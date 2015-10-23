@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersGroupsTable extends Migration
+class CreateProgramsMetaTable extends Migration
 {
      /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreateUsersGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_groups', function (Blueprint $table) {
+        Schema::create('programs_meta', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('group_id');
-            $table->integer('creator');
+            $table->integer('object_id');
+            $table->string('meta_key', 50);
+            $table->string('meta_value')->nullable();
             $table->timestamps();
+            $table->unique(['object_id', 'meta_key']);
+            $table->engine = 'InnoDB';
         });
     }
 
@@ -28,6 +30,6 @@ class CreateUsersGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_groups');
+        Schema::drop('programs_meta');
     }
 }

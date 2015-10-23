@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('id_card_expired_date')->nullable();
             $table->string('id_card_issued_by')->nullable();
             $table->string('gender', 20);
-            $table->string('roll_no', 60)->unique();
+            $table->string('roll_no', 60)->unique()->nullable();
             $table->string('photo')->nullable();
             $table->integer('postcode')->nullable();
             $table->string('address')->nullable();
@@ -36,7 +36,11 @@ class CreateUsersTable extends Migration
             $table->integer('department_id')->nullable(); // For Staff
             $table->string('categories')->nullable(); // Comma separated
             $table->date('expired_date')->nullable();
+            $table->integer('role_id');
+            $table->text('permissions')->nullable(); // We can even set permissions for individual user
             $table->rememberToken();
+            $table->string('status', 60)->nullable();
+            $table->integer('creator_id');
             $table->softDeletes();
             $table->timestamps();
 

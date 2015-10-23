@@ -14,9 +14,9 @@ class CreateSettingsTable extends Migration
     {
          Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('setting_name');
-            $table->text('setting_value')->nullable();
-            $table->integer('branch_id'); // This setting is applied to only 1 branch
+            $table->string('name');
+            $table->text('val')->nullable();
+            $table->integer('branch_id')->nullable(); // This setting is applied to only 1 branch
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Role;
+use App\Classes;
 
-class RoleController extends Controller
+class ClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles      = Role::all();
+        $classes = Classes::all();
 
-        return view('roles.index', compact('roles'));
+        return view('classes/index', compact('classes'));
     }
 
     /**
@@ -28,9 +28,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = config('settings.permissions');
-        
-        return view('roles.create', compact('permissions'));
+        //
     }
 
     /**
@@ -41,17 +39,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        
-        // if (! empty($data['permissions']))
-        //     $data['permissions'] = json_encode($data['permissions']);
-
-        try {
-            $role = Role::create($data);
-            return redirect('roles/' . $role->id )->with('message', 'Role was created successfully!');
-        } catch ( Exception $e ) {
-            return back()->withInput()->with('message', 'Fooo!');
-        }
+        //
     }
 
     /**

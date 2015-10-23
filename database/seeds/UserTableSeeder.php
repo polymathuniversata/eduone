@@ -17,10 +17,11 @@ class UserTableSeeder extends Seeder
         	'last_name' 	=> 'Nguyen',
         	'email'			=> 'tan@fitwp.com',
         	'phone'			=> '0932292225',
-        	'id_card'		=> '123456789'
+        	'id_card'		=> '123456789',
+            'role_id'       => 1
         ]);
 
-        $administrator = DB::table('groups')->insert([
+        $administrator = DB::table('roles')->insert([
         	'name' => 'Administrator',
         	'slug' => 'administrator',
         	'permissions' => serialize([
@@ -28,10 +29,10 @@ class UserTableSeeder extends Seeder
         	])
         ]);
 
-        DB::table('users_groups')->insert([
-        	'user_id' 	=> $user_id,
-        	'group_id' 	=> $administrator,
-        	'creator' 	=> 0
-        ]);
+        // DB::table('users_roles')->insert([
+        // 	'user_id' 	=> $user_id,
+        // 	'role_id' 	=> $administrator,
+        // 	'creator' 	=> 0
+        // ]);
     }
 }

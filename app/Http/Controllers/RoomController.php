@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Room;
+use App\Branch;
 
 class RoomController extends Controller
 {
@@ -17,6 +18,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = Room::all();
+
         return view('rooms.index', compact('rooms'));
     }
 
@@ -27,7 +29,9 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $branches = Branch::lists('name', 'id')->toArray();
+
+        return view('rooms.create', compact('branches'));
     }
 
     /**
@@ -38,7 +42,13 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        try {
+            $room = Room::create($data);
+            return redirect('rooms/' . $room->id )->with('message', 'Room was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**

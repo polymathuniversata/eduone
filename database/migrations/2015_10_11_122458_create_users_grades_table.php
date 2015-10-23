@@ -13,7 +13,7 @@ class CreateUsersGradesTable extends Migration
             $table->integer('subject_id');
             $table->integer('grade_id');
             $table->integer('total');
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->string('status')->nullable(); // Passed or not
             $table->timestamps();
             $table->engine = 'InnoDB';

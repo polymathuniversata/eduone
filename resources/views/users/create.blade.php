@@ -6,7 +6,7 @@
 	<h1>{!! trans('app.create_new_user') !!}</h1>
 </header>
 
-{!! Form::open() !!}
+{!! Form::open(['url' => 'users']) !!}
 
 <div class="row">
 	<div class="col-md-6 basic">
@@ -14,22 +14,22 @@
 		<hr>
 		<div class="form-group">
 			<label>{!! trans('app.user_name') !!}</label>
-			{!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Enter User Name']) !!}
+			{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter User Name']) !!}
 		</div>
 
 		<div class="form-group">
 			<label>{!! trans('app.email') !!}</label>
-			{!! Form::email('email', 'tan@fitwp.com', ['class' => 'form-control']) !!}
+			{!! Form::email('email', null, ['class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
 			<label>{!! trans('app.role') !!}</label>
-			{!! Form::select('role', ['Registered', 'Student', 'SRO', 'Parent', 'Teacher', 'Administrator', 'Super Administrator'], 1, ['class' => 'form-control'] ) !!}
+			{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
 		</div>
 
 		<div class="form-group">
 			<label>{!! trans('app.first_name') !!}</label>
-			{!! Form::text('fist_name', null, ['class' => 'form-control']) !!}
+			{!! Form::text('first_name', null, ['class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
@@ -49,8 +49,8 @@
 		</div>
 		
 		<div class="form-group">
-			<label>{!! trans('app.branch') !!}</label>
-				{!! Form::select('branch', ['FPT Polytechnic Hanoi', 'FPT Polytechnic HCMC', 'FPT Polytechnic Hai Phong'], null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
+			<label>{!! trans('app.branches') !!}</label>
+				{!! Form::select('branches', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
 		</div>
 
 	</div>
@@ -77,17 +77,12 @@
 
 		<div class="form-group">
 			<label>{!! trans('app.id_code_or_passport') !!}</label>
-			{!! Form::text('id_code', null, ['class' => 'form-control', 'placeholder' => trans('app.id_code_or_passport') ]) !!}
+			{!! Form::text('id_card', null, ['class' => 'form-control', 'placeholder' => trans('app.id_code_or_passport') ]) !!}
 		</div>
 
 		<div class="form-group">
 			<label>{!! trans('app.roll_no') !!}</label>
 			{!! Form::text('roll_no', null, ['class' => 'form-control', 'placeholder' => trans('app.roll_no') ]) !!}
-		</div>
-
-		<div class="form-group">
-			<label>{!! trans('app.facebook') !!}</label>
-			{!! Form::text('facebook', null, ['class' => 'form-control', 'placeholder' => trans('app.facebook') ]) !!}
 		</div>
 
 		<div class="form-group">
@@ -112,13 +107,13 @@
 
 		<div class="form-group">
 			<label>{!! trans('app.profile_picture') !!}</label>
-			{!! Form::file('profile_picture', ['class' => 'form-control']) !!}
+			{!! Form::file('photo', ['class' => 'form-control']) !!}
 		</div>
 	</div>
 	
 </div>
 
-	<button class="btn btn-primary">Save Changes</button>
+	<button class="btn btn-primary">{{ trans('app.save_changes') }}</button>
 
 
 {!! Form::close() !!}

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<h1>Branches <a href="/branches/create" class="btn btn-default">New</a></h1>
+<h1>{!! trans('app.branches') !!} <a href="/branches/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
 
 <table class="table table-bordered table-striped table-hover">
 	<thead>
@@ -19,7 +19,7 @@
 				<td><input type="checkbox"></td>
 				<td><a href="/branches/{!! $branch->id !!}/edit">{!! $branch->name !!}</a></td>
 				<td>{!! $branch->email !!}</td>
-				<td><a href="/users/1">{!! $branch->administrator_id !!}</a></td>
+				<td><a href="/users/1">{!! $branch->admin->first_name . ' ' . $branch->admin->last_name !!}</a></td>
 			</tr>
 			@endforeach
 		@else

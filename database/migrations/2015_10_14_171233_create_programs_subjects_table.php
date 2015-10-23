@@ -3,23 +3,21 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserMetaTable extends Migration
+class CreateProgramsSubjectsTable extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users_meta', function (Blueprint $table) {
+        Schema::create('programs_subjects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('object_id');
-            $table->string('meta_key', 50);
-            $table->string('meta_value')->nullable();
+            $table->integer('program_id');
+            $table->integer('subject_id');
+            $table->integer('period');
             $table->timestamps();
-            $table->unique(['object_id', 'meta_key']);
-            $table->engine = 'InnoDB';
         });
     }
 
@@ -30,6 +28,6 @@ class CreateUserMetaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_meta');
+        Schema::drop('programs_subjects');
     }
 }

@@ -9,51 +9,112 @@
         @yield('header')
     </head>
     <body>
-        <div class="container-fluid">
-            <aside class="col-md-2" id="sidebar">
-                @section('sidebar')
-                    <div class="list-group">
-                      <a href="/" class="list-group-item active">
-                        Dashboard
-                      </a>
-                      <a href="/students" class="list-group-item">Students</a>
-                      <a href="/teachers" class="list-group-item">Teachers</a>
-                      <a href="/parents" class="list-group-item">Parents</a>
-                      <a href="/activities" class="list-group-item">Activities</a>
-                      <a href="#" class="list-group-item">Attendances</a>
-                      <a href="#" class="list-group-item">Grades</a>
-                      <a href="/rooms" class="list-group-item">Rooms</a>
-                      <a href="#" class="list-group-item">Classes</a>
-                      <a href="#" class="list-group-item">Plugins</a>
-                      <a href="#" class="list-group-item">Themes</a>
-                      <a href="#" class="list-group-item">Payments</a>
-                      <a href="#" class="list-group-item">Transport</a>
-                      <a href="#" class="list-group-item">Dormitories</a>
-                      <a href="#" class="list-group-item">Messages</a>
-                      <a href="#" class="list-group-item">Services</a>
-                      <a href="#" class="list-group-item">Menus</a>
-                      <a href="#" class="list-group-item">Media</a>
-                      <a href="#" class="list-group-item">Library</a>
-                      <a href="/users" class="list-group-item">{!! trans('app.users') !!}</a>
-                      <a href="/groups" class="list-group-item">{!! trans('app.groups') !!}</a>
-                      <a href="/branches" class="list-group-item">{!! trans('app.branches') !!}</a>
-                      <a href="/settings" class="list-group-item">{!! trans('app.settings') !!}</a>
-                    </div>
-                @show
-            </aside>
 
-            <div id="main" class="col-md-10">
-                
-                <div id="content" class="col-md-12">
-                    @yield('content')
-                </div>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="col-md-12">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Uniform</a>
+          </div>
 
-                <hr>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Dashboard <span class="sr-only">(current)</span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/users">All Users</a></li>
+                  <li><a href="/students">Students</a></li>
+                  <li><a href="/parents">Parents</a></li>
+                  <li><a href="/teachers">Teachers</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Add New User</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/roles">Roles &amp; Permissions</a></li>
+                </ul>
+              </li>
 
-                <footer class="col-md-12">
-                    Copyright &copy; 2015 <a href="https://binaty.org">Binaty</a>
-                </footer>
-            </div>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Classes <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/classes">Classes</a></li>
+                  <li><a href="/schedule">Schedule</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Add New Class</a></li>
+                </ul>
+              </li>
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programs <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/programs">All Programs</a></li>
+                  <li><a href="/programs/create">Add New Program</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/subjects">All Subjects</a></li>
+                  <li><a href="/subjects/create">Add New Subject</a></li>
+                </ul>
+              </li>          
+              <li><a href="#">Services</a></li>
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/settings">General</a></li>
+                  <li><a href="/branches">Branches</a></li>
+                  <li><a href="/rooms">Rooms</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/themes">Themes</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/plugins">Plugins</a></li>
+                </ul>
+              </li>   
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+          </div>
+        </div><!-- /.container-fluid -->
+      </nav>
+
+        <div class="container">                
+          <div id="content" class="col-md-12">
+            @if (! empty(session('message')))
+              <div class="alert alert-message">
+                {!! session('message') !!}
+              </div>
+            @endif
+
+              @yield('content')
+          </div>
+
+          <hr>
+
+          <footer class="col-md-12">
+              Copyright &copy; 2015 <a href="https://binaty.org">Binaty</a>
+          </footer>
         </div>
 
         @yield('footer')

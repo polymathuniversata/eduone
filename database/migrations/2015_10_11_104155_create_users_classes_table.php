@@ -16,10 +16,10 @@ class CreateUsersClassesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('class_id');
-            $table->integer('creator');
+            $table->integer('creator_id');
             // User can have special role in class. 
             // For example, users can becomes teacher and vise versa
-            $table->string('role')->nullable(); 
+            $table->integer('role')->nullable(); 
             $table->text('permission')->nullable(); // Parent, Sibling...
             $table->timestamps();
             $table->engine = 'InnoDB';

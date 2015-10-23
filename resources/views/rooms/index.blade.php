@@ -21,7 +21,7 @@
 				<td><a href="/rooms/{!! $room->id !!}/edit">{!! $room->name !!}</a></td>
 				<td>{!! $room->type !!}</td>
 				<td>{!! $room->capacity !!}</td>
-				<td><a href="/users/1">{!! $room->branch_id !!}</a></td>
+				<td><a href="/users/1">{!! $room->branch->name !!}</a></td>
 			</tr>
 			@endforeach
 		@else

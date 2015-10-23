@@ -20,7 +20,7 @@ class CreateUsersProgramsTable extends Migration
             $table->date('started_at');
             $table->date('finished_at')->nullable();
             $table->text('meta');
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

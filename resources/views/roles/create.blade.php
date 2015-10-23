@@ -1,103 +1,49 @@
 @extends('master')
 
-@section('title', 'New Role')
+@section('title', trans('app.create_new_role'))
 
 @section('content')
 <header>
-	<h1>Create New Role</h1>
+	<h1>{!! trans('app.create_new_role') !!}</h1>
 </header>
 
-<form action="/">
+{!! Form::open(['url' => 'roles']) !!}
+
 	<div class="form-group">
 		<label for="name">Role Name</label>
-		<input type="text" class="form-control" placeholder="Enter Role Name...">
+
+		{!! Form::text('name', null, [
+				'class' => 'form-control', 
+				'placeholder' => trans('app.name')]) 
+		!!}
 	</div>
 
 	<div class="form-group">
 		<label for="slug">Slug</label>
-		<input type="text" class="form-control" placeholder="Enter Role Name...">
+		{!! Form::text('slug', null, [
+				'class' => 'form-control', 
+				'placeholder' => trans('app.slug')]) 
+		!!}
 	</div>
 
 	<hr>
 
-	<h4>Permissions</h4>
+	<h4>{!! trans('app.permissions') !!}</h4>
 
 	<section class="permissions">
+		@foreach ($permissions as $group)
 		<header>
-			<h5>Global</h5>
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Super Admin
+			<h5>{!! $group['group'] !!}</h5>
+			@foreach ($group['permissions'] as $permission)
+			<label class="checkbox-inline label-thin permission-label">
+				{!! Form::checkbox('permissions[' . $permission . ']', 1 ) . ' ' . $permission !!}
 			</label>
+			@endforeach
 		</header>
-
-		<header>
-			<h5>Settings</h5>
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Manage Settings
-			</label>
-		</header>
-
-
-		<header>
-			<h5>Users</h5>
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> List
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Create
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Update
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Self Update
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Delete
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Import
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Export
-			</label>
-		</header>
-
-		<header>
-			<h5>Rooms</h5>
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> List
-			</label>
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Create
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Update
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Delete
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Import
-			</label>
-
-			<label class="checkbox-inline label-thin">
-				<input type="checkbox"> Export
-			</label>
-		</header>
-
+		@endforeach
 	</section>
 
-	<button class="btn btn-primary">Save Changes</button>
+	<button class="btn btn-primary">{!! trans('app.save_changes') !!}</button>
 
-</form>	
+{!! Form::close() !!}
 @endsection

@@ -19,6 +19,16 @@ class Branch extends Model
      */
     public function admin()
     {
+        return $this->belongsTo('App\User', 'administrator_id');
+    }
 
+    public function rooms()
+    {
+        return $this->hasMany('App\Room');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'users_branches');
     }
 }

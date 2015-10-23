@@ -14,10 +14,8 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->integer('author_id');
             $table->integer('grades_count')->nullable();
             $table->integer('session_count')->nullable();
             $table->integer('total_grade_rate')->default(0); // This subject hold how much in program?
@@ -31,7 +29,7 @@ class CreateSubjectsTable extends Migration
             // Grade plan included
             // Name, Percent, Min
             
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

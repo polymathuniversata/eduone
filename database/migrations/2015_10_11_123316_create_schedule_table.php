@@ -18,6 +18,7 @@ class CreateScheduleTable extends Migration
             $table->timestamp('started_at');
             $table->timestamp('finished_at');
             $table->text('attendance_detail');
+            $table->integer('creator_id');
             // User 1: P, User 2: A, User 3: A, User 4: P
             $table->timestamps();
             $table->engine = 'InnoDB';

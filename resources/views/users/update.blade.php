@@ -5,10 +5,10 @@
 @section('content')
 
 <header>
-	<h1>{!! trans('app.update_user') !!}</h1>
+	<h1>{{ $user->first_name }} {{ $user->last_name }}</h1>
 </header>
 
-{!! Form::open() !!}
+{!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'PUT']) !!}
 
 <div class="row">
 	<div class="col-md-12">
@@ -16,6 +16,7 @@
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
 	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Contact</a></li>
+	    <li role="presentation"><a href="#permissions" aria-controls="permissions" role="tab" data-toggle="tab">Permissions</a></li>
 	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Meta</a></li>
 	  </ul>
 
@@ -23,28 +24,23 @@
 	  <div class="tab-content col-md-9">
 	    <div role="tabpanel" class="tab-pane active" id="home">
 	    	<div class="form-group">
-	    		<label for="">{!! trans('app.user_name') !!}</label>
-	    		{!! Form::text('user_name', 'tan', ['class' => 'form-control', 'placeholder' => trans('app.user_name')]) !!}
+	    		<label for="">{!! trans('app.name') !!}</label>
+	    		{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('app.name')]) !!}
 	    	</div>
 
 	    	<div class="form-group">
 	    		<label for="">{!! trans('app.first_name') !!}</label>
-	    		{!! Form::text('first_name', 'tan', ['class' => 'form-control', 'placeholder' => trans('app.first_name')]) !!}
+	    		{!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('app.first_name')]) !!}
 	    	</div>
 
 	    	<div class="form-group">
 	    		<label for="">{!! trans('app.last_name') !!}</label>
-	    		{!! Form::text('last_name', 'tan', ['class' => 'form-control', 'placeholder' => trans('app.last_name')]) !!}
-	    	</div>
-
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.email') !!}</label>
-	    		{!! Form::email('email', 'tan', ['class' => 'form-control', 'placeholder' => trans('app.email')]) !!}
+	    		{!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('app.last_name')]) !!}
 	    	</div>
 
 			<div class="form-group">
 				<label>{!! trans('app.role') !!}</label>
-				{!! Form::select('role', ['Registered', 'Student', 'SRO', 'Parent', 'Teacher', 'Administrator', 'Super Administrator'], 1, ['class' => 'form-control'] ) !!}
+				{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
 			</div>
 
 
@@ -60,12 +56,17 @@
 
 
 			<div class="form-group">
-				<label>{!! trans('app.branch') !!}</label>
-				{!! Form::select('branch', ['FPT Polytechnic Hanoi', 'FPT Polytechnic HCMC', 'FPT Polytechnic Hai Phong'], null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
+				<label>{!! trans('app.branches') !!}</label>
+				{!! Form::select('branches', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
 			</div>
 
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="profile">
+	    	<div class="form-group">
+	    		<label for="">{!! trans('app.email') !!}</label>
+	    		{!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => trans('app.email')]) !!}
+	    	</div>
+	    	
 	    	<div class="form-group">
 				<label>{!! trans('app.phone') !!}</label>
 				{!! Form::tel('phone', null, ['class' => 'form-control', 'placeholder' => trans('app.phone') ]) !!}
@@ -78,7 +79,7 @@
 
 			<div class="form-group">
 				<label>{!! trans('app.gender') !!}</label>
-				{!! Form::select('gender', config('settings.genders'), 'm', ['class' => 'form-control'] ) !!}
+				{!! Form::select('gender', config('settings.genders'), null, ['class' => 'form-control'] ) !!}
 			</div>
 
 			<div class="form-group">
@@ -89,11 +90,6 @@
 			<div class="form-group">
 				<label>{!! trans('app.roll_no') !!}</label>
 				{!! Form::text('roll_no', null, ['class' => 'form-control', 'placeholder' => trans('app.roll_no') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.facebook') !!}</label>
-				{!! Form::text('facebook', null, ['class' => 'form-control', 'placeholder' => trans('app.facebook') ]) !!}
 			</div>
 
 			<div class="form-group">
@@ -126,6 +122,20 @@
 				{!! Form::file('profile_picture', ['class' => 'form-control']) !!}
 			</div>
 	    </div>
+
+	   	<div role="tabpanel" class="tab-pane" id="permissions">
+			<p>You can override role permission by using user permission here</p>
+			@foreach ($permissions as $group)
+			<header>
+				<h5>{!! $group['group'] !!}</h5>
+				@foreach ($group['permissions'] as $permission)
+				<label class="checkbox-inline label-thin permission-label">
+					{!! Form::checkbox('permissions[' . $permission . ']', 1 ) . ' ' . $permission !!}
+				</label>
+				@endforeach
+			</header>
+			@endforeach
+		</div>
 
 	    <div role="tabpanel" class="tab-pane" id="messages">
 	    	<div class="panel panel-default">

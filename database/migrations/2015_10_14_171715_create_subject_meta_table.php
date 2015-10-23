@@ -3,16 +3,16 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserMetaTable extends Migration
+class CreateSubjectMetaTable extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users_meta', function (Blueprint $table) {
+        Schema::create('subjects_meta', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('object_id');
             $table->string('meta_key', 50);
@@ -30,6 +30,6 @@ class CreateUserMetaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_meta');
+        Schema::drop('subjects_meta');
     }
 }

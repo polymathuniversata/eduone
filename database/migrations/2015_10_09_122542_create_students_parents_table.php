@@ -17,7 +17,7 @@ class CreateStudentsParentsTable extends Migration
             $table->integer('student_id');
             $table->integer('parent_id');
             $table->string('relationship')->nullable(); // Parent, Sibling...
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->engine = 'InnoDB';
         });
     }

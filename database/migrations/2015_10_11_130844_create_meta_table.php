@@ -16,7 +16,7 @@ class CreateMetaTable extends Migration
             $table->string('description')->nullable();
             $table->string('default')->nullable();
             $table->text('conditional_logic')->nullable();
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->string('status')->nullable(); // Passed or not
             $table->timestamps();
             $table->engine = 'InnoDB';

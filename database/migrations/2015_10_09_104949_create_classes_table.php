@@ -20,7 +20,7 @@ class CreateClassesTable extends Migration
             $table->integer('program_id')->nullable();
             $table->integer('subject_id')->nullable();
             $table->integer('branch_id')->nullable();
-            $table->integer('creator');
+            $table->integer('creator_id');
 
             $table->date('started_at')->nullable();
             $table->date('finished_at')->nullable();

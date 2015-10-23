@@ -17,7 +17,8 @@ class CreateProgramsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('grade_type')->nullable(); // Grade type so Subject can inherit
-            $table->integer('creator');
+            $table->integer('periods')->default(1);
+            $table->integer('creator_id');
             $table->string('branches')->nullable(); //Branches ID, separated by commas
             $table->timestamps();
             $table->engine = 'InnoDB';

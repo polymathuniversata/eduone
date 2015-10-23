@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
+use App\Branch;
 
 class UserController extends Controller
 {
@@ -28,7 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::lists('name', 'id')->toArray();
+        $branches = Branch::lists('name', 'id')->toArray();
+
+        return view('users.create', compact('roles', 'branches'));
     }
 
     /**
@@ -39,7 +44,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        foreach ($data as $k => $v) {
+            if (empty($data[$k]))
+                unset($data[$k]);
+        }
+        
+        if (! empty($data['branches']))
+            $branches = (array) $data['branches'];
+        
+        unset($data['password_confirmation']);
+        unset($data['branches']);
+
+        try {
+            $user = User::create($data);
+            
+            if (! empty($data['branches']))
+                $user->branches()->sync($branches);
+
+            return redirect('users/' . $user->id )->with('message', 'User was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**
@@ -50,7 +77,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('users.update');
+        $user       = User::findOrFail($id);
+        $roles      = Role::lists('name', 'id')->toArray();
+        $branches   = Branch::lists('name', 'id')->toArray();
+        $permissions= config('settings.permissions');
+
+        return view('users.update', compact('user', 'roles', 'branches', 'permissions'));
     }
 
     /**
@@ -61,7 +93,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->show($id);
     }
 
     /**
@@ -73,7 +105,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $user = User::findOrFail($id);
+
+        try {
+            $user->update($data);
+
+            return redirect('users/' . $user->id )->with('message', 'User was created successfully!');
+
+        } catch(Exception $e) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
+
     }
 
     /**

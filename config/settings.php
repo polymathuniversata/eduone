@@ -17,6 +17,17 @@ return [
 		'f' => 'Female',
 		'u' => 'Undefined'
 	],
+
+	'permissions' => [
+		[
+			'group' 		=> 'Global',
+			'permissions' 	=> ['super_admin']
+		],
+		[
+			'group'			=> 'Users',
+			'permissions' 	=> ['add_user', 'update_user', 'delete_user', 'view_users']
+		]
+	],
 	
 	'countries' => [
 		'AF' => 'Afghanistan',
@@ -264,5 +275,13 @@ return [
 		'YE' => 'Yemen',
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe',
+	],
+
+	'grade_types' => [
+		'gpa' 	=> 'GPA',
+		'ind' 	=> 'Indian',
+		'rus' 	=> 'Russian',
+		'vi'	=> 'Vietnamese'
 	]
+	
 ];

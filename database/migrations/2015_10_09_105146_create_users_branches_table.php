@@ -12,7 +12,7 @@ class CreateUsersBranchesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('branch_id');
-            $table->integer('creator');
+            $table->integer('creator_id');
             $table->timestamps();
         });
     }

@@ -13,6 +13,6 @@ class Room extends Model
      */
     public function branch() 
     {
-
+    	return $this->belongsTo('App\Branch');
     }
 }

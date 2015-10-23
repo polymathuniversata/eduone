@@ -25,20 +25,19 @@
 			<td><input type="checkbox" disabled></td>
 			<td><a href="/users/{{$user->id}}">{!! $user->name !!}</a></td>
 			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-			<td>Admin</td>
+			<td>{{ $user->role->name }}</td>
 			<td>{!! $user->status !!}</td>
 			<td>{!! $user->created_at !!}</td>
-			<td><a href="#">{!! trans('app.login_as') !!}</a></td>
+			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
 
-
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
-<button type="button" class="btn btn-default">{!! trans('app.import') !!}...</button>
-<button type="button" class="btn btn-default">{!! trans('app.export') !!}...</button>
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
+<button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
+<button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
