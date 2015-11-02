@@ -12,15 +12,44 @@ use App\Branch;
 class UserController extends Controller
 {
     /**
+     * Available Roles
+     * @var array
+     */
+    protected $roles = [];
+
+    /**
+     * Available Branches
+     * @var array
+     */
+    protected $branches = [];
+
+
+    public function __construct()
+    {
+        $this->roles       = Role::lists('name', 'id')->toArray();
+        array_unshift($this->roles, 'Please select');
+
+        $this->branches    = Branch::lists('name', 'id')->toArray();
+        array_unshift($this->branches, 'Please select');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users      = User::search($request->q)
+                            ->ofRole($request->role)
+                            ->branch($request->branch)
+                            ->orderBy('created_at')
+                            ->get();
 
-        return view('users.index', compact('users'));
+        $roles      = $this->roles;
+        $branches   = $this->branches;
+
+        return view('users.index', compact('users', 'roles', 'branches', 'request'));
     }
 
     /**
@@ -30,8 +59,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::lists('name', 'id')->toArray();
-        $branches = Branch::lists('name', 'id')->toArray();
+        $roles      = $this->roles;
+        $branches   = $this->branches;
 
         return view('users.create', compact('roles', 'branches'));
     }
@@ -45,11 +74,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        foreach ($data as $k => $v) {
-            if (empty($data[$k]))
-                unset($data[$k]);
-        }
+        $data = array_filter($data);
         
         if (! empty($data['branches']))
             $branches = (array) $data['branches'];
@@ -63,7 +88,8 @@ class UserController extends Controller
             if (! empty($data['branches']))
                 $user->branches()->sync($branches);
 
-            return redirect('users/' . $user->id )->with('message', 'User was created successfully!');
+            return redirect('users/' . $user->id )
+                        ->with('message', 'User was created successfully!');
         } catch ( Exception $e ) {
             return back()->withInput()->with('message', 'Fooo!');
         }
@@ -75,11 +101,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user       = User::findOrFail($id);
-        $roles      = Role::lists('name', 'id')->toArray();
-        $branches   = Branch::lists('name', 'id')->toArray();
+        $roles      = $this->roles;
+        $branches   = $this->branches;
+
         $permissions= config('settings.permissions');
 
         return view('users.update', compact('user', 'roles', 'branches', 'permissions'));
@@ -91,9 +117,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return $this->show($id);
+        return $this->show($user);
     }
 
     /**
@@ -103,16 +129,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $data = $request->all();
-
-        $user = User::findOrFail($id);
+        $data = $request->all();        
+        $data = array_filter($data);
 
         try {
             $user->update($data);
 
-            return redirect('users/' . $user->id )->with('message', 'User was created successfully!');
+            return redirect('users/' . $user->id )->with('message', 'User was updated successfully!');
 
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
@@ -126,8 +151,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }

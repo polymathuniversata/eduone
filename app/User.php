@@ -57,4 +57,47 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('App\Branch', 'users_branches');
     }
+
+    public function getPhoto()
+    {
+        $use_gravatar = true;
+        $default_photo = '';
+
+        if ($use_gravatar)
+            $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=150';
+
+        return ! empty($this->photo) ? $this->photo : $default_photo;
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        if (! empty($value)) {
+            $value = "%$value%";
+
+            return $query->where('name', 'like', $value)
+                        ->orWhere('first_name', 'like', $value)
+                        ->orWhere('last_name', 'like', $value)
+                        ->orWhere('email', 'like', $value)
+                        ->orWhere('phone', 'lile', $value)
+                        ->orWhere('id_card', 'like', $value);
+        }
+
+        return $query;
+    }
+
+    public function scopeBranch($query, $value)
+    {
+        if (is_numeric($value) && $value > 0)
+            return $query->has('branches', '=', $value);
+
+        return $query;
+    }
+
+    public function scopeOfRole($query, $value)
+    {
+        if (is_numeric($value) && $value > 0)
+            return $query->whereRoleId($value);
+
+        return $query;
+    }
 }

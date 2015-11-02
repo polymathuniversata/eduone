@@ -84,6 +84,8 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Classes::findOrFail($id)->delete();
+
+        return back();
     }
 }

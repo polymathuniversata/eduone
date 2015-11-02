@@ -3,7 +3,33 @@
 @section('title', trans('app.all_users'))
 @section('content')
 <header>
-	<h1>{!! trans('app.users') !!} <a href="/users/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+    {!! Form::model($request, ['url' => '/users', 'method' => 'GET']) !!}
+    <div class="input-group pull-right col-md-7" id="advanced-search">
+        {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Show Advanced Search Options">
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        {!! Form::label('role') !!}
+                        {!! Form::select('role', $roles, null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {!! Form::label('branch') !!}
+                        {!! Form::select('branch', $branches, null, ['class' => 'form-control']) !!}
+                    </div>
+                </div>
+             
+            </div>
+            <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+    <h1>{!! trans('app.users') !!} <a href="/users/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+
 </header>
 
 <table class="table table-bordered table-hover">

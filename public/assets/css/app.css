@@ -25,3 +25,21 @@ footer{
 .label-thin{
 	font-weight: normal;
 }
+
+#advanced-search{
+
+}
+
+#advanced-search .dropdown-menu{
+	width: 700px;
+	padding: 20px;
+}
+
+#profile-thumbnail{
+	width: 150px;
+	height: 150px;
+}
+#profile-thumbnail img {
+	width: 100%;
+	height: 100%;
+}

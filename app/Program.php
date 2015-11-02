@@ -9,7 +9,7 @@ class Program extends Model
 	use CanUseCreator, CanUseMeta;
 	
     protected $fillable = ['name', 'slug', 'grade_type', 'periods', 'creator_id', 'branches'];
-
+    
     protected $casts = [
     	'periods' => 'integer'
     ];

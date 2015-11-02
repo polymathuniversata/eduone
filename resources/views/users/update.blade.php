@@ -5,6 +5,9 @@
 @section('content')
 
 <header>
+	<div class="thumbnail" id="profile-thumbnail">
+		<img src="{{$user->getPhoto()}}" alt="Profile Photo">
+	</div>
 	<h1>{{ $user->first_name }} {{ $user->last_name }}</h1>
 </header>
 

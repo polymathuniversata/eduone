@@ -23,8 +23,8 @@
 			<td>
 				<input type="checkbox" @if ($role->id < 5) disabled @endif>
 			</td>
-			<td><a href="/roles/edit/1">{!! $role->name !!}</a></td>
-			<td><a href="/roles/edit/1">{!! $role->slug !!}</a></td>
+			<td><a href="/roles/{{$role->id}}">{!! $role->name !!}</a></td>
+			<td><a href="/roles/{{$role->id}}">{!! $role->slug !!}</a></td>
 			<td>{!! $role->count !!}</td>
 			<td>{!! $role->created_at !!}</td>
 		</tr>
