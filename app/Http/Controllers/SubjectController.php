@@ -12,15 +12,31 @@ use App\Program;
 class SubjectController extends Controller
 {
     /**
+     * All Available Programs 
+     * @var array
+     */
+    protected $programs;
+
+    /**
+     * Prepare variables
+     */
+    public function __construct()
+    {
+        $this->programs = Program::lists('name', 'id')->toArray();
+        array_unshift( $this->programs, 'Please select');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::all();
+        $subjects = Subject::orderBy('created_at')->get();
+        $programs = $this->programs;
 
-        return view('subjects/index', compact('subjects'));
+        return view('subjects/index', compact('subjects', 'request', 'programs'));
     }
 
     /**
@@ -30,9 +46,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $programs = Program::lists('name', 'id')->toArray();
-
-        return view('subjects/create', compact('programs'));
+        return view('subjects/create');
     }
 
     /**
@@ -43,7 +57,26 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data = array_filter($data);
+
+
+        if (! empty($data['grades_plan'])) {
+            $grades_plan = json_decode( $data['grades_plan'] );
+            $data['grades_count'] = count($grades_plan);
+        }
+
+        if (! empty($data['sessions_plan'])) {
+            $sessions_plan = json_decode( $data['sessions_plan'] );
+            $data['sessions_count'] = count($sessions_plan);
+        }
+
+        try {
+            $subject = Subject::create($data);
+            return redirect('subjects/' . $subject->id )->with('message', 'Subject was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**
@@ -52,9 +85,9 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Subject $subject)
     {
-        //
+        return $this->edit($subject);
     }
 
     /**
@@ -63,7 +96,7 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subject $subject)
     {
         //
     }
@@ -75,7 +108,7 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Subject $subject)
     {
         //
     }
@@ -86,7 +119,7 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subject $subject)
     {
         //
     }

@@ -51,8 +51,8 @@ trait CanUseCreator
 	 *
 	 * @return void
 	 */
-	public function setCreator()
+	public function setCreatorIdAttribute($value = 1)
 	{
-		$this->creator_id = Auth::get()->id;
+		$this->attributes['creator_id'] = $value;
 	}
 }

@@ -58,6 +58,24 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Branch', 'users_branches');
     }
 
+    /**
+     * If user full name is set, return his full name. Otherwise, return username
+     * 
+     * @return String user name
+     */
+    public function getFullName()
+    {
+        if (! empty($this->first_name) || ! empty($this->last_name))
+            return $this->first_name . ' ' . $this->last_name;
+
+        return $this->name;
+    }
+
+    /**
+     * Get User Photo if exists. Otherwise, if Gravatar enabled, use gravatar, other wise use default image
+     * 
+     * @return String Photo Image URL
+     */
     public function getPhoto()
     {
         $use_gravatar = true;

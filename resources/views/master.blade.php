@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="App">
     <head>
         <title>Uniform @yield('title')</title>
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="/assets/js/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.7/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/assets/js/app.js"></script>
+
         <script type="text/javascript">
+        var APP_URL = 'http://uniform.dev/';
+
         $(function(){
           $('.dropdown-menu').click(function(e) {
             e.stopPropagation();
@@ -43,7 +49,7 @@
                   <li><a href="/parents">Parents</a></li>
                   <li><a href="/teachers">Teachers</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Add New User</a></li>
+                  <li><a href="/users/create">Add New User</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="/roles">Roles &amp; Permissions</a></li>
                 </ul>

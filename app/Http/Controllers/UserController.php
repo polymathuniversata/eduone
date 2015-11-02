@@ -142,7 +142,13 @@ class UserController extends Controller
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }
+    }
 
+    public function updatePhoto(Request $request, User $user)
+    {
+        Storage::put('avatars' . $user->id, 
+            file_get_contents($request->file('avatar')->getRealPath())
+        );
     }
 
     /**
@@ -154,5 +160,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return back()->withMessage('User was deleted successfully!');
     }
 }

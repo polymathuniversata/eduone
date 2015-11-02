@@ -32,38 +32,51 @@
 
 </header>
 
-<table class="table table-bordered table-hover">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>{!! trans('app.name') !!}</th>
-			<th>{!! trans('app.email') !!}</th>
-			<th>{!! trans('app.role') !!}</th>
-			<th>{!! trans('app.status') !!}</th>
-			<th>{!! trans('app.created_at') !!}</th>
-			<th>{!! trans('app.login_as') !!}</th>
-		</tr>
-	</thead>
+<div class="table-responsive panel panel-default">
+    <table class="table table-hover">
+    	<thead class="panel-heading">
+    		<tr>
+    			<th>#</th>
+    			<th>{!! trans('app.name') !!}</th>
+    			<th>{!! trans('app.email') !!}</th>
+    			<th>{!! trans('app.role') !!}</th>
+    			<th>{!! trans('app.status') !!}</th>
+    			<th>{!! trans('app.created_at') !!}</th>
+    			<th>{!! trans('app.login_as') !!}</th>
+    		</tr>
+    	</thead>
 
-	<tbody>
-		@foreach ($users as $user)
-		<tr>
-			<td><input type="checkbox" disabled></td>
-			<td><a href="/users/{{$user->id}}">{!! $user->name !!}</a></td>
-			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-			<td>{{ $user->role->name }}</td>
-			<td>{!! $user->status !!}</td>
-			<td>{!! $user->created_at !!}</td>
-			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
-		</tr>
-		@endforeach
-	</tbody>
-</table>
+    	<tbody>
+    		@foreach ($users as $user)
+    		<tr>
+    			<td><input type="checkbox" disabled></td>
+    			<td class="table-title"><a href="/users/{{$user->id}}">{!! $user->getFullName() !!}</a></td>
+    			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
+    			<td>{{ $user->role->name }}</td>
+    			<td>{!! $user->status !!}</td>
+    			<td>{!! $user->created_at !!}</td>
+    			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
+    		</tr>
+    		@endforeach
+    	</tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <select name="bulk_action" id="bulk_action" class="form-control input-sm">
+            <option value="">Bulk Action</option>
+            <option value="delete">Delete</option>
+            <option value="ban">Ban</option>
+            <option value="export">Export</option>
+        </select>
+    </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
-<button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
-<button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
+    <button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
+    <button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
+    <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

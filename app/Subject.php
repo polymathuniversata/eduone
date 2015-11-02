@@ -23,13 +23,23 @@ class Subject extends Model
     	'minimum_student_grade' => 'integer',
     	'minimum_student_present_session' => 'integer',
     	'equal_to'				=> 'integer',
-    	'sessions_plan' 			=> 'array',
+    	'sessions_plan' 		=> 'array',
     	'grades_plan' 			=> 'array',
-    	'creator_id' 				=> 'integer'
+    	'creator_id' 			=> 'integer'
     ];
 
     public function program()
     {
         return $this->belongsToMany('App\Program', 'programs_subjects');
+    }
+
+    public function getSessionsCountAttribute($value)
+    {
+        return isset($value) ? $value : 0;
+    }
+
+    public function getGradesCountAttribute($value)
+    {
+        return isset($value) ? $value : 0;
     }
 }

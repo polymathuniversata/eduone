@@ -1,7 +1,28 @@
 @extends('master')
 
 @section('content')
-<h1>{!! trans('app.subjects') !!} <a href="/subjects/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+<header>
+	{!! Form::model($request, ['url' => 'subjects', 'method' => 'GET']) !!}
+    <div class="input-group pull-right col-md-7" id="advanced-search">
+        {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Show Advanced Search Options">
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        {!! Form::label('program') !!}
+                        {!! Form::select('program', $programs, null, ['class' => 'form-control']) !!}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+    {!! Form::close() !!}
+	<h1>{!! trans('app.subjects') !!} <a href="/subjects/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+</header>
 
 <table class="table table-bordered table-striped table-hover">
 	<thead>
@@ -9,7 +30,6 @@
 			<th>#</th>
 			<th>{!! trans('app.name') !!}</th>
 			<th>{!! trans('app.slug') !!}</th>
-			<th>{!! trans('app.period') !!}</th>
 			<th>{!! trans('app.grades_count') !!}</th>
 			<th>{!! trans('app.sessions_count') !!}</th>
 		</tr>
@@ -19,10 +39,8 @@
 			@foreach ($subjects as $subject)
 			<tr>
 				<td><input type="checkbox"></td>
-				<td><a href="/subjects/{!! $subject->id !!}/edit">{!! $subject->name !!}</a></td>
-				<td>{!! $subject->slug !!}</td>
-				<td>{!! $subject->program->name !!}</td>
-				<td>{!! $subject->period !!}</td>
+				<td><a href="/subjects/{!! $subject->id !!}/edit">{{ $subject->name }}</a></td>
+				<td>{{ $subject->slug }}</td>
 				<td><a href="/users/1">{!! $subject->grades_count !!}</a></td>
 				<td><a href="/users/1">{!! $subject->sessions_count !!}</a></td>
 			</tr>

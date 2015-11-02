@@ -67,4 +67,10 @@ return [
 	'grade_types'		=> 'Grade Types',
 	'save_changes'		=> 'Save Changes',
 	'update_program'		=> 'Update Program',
+	'subject'	=> 'Subject',
+	'subjects' => 'Subjects',
+	'create_new_subject' => 'Create New Subject',
+	'total_grade_rate' => 'Total Grade Rate',
+	'minimum_student_present_session' => 'Minimum Present Session',
+	'minimum_student_grade' => 'Minimum Student Grade',
  ];

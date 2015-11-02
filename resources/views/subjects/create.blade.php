@@ -7,8 +7,7 @@
 	<h1>{!! trans('app.create_new_subject') !!}</h1>
 </header>
 
-<div class="row">
-
+<div class="row" ng-controller="SubjectController">
 	<div class="col-md-3">
 		{!! Form::open(['url' => 'subjects']) !!}
 			
@@ -58,6 +57,9 @@
 					['class' => 'form-control'] ) !!}
 			</div>
 
+			<input type="hidden" name="grades_plan" value="@{{grades}}">
+			<input type="hidden" name="sessions_plan" value="@{{sessions}}">
+
 			<button class="btn btn-primary">{{trans('app.save_changes')}}</button>
 
 		{!! Form::close() !!}
@@ -73,45 +75,56 @@
 	  <!-- Tab panes -->
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="grades">
-
-	    	<div class="form-group col-md-4">
-    			<label for="">Grade Name</label>
-    			<input type="text" ng-model="grade.name" class="form-control input-sm">
-    		</div>
-
-    		<div class="form-group col-md-4">
-    			<label for="">Percent</label>
-    			<input type="number" ng-model="grade.name" class="form-control input-sm">
-    		</div>
-
-    		<div class="form-group col-md-4">
-    			<label for="">Minimum</label>
-    			<input type="number" ng-model="grade.name" class="form-control input-sm">
-    		</div>
+	    	<table class="table table-condensed">
+	    		<thead>
+		    		<tr>
+		    			<th>Grade Name</th>
+		    			<th>Percent</th>
+		    			<th>Minimum</th>
+		    			<th></th>
+		    		</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr ng-repeat="grade in grades">
+	    				<td><input type="text" ng-model="grade.name" class="form-control input-sm"></td>
+	    				<td><input type="number" ng-model="grade.percent" min="0" max="100" step="1" class="form-control input-sm"></td>
+	    				<td><input type="number" ng-model="grade.minimum" min="0" max="100" step="1" class="form-control input-sm"></td>
+	    				<td><button class="btn btn-default btn-sm" ng-click="removeGrade($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    	<button class="btn btn-default btn-sm" ng-click="addGrade()">Add Grade</button>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="sessions">
-	    	<div class="form-group">
-    			<label for="">Session Type</label>
-    			<select name="session_type" id="session_type" class="form-control input-sm">
-    				<option value="t">Theory</option>
-    				<option value="l">Lab</option>
-    				<option value="o">Outdoor</option>
-    				<option value="i">Internet</option>
-    				<option value="m">Mixed</option>
-    				<option value="e">Exam</option>
-    				<option value="t">Test</option>
-    			</select>
-    		</div>
-
-    		<div class="form-group">
-    			<label for="">Session Name</label>
-    			<input type="text" ng-model="grade.name" class="form-control input-sm">
-    		</div>
-
-    		<div class="form-group">
-    			<label for="">Session Description</label>
-    			<input type="text" ng-model="grade.name" class="form-control input-sm">
-    		</div>
+	    	<table class="table table-condensed">
+	    		<thead>
+	    			<tr>
+	    				<th>Session Type</th>
+	    				<th>Session Name</th>
+	    				<th>Description</th>
+	    				<td></td>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr ng-repeat="session in sessions">
+	    				<td>
+	    					<select name="session.type" id="session_type" class="form-control input-sm">
+			    				<option value="t">Theory</option>
+			    				<option value="l">Lab</option>
+			    				<option value="o">Outdoor</option>
+			    				<option value="i">Internet</option>
+			    				<option value="m">Mixed</option>
+			    				<option value="e">Exam</option>
+			    				<option value="t">Test</option>
+			    			</select>
+	    				</td>
+						<td><input type="text" ng-model="session.name" class="form-control input-sm"></td>
+						<td><input type="text" ng-model="session.description" class="form-control input-sm"></td>
+						<td><button class="btn btn-default btn-sm" ng-click="removeSession($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    	<button ng-click="addSession()" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-plus-sign"></i></button>
 	    </div>
 	  </div>
 	</div>

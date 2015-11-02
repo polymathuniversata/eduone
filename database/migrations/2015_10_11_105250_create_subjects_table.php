@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->integer('grades_count')->nullable();
-            $table->integer('session_count')->nullable();
+            $table->integer('sessions_count')->nullable();
             $table->integer('total_grade_rate')->default(0); // This subject hold how much in program?
             $table->float('minimum_student_present_session')->nullable();
             $table->string('minimum_student_grade')->nullable(); // 7.6 means 76. A means 80
