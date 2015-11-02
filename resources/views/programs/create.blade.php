@@ -29,14 +29,6 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		{!! Form::label('grade_type', trans('app.grade_type'), ['class' => 'col-md-2']) !!}
-		<div class="col-md-6">
-			{!! Form::select('grade_type', config('settings.grade_types'), 'vi', 
-			['class' => 'form-control'] ) !!}
-		</div>
-	</div>
-
 	<button class="btn btn-primary">{{trans('app.save_changes')}}</button>
 
 {!! Form::close() !!}

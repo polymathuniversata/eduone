@@ -90,20 +90,16 @@
                 </ul>
               </li>   
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-            </form>
+        
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">My Profile</a></li>
+                  <li><a href="#">Activity Logs</a></li>
+                  <li><a href="https://binaty.org/help">Help</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li><a href="/logout">Log out</a></li>
                 </ul>
               </li>
             </ul>

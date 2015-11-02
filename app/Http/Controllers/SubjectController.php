@@ -33,7 +33,11 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $subjects = Subject::orderBy('created_at')->get();
+        $subjects = Subject::search($request->q)
+                            ->ofProgram($request->program)
+                            ->orderBy('created_at')
+                            ->paginate(50);
+
         $programs = $this->programs;
 
         return view('subjects/index', compact('subjects', 'request', 'programs'));
@@ -59,7 +63,6 @@ class SubjectController extends Controller
     {
         $data = $request->all();
         $data = array_filter($data);
-
 
         if (! empty($data['grades_plan'])) {
             $grades_plan = json_decode( $data['grades_plan'] );

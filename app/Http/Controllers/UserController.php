@@ -44,7 +44,7 @@ class UserController extends Controller
                             ->ofRole($request->role)
                             ->branch($request->branch)
                             ->orderBy('created_at')
-                            ->get();
+                            ->paginate(50);
 
         $roles      = $this->roles;
         $branches   = $this->branches;
@@ -78,10 +78,7 @@ class UserController extends Controller
         
         if (! empty($data['branches']))
             $branches = (array) $data['branches'];
-        
-        unset($data['password_confirmation']);
-        unset($data['branches']);
-
+    
         try {
             $user = User::create($data);
             
@@ -137,8 +134,8 @@ class UserController extends Controller
         try {
             $user->update($data);
 
-            return redirect('users/' . $user->id )->with('message', 'User was updated successfully!');
-
+            return redirect('users/' . $user->id )
+                ->with('message', 'User was updated successfully!');
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }

@@ -42,4 +42,23 @@ class Subject extends Model
     {
         return isset($value) ? $value : 0;
     }
+
+    public function scopeSearch($query, $value)
+    {
+        if ( ! empty($value)) {
+            $value = "%$value%";
+
+            return $query->where('name', 'like', $value);
+        }
+
+        return $query;
+    }
+
+    public function scopeOfProgram($query, $value)
+    {
+        if (intval($value) > 0)
+            return $query->whereProgramId($value);
+        
+        return $query;
+    }
 }
