@@ -7,9 +7,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Program;
 use App\Subject;
+use App\Branch;
 
 class ProgramController extends Controller
 {
+    protected $branches = [];
+    protected $subjects = [];
+    
+    public function __construct()
+    {
+        $this->branches = Branch::lists('name', 'id')->toArray();
+        array_unshift($this->branches, 'Please select');
+        
+        $this->subjects = Subject::lists('name', 'id')->toArray();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +41,9 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view('programs/create');
+        $subjects = $this->subjects;
+
+        return view('programs/create', compact('subjects'));
     }
 
     /**
@@ -41,6 +55,8 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data = array_filter($data);
+        dd($data);
         try {
             $program = Program::create($data);
             return redirect('programs/' . $program->id )->with('message', 'Program was created successfully!');
@@ -55,9 +71,10 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Program $program)
     {
-        $program    = Program::findOrFail($id);
+        $subjects   = $this->subjects;
+        // Remove exists subject from all subject above
 
         return view('programs/update', compact('program', 'subjects'));
     }
@@ -68,9 +85,9 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Program $program)
     {
-        return $this->show($id);
+        return $this->show($program);
     }
 
     /**
@@ -80,7 +97,7 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Program $program)
     {
         //
     }
@@ -91,8 +108,10 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Program $program)
     {
-        //
+        $program->delete();
+
+        return back();
     }
 }

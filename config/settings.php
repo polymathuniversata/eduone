@@ -282,6 +282,8 @@ return [
 		'ind' 	=> 'Indian',
 		'rus' 	=> 'Russian',
 		'vi'	=> 'Vietnamese'
-	]
+	],
+
+	'calculate_formula' => ['Weighted Arithmetic Mean', 'Percent']
 	
 ];

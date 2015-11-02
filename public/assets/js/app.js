@@ -35,8 +35,45 @@
 		$scope.removeSession = function($index) {
 			$scope.sessions.splice($index, 1);
 		};
+	});
 
-		// Push to hidden fields when Form submitted
+	app.controller('ProgramController', function($scope, $http, $sce) {
+		
+		$scope.cached_json = [
+			{
+				name: 'Period 1',
+				type: 'period',
+				weight: 1
+			}
+		];
+
+		$scope.availableSubjects = [];
+
+		$scope.init = function() {
+			$scope.availableSubjects = window.subjects;
+			console.log(window.subjects);
+		};
+
+		$scope.addSubject = function(id) {
+			$scope.cached_json.push({
+				id: id,
+				name: $scope.availableSubjects[id] 
+			});
+
+			delete $scope.availableSubjects[id];
+		};
+
+		$scope.addPeriod = function() {
+			$scope.cached_json.push({
+				name: 'Period',
+				type: 'period',
+				weight: 1
+			});
+		};
+
+		$scope.removeItem = function($index) {
+			$scope.cached_json.splice($index, 1);
+		};
 	});
 
 })(jQuery, angular);

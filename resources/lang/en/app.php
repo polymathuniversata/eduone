@@ -73,4 +73,5 @@ return [
 	'total_grade_rate' => 'Total Grade Rate',
 	'minimum_student_present_session' => 'Minimum Present Session',
 	'minimum_student_grade' => 'Minimum Student Grade',
+	'create_new_program' => 'Create New Program',
  ];

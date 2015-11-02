@@ -15,9 +15,10 @@ class CreateProgramsTable extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('grade_type')->nullable(); // Grade type so Subject can inherit
-            $table->integer('periods')->default(1);
+            $table->string('slug')->unique()->nullable();
+            $table->integer('periods_count')->default(1);
+            $table->text('periods')->nullable();
+            $table->text('builder_json')->nullable();
             $table->integer('creator_id');
             $table->string('branches')->nullable(); //Branches ID, separated by commas
             $table->timestamps();
