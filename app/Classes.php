@@ -7,7 +7,7 @@ use App\Subject;
 
 class Classes extends Model
 {
-	use CanUseCreator;
+	use CanUseCreator, CanUseMeta;
 	
     protected $fillable = [
     	'name', 'slug', 'student_count', 'program_id', 
@@ -75,5 +75,47 @@ class Classes extends Model
             return $query->where('subjects_id', 'like', "%$value%");
 
         return $query;
+    }
+
+    /**
+     * Add student to class
+     * 
+     * @param array/mixed $params One or List of student
+     */
+    public function addStudent($params = [])
+    {
+
+    }
+
+    /**
+     * Remove a student or list of students from class
+     * 
+     * @param array/mixed $params One or List of student
+     */
+    public function removeStudent($params = [])
+    {
+
+    }
+
+    public function existsStudent($params){
+
+    }
+
+    /**
+     * Add teacher to class
+     */
+    public function addTeacher()
+    {
+
+    }
+
+    public function removeTeacher()
+    {
+
+    }
+
+    public function existsTeacher()
+    {
+
     }
 }

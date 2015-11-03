@@ -11,7 +11,7 @@
 	var subjects = {!! $subjects !!},
 		programs = {!! $programs_periods !!};
 </script>
-
+<div ng-controller="ClassController">
 {!! Form::open(['url' => 'classes']) !!}
 
 	<div class="form-group">
@@ -30,9 +30,38 @@
 	<div class="form-group">
 		{!! Form::label('subjects', trans('app.subjects')) !!}
 	</div>
+	
+	<div class="form-group">
+		{!! Form::label('students', 'Members') !!}
+		
+		<script type="text/ng-template" id="customTemplate.html">
+		  <a>
+		      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/@{{match.model.photo}}" width="16">
+		      <span ng-bind-html="match.model.name | uibTypeaheadHighlight:query"></span>
+		  </a>
+		</script>
 
+		<input type="text" ng-model="selected" placeholder="Select a student to add" uib-typeahead="student as student.name for student in students | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" typeahead-on-select="addStudent($item, $model, $label)" class="form-control">
+
+		<div class="members">
+			<div class="media" ng-repeat="student in selectedStudents">
+			  <div class="media-left media-middle">
+			    <a href="#">
+			      <img class="media-object" ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/@{{student.photo}}" alt="@{{student.name}}">
+			    </a>
+			  </div>
+			  <div class="media-body">
+			    <h4 class="media-heading">@{{student.name}}</h4>
+			    <button class="btn btn-default btn-sm" ng-click="removeStudent(student.id)"><i class="glyphicon glyphicon-remove"></i></button>
+			  </div>
+			</div>
+		</div>
+
+	</div>
 
 	<button class="btn btn-primary">Save Changes</button>
-
+	
+	<input type="hidden" name="students_id" value="@{{selectedStudents}}">
 {!! Form::close() !!}
+</div>
 @endsection

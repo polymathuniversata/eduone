@@ -17,7 +17,7 @@ class CreateClassesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('student_count')->default(0);
-            $table->integer('program_id')->nullable();
+            $table->integer('program_id')->index()->nullable();
             $table->string('subjects_id')->nullable();
             $table->integer('branch_id')->nullable();
             $table->integer('creator_id');

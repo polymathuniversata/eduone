@@ -8,8 +8,9 @@
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <script type="text/javascript" src="https://code.angularjs.org/1.4.7/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/assets/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
         <script type="text/javascript" src="/assets/js/app.js"></script>
-
+        
         <script type="text/javascript">
         var APP_URL = 'http://uniform.dev/';
 

@@ -9,15 +9,22 @@ use App\Classes;
 use App\Branch;
 use App\Program;
 use App\Subject;
+use App\Repositories\ClassRepository;
 
 class ClassController extends Controller
 {
     protected $programs = [];
+    
     protected $branches = [];
+    
     protected $subjects = [];
 
-    public function __construct()
+    protected $classes;
+
+    public function __construct(ClassRepository $classes)
     {
+        $this->classes = $classes;
+
         $this->programs = Program::lists('name', 'id')->toArray();
         array_unshift($this->programs, 'Please select');
         

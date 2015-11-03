@@ -1,6 +1,6 @@
 ;(function($, angular) {
 
-	var app = angular.module('App', []);
+	var app = angular.module('App', ['ui.bootstrap']);
 
 	app.controller('SubjectController', function($scope, $http, $sce) {
 		
@@ -97,6 +97,47 @@
 
 		$scope.removeMeta = function($index) {
 			$scope.meta.splice($index, 1);
+		};
+	});
+
+	app.controller('ClassController', function($scope) {
+		
+		$scope.students = [
+			{
+				id: 1,
+				name: 'Tan Nguyen',
+				photo: '0/01/Flag_of_California.svg/45px-Flag_of_California.svg.png'
+			},
+			{
+				id: 2,
+				name: 'Anh Tran',
+				photo: 'e/ef/Flag_of_Hawaii.svg/46px-Flag_of_Hawaii.svg.png'
+			}
+		];
+
+		$scope.selectedStudents = [];
+
+		$scope.init = function() {
+			//$scope.students = window.students;
+			//$scope.selected = window.selected;
+		};
+
+		$scope.addStudent = function($item, $model, $label) {
+			$scope.selectedStudents.push($item);
+
+			var students = [];
+			
+			angular.forEach($scope.students, function(student) {
+				if (student.id !== $item.id)
+					students.push(student);
+			});
+
+			$scope.students = students;
+			$scope.selected = [];
+		};
+
+		$scope.removeStudent = function(student) {
+			$scope.selectedStudents.splice($index, 1);
 		};
 	});
 
