@@ -55,3 +55,33 @@ footer{
 	font-weight: bold;
 	color: #333;
 }
+.panel-group{
+	padding: 30px;
+}
+.panel-group.sortable li{
+	max-width: 500px;
+	margin: 10px 0;
+}
+.ui-state-highlight{
+	border: 1px dashed #ccc;
+	height: 40px;
+}
+
+.panel-period {
+  border-color: #bce8f1;
+}
+.panel-period > .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.panel-period > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #bce8f1;
+}
+.panel-period > .panel-heading .badge {
+  color: #d9edf7;
+  background-color: #31708f;
+}
+.panel-period > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #bce8f1;
+}

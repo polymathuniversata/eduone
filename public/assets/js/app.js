@@ -1,6 +1,6 @@
 ;(function($, angular) {
 
-	var app = angular.module('App', ['ui.bootstrap']);
+	var app = angular.module('App', ['ui.bootstrap', 'tg.dynamicDirective', 'ui.sortable']);
 
 	app.controller('SubjectController', function($scope, $http, $sce) {
 		
@@ -47,11 +47,26 @@
 			}
 		];
 
+		/**
+		 * Configs for ui-sortable
+		 * @type {Object}
+		 */
+		$scope.sortableOptions = {
+		    connectWith: ".sortable",
+		    placeholder: "ui-state-highlight",
+		};
+
 		$scope.availableSubjects = [];
+
+		$scope.active = {};
 
 		$scope.init = function() {
 			$scope.availableSubjects = window.subjects;
 			console.log(window.subjects);
+		};
+
+		$scope.setActiveField = function (field) {
+			$scope.active = field;
 		};
 
 		$scope.addSubject = function(id) {

@@ -52,14 +52,41 @@
 				<input type="hidden" name="builder_json" value="@{{cached_json}}">
 				{!! Form::close() !!}
 			</div>
-			@{{checkedItems}}
-			<div class="panel-body">
-				<ul class="list-unstyled">
-					<li ng-repeat="item in cached_json">
-						@{{item.name}}
-					</li>
-				</ul>
-			</div>
+			
+			<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="cached_json">
+				<li ng-repeat="item in cached_json" ng-click="setActiveField(item)">
+				<div class="panel panel-default panel-@{{item.type}}">
+				    <div class="panel-heading" role="tab">
+				      <h4 class="panel-title">
+				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#field-@{{$index}}" aria-expanded="true" aria-controls="field-@{{$index}}">
+				          @{{item.name}}
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="field-@{{$index}}" class="panel-collapse collapse @{{active==field}}" role="tabpanel" ng-if="item.type">
+				      	<div class="panel-body">
+				    		<div class="row">
+								<div class="form-group col-md-6">
+									<label> Period Name
+									<input type="text" ng-model="item.name" class="form-control">
+									</label>
+								</div>
+								<div class="form-group col-md-6">
+										<label>Weight
+									<input type="number" ng-model="item.weight" class="form-control">
+									</label>
+								</div>
+								<div class="col-md-12">
+									<button class="btn btn-default btn-xs">Close</button>
+									<button class="btn btn-danger btn-xs" ng-show="$index != 0">Delete</button>
+								</div>
+				    		</div>
+				    		
+				      	</div>
+				    </div>
+			 	</div>
+			 	</li>
+		 	</ul><!--/panel-group-->
 		</div>
 	</div>
 </div><!--.row-->
