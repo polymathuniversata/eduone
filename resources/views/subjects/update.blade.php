@@ -1,15 +1,20 @@
 @extends('master')
 
-@section('title', trans('app.create_new_subject'))
+@section('title', trans('app.update_subject'))
 @section('content')
 
 <header>
-	<h1>{!! trans('app.create_new_subject') !!}</h1>
+	<h1>{!! trans('app.update_subject') !!}</h1>
 </header>
 
-<div class="row" ng-controller="SubjectController">
+<script type="text/javascript">
+	var grades 	= {!! $subject->grades_plan !!},
+		sessions= {!! $subject->sessions_plan !!};
+</script>
+
+<div class="row" ng-controller="SubjectController" ng-init="init()">
 	<div class="col-md-3">
-		{!! Form::open(['url' => 'subjects']) !!}
+		{!! Form::model($subject, ['route' => ['subjects.update', $subject->id], 'method' => 'PUT']) !!}
 			
 			<div class="form-group">
 				{!! Form::label('name', trans('app.name')) !!}

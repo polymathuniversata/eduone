@@ -8,8 +8,8 @@
 		$scope.sessions = [];
 
 		$scope.init = function() {
-			$scope.grades 	= window.grades || $scope.grades;
-			$scope.sessions = window.sessions || $scope.sessions;
+			$scope.grades 	= window.grades;
+			$scope.sessions = window.sessions;
 		};
 		
 		$scope.addGrade = function() {

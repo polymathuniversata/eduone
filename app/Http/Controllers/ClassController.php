@@ -6,19 +6,34 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Classes;
+use App\Branch;
+use App\Program;
 
 class ClassController extends Controller
 {
+    protected $programs = [];
+    protected $branches = [];
+
+    public function __construct()
+    {
+        $this->programs = Program::lists('name', 'id')->toArray();
+        array_unshift($this->programs, 'Please select');
+        $this->branches = Branch::lists('name', 'id')->toArray();
+        array_unshift($this->branches, 'Please select');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $classes = Classes::all();
+        $programs = $this->programs;
+        $branches = $this->branches;
 
-        return view('classes/index', compact('classes'));
+        return view('classes/index', compact('classes', 'programs', 'branches', 'request'));
     }
 
     /**
@@ -48,9 +63,9 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Classes $class)
     {
-        //
+        return $this->edit($class);
     }
 
     /**
@@ -59,9 +74,13 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Classes $class)
     {
-        //
+        $classes = Classes::all();
+        $programs = $this->programs;
+        $branches = $this->branches;
+
+        return view('classes/update', compact('classes', 'programs', 'branches'));
     }
 
     /**

@@ -101,7 +101,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('subjects/update', compact('subject'));
     }
 
     /**
@@ -113,7 +113,27 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $data = $request->all();        
+        $data = array_filter($data);
+
+        if (! empty($data['grades_plan'])) {
+            $grades_plan = json_decode( $data['grades_plan'] );
+            $data['grades_count'] = count($grades_plan);
+        }
+
+        if (! empty($data['sessions_plan'])) {
+            $sessions_plan = json_decode( $data['sessions_plan'] );
+            $data['sessions_count'] = count($sessions_plan);
+        }
+
+        try {
+            $subject->update($data);
+
+            return redirect('subjects/' . $subject->id )
+                ->with('message', 'Subject was updated successfully!');
+        } catch(Exception $e) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**
@@ -124,6 +144,8 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+
+        return back()->withMessage('Subject was deleted successfully!');
     }
 }

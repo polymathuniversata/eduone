@@ -15,7 +15,7 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->integer('grades_count')->nullable();
             $table->integer('sessions_count')->nullable();
             $table->integer('total_grade_rate')->default(0); // This subject hold how much in program?
