@@ -73,7 +73,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        dd($role);
+        $permissions = config('settings.permissions');
+
+        return view('roles/update', compact('role', 'permissions'));
     }
 
     /**
@@ -83,9 +85,18 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $data = array_filter($request->all());
+
+        try {
+            $role->update($data);
+
+            return redirect('roles/' . $role->id )
+                ->with('message', 'Role was updated successfully!');
+        } catch(Exception $e) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**

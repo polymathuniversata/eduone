@@ -20,9 +20,7 @@
 	<tbody>
 		@foreach ($roles as $role)
 		<tr>
-			<td>
-				<input type="checkbox" @if ($role->id < 5) disabled @endif>
-			</td>
+			<td>{{$role->id}}</td>
 			<td><a href="/roles/{{$role->id}}">{!! $role->name !!}</a></td>
 			<td><a href="/roles/{{$role->id}}">{!! $role->slug !!}</a></td>
 			<td>{!! $role->count !!}</td>
