@@ -52,11 +52,12 @@ class ClassController extends Controller
         // Todo: If users isn't Administrator, branch is current branch
         $branches = $this->branches;
         
-        $subjects = $this->subjects;
+        $subjects = json_encode($this->subjects);
 
         $programs = $this->programs;
-
-        return view('classes/create', compact('branches', 'programs', 'subjects'));
+        $programs_periods = Program::lists('periods', 'id')->toJson();
+        
+        return view('classes/create', compact('branches', 'programs', 'subjects', 'programs_periods'));
     }
 
     /**
@@ -68,6 +69,17 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $data = array_filter($request->all());
+        if ( empty($data['slug']))
+            $data['slug'] = str_slug($data['name']);
+
+        try {
+            $class = Classes::create($data);
+            
+            return redirect('classes/' . $class->id )
+                        ->with('message', 'Class was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**

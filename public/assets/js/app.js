@@ -76,4 +76,28 @@
 		};
 	});
 
+	app.controller('MetaController', function($scope) {
+		
+		$scope.meta 	= [];
+		$scope.object 	= '';
+		$scope.object_id = 0;
+
+		$scope.init = function() {
+			$scope.meta = window.meta;
+			$scope.object = window.object;
+			$scope.object_id = window.object_id;
+		};
+
+		$scope.addMeta = function() {
+			$scope.meta.push({
+				key: '',
+				value: ''
+			});
+		};
+
+		$scope.removeMeta = function($index) {
+			$scope.meta.splice($index, 1);
+		};
+	});
+
 })(jQuery, angular);

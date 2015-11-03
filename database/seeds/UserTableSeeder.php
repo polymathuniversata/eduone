@@ -19,6 +19,12 @@ class UserTableSeeder extends Seeder
         	])
         ]);
 
+        $teacher = App\Role::create([
+            'name' => 'Teacher',
+            'slug'  => 'teacher',
+            'permissions' => []
+        ]);
+
         $user = App\User::create([
             'name'          => 'admin',
             'first_name'    => 'Tan',

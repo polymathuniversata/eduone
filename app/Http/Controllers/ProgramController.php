@@ -12,6 +12,7 @@ use App\Branch;
 class ProgramController extends Controller
 {
     protected $branches = [];
+
     protected $subjects = [];
     
     public function __construct()
@@ -56,7 +57,28 @@ class ProgramController extends Controller
     {
         $data = $request->all();
         $data = array_filter($data);
-        dd($data);
+        
+        // Parse builder Json data to normal array
+        if ( ! empty($data['builder_json'])) {
+            $periods        = [];
+            $builder_json   = json_decode( $data['builder_json'], true );
+            
+            $i = -1;
+            foreach ($builder_json as $item) {
+                if (empty($item['id']) && $item['type'] === 'period') {
+                    $i++;
+                    $periods[$i] = [
+                        'name'   => $item['name'],
+                        'weight' => $item['weight']
+                    ];
+                }
+                else {
+                    $periods[$i]['subjects'][] = intval($item['id']);
+                }
+            }
+            $data['periods'] = $periods;
+        }
+
         try {
             $program = Program::create($data);
             return redirect('programs/' . $program->id )->with('message', 'Program was created successfully!');
@@ -74,6 +96,7 @@ class ProgramController extends Controller
     public function show(Program $program)
     {
         $subjects   = $this->subjects;
+        
         // Remove exists subject from all subject above
 
         return view('programs/update', compact('program', 'subjects'));

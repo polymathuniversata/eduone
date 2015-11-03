@@ -73,8 +73,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data = array_filter($data);
+        $data = array_filter($request->all());
         
         if (! empty($data['branches']))
             $branches = (array) $data['branches'];
