@@ -21,6 +21,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Subjects</div>
 			<div class="panel-body">
+				<small>Click to Add</small>
 				<div class="checkbox-list" id="subjects">
 					<div class="checkbox" ng-repeat="(key, value) in availableSubjects">
 						<label>
@@ -53,6 +54,8 @@
 				{!! Form::close() !!}
 			</div>
 			
+			<small>Drag subjects and periods to the order you want</small>
+
 			<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="cached_json">
 				<li ng-repeat="item in cached_json" ng-click="setActiveField(item)">
 				<div class="panel panel-default panel-@{{item.type}}">

@@ -8,8 +8,10 @@
 		$scope.sessions = [];
 
 		$scope.init = function() {
-			$scope.grades 	= window.grades;
-			$scope.sessions = window.sessions;
+			if (typeof window.grades != 'undefined' && angular.isArray(window.grades))
+				$scope.grades 	= window.grades;
+			if (typeof window.sessions != 'undefined' && angular.isArray(window.sessions))
+				$scope.sessions = window.sessions;
 		};
 		
 		$scope.addGrade = function() {
