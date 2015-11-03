@@ -8,18 +8,24 @@ use App\Http\Controllers\Controller;
 use App\Classes;
 use App\Branch;
 use App\Program;
+use App\Subject;
 
 class ClassController extends Controller
 {
     protected $programs = [];
     protected $branches = [];
+    protected $subjects = [];
 
     public function __construct()
     {
         $this->programs = Program::lists('name', 'id')->toArray();
         array_unshift($this->programs, 'Please select');
+        
         $this->branches = Branch::lists('name', 'id')->toArray();
         array_unshift($this->branches, 'Please select');
+
+        $this->subjects = Subject::lists('name', 'id')->toArray();
+        array_unshift($this->subjects, 'Please select');
     }
 
     /**
@@ -43,7 +49,14 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        // Todo: If users isn't Administrator, branch is current branch
+        $branches = $this->branches;
+        
+        $subjects = $this->subjects;
+
+        $programs = $this->programs;
+
+        return view('classes/create', compact('branches', 'programs', 'subjects'));
     }
 
     /**
@@ -54,7 +67,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array_filter($request->all());
     }
 
     /**

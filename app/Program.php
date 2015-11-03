@@ -21,6 +21,16 @@ class Program extends Model
     	return $this->belongsToMany('App\User', 'users_programs');
     }
 
+    public function subjects()
+    {
+
+    }
+
+    public function classes()
+    {
+        return $this->hasMany('App\Classes');
+    }
+
     public function allSubject()
     {
 

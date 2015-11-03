@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Subject;
 
 class Classes extends Model
 {
@@ -25,21 +26,54 @@ class Classes extends Model
 
     public function students()
     {
-    	$this->belongsToMany('App\User', 'users_classes');
+    	return $this->belongsToMany('App\User', 'users_classes');
     }
 
     public function program()
     {
-    	$this->belongsTo('App\Program');
-    }
-
-    public function subject()
-    {
-    	$this->belongsTo('App\Subject');
+    	return $this->belongsTo('App\Program');
     }
 
     public function branch()
     {
-    	$this->belongsTo('App\Branch');
+    	return $this->belongsTo('App\Branch');
+    }
+
+    public function getSubjectsId()
+    {
+        if ( ! empty($this->subjects_id)) {
+            $subjects = array_map('intval', explode( ',', $this->subjects_id));
+
+            return $subjects;
+        }
+
+        return null;
+    }
+
+    public function getSubjects()
+    {
+        $subjects_id = $this->getSubjectsId();
+        
+        if (is_null($subjects_id))
+            return;
+
+        return Subject::where('id', 'in', $subjects_id)
+                        ->lists('name', 'id')->get();
+    }
+
+    public function scopeOfProgram($query, $value)
+    {
+        if (intval($value) > 0)
+            return $query->whereProgramId($value);
+
+        return $query;
+    }
+
+    public function scopeOfSubject($query, $value)
+    {
+        if ( ! empty($value))
+            return $query->where('subjects_id', 'like', "%$value%");
+
+        return $query;
     }
 }

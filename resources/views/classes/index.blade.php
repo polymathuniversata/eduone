@@ -13,8 +13,8 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        {!! Form::label('role') !!}
-                        {!! Form::select('role', $roles, null, ['class' => 'form-control']) !!}
+                        {!! Form::label('program') !!}
+                        {!! Form::select('program', $programs, null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group col-md-6">
                         {!! Form::label('branch') !!}
@@ -28,7 +28,7 @@
     </div>
     {!! Form::close() !!}
 
-    <h1>{!! trans('app.users') !!} <a href="/users/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+    <h1>{!! trans('app.classes') !!} <a href="/classes/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
 
 </header>
 
@@ -38,24 +38,29 @@
     		<tr>
     			<th>#</th>
     			<th>{!! trans('app.name') !!}</th>
-    			<th>{!! trans('app.email') !!}</th>
-    			<th>{!! trans('app.role') !!}</th>
+    			<th>{!! trans('app.program') !!}</th>
+                <th>{{ trans('app.subjects') }}</th>
+    			<th>{!! trans('app.teachers') !!}</th>
     			<th>{!! trans('app.status') !!}</th>
     			<th>{!! trans('app.created_at') !!}</th>
-    			<th>{!! trans('app.login_as') !!}</th>
     		</tr>
     	</thead>
-
     	<tbody>
-    		@foreach ($users as $user)
+    		@foreach ($classes as $class)
     		<tr>
     			<td><input type="checkbox" disabled></td>
-    			<td class="table-title"><a href="/users/{{$user->id}}">{!! $user->getFullName() !!}</a></td>
-    			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-    			<td>{{ $user->role->name }}</td>
-    			<td>{!! $user->status !!}</td>
-    			<td>{!! $user->created_at !!}</td>
-    			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
+    			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
+    			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
+    			<td>
+                    @if ( ! empty($class->getSubjects()))
+                        @foreach ($class->getSubjects() as $id => $name)
+                            {{$name}}
+                        @endforeach
+                    @endif
+                </td>
+                <td></td>
+    			<td>{!! $class->status !!}</td>
+    			<td>{!! $class->created_at !!}</td>
     		</tr>
     		@endforeach
     	</tbody>

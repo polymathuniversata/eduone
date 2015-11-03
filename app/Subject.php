@@ -23,8 +23,6 @@ class Subject extends Model
     	'minimum_student_grade' => 'integer',
     	'minimum_student_present_session' => 'integer',
     	'equal_to'				=> 'integer',
-    	'sessions_plan' 		=> 'array',
-    	'grades_plan' 			=> 'array',
     	'creator_id' 			=> 'integer'
     ];
 
