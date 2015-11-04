@@ -10,6 +10,13 @@ use App\User;
 
 class BranchController extends Controller
 {
+
+    protected $administrators = [];
+
+    public function __construct()
+    {
+        $this->administrators = User::ofRole(1)->lists('name', 'id')->toArray();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +36,9 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $users      = User::ofRole(1)->lists('name', 'id')->toArray();
+        $administrators = $this->administrators;
         
-        return view('branches.create', compact('users'));
+        return view('branches.create', compact('administrators'));
     }
 
     /**
@@ -57,9 +64,9 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Branch $branch)
     {
-        return view('branches.edit');
+        $this->edit($branch);
     }
 
     /**
@@ -68,9 +75,11 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Branch $branch)
     {
-        return view('branches.edit');
+        $administrators = $this->administrators;
+
+        return view('branches.update', compact('branch', 'administrators'));
     }
 
     /**
