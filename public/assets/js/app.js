@@ -64,7 +64,7 @@
 
 		$scope.init = function() {
 			$scope.availableSubjects = window.subjects;
-			console.log(window.subjects);
+			$scope.cached_json = window.cached_json;
 		};
 
 		$scope.setActiveField = function (field) {

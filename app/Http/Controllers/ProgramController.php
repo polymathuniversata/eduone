@@ -58,26 +58,8 @@ class ProgramController extends Controller
         $data = $request->all();
         $data = array_filter($data);
         
-        // Parse builder Json data to normal array
-        if ( ! empty($data['builder_json'])) {
-            $periods        = [];
-            $builder_json   = json_decode( $data['builder_json'], true );
-            
-            $i = -1;
-            foreach ($builder_json as $item) {
-                if (empty($item['id']) && $item['type'] === 'period') {
-                    $i++;
-                    $periods[$i] = [
-                        'name'   => $item['name'],
-                        'weight' => $item['weight']
-                    ];
-                }
-                else {
-                    $periods[$i]['subjects'][] = intval($item['id']);
-                }
-            }
-            $data['periods'] = $periods;
-        }
+        if ( ! empty($data['builder_json']))
+            $data['periods'] = $this->parsePeriods($data['builder_json']);
 
         try {
             $program = Program::create($data);
@@ -96,9 +78,7 @@ class ProgramController extends Controller
     public function show(Program $program)
     {
         $subjects   = $this->subjects;
-        
         // Remove exists subject from all subject above
-
         return view('programs/update', compact('program', 'subjects'));
     }
 
@@ -122,7 +102,41 @@ class ProgramController extends Controller
      */
     public function update(Request $request, Program $program)
     {
-        //
+        $data = array_filter($request->all());
+        if ( ! empty($data['builder_json']))
+            $data['periods'] = $this->parsePeriods($data['builder_json']);
+
+        try {
+            $program->update($data);
+
+            return redirect('programs/' . $program->id )
+                ->with('message', 'Program was updated successfully!');
+        } catch(Exception $e) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
+    }
+
+    protected function parsePeriods($builder_json)
+    {
+        // Parse builder Json data to normal array
+        $periods        = [];
+        $builder_json   = json_decode( $builder_json, true );
+        
+        $i = -1;
+        foreach ($builder_json as $item) {
+            if (empty($item['id']) && $item['type'] === 'period') {
+                $i++;
+                $periods[$i] = [
+                    'name'   => $item['name'],
+                    'weight' => $item['weight']
+                ];
+            }
+            else {
+                $periods[$i]['subjects'][] = intval($item['id']);
+            }
+        }
+
+        return $periods;
     }
 
     /**
