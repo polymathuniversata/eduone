@@ -69,6 +69,12 @@ class Classes extends Model
         return $query;
     }
 
+    public function scopeSearch($query, $value)
+    {
+        if ( ! empty($value))
+            return ! empty($value) ? $query->where('name', 'like', "%$value%") : $query;
+    }
+    
     public function scopeOfSubject($query, $value)
     {
         if ( ! empty($value))

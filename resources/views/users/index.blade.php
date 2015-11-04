@@ -78,6 +78,8 @@
     <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>
 </div>
 
+{!! $users->render() !!}
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

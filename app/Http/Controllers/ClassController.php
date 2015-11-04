@@ -42,7 +42,11 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        $classes = Classes::all();
+        $classes = Classes::search($request->q)
+                        ->ofProgram($request->program)
+                        ->ofSubject($request->subject)
+                        ->paginate(20);
+
         $programs = $this->programs;
         $branches = $this->branches;
 
