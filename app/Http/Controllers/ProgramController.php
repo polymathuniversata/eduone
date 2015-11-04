@@ -78,6 +78,10 @@ class ProgramController extends Controller
     public function show(Program $program)
     {
         $subjects   = $this->subjects;
+        
+        if (empty( $program->builder_json))
+            $program->builder_json = '[]';
+
         // Remove exists subject from all subject above
         return view('programs/update', compact('program', 'subjects'));
     }
