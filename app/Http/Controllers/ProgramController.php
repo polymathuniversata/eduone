@@ -79,6 +79,12 @@ class ProgramController extends Controller
     {
         $subjects   = $this->subjects;
         
+        // Remove already added subject from builder sidebar
+        if ( ! empty($program->periods)) {
+            $added_subjects = $program->getSubjectFromPeriod();
+            $subjects = array_diff_key($subjects, array_flip($added_subjects));
+        }
+
         if (empty( $program->builder_json))
             $program->builder_json = '[]';
 

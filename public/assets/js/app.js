@@ -63,8 +63,10 @@
 		$scope.active = {};
 
 		$scope.init = function() {
-			$scope.availableSubjects = window.subjects;
-			$scope.cached_json = window.cached_json;
+			if (typeof window.subjects != 'undefined' && angular.isObject(window.subjects))
+				$scope.availableSubjects 	= window.subjects;
+			if (typeof window.cached_json != 'undefined' && angular.isArray(window.cached_json))
+				$scope.cached_json 			= window.cached_json;
 		};
 
 		$scope.setActiveField = function (field) {
@@ -89,7 +91,11 @@
 		};
 
 		$scope.removeItem = function($index) {
+			var item = $scope.cached_json[$index];
+
 			$scope.cached_json.splice($index, 1);
+			if (item.id)
+				$scope.availableSubjects[item.id] = item.name;
 		};
 	});
 

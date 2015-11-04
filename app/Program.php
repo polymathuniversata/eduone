@@ -21,6 +21,21 @@ class Program extends Model
     	return $this->belongsToMany('App\User', 'users_programs');
     }
 
+    public function getSubjectFromPeriod($arg = '')
+    {
+        $periods = $this->periods;
+        $all_subjects = [];
+
+        foreach ($periods as $index => $period ) {
+            if ((is_integer($arg) && $index === $arg) || ! empty($arg) && $period['name'] === $arg)
+                return $period['subjects'];
+
+            $all_subjects = array_merge($all_subjects, $period['subjects']);
+        }
+
+        return $all_subjects;
+    }
+
     public function subjects()
     {
 

@@ -71,7 +71,7 @@ footer{
   border-color: #bce8f1;
 }
 .panel-period > .panel-heading {
-  color: #31708f;
+  color: #2980b9;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
@@ -80,8 +80,12 @@ footer{
 }
 .panel-period > .panel-heading .badge {
   color: #d9edf7;
-  background-color: #31708f;
+  background-color: #2980b9;
 }
 .panel-period > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #bce8f1;
+}
+
+.sortable .panel:hover{
+	cursor: move;
 }
