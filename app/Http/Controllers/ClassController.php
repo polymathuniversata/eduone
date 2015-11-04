@@ -26,13 +26,10 @@ class ClassController extends Controller
         $this->classes = $classes;
 
         $this->programs = Program::lists('name', 'id')->toArray();
-        array_unshift($this->programs, 'Please select');
         
         $this->branches = Branch::lists('name', 'id')->toArray();
-        array_unshift($this->branches, 'Please select');
-
+ 
         $this->subjects = Subject::lists('name', 'id')->toArray();
-        array_unshift($this->subjects, 'Please select');
     }
 
     /**

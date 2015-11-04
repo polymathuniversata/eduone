@@ -123,7 +123,7 @@
 		};
 	});
 
-	app.controller('ClassController', function($scope) {
+	app.controller('ClassController', function($scope, $http) {
 		
 		$scope.students = [
 			{
@@ -139,6 +139,14 @@
 		];
 
 		$scope.selectedStudents = [];
+
+		$scope.periods = null;
+
+		$scope.subjects = [];
+
+		$scope.selectedProgram = null;
+
+		$scope.selectedPeriods = [];
 
 		$scope.init = function() {
 			//$scope.students = window.students;
@@ -157,6 +165,21 @@
 
 			$scope.students = students;
 			$scope.selected = [];
+		};
+
+		$scope.showChild = function() {
+			$http.get('/programs/periods/' + $scope.selectedProgram).
+				success(function(data, status, headers, config) {
+			    	$scope.periods = data;
+			    	console.log(data);
+			  	}).
+			  	error(function(data, status, headers, config) {
+			    	//
+				});
+		};
+
+		$scope.onPeriodSelected = function() {
+			console.log($scope.selectedPeriods);
 		};
 
 		$scope.removeStudent = function(student) {

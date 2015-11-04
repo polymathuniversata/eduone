@@ -42,3 +42,5 @@ Route::resource('classes', 'ClassController');
 Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');
 Route::resource('student', 'StudentController');
+
+Route::get('programs/periods/{id}', 'ProgramController@periods');

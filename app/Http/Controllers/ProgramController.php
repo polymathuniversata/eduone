@@ -148,6 +148,24 @@ class ProgramController extends Controller
         return $periods;
     }
 
+    public function periods($id)
+    {
+        $program = Program::findOrFail($id);
+       
+        $periods = [];
+
+        foreach ($program->periods as $index => $period) {
+            if ( ! empty($period['subjects'])) {
+                $subjects = Subject::whereIn('id', $period['subjects'])
+                                ->lists('name', 'id')->toArray();
+                $period['subjects'] = $subjects;
+            }
+            $periods[] = $period;
+        }
+
+        return $periods;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

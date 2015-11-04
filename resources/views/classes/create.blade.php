@@ -24,9 +24,19 @@
 
 	<div class="form-group">
 		{!! Form::label('program_id', trans('app.program')) !!}
-		{!! Form::select('program_id', $programs, null, ['class' => 'form-control']) !!}
+		{!! Form::select('program_id', $programs, null, [
+			'class' => 'form-control', 
+			'placeholder' => 'Please select',
+			'ng-model'	=> 'selectedProgram',
+			'ng-change' => 'showChild()'])
+		!!}
 	</div>
 	
+	@{{selectedPeriods | json}}
+	<div class="form-group" ng-if="periods != null">
+		<select class="form-control" ng-model="selectedPeriods" multiple="multiple" ng-options="period.name for (id, period) in periods"></select>
+	</div>
+
 	<div class="form-group">
 		{!! Form::label('subjects', trans('app.subjects')) !!}
 	</div>

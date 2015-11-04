@@ -75,5 +75,6 @@ return [
 	'minimum_student_grade' => 'Minimum Student Grade',
 	'create_new_program' => 'Create New Program',
  	'create_new_class' => 'Create New Class',
- 	'update_subject' => 'Update Subject'
+ 	'update_subject' => 'Update Subject',
+ 	'program_designer' => 'Program Designer',
  ];

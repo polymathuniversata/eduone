@@ -45,14 +45,4 @@ trait CanUseCreator
 	{
         return $this->belongsTo('App\User', 'creator_id', 'id');
 	}
-
-	/**
-	 * Auto set creator when object created
-	 *
-	 * @return void
-	 */
-	public function setCreatorIdAttribute($value = 1)
-	{
-		$this->attributes['creator_id'] = $value;
-	}
 }
