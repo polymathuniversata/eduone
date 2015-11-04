@@ -3,10 +3,10 @@
 @section('content')
 
 <header>
-	<h1>Create New Branch</h1>
+	<h1>Update Branch</h1>
 </header>
 
-{!! Form::open(['url' => 'branches', 'class' => 'form-horizontal']) !!}
+{!! Form::model($branch, ['route' => ['branchs.update', $branch->id], 'method' => 'PUT']) !!}
 	@include('branches/_partials/form');
 {!! Form::close() !!}
 @endsection
