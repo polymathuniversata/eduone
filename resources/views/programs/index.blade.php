@@ -19,7 +19,11 @@
 				<tr>
 					<td class="table-title"><a href="/programs/{!! $program->id !!}/edit">{!! $program->name !!}</a></td>
 					<td>{!! $program->slug !!}</td>
-					<td>{{ $program->creator->getFullName() }}</td>
+					<td>
+						@if ($program->creator)
+						{{ $program->creator->getFullName() }}
+						@endif
+					</td>
 					<td>{!! count( $program->students ) !!}</td>
 				</tr>
 				@endforeach

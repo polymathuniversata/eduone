@@ -20,7 +20,6 @@ class CreateProgramsTable extends Migration
             $table->text('periods')->nullable();
             $table->text('builder_json')->nullable();
             $table->integer('creator_id');
-            $table->string('branches')->nullable(); //Branches ID, separated by commas
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

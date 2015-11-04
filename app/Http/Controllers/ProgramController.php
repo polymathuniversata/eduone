@@ -18,7 +18,6 @@ class ProgramController extends Controller
     public function __construct()
     {
         $this->branches = Branch::lists('name', 'id')->toArray();
-        array_unshift($this->branches, 'Please select');
         
         $this->subjects = Subject::lists('name', 'id')->toArray();
     }
