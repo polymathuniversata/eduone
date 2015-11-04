@@ -30,7 +30,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::all();
+        $programs = Program::orderBy('created_at')->paginate(20);
 
         return view('programs/index', compact('programs'));
     }
