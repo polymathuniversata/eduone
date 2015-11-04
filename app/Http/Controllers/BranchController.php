@@ -29,7 +29,8 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $users      = User::lists('name', 'id')->toArray();
+        $users      = User::ofRole(1)->lists('name', 'id')->toArray();
+        
         return view('branches.create', compact('users'));
     }
 

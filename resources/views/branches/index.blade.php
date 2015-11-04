@@ -17,9 +17,9 @@
 			@foreach ($branches as $branch)
 			<tr>
 				<td><input type="checkbox"></td>
-				<td><a href="/branches/{!! $branch->id !!}/edit">{!! $branch->name !!}</a></td>
-				<td>{!! $branch->email !!}</td>
-				<td><a href="/users/1">{!! $branch->admin->first_name . ' ' . $branch->admin->last_name !!}</a></td>
+				<td><a href="/branches/{!! $branch->id !!}/edit">{{ $branch->name }}</a></td>
+				<td>{{ $branch->email }}</td>
+				<td><a href="/users/1">{!! $branch->admin->getFullName() !!}</a></td>
 			</tr>
 			@endforeach
 		@else

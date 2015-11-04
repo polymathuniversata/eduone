@@ -36,7 +36,8 @@ class UserTableSeeder extends Seeder
         ]);
 
         $branch = App\Branch::create([
-            'name' => 'FPT Polytechnic'
+            'name'              => 'FPT Polytechnic',
+            'administrator_id'  => $superAdmin->id
         ]);
 
         $room = App\Room::create([
