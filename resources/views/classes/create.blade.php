@@ -51,20 +51,24 @@
 	<div class="form-group">
 		<label for="started_at">Start Date</label>
 		{!! Form::date('started_at', null, [
-			'class' => 'form-control',
-			'placeholder' => 'Enter start date'
+			'class' => 'form-control'
 		]) !!}
 	</div>
 
 	<div class="form-group">
 		<label for="finished_at">Finish Date</label>
 		{!! Form::date('finished_at', null, [
-			'class' => 'form-control',
-			'placeholder' => 'Enter finish date'
+			'class' => 'form-control'
 		])!!}
 	</div>
 
-	Todo: Relationship with Branch
+	<div class="form-group">
+		<label for="branch_id">Branch</label>
+		{!! Form::select('branch_id', $branches, null, [
+			'class' 		=> 'form-control',
+			'placeholder' 	=> 'Select Branch'
+		])!!}
+	</div>
 	
 	<input type="hidden" name="periods_id" value="@{{selectedPeriods}}">
 

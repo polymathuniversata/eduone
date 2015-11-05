@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         {!! Form::label('program') !!}
-                        {!! Form::select('program', $programs, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('program', $programs, null, ['class' => 'form-control', 'placeholder' => 'Select a Program']) !!}
                     </div>
                     <div class="form-group col-md-6">
                         {!! Form::label('branch') !!}
-                        {!! Form::select('branch', $branches, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('branch', $branches, null, ['class' => 'form-control', 'placeholder' => 'Select a Branch']) !!}
                     </div>
                 </div>
              
