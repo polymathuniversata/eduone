@@ -57,9 +57,8 @@ class ProgramController extends Controller
         $data = $request->all();
         $data = array_filter($data);
         
-        if ( ! empty($data['builder_json']))
-            $data['periods'] = $this->parsePeriods($data['builder_json']);
-
+        if (empty($data['periods']))
+            $data['periods'] = [];
         try {
             $program = Program::create($data);
             return redirect('programs/' . $program->id )->with('message', 'Program was created successfully!');
@@ -77,15 +76,6 @@ class ProgramController extends Controller
     public function show(Program $program)
     {
         $subjects   = $this->subjects;
-        
-        // Remove already added subject from builder sidebar
-        if ( ! empty($program->periods)) {
-            $added_subjects = $program->getSubjectFromPeriod();
-            $subjects = array_diff_key($subjects, array_flip($added_subjects));
-        }
-
-        if (empty( $program->builder_json))
-            $program->builder_json = '[]';
 
         // Remove exists subject from all subject above
         return view('programs/update', compact('program', 'subjects'));
@@ -112,9 +102,10 @@ class ProgramController extends Controller
     public function update(Request $request, Program $program)
     {
         $data = array_filter($request->all());
-        if ( ! empty($data['builder_json']))
-            $data['periods'] = $this->parsePeriods($data['builder_json']);
 
+        if (empty($data['periods']))
+            $data['periods'] = [];
+        
         try {
             $program->update($data);
 
@@ -125,36 +116,13 @@ class ProgramController extends Controller
         }
     }
 
-    protected function parsePeriods($builder_json)
-    {
-        // Parse builder Json data to normal array
-        $periods        = [];
-        $builder_json   = json_decode( $builder_json, true );
-        
-        $i = -1;
-        foreach ($builder_json as $item) {
-            if (empty($item['id']) && $item['type'] === 'period') {
-                $i++;
-                $periods[$i] = [
-                    'name'   => $item['name'],
-                    'weight' => $item['weight']
-                ];
-            }
-            else {
-                $periods[$i]['subjects'][] = intval($item['id']);
-            }
-        }
-
-        return $periods;
-    }
-
     public function periods($id)
     {
-        $program = Program::findOrFail($id);
-       
+        $program = Program::findOrFail($id);       
         $periods = [];
+        $all_periods = $program->getPeriods();
 
-        foreach ($program->periods as $index => $period) {
+        foreach ($all_periods as $id => $period) {
             if ( ! empty($period['subjects'])) {
                 $subjects = Subject::whereIn('id', $period['subjects'])
                                 ->lists('name', 'id')->toArray();

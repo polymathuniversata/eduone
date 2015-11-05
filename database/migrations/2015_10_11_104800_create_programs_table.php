@@ -18,7 +18,6 @@ class CreateProgramsTable extends Migration
             $table->string('slug')->unique()->nullable();
             $table->integer('periods_count')->default(1);
             $table->text('periods')->nullable();
-            $table->text('builder_json')->nullable();
             $table->integer('creator_id');
             $table->timestamps();
             $table->engine = 'InnoDB';

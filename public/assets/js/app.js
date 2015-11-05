@@ -55,8 +55,9 @@
 
 	app.controller('ProgramController', function($scope, $http, $sce) {
 		
-		$scope.cached_json = [
+		$scope.periods = [
 			{
+				id: $scope.uniqId(),
 				name: 'Period 1',
 				type: 'period',
 				weight: 1
@@ -72,15 +73,22 @@
 		    placeholder: "ui-state-highlight",
 		};
 
-		$scope.availableSubjects = [];
+		$scope.subjects = [];
 
 		$scope.active = {};
 
+		$scope.alreadyAddedSubject = [];
+
 		$scope.init = function() {
 			if (typeof window.subjects != 'undefined' && angular.isObject(window.subjects))
-				$scope.availableSubjects 	= window.subjects;
-			if (typeof window.cached_json != 'undefined' && angular.isArray(window.cached_json))
-				$scope.cached_json 			= window.cached_json;
+				$scope.subjects 	= window.subjects;
+
+			if (typeof window.periods != 'undefined' && angular.isArray(window.periods))
+				$scope.periods 			= window.periods;
+
+			$scope.setAlreadyAddedSubject();
+
+			console.log($scope.alreadyAddedSubject);
 		};
 
 		$scope.setActiveField = function (field) {
@@ -88,16 +96,16 @@
 		};
 
 		$scope.addSubject = function(id) {
-			$scope.cached_json.push({
+			$scope.periods.push({
 				id: id,
-				name: $scope.availableSubjects[id] 
+				type: 'subject'
 			});
 
-			delete $scope.availableSubjects[id];
+			$scope.alreadyAddedSubject.push(id);
 		};
 
 		$scope.addPeriod = function() {
-			$scope.cached_json.push({
+			$scope.periods.push({
 				id: $scope.uniqId(),
 				name: 'Period',
 				type: 'period',
@@ -106,11 +114,21 @@
 		};
 
 		$scope.removeItem = function($index) {
-			var item = $scope.cached_json[$index];
+			var item = $scope.periods[$index];
 
-			$scope.cached_json.splice($index, 1);
-			if (item.id)
-				$scope.availableSubjects[item.id] = item.name;
+			$scope.periods.splice($index, 1);
+			
+			if (item.type === 'subject') {
+				var index = $scope.alreadyAddedSubject.indexOf(item.id);
+				$scope.alreadyAddedSubject.splice(index, 1);	
+			}
+		};
+
+		$scope.setAlreadyAddedSubject = function() {
+			angular.forEach($scope.periods, function(period) {
+				if (period.type === 'subject')
+					$scope.alreadyAddedSubject.push(period.id);
+			});
 		};
 	});
 

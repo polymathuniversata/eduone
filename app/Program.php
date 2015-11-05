@@ -12,8 +12,7 @@ class Program extends Model
     
     protected $casts = [
     	'periods_count'  => 'integer',
-        'periods'        => 'array',
-        'builder_json'   => 'array'
+        'periods'        => 'array'
     ];
 
     public function students()
@@ -21,13 +20,36 @@ class Program extends Model
     	return $this->belongsToMany('App\User', 'users_programs');
     }
 
+    public function getPeriods()
+    {
+        $periods = [];
+
+        $all_periods = json_decode($this->periods, true);
+        
+        foreach ($all_periods as $item) {
+            if ($item['type'] === 'period') {
+                $periods[$item['id']] = [
+                    'id'   => $item['id'],
+                    'name' => $item['name']
+                ];
+                $period_id = $item['id'];
+            }
+
+            if ($item['type'] === 'subject')
+                $periods[$period_id]['subjects'][] = intval($item['id']);
+        }
+        
+        return $periods;
+    }
+
     public function getSubjectFromPeriod($arg = '')
     {
-        $periods = $this->periods;
+        $periods = $this->getPeriods();
+
         $all_subjects = [];
 
-        foreach ($periods as $index => $period ) {
-            if ((is_integer($arg) && $index === $arg) || ! empty($arg) && $period['name'] === $arg)
+        foreach ($periods as $id => $period ) {
+            if ($arg === $id)
                 return $period['subjects'];
 
             $all_subjects = array_merge($all_subjects, $period['subjects']);

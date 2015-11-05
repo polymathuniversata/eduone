@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 	var subjects = {!! json_encode($subjects) !!},
-		cached_json = {!! $program->builder_json !!};
+		periods = {!! $program->periods !!};
 </script>
 
 <div class="row" ng-controller="ProgramController" ng-init="init()">

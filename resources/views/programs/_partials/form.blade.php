@@ -9,10 +9,11 @@
 		<div class="panel-heading">Subjects</div>
 		<div class="panel-body">
 			<small>Click to Add</small>
+			
 			<div class="checkbox-list" id="subjects">
-				<div class="checkbox" ng-repeat="(key, value) in availableSubjects">
+				<div class="checkbox" ng-repeat="(key, value) in subjects" ng-hide="alreadyAddedSubject.indexOf(key)!=-1">
 					<label>
-						<input type="checkbox" ng-click="addSubject(key)"> @{{value}}
+						<input ng-checked="!alreadyAddedSubject.indexOf(key)" type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
 					</label>
 				</div>
 			</div>
@@ -36,20 +37,24 @@
 					!!}
 				</div>
 			</div>
-			<input type="hidden" name="builder_json" value="@{{cached_json}}">
+			<input type="hidden" name="periods" value="@{{periods}}">
 			
 		</header>
 		
 		<small>Drag subjects and periods to the order you want</small>
 
-		<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="cached_json">
-			<li ng-repeat="item in cached_json track by $index" ng-click="setActiveField(item)">
+		<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="periods">
+			<li ng-repeat="item in periods track by $index" ng-click="setActiveField(item)">
 			
 			<div class="panel panel-default panel-@{{item.type}}">
 			    <div class="panel-heading" role="tab">
 			      <h4 class="panel-title">
-			      	@{{item.name}}
-			       
+			      	<span ng-show="item.name">
+			      		@{{item.name}}
+			      	</span>
+			       <span ng-show="!item.name">
+						@{{subjects[item.id]}}
+			       </span>
 			        <div class="btn-group pull-right" role="group">
 					   <button ng-show="item.type" type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#field-@{{$index}}" aria-expanded="true" aria-controls="field-@{{$index}}">
 				          <i class="glyphicon glyphicon-plus"></i>
