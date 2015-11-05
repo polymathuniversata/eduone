@@ -28,17 +28,24 @@
 			'class' => 'form-control', 
 			'placeholder' => 'Please select',
 			'ng-model'	=> 'selectedProgram',
-			'ng-change' => 'showChild()'])
+			'ng-change' => 'showPeriods()'])
 		!!}
 	</div>
 	
-	@{{selectedPeriods | json}}
-	<div class="form-group" ng-if="periods != null">
-		<select class="form-control" ng-model="selectedPeriods" multiple="multiple" ng-options="period.name for (id, period) in periods"></select>
+	<div class="form-group" ng-show="selectedProgram != null">
+		<label for="periods">Periods</label>
+		<select ng-change="showSubjects()" id="periods" class="form-control" ng-model="selectedPeriods" multiple="multiple" ng-options="period.id as period.name for period in periods"></select>
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('subjects', trans('app.subjects')) !!}
+		<label for="subjects">Subjects</label>
+		<div class="checkbox-list checkbox-inline" id="subjects">
+			<div class="checkbox checkbox-inline" ng-repeat="(key, value) in subjects">
+				<label>
+					<input type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
+				</label>
+			</div>
+		</div>
 	</div>
 	
 	<div class="form-group">

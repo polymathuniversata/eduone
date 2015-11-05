@@ -200,19 +200,28 @@
 			$scope.selected = [];
 		};
 
-		$scope.showChild = function() {
+		$scope.showPeriods = function() {
+			if (typeof $scope.selectedProgram == 'undefined' || $scope.selectedProgram <= 0)
+				return;
+
 			$http.get('/programs/periods/' + $scope.selectedProgram).
 				success(function(data, status, headers, config) {
 			    	$scope.periods = data;
-			    	console.log(data);
 			  	}).
 			  	error(function(data, status, headers, config) {
 			    	//
-				});
+			});
 		};
 
-		$scope.onPeriodSelected = function() {
-			console.log($scope.selectedPeriods);
+		$scope.showSubjects = function() {
+			if ($scope.selectedPeriods.length == 1) {
+				angular.forEach($scope.periods, function(period) {
+					if (period.id === $scope.selectedPeriods[0]) {
+						$scope.subjects = period.subjects;
+						return;
+					}
+				});
+			}
 		};
 
 		$scope.removeStudent = function(student) {
