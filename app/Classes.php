@@ -11,13 +11,14 @@ class Classes extends Model
 	
     protected $fillable = [
     	'name', 'slug', 'student_count', 'program_id', 
-    	'subject_id', 'branch_id', 'creator', 'started_at', 'finished_at'
+    	'subjects_id', 'periods_id', 'branch_id', 'creator', 'started_at', 'finished_at'
     ];
 
     protected $casts = [
     	'student_count' => 'integer',
     	'program_id' 	=> 'integer',
-    	'subject_id' 	=> 'integer',
+    	'subjects_id' 	=> 'array',
+        'periods_id'    => 'array',
     	'branch_id' 	=> 'integer',
     	'creator' 		=> 'integer'
     ];
@@ -41,13 +42,8 @@ class Classes extends Model
 
     public function getSubjectsId()
     {
-        if ( ! empty($this->subjects_id)) {
-            $subjects = array_map('intval', explode( ',', $this->subjects_id));
-
-            return $subjects;
-        }
-
-        return null;
+        if ( ! empty($this->subjects_id))
+            return (array) $this->subjects_id;
     }
 
     public function getSubjects()

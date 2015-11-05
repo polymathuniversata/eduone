@@ -77,8 +77,17 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $data = array_filter($request->all());
+
         if ( empty($data['slug']))
             $data['slug'] = str_slug($data['name']);
+
+        if ( ! empty($data['subjects'])) {
+            if (is_string($data['subjects']))
+                $data['subjects'] = intval($data['subjects']);
+        }
+
+        if ( ! empty($data['periods']))
+            $data['periods'] = json_decode($data['periods']);
 
         try {
             $class = Classes::create($data);

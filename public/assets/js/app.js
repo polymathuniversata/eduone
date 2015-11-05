@@ -181,6 +181,8 @@
 
 		$scope.selectedPeriods = [];
 
+		$scope.selectedSubjects = [];
+
 		$scope.init = function() {
 			//$scope.students = window.students;
 			//$scope.selected = window.selected;
@@ -222,6 +224,10 @@
 					}
 				});
 			}
+		};
+
+		$scope.addSubject = function(a){
+			console.log($scope.selectedSubjects);
 		};
 
 		$scope.removeStudent = function(student) {

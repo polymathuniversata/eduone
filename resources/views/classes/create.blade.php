@@ -33,52 +33,25 @@
 	</div>
 	
 	<div class="form-group" ng-show="selectedProgram != null">
-		<label for="periods">Periods</label>
+		{!! Form::label('periods', 'Periods') !!}
 		<select ng-change="showSubjects()" id="periods" class="form-control" ng-model="selectedPeriods" multiple="multiple" ng-options="period.id as period.name for period in periods"></select>
 	</div>
-
-	<div class="form-group">
+	
+	<div class="form-group" ng-show="selectedPeriods.length == 1">
 		<label for="subjects">Subjects</label>
 		<div class="checkbox-list checkbox-inline" id="subjects">
 			<div class="checkbox checkbox-inline" ng-repeat="(key, value) in subjects">
 				<label>
-					<input type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
+					<input type="checkbox" name="subjects_id" value="@{{key}}"> @{{value}}
 				</label>
 			</div>
 		</div>
 	</div>
 	
-	<div class="form-group">
-		{!! Form::label('students', 'Members') !!}
-		
-		<script type="text/ng-template" id="customTemplate.html">
-		  <a>
-		      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/@{{match.model.photo}}" width="16">
-		      <span ng-bind-html="match.model.name | uibTypeaheadHighlight:query"></span>
-		  </a>
-		</script>
-
-		<input type="text" ng-model="selected" placeholder="Select a student to add" uib-typeahead="student as student.name for student in students | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" typeahead-on-select="addStudent($item, $model, $label)" class="form-control">
-
-		<div class="members">
-			<div class="media" ng-repeat="student in selectedStudents">
-			  <div class="media-left media-middle">
-			    <a href="#">
-			      <img class="media-object" ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/@{{student.photo}}" alt="@{{student.name}}">
-			    </a>
-			  </div>
-			  <div class="media-body">
-			    <h4 class="media-heading">@{{student.name}}</h4>
-			    <button class="btn btn-default btn-sm" ng-click="removeStudent(student.id)"><i class="glyphicon glyphicon-remove"></i></button>
-			  </div>
-			</div>
-		</div>
-
-	</div>
+	<input type="hidden" name="periods_id" value="@{{selectedPeriods}}">
 
 	<button class="btn btn-primary">Save Changes</button>
-	
-	<input type="hidden" name="students_id" value="@{{selectedStudents}}">
+
 {!! Form::close() !!}
 </div>
 @endsection
