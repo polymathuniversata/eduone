@@ -2,7 +2,21 @@
 
 	var app = angular.module('App', ['ui.bootstrap', 'tg.dynamicDirective', 'ui.sortable']);
 
-	app.controller('SubjectController', function($scope, $http, $sce) {
+	app.run(function($rootScope) 
+	{
+		$rootScope.uniqId = function() {
+		  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		      .toString(16)
+		      .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		    s4() + '-' + s4() + s4() + s4();
+		};
+	});
+
+	app.controller('SubjectController', function($scope, $http, $sce) 
+	{
 		
 		$scope.grades = [];
 		$scope.sessions = [];
@@ -84,6 +98,7 @@
 
 		$scope.addPeriod = function() {
 			$scope.cached_json.push({
+				id: $scope.uniqId(),
 				name: 'Period',
 				type: 'period',
 				weight: 1
