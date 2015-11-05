@@ -39,10 +39,12 @@
     			<th>#</th>
     			<th>{!! trans('app.name') !!}</th>
     			<th>{!! trans('app.program') !!}</th>
-                <th>{{ trans('app.subjects') }}</th>
+                <th>{{ trans('app.active_subjects') }}</th>
+                <th>{{ trans('app.student_count') }}</th>
     			<th>{!! trans('app.teachers') !!}</th>
     			<th>{!! trans('app.status') !!}</th>
-    			<th>{!! trans('app.created_at') !!}</th>
+    			<th>{!! trans('app.started') !!}</th>
+                <th>{{ trans('app.finished') }}</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -58,9 +60,11 @@
                         @endforeach
                     @endif
                 </td>
-                <td></td>
+                <td>0</td>
+                <td>0</td>
     			<td>{!! $class->status !!}</td>
-    			<td>{!! $class->created_at !!}</td>
+    			<td>{!! $class->started_at !!}</td>
+                <td>{{ $class->finished_at }}</td>
     		</tr>
     		@endforeach
     	</tbody>
