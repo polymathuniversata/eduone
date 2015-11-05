@@ -52,7 +52,7 @@
     			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
     			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
     			<td>
-                    @if ( ! empty($class->getSubjects()))
+                    @if ( is_array($class->getSubjects()))
                         @foreach ($class->getSubjects() as $id => $name)
                             {{$name}}
                         @endforeach

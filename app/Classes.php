@@ -50,11 +50,11 @@ class Classes extends Model
     {
         $subjects_id = $this->getSubjectsId();
         
-        if (is_null($subjects_id))
+        if ( ! is_array($subjects_id))
             return;
 
         return Subject::where('id', 'in', $subjects_id)
-                        ->lists('name', 'id')->get();
+                        ->lists('name', 'id');
     }
 
     public function scopeOfProgram($query, $value)

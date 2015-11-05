@@ -13,7 +13,7 @@
 </script>
 <div ng-controller="ClassController">
 {!! Form::open(['url' => 'classes']) !!}
-
+	
 	<div class="form-group">
 		{!! Form::label('name', trans('app.name')) !!}
 		{!! Form::text('name', null, [
@@ -47,6 +47,24 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="form-group">
+		<label for="started_at">Start Date</label>
+		{!! Form::date('started_at', null, [
+			'class' => 'form-control',
+			'placeholder' => 'Enter start date'
+		]) !!}
+	</div>
+
+	<div class="form-group">
+		<label for="finished_at">Finish Date</label>
+		{!! Form::date('finished_at', null, [
+			'class' => 'form-control',
+			'placeholder' => 'Enter finish date'
+		])!!}
+	</div>
+
+	Todo: Relationship with Branch
 	
 	<input type="hidden" name="periods_id" value="@{{selectedPeriods}}">
 
