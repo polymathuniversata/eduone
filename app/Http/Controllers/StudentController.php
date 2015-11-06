@@ -45,7 +45,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $branches   = $this->branches;
+        $view       = 'student';
+
+        return view('students.create', compact('view', 'branches'));
     }
 
     /**
