@@ -172,18 +172,18 @@
 		];
 
 		$scope.selectedStudents = [];
-
 		$scope.periods = null;
-
 		$scope.subjects = [];
-
 		$scope.selectedProgram = null;
-
 		$scope.selectedPeriods = [];
-
 		$scope.selectedSubjects = [];
 
+		$scope.availablePrograms = {};
+		$scope.thisClass = [];
+
 		$scope.init = function() {
+			$scope.thisClass = window.thisClass;
+			$scope.availablePrograms = window.availablePrograms;
 			//$scope.students = window.students;
 			//$scope.selected = window.selected;
 		};
@@ -203,12 +203,10 @@
 		};
 
 		$scope.showPeriods = function() {
-			if (typeof $scope.selectedProgram == 'undefined' || $scope.selectedProgram <= 0)
-				return;
-
-			$http.get('/programs/periods/' + $scope.selectedProgram).
+			$http.get('/programs/periods/' + $scope.thisClass.program_id).
 				success(function(data, status, headers, config) {
 			    	$scope.periods = data;
+			    	console.log($scope.periods);
 			  	}).
 			  	error(function(data, status, headers, config) {
 			    	//

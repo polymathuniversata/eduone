@@ -3,20 +3,21 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProgramsSubjectsTable extends Migration
+class CreatePeriodsSubjectsTable extends Migration
 {
-     /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('programs_subjects', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('program_id');
+        Schema::create('periods_subjects', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('period_id');
             $table->integer('subject_id');
-            $table->integer('period');
+            $table->integer('program_id')->nullable();
+            $table->integer('ordr')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateProgramsSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('programs_subjects');
+        Schema::drop('periods_subjects');
     }
 }

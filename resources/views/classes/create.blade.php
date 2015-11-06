@@ -7,10 +7,6 @@
 	<h1>{!! trans('app.create_new_class') !!}</h1>
 </header>
 
-<script type="text/javascript">
-	var subjects = {!! $subjects !!},
-		programs = {!! $programs_periods !!};
-</script>
 <div ng-controller="ClassController">
 {!! Form::open(['url' => 'classes']) !!}
 	

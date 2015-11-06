@@ -118,11 +118,10 @@ class ClassController extends Controller
      */
     public function edit(Classes $class)
     {
-        $classes = Classes::all();
         $programs = $this->programs;
         $branches = $this->branches;
-
-        return view('classes/update', compact('classes', 'programs', 'branches'));
+        
+        return view('classes/update', compact('class', 'programs', 'branches'));
     }
 
     /**
@@ -132,7 +131,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Classes $class)
     {
         //
     }
@@ -143,9 +142,9 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Classes $class)
     {
-        Classes::findOrFail($id)->delete();
+        $class->delete();
 
         return back();
     }
