@@ -8,4 +8,10 @@ class Student extends User
     {
     	static::addGlobalScope(new StudentScope);
     }
+
+    public function branches()
+    {
+        return $this->belongsToMany('App\Branch', 'users_branches', 'user_id', 'id');
+    }
+
 }

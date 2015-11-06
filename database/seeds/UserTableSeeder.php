@@ -12,20 +12,52 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $superAdmin = App\Role::create([
-        	'name' => 'Administrator',
-        	'slug' => 'administrator',
+        	'id'   => 1,
+            'name' => 'Super Administrator',
+        	'slug' => 'super_administrator',
         	'permissions' => serialize([
         		'super_admin' => 1
         	])
         ]);
 
-        $teacher = App\Role::create([
-            'name' => 'Teacher',
-            'slug'  => 'teacher',
-            'permissions' => []
+        $administrator = App\Role::create([
+            'id'   => 2,
+            'name' => 'Administrator',
+            'slug' => 'administrator',
+            'permissions' => serialize([
+                'super_admin' => 1
+            ])
         ]);
 
-        $user = App\User::create([
+        $teacher = App\Role::create([
+            'id'   => 3,
+            'name' => 'Teacher',
+            'slug' => 'teacher',
+            'permissions' => serialize([
+                'super_admin' => 1
+            ])
+        ]);
+
+        $student = App\Role::create([
+            'id'   => 4,
+            'name' => 'Student',
+            'slug' => 'student'
+        ]);
+
+        $parent = App\Role::create([
+            'id'    => 5,
+            'name'  => 'Parent',
+            'slug'  => 'parent'
+        ]);
+
+        $registered_user = App\Role::create([
+            'id'    => 6,
+            'name'  => 'Registered User',
+            'slug'  => 'registered_user'
+        ]);
+
+
+        $super_admin = App\User::create([
             'name'          => 'admin',
             'first_name'    => 'Tan',
             'last_name'     => 'Nguyen',
@@ -33,6 +65,42 @@ class UserTableSeeder extends Seeder
             'phone'         => '0932292225',
             'id_card'       => '123456789',
             'role_id'       => $superAdmin->id
+        ]);
+
+        $walter_white = App\User::create([
+            'name'          => 'walter_white',
+            'first_name'    => 'Walter',
+            'last_name'     => 'White',
+            'email'         => 'walterwhite@cook.com',
+            'phone'         => '(1) 234 5679',
+            'role_id'       => $teacher->id
+        ]);
+
+        $jesse_pinkman = App\User::create([
+            'name'          => 'jesse_pinkman',
+            'first_name'    => 'Jesse',
+            'last_name'     => 'Pinkman',
+            'email'         => 'jesse_pinkman@drugdealer.com',
+            'phone'         => '(1) 542 4 890',
+            'role_id'       => $student->id
+        ]);
+
+        $jesse_pinkman_daddy = App\User::create([
+            'name'          => 'jesse_pinkman_daddy',
+            'first_name'    => 'Mr',
+            'last_name'     => 'Pinkman',
+            'email'         => 'mrpinkman@father.com',
+            'phone'         => '(1) 04810100',
+            'role_id'       => $parent->id
+        ]);
+
+        $gustavo_fring = App\User::create([
+            'name'          => 'gustavo_fring',
+            'first_name'    => 'Gustavo',
+            'last_name'     => 'Fring',
+            'email'         => 'gustavo_fring@boss.com',
+            'phone'         => '(1) 49404910',
+            'role_id'       => $registered_user->id
         ]);
 
         $branch = App\Branch::create([
@@ -46,11 +114,5 @@ class UserTableSeeder extends Seeder
             'type'      => 'Lab',
             'branch_id' => $branch->id
         ]);
-
-        // DB::table('users_roles')->insert([
-        // 	'user_id' 	=> $user_id,
-        // 	'role_id' 	=> $administrator,
-        // 	'creator' 	=> 0
-        // ]);
     }
 }

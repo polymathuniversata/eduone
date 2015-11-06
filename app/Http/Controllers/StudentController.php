@@ -59,7 +59,24 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array_filter($request->all());
+        
+        $data['role_id'] = 2;
+        
+        if (! empty($data['branches']))
+            $branches = (array) $data['branches'];
+    
+        try {
+            $student = Student::create($data);
+            
+            if (! empty($data['branches']))
+                $student->branches()->sync($branches);
+
+            return redirect('students/' . $student->id )
+                        ->with('message', 'User was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**
