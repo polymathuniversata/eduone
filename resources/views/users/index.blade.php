@@ -1,10 +1,14 @@
 @extends('master')
 
 @section('title', trans('app.all_users'))
-@section('content')
-<header>
+
+@section('main_title')
+ {!! trans('app.users') !!}
+@endsection
+
+@section('search_box')
     {!! Form::model($request, ['url' => '/users', 'method' => 'GET']) !!}
-    <div class="input-group pull-right col-md-7" id="advanced-search">
+    <div class="input-group" id="advanced-search">
         {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
         <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Show Advanced Search Options">
@@ -27,10 +31,13 @@
         </div>
     </div>
     {!! Form::close() !!}
+@endsection
 
-    <h1>{!! trans('app.users') !!} <a href="/users/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
+@section('main_button')
+    <a href="/users/create" role="button" class="btn btn-success">Add New</a>
+@endsection
 
-</header>
+@section('content')
 
 <div class="table-responsive panel panel-default">
     <table class="table table-hover">

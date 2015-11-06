@@ -26,109 +26,81 @@
         @yield('header')
     </head>
     <body>
+      
+        <div class="container-fluid">
+            <div class="row">
+                <aside id="sidebar">
+                    <header id="header">
+                        <h1><a href="/">Uniform</a></h1>
 
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="col-md-12">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Uniform</a>
-          </div>
+                        <a href="/" class="thumbnail">
+                            <img src="{!! App\User::find(1)->getPhoto() !!}" alt="View Profile">
+                            <figcaption>Tan Nguyen</figcaption>
+                        </a>
+                    </header>
+                    
+                    <nav id="main-menu">
+                        <ul class="list-unstyled">
+                            <li><a href="/"><i class="glyphicon glyphicon-stats"></i> Overviews</a></li>
+                            <li class="active"><a href="/"><i class="glyphicon glyphicon-user"></i> Users</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="/">Students</a></li>
+                                    <li><a href="/">Teachers</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/"><i class="glyphicon glyphicon-tree-conifer"></i> Classes</a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-time"></i> Class Routines</a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-book"></i> Programs</a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-text-background"></i> Assets</a></li>
+                        </ul>
+                    </nav>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Dashboard <span class="sr-only">(current)</span></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/users">All Users</a></li>
-                  <li><a href="/students">Students</a></li>
-                  <li><a href="/parents">Parents</a></li>
-                  <li><a href="/teachers">Teachers</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/users/create">Add New User</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/roles">Roles &amp; Permissions</a></li>
-                </ul>
-              </li>
-
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Classes <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/classes">Classes</a></li>
-                  <li><a href="/schedule">Schedule</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Add New Class</a></li>
-                </ul>
-              </li>
+                    <a href="/sign-out" id="sign-out">Sign Out</a>
+                </aside>          
               
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programs <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/programs">All Programs</a></li>
-                  <li><a href="/programs/create">Add New Program</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/subjects">All Subjects</a></li>
-                  <li><a href="/subjects/create">Add New Subject</a></li>
-                </ul>
-              </li>          
-              <li><a href="#">Services</a></li>
-              
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/settings">General</a></li>
-                  <li><a href="/branches">Branches</a></li>
-                  <li><a href="/rooms">Rooms</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/themes">Themes</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/plugins">Plugins</a></li>
-                </ul>
-              </li>   
-            </ul>
-        
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">My Profile</a></li>
-                  <li><a href="#">Activity Logs</a></li>
-                  <li><a href="https://binaty.org/help">Help</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/logout">Log out</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-          </div>
-        </div><!-- /.container-fluid -->
-      </nav>
+                <main id="content">
+                    <nav class="navbar navbar-default">
+                      <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                          <a class="navbar-brand" href="#">@yield('main_title')</a>
+                        </div>
 
-        <div class="container">                
-          <div id="content" class="col-md-12">
-            @if (! empty(session('message')))
-              <div class="alert alert-message">
-                {!! session('message') !!}
-              </div>
-            @endif
+                        <div id="main-button" class="pull-right">@yield('main_button')</div>
 
-              @yield('content')
-          </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-form navbar-right" role="search">
+                            @yield('search_box')
+                        </div>
+                            
+                      </div><!-- /.container-fluid -->
+                    </nav>
+                    
+                    <div class="container-fluid">
 
-          <hr>
+                        <div class="row">
+                            @if (! empty(session('message')))
+                                <div class="alert alert-message">
+                                    {!! session('message') !!}
+                                </div>
+                            @endif
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                @yield('content')
+                            </div>
+                        </div>
 
-          <footer class="col-md-12">
-              Copyright &copy; 2015 <a href="https://binaty.org">Binaty</a>
-          </footer>
-        </div>
+                        <div class="row">
+                            <footer class="col-md-12">
+                                Copyright &copy; 2015 <a href="https://binaty.org">Binaty</a>
+                            </footer>
+                        </div>
+                    </div>
+                </main>
+            </div><!--.rơ-->
+        </div><!--.container-fluid-->
 
         @yield('footer')
     </body>

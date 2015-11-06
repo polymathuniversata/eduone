@@ -82,7 +82,7 @@ class User extends Model implements AuthenticatableContract,
         $default_photo = '';
 
         if ($use_gravatar)
-            $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=150';
+            $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=80';
 
         return ! empty($this->photo) ? $this->photo : $default_photo;
     }
