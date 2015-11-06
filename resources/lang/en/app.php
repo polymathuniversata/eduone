@@ -77,4 +77,9 @@ return [
  	'create_new_class' => 'Create New Class',
  	'update_subject' => 'Update Subject',
  	'program_designer' => 'Program Designer',
+ 	'student'	=> 'Student',
+ 	'students' => 'Students',
+ 	'add_student' => 'Add Student',
+ 	'delete_student' => 'Delete Student',
+ 	
  ];

@@ -5,37 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Student;
-use App\Branch;
 
-class StudentController extends Controller
+class FeeController extends Controller
 {
-    /**
-     * List branches for select
-     * @var array
-     */
-    protected $branches = [];
-
-
-    public function __construct()
-    {
-        $this->branches = Branch::lists('name', 'id')->toArray();
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-         $students      = Student::search($request->q)
-                            ->branch($request->branch)
-                            ->orderBy('created_at')
-                            ->paginate(50);
-
-        $branches   = $this->branches;
-
-        return view('students.index', compact('students', 'branches', 'request'));
+        //
     }
 
     /**

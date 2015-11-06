@@ -34,13 +34,12 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::resource('branches', 'BranchController');
 Route::resource('settings', 'SettingController');
 Route::resource('users', 'UserController');
-Route::resource('students', 'StudentController');
 Route::resource('parents', 'UserController');
 Route::resource('rooms', 'RoomController');
 Route::resource('roles', 'RoleController');
 Route::resource('classes', 'ClassController');
 Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');
-Route::resource('student', 'StudentController');
+Route::resource('students', 'StudentController');
 
 Route::get('programs/periods/{id}', 'ProgramController@periods');

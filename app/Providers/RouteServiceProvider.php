@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('branches', 'App\Branch');
         $router->model('programs', 'App\Program');
         $router->model('rooms', 'App\Room');
-        $router->model('student', 'App\Student');
+        $router->model('students', 'App\Student');
         
         parent::boot($router);
     }

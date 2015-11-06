@@ -23,14 +23,11 @@ class UserController extends Controller
      */
     protected $branches = [];
 
-
     public function __construct()
     {
         $this->roles       = Role::lists('name', 'id')->toArray();
-        array_unshift($this->roles, 'Please select');
 
         $this->branches    = Branch::lists('name', 'id')->toArray();
-        array_unshift($this->branches, 'Please select');
     }
 
     /**
