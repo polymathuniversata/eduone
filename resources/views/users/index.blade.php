@@ -3,7 +3,11 @@
 @section('title', trans('app.all_users'))
 
 @section('main_title')
- {!! trans('app.users') !!}
+    {!! trans('app.users') !!}
+@endsection
+
+@section('main_button')
+    <a href="/users/create" role="button" class="btn btn-success">Add New</a>
 @endsection
 
 @section('search_box')
@@ -18,24 +22,20 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         {!! Form::label('role') !!}
-                        {!! Form::select('role', $roles, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('role', $roles, null, ['class' => 'form-control', 'placeholder' => 'Select a Role']) !!}
                     </div>
                     <div class="form-group col-md-6">
                         {!! Form::label('branch') !!}
-                        {!! Form::select('branch', $branches, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('branch', $branches, null, ['class' => 'form-control', 'placeholder' => 'Select a Branch']) !!}
                     </div>
                 </div>
              
             </div>
-            <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
         </div>
     </div>
     {!! Form::close() !!}
 @endsection
 
-@section('main_button')
-    <a href="/users/create" role="button" class="btn btn-success">Add New</a>
-@endsection
 
 @section('content')
 
@@ -43,7 +43,7 @@
     <table class="table table-hover">
     	<thead class="panel-heading">
     		<tr>
-    			<th>#</th>
+    			<th><input type="checkbox"></th>
     			<th>{!! trans('app.name') !!}</th>
     			<th>{!! trans('app.email') !!}</th>
     			<th>{!! trans('app.role') !!}</th>

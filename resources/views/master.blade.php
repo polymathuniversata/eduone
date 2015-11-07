@@ -13,9 +13,12 @@
         <script type="text/javascript" src="/assets/js/sortable.js"></script>
         <script type="text/javascript" src="/assets/js/tg.dynamic.directive.js"></script>
         <script type="text/javascript" src="/assets/js/app.js"></script>
-        
         <script type="text/javascript">
         var APP_URL = 'http://uniform.dev/';
+        // before loading pace.js
+        window.paceOptions = {
+          target: 'main'
+        };
 
         $(function(){
           $('.dropdown-menu').click(function(e) {
@@ -23,42 +26,37 @@
           });
         });
         </script>
+                <script type="text/javascript" src="/assets/js/pace.min.js"></script>
+
         @yield('header')
     </head>
     <body>
       
-        <div class="container-fluid">
+        <div class="container-fluid" id="wrapper">
             <div class="row">
                 <aside id="sidebar">
                     <header id="header">
-                        <h1><a href="/">Uniform</a></h1>
-
-                        <a href="/" class="thumbnail">
-                            <img src="{!! App\User::find(1)->getPhoto() !!}" alt="View Profile">
-                            <figcaption>Tan Nguyen</figcaption>
-                        </a>
+                        <h1><a href="/">binaty</a></h1>
                     </header>
                     
                     <nav id="main-menu">
                         <ul class="list-unstyled">
                             <li><a href="/"><i class="glyphicon glyphicon-stats"></i> Overviews</a></li>
-                            <li class="active"><a href="/"><i class="glyphicon glyphicon-user"></i> Users</a>
+                            <li class="active"><a href="/"><i class="glyphicon glyphicon-user"></i> Students <span class="caret pull-right"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="/">Students</a></li>
-                                    <li><a href="/">Teachers</a></li>
+                                    <li><a href="/">All Students</a></li>
+                                    <li><a href="/">Add New</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/"><i class="glyphicon glyphicon-tree-conifer"></i> Classes</a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-time"></i> Class Routines</a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-book"></i> Programs</a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-text-background"></i> Assets</a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-tree-conifer"></i> Classes <span class="caret pull-right"></span></a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-time"></i> Class Routines <span class="caret pull-right"></span></a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-book"></i> Programs <span class="caret pull-right"></span></a></li>
+                            <li><a href="/"><i class="glyphicon glyphicon-text-background"></i> Assets <span class="caret pull-right"></span></a></li>
                         </ul>
                     </nav>
-
-                    <a href="/sign-out" id="sign-out">Sign Out</a>
                 </aside>          
               
-                <main id="content">
+                <main id="main">
                     <nav class="navbar navbar-default">
                       <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -66,37 +64,53 @@
                           <a class="navbar-brand" href="#">@yield('main_title')</a>
                         </div>
 
-                        <div id="main-button" class="pull-right">@yield('main_button')</div>
+                        <div id="main-button">@yield('main_button')</div>
 
-                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <img src="https://avatars2.githubusercontent.com/u/9004445?v=3&s=20" alt="Edit Profile"> <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Signed in as <strong>Tan Nguyen</strong></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">My Profile</a></li>
+                                    <li><a href="#">Preferences</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Sign out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                       <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="navbar-form navbar-right" role="search">
                             @yield('search_box')
                         </div>
                             
                       </div><!-- /.container-fluid -->
                     </nav>
-                    
-                    <div class="container-fluid">
 
-                        <div class="row">
-                            @if (! empty(session('message')))
-                                <div class="alert alert-message">
-                                    {!! session('message') !!}
-                                </div>
-                            @endif
-                        </div>
+                    <div class="container-fluid">
                         
-                        <div class="row">
+                        @if (! empty(session('message')))
+                        <header class="row" id="messages">    
+                            <div class="alert alert-message col-md-12">
+                                {!! session('message') !!}
+                            </div>
+                        </header>
+                        @endif
+
+                        <section class="row" id="content">
                             <div class="col-md-12">
                                 @yield('content')
                             </div>
-                        </div>
+                        </section>
 
-                        <div class="row">
-                            <footer class="col-md-12">
+                        <footer class="row" id="footer">
+                            <div class="col-md-12">
                                 Copyright &copy; 2015 <a href="https://binaty.org">Binaty</a>
-                            </footer>
-                        </div>
+                            </div>
+                        </footer>
                     </div>
                 </main>
             </div><!--.rơ-->
