@@ -11,9 +11,9 @@
 			<small>Click to Add</small>
 			
 			<div class="checkbox-list" id="subjects">
-				<div class="checkbox" ng-repeat="(key, value) in subjects" ng-hide="alreadyAddedSubject.indexOf(key)!=-1">
+				<div class="checkbox" ng-repeat="(key, value) in subjects">
 					<label>
-						<input ng-checked="!alreadyAddedSubject.indexOf(key)" type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
+						<input type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
 					</label>
 				</div>
 			</div>

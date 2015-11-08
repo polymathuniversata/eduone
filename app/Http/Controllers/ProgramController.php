@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Program;
 use App\Subject;
 use App\Branch;
+use App\Period;
 
 class ProgramController extends Controller
 {
@@ -56,11 +57,25 @@ class ProgramController extends Controller
     {
         $data = array_filter($request->all());
         
-        if (empty($data['periods']))
-            $data['periods'] = [];
         try {
+
             $program = Program::create($data);
-            return redirect('programs/' . $program->id )->with('message', 'Program was created successfully!');
+
+            // Todo: Use Relationship to create period
+            if ( ! empty($data['periods'])) {
+                $periods = json_decode($data['periods'], true);
+                
+                foreach ($periods as $order => $period)
+                {
+                    $period['ordr']        = $order;
+                    $period['program_id']   = $program->id;
+
+                    Period::create($period);
+                }
+            }
+            
+            return redirect('programs/' . $program->id )
+                    ->with('message', 'Program was created successfully!');
         } catch ( Exception $e ) {
             return back()->withInput()->with('message', 'Fooo!');
         }

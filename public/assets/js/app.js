@@ -57,7 +57,6 @@
 		
 		$scope.periods = [
 			{
-				id: $scope.uniqId(),
 				name: 'Period 1',
 				type: 'period',
 				weight: 1
@@ -106,7 +105,6 @@
 
 		$scope.addPeriod = function() {
 			$scope.periods.push({
-				id: $scope.uniqId(),
 				name: 'Period',
 				type: 'period',
 				weight: 1
