@@ -21,7 +21,7 @@
 	</div>
 </aside>
 
-<div class="col-md-8" id="main">
+<div class="col-md-8">
 
 	<section class="panel panel-default">
 		<header class="panel-heading">

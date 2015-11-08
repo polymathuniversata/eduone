@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="UserController">
 	<div class="col-md-6 basic">
 		<div class="form-group">
 			<label>{!! trans('app.user_name') !!}</label>
@@ -14,7 +14,7 @@
 		@if (isset($roles))
 		<div class="form-group">
 			<label>{!! trans('app.role') !!}</label>
-			{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
+			{!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'placeholder' => 'Please select', 'ng-model' => 'role_id'] ) !!}
 		</div>
 		@endif
 
@@ -31,7 +31,6 @@
 		<div class="form-group">
 			<label>{!! trans('app.password') !!}</label>
 			{!! Form::password('password', ['class' => 'form-control']) !!}
-			<button type="button" class="btn btn-sm btn-default">{!! trans('app.generate') !!}</button>
 		</div>
 
 		<div class="form-group">
@@ -44,7 +43,7 @@
 				{!! Form::select('branches', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-show="role_id == 4">
 			<label for="roll_no">{{ trans('app.roll_no') }}</label>
 			{!! Form::text('roll_no', null, ['class' => 'form-control']) !!}
 		</div>

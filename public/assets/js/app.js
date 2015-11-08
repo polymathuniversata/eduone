@@ -233,4 +233,9 @@
 		};
 	});
 
+	app.controller('UserController', function($scope, $http)
+	{
+		
+	});
+
 })(jQuery, angular);

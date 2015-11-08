@@ -1,7 +1,11 @@
 @extends('master')
-
+@section('main_title')
+	{!! trans('app.programs') !!}
+@endsection
+@section('main_button')
+ <a href="/programs/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
+@endsection
 @section('content')
-<h1>{!! trans('app.programs') !!} <a href="/programs/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
 
 <div class="panel panel-default table-responsive">
 	<table class="table table-hover">

@@ -1,9 +1,14 @@
 @extends('master')
 
 @section('title', trans('app.all_classes'))
-@section('content')
-<header>
-    {!! Form::model($request, ['url' => '/classes', 'method' => 'GET']) !!}
+@section('main_title')
+{!! trans('app.classes') !!}
+@endsection
+@section('main_button')
+    <a href="/classes/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
+@endsection
+@section('search_box')
+ {!! Form::model($request, ['url' => '/classes', 'method' => 'GET']) !!}
     <div class="input-group pull-right col-md-7" id="advanced-search">
         {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
         <div class="input-group-btn">
@@ -27,10 +32,8 @@
         </div>
     </div>
     {!! Form::close() !!}
-
-    <h1>{!! trans('app.classes') !!} <a href="/classes/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
-
-</header>
+@endsection
+@section('content')
 
 <div class="table-responsive panel panel-default">
     <table class="table table-hover">

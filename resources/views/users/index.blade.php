@@ -7,7 +7,7 @@
 @endsection
 
 @section('main_button')
-    <a href="/users/create" role="button" class="btn btn-success">Add New</a>
+    <a href="/users/create" role="button" class="btn btn-default">Add New</a>
 @endsection
 
 @section('search_box')

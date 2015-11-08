@@ -40,19 +40,7 @@
                     </header>
                     
                     <nav id="main-menu">
-                        <ul class="list-unstyled">
-                            <li><a href="/"><i class="glyphicon glyphicon-stats"></i> Overviews</a></li>
-                            <li class="active"><a href="/"><i class="glyphicon glyphicon-user"></i> Students <span class="caret pull-right"></span></a>
-                                <ul class="list-unstyled">
-                                    <li><a href="/">All Students</a></li>
-                                    <li><a href="/">Add New</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/"><i class="glyphicon glyphicon-tree-conifer"></i> Classes <span class="caret pull-right"></span></a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-time"></i> Class Routines <span class="caret pull-right"></span></a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-book"></i> Programs <span class="caret pull-right"></span></a></li>
-                            <li><a href="/"><i class="glyphicon glyphicon-text-background"></i> Assets <span class="caret pull-right"></span></a></li>
-                        </ul>
+                        {!! App\Menu::render() !!}
                     </nav>
                 </aside>          
               

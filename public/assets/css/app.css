@@ -8,6 +8,13 @@ html, body, .container-fluid, #sidebar, #content{
 }
 h1,h2,h3{ font-weight: normal; }
 
+.help-block{
+	font-size: 12px;
+}
+.row-md{
+	max-width: 1200px;
+}
+
 #content{
 	min-height: 600px;
 }
@@ -110,13 +117,17 @@ h1,h2,h3{ font-weight: normal; }
 	font-size: 16px;
 	margin-right: 10px;
 }
-#main-menu ul > li.active{
+#main-menu > ul > li.active{
 	background: #222933;
 	border-left: 3px solid #2980B9
 }
-#main-menu ul > li.active a{
+#main-menu li.active > a{
 	color: #fff;
 }
+#main-menu li li{
+	
+}
+
 #main > .container-fluid > .row{
 	padding: 20px
 }
