@@ -117,15 +117,12 @@ h1,h2,h3{ font-weight: normal; }
 	font-size: 16px;
 	margin-right: 10px;
 }
-#main-menu > ul > li.active{
+#main-menu > ul > li.active, #main-menu > ul > li.child-active{
 	background: #222933;
 	border-left: 3px solid #2980B9
 }
 #main-menu li.active > a{
 	color: #fff;
-}
-#main-menu li li{
-	
 }
 
 #main > .container-fluid > .row{

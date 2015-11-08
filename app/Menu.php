@@ -17,6 +17,9 @@ class Menu
 			{
 				foreach ($properties['childs'] as $child_properties) {
 					$child_active = self::checkActive($child_properties['url']);
+
+					if ('active' === $child_active)
+						$child_active = 'child-active';
 				}
 			}
 
@@ -30,7 +33,7 @@ class Menu
 			if ( ! empty($properties['childs'])) {
                 $menu .= '<span class="caret pull-right"></span>';
 	            
-	            if ( $parent_active === 'active' || $child_active === 'active' ) :
+	            if ( $parent_active === 'active' || $child_active === 'child-active' ) :
 	                $menu .= '<ul class="list-unstyled">';
 
 	                foreach($properties['childs'] as $child_properties) :
