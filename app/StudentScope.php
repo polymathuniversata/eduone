@@ -11,7 +11,7 @@ class StudentScope implements ScopeInterface
 
     public function apply(Builder $builder, Model $model) 
     {
-        $builder->whereRoleId(2);
+        $builder->whereRoleId(4);
     }
 
     public function remove(Builder $builder, Model $model) 
