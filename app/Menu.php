@@ -13,16 +13,19 @@ class Menu
 			$parent_active = self::checkActive($properties['url']);
 
 			$child_active = '';
-			if ( ! empty($properties['childs']))
-			{
-				foreach ($properties['childs'] as $child_properties) {
-					$child_active = self::checkActive($child_properties['url']);
 
-					if ('active' === $child_active)
+			if ( ! empty($properties['childs'])) {
+				foreach ($properties['childs'] as $url => $title) {
+
+					$child_active = self::checkActive($url);
+
+					if ('active' == $child_active) {
 						$child_active = 'child-active';
+						break;
+					}
 				}
 			}
-
+						
 			$menu .= '<li class="' . $parent_active . ' ' . $child_active . '"><a href="' . url($properties['url']) . '">';
 			
 			if ($properties['icon'])
@@ -36,10 +39,10 @@ class Menu
 	            if ( $parent_active === 'active' || $child_active === 'child-active' ) :
 	                $menu .= '<ul class="list-unstyled">';
 
-	                foreach($properties['childs'] as $child_properties) :
+	                foreach($properties['childs'] as $url => $title) :
 
-		                $menu .= '<li class="' . self::checkActive($child_properties['url']) . '">
-		                    <a href="' . url($child_properties['url']) . '">' . $child_properties['title'] . '</a>
+		                $menu .= '<li class="' . self::checkActive($url) . '">
+		                    <a href="' . url($url) . '">' . $title . '</a>
 		                </li>';
 
 	                endforeach;
