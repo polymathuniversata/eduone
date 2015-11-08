@@ -97,7 +97,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-cog',
+		'icon' => 'fa fa-sliders',
 		'title' => 'Settings',
 		'url'	=> 'settings',
 		'childs' => [

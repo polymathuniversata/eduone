@@ -1,7 +1,9 @@
 @extends('master')
 
+@section('main_title', trans('app.settings'))
+@section('title', trans('app.settings'))
+
 @section('content')
-<h1>Settings</h1>
 
 {!! Form::open([ 'url' => 'settings', 'class' => 'form-horizontal']) !!}
 

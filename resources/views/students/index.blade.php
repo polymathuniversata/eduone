@@ -1,9 +1,10 @@
 @extends('master')
 
 @section('title', trans('app.all_students'))
-@section('content')
-<header>
-    {!! Form::model($request, ['url' => '/students', 'method' => 'GET']) !!}
+@section('main_title', trans('app.all_students'))
+@section('main_button', "<a href='/students/create' class='btn btn-default'>New Student</a>")
+@section('search_box')
+{!! Form::model($request, ['url' => '/students', 'method' => 'GET']) !!}
     <div class="input-group pull-right col-md-7" id="advanced-search">
         {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
         <div class="input-group-btn">
@@ -17,16 +18,13 @@
                         {!! Form::select('branch', $branches, null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
-             
             </div>
             <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
         </div>
     </div>
     {!! Form::close() !!}
-
-    <h1>{!! trans('app.students') !!} <a href="/students/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
-
-</header>
+@endsection
+@section('content')
 
 <div class="table-responsive panel panel-default">
     <table class="table table-hover">

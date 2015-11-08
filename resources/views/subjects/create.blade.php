@@ -1,11 +1,10 @@
 @extends('master')
 
 @section('title', trans('app.create_new_subject'))
+@section('main_title', trans('app.create_new_subject'))
+@section('main_button', '<a href="/subjects" class="btn btn-default">Back</a>')
 @section('content')
 
-<header>
-	<h1>{!! trans('app.create_new_subject') !!}</h1>
-</header>
 
 <div class="row" ng-controller="SubjectController">
 	{!! Form::open(['url' => 'subjects']) !!}

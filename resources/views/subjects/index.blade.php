@@ -1,7 +1,8 @@
 @extends('master')
-
-@section('content')
-<header>
+@section('title', trans('app.subjects'))
+@section('main_title', trans('app.subjects'))
+@section('main_button', '<a href="/subjects/create" class="btn btn-default">'. trans('app.add_new') . '</a>')
+@section('search_box')
 	{!! Form::model($request, ['url' => 'subjects', 'method' => 'GET']) !!}
     <div class="input-group pull-right col-md-7" id="advanced-search">
         {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
@@ -21,8 +22,9 @@
         </div>
     </div>
     {!! Form::close() !!}
-	<h1>{!! trans('app.subjects') !!} <a href="/subjects/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
-</header>
+@endsection
+@section('content')
+
 <div class="table-responsive panel panel-default">
 	<table class="table table-hover">
 		<thead class="panel-heading">
