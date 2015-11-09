@@ -9,13 +9,8 @@
 		<div class="panel-heading">Subjects</div>
 		<div class="panel-body">
 			<small>Click to Add</small>
-			
-			<div class="checkbox-list" id="subjects">
-				<div class="checkbox" ng-repeat="(key, value) in subjects">
-					<label>
-						<input type="checkbox" ng-click="addSubject(key)" ng-checked="false"> @{{value}}
-					</label>
-				</div>
+			<div class="row">
+				<button type="button" class="btn btn-sm btn-default col-md-6" ng-click="addSubject(key)" ng-repeat="(key, value) in subjects">@{{value}}</button>
 			</div>
 		</div>
 	</div>

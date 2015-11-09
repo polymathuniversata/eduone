@@ -202,6 +202,7 @@ footer{
 	max-width: 500px;
 	margin: 10px 0;
 }
+
 .ui-state-highlight{
 	border: 1px dashed #ccc;
 	height: 40px;
@@ -279,4 +280,8 @@ footer{
 
 .nav img{
 	border-radius: 2px;
+}
+
+.panel-subject{
+	margin-left: 20px;
 }

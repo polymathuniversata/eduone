@@ -58,22 +58,30 @@ class ProgramController extends Controller
         $data = array_filter($request->all());
         
         try {
-
+            
             $program = Program::create($data);
 
             // Todo: Use Relationship to create period
             if ( ! empty($data['periods'])) {
                 $periods = json_decode($data['periods'], true);
                 
-                foreach ($periods as $order => $period)
+                $i = 0;
+                $j = 0;
+                foreach ($periods as $period)
                 {
-                    $period['ordr']        = $order;
-                    $period['program_id']   = $program->id;
+                    if ($period['type'] === 'period') {
+                        $period['ordr']        = $i;
+                        $period['program_id']  = $program->id;
 
-                    Period::create($period);
+                        $cp = Period::create($period);
+                        $i++;
+                    } else {
+                        $cp->subjects()->attach($period['id'], ['ordr' => $j, 'program_id' => $program->id]);
+                        $j++;
+                    }
                 }
             }
-            
+
             return redirect('programs/' . $program->id )
                     ->with('message', 'Program was created successfully!');
         } catch ( Exception $e ) {

@@ -31,6 +31,13 @@ class Subject extends Model
         return $this->belongsToMany('App\Program', 'programs_subjects');
     }
 
+    public function periods()
+    {
+        return $this->belongsToMany('App\Period', 'periods_subjects')
+                    ->withPivot('ordr', 'program_id')
+                    ->withTimestamps();
+    }
+
     public function getSessionsCountAttribute($value)
     {
         return isset($value) ? $value : 0;

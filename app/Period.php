@@ -15,4 +15,10 @@ class Period extends Model
     	return $this->hasOne('App\Program');
     }
 
+    public function subjects()
+    {
+    	return $this->belongsToMany('App\Subject', 'periods_subjects')
+    				->withPivot('ordr', 'program_id')
+    				->withTimestamps();
+    }
 }
