@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 	var subjects = {!! json_encode($subjects) !!},
-		periods = {!! $program->periods !!};
+		periods = {!! json_encode($periods) !!};
 </script>
 
 <div class="row" ng-controller="ProgramController" ng-init="init()">

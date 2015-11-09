@@ -65,19 +65,19 @@ class ProgramController extends Controller
             if ( ! empty($data['periods'])) {
                 $periods = json_decode($data['periods'], true);
                 
-                $i = 0;
-                $j = 0;
+                $period_order = $subject_order =  0;
+                
                 foreach ($periods as $period)
                 {
                     if ($period['type'] === 'period') {
-                        $period['ordr']        = $i;
+                        $period['ordr']        = $period_order;
                         $period['program_id']  = $program->id;
 
                         $cp = Period::create($period);
-                        $i++;
+                        $period_order++;
                     } else {
-                        $cp->subjects()->attach($period['id'], ['ordr' => $j, 'program_id' => $program->id]);
-                        $j++;
+                        $cp->subjects()->attach($period['id'], ['ordr' => $subject_order, 'program_id' => $program->id]);
+                        $subject_order++;
                     }
                 }
             }
@@ -99,8 +99,32 @@ class ProgramController extends Controller
     {
         $subjects   = $this->subjects;
 
+        // Parse Periods and subjects to array to bind to AngularJS
+        $periods = [];
+
+        // Todo: Improve Eager Loading
+        $program_periods = $program->periods()->orderBy('ordr')->get();
+
+        foreach ($program_periods as $period) {
+            $periods[] = [
+                'id'        => $period->id,
+                'name'      => $period->name,
+                'type'      => 'period',
+                'weight'    => $period->weight
+            ];
+
+            $period_subjects = $period->subjects()->orderBy('ordr')->get();
+
+            foreach ($period_subjects as $subject) {
+                $periods[] = [
+                    'id'    => $subject->id,
+                    'type'  => 'subject'
+                ];
+            }
+        }
+        
         // Remove exists subject from all subject above
-        return view('programs/update', compact('program', 'subjects'));
+        return view('programs/update', compact('program', 'subjects', 'periods'));
     }
 
     /**
@@ -125,14 +149,52 @@ class ProgramController extends Controller
     {
         $data = array_filter($request->all());
 
-        if (empty($data['periods']))
-            $data['periods'] = [];
-        
         try {
             $program->update($data);
 
+            // Todo: Use Relationship to create period
+            if ( ! empty($data['periods'])) {
+                $periods = json_decode($data['periods'], true);
+                
+                $period_order = $subject_order =  0;
+                
+                $subjects = [];
+                foreach ($periods as $period)
+                {
+                    if ($period['type'] === 'period') {
+                        $period['ordr']        = $period_order;
+                        $period['program_id']  = $program->id;
+
+                        if (isset($period['id'])) {
+                            $cp = Period::findOrFail($period['id']);
+                            $cp->update($period);
+                        }
+                        else {
+                            $cp = Period::create($period);
+                        }
+                        
+                        $period_order++;
+                    } else {
+                        
+                        $subjects[$cp->id][$period['id']] = [ 
+                           'ordr'       => $subject_order,
+                           'program_id' => $program->id
+                        ];
+                        
+                        $subject_order++;
+                    }
+                }
+
+                if ( ! empty($subjects)) {
+                    foreach ($subjects as $period_id => $subject_pivot ) {
+                        $period = Period::findOrFail($period_id);
+                        $period->subjects()->sync($subject_pivot);
+                    } 
+                }
+            }
+
             return redirect('programs/' . $program->id )
-                ->with('message', 'Program was updated successfully!');
+                ->with('message', 'Period was updated successfully!');
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }
