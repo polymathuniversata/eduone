@@ -66,4 +66,9 @@ class Menu
 
 		return '';
 	}
+
+	public static function back()
+	{
+	
+	}
 }

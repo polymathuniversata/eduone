@@ -1,7 +1,11 @@
 @extends('master')
+@section('title', 'All Branches')
+@section('main_title', 'All Branches')
+@section('main_button')
+<a href="/branches/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
+@endsection
 
 @section('content')
-<h1>{!! trans('app.branches') !!} <a href="/branches/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
 
 <table class="table table-bordered table-striped table-hover">
 	<thead>

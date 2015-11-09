@@ -102,7 +102,7 @@ class ProgramController extends Controller
         // Parse Periods and subjects to array to bind to AngularJS
         $periods = [];
 
-        // Todo: Improve Eager Loading
+        // Todo: Improve Loading
         $program_periods = $program->periods()->orderBy('ordr')->get();
 
         foreach ($program_periods as $period) {

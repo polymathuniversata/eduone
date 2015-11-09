@@ -27,7 +27,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-user',
+		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Teachers',
 		'url'	=> 'teachers',
 		'childs' => [
@@ -38,7 +38,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-user',
+		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Parents',
 		'url'	=> 'parents',
 		'childs' => [

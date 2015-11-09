@@ -114,5 +114,90 @@ class UserTableSeeder extends Seeder
             'type'      => 'Lab',
             'branch_id' => $branch->id
         ]);
+
+        $math = App\Subject::create([
+            'name' => 'Math',
+            'slug' => 'math',
+            'grades_count' => 2,
+            'sessions_count' => 2,
+            'total_grade_rate' => 1,
+            'minimum_student_present_session' => 1,
+            'minimum_student_grade' => 40,
+            'sessions_plan' => json_encode([
+                [
+                    'name' => 'Buoi 1',
+                    'type' => '',
+                    'description' => ''
+                ],
+                [
+                    'name' => 'Buoi 2',
+                    'type' => '',
+                    'description' => ''
+                ]
+            ]),
+            'grades_plan' => json_encode([
+                [
+                    'name' => 'Ly Thuyet',
+                    'percent' => 1,
+                    'minimum' => 30
+                ],
+                [
+                    'name' => 'Thuc Hanh',
+                    'percent' => 2,
+                    'minimum' => 30
+                ]
+            ])
+        ]);
+
+        $history = App\Subject::create([
+            'name' => 'History',
+            'slug' => 'history',
+            'grades_count' => 2,
+            'sessions_count' => 2,
+            'total_grade_rate' => 1,
+            'minimum_student_present_session' => 1,
+            'minimum_student_grade' => 40,
+            'sessions_plan' => json_encode([
+                [
+                    'name' => 'Buoi 1',
+                    'type' => '',
+                    'description' => ''
+                ],
+                [
+                    'name' => 'Buoi 2',
+                    'type' => '',
+                    'description' => ''
+                ]
+            ]),
+            'grades_plan' => json_encode([
+                [
+                    'name' => 'Ly Thuyet',
+                    'percent' => 1,
+                    'minimum' => 30
+                ],
+                [
+                    'name' => 'Thuc Hanh',
+                    'percent' => 2,
+                    'minimum' => 30
+                ]
+            ])
+        ]);
+
+        $program = App\Program::create([
+            'name' => 'Cong Nghe Thong Tin',
+            'slug' => 'cntt',
+            'creator_id' => 1
+        ]);
+
+        $period = App\Period::create([
+            'name' => 'Period 1',
+            'weight' => 1,
+            'ordr'  => 1,
+            'program_id' => 1
+        ]);
+
+        $period->subjects()->attach(1, ['program_id' => 1, 'ordr' => 1]);
+        $period->subjects()->attach(2, ['program_id' => 1, 'ordr' => 1]);
+
     }
 }

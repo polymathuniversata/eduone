@@ -76,12 +76,18 @@
 
 		$scope.active = {};
 
+		$scope.alreadyAddedSubject = [];
+
 		$scope.init = function() {
 			if (typeof window.subjects != 'undefined' && angular.isObject(window.subjects))
 				$scope.subjects 	= window.subjects;
 
 			if (typeof window.periods != 'undefined' && angular.isArray(window.periods))
 				$scope.periods 			= window.periods;
+
+			$scope.setAlreadyAddedSubject();
+
+			console.log($scope.alreadyAddedSubject);
 		};
 
 		$scope.setActiveField = function (field) {
@@ -93,6 +99,8 @@
 				id: id,
 				type: 'subject'
 			});
+
+			$scope.alreadyAddedSubject.push(id);
 		};
 
 		$scope.addPeriod = function() {
@@ -107,6 +115,18 @@
 			var item = $scope.periods[$index];
 
 			$scope.periods.splice($index, 1);
+			
+			if (item.type === 'subject') {
+				var index = $scope.alreadyAddedSubject.indexOf(item.id);
+				$scope.alreadyAddedSubject.splice(index, 1);	
+			}
+		};
+
+		$scope.setAlreadyAddedSubject = function() {
+			angular.forEach($scope.periods, function(period) {
+				if (period.type === 'subject')
+					$scope.alreadyAddedSubject.push(period.id);
+			});
 		};
 	});
 

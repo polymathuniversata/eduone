@@ -16,7 +16,6 @@ class CreateProgramsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('slug')->unique()->nullable();
-            $table->integer('periods_count')->default(1);
             $table->integer('creator_id');
             $table->timestamps();
             $table->engine = 'InnoDB';

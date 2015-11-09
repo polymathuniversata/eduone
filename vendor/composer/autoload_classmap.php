@@ -6,8 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'BranchTableSeeder' => $baseDir . '/database/seeds/BranchTableSeeder.php',
     'CreateBranchMetaTable' => $baseDir . '/database/migrations/2015_10_11_134448_create_branch_meta_table.php',
     'CreateBranchesTable' => $baseDir . '/database/migrations/2015_10_09_105125_create_branches_table.php',
+    'CreateClassesSubjectsTable' => $baseDir . '/database/migrations/2015_11_09_100441_create_classes_subjects_table.php',
     'CreateClassesTable' => $baseDir . '/database/migrations/2015_10_09_104949_create_classes_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2015_10_11_123429_create_events_table.php',
     'CreateMediaTable' => $baseDir . '/database/migrations/2015_10_11_112711_create_media_table.php',
@@ -503,6 +505,8 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'ProgramTableSeeder' => $baseDir . '/database/seeds/ProgramTableSeeder.php',
+    'RoomTableSeeder' => $baseDir . '/database/seeds/RoomTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -540,6 +544,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
+    'SubjectTableSeeder' => $baseDir . '/database/seeds/SubjectTableSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/UserTableSeeder.php',

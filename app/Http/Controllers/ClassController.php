@@ -59,11 +59,12 @@ class ClassController extends Controller
     {
         // Todo: If users isn't Administrator, branch is current branch
         $branches = $this->branches;
-        
-        $subjects = json_encode($this->subjects);
-
         $programs = $this->programs;
-        $programs_periods = Program::lists('periods', 'id')->toJson();
+        
+        //$subjects = json_encode($this->subjects);
+
+        
+        //$programs_periods = Program::lists('periods', 'id')->toJson();
         
         return view('classes/create', compact('branches', 'programs', 'subjects', 'programs_periods'));
     }
