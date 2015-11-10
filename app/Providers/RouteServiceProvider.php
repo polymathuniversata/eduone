@@ -27,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('users', 'App\User');
         $router->model('roles', 'App\Role');
         $router->model('subjects', 'App\Subject');
-        $router->model('classes', 'App\Classes');
+        $router->model('classes', 'App\Group');
+        $router->model('groups', 'App\Group');
         $router->model('branches', 'App\Branch');
         $router->model('programs', 'App\Program');
         $router->model('rooms', 'App\Room');

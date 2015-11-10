@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Classes;
+use App\Group;
 use App\Branch;
 use App\Program;
 use App\Subject;
@@ -40,9 +40,10 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        $classes = Classes::search($request->q)
+        $classes = Group::ofType('class')
                         ->ofProgram($request->program)
                         ->ofSubject($request->subject)
+                        ->search($request->q)
                         ->paginate(20);
 
         $programs = $this->programs;
@@ -77,9 +78,9 @@ class ClassController extends Controller
 
         if ( empty($data['slug']))
             $data['slug'] = str_slug($data['name']);
-
+        
         try {
-            $class = Classes::create($data);
+            $class = Group::create($data);
             
             return redirect('classes/' . $class->id )
                         ->with('message', 'Class was created successfully!');
@@ -94,7 +95,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Classes $class)
+    public function show(Group $class)
     {
         return $this->edit($class);
     }
@@ -105,7 +106,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $class)
+    public function edit(Group $class)
     {
         $programs = $this->programs;
         $branches = $this->branches;
@@ -113,7 +114,7 @@ class ClassController extends Controller
         return view('classes/update', compact('class', 'programs', 'branches'));
     }
 
-    public function members(Classes $class)
+    public function members(Group $class)
     {
         // Already Added Members
         $members = $class->members->lists('name', 'id')->toArray();
@@ -131,7 +132,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $class)
+    public function update(Request $request, Group $class)
     {
         //
     }
@@ -142,7 +143,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classes $class)
+    public function destroy(Group $class)
     {
         $class->delete();
 
