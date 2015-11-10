@@ -8,9 +8,9 @@ use App\Subject;
 class Classes extends Group
 {
 	use CanUseCreator, CanUseMeta;
-    
+
 	public static function boot()
     {
-        static::addGlobalScope(new StudentScope);
+        static::addGlobalScope(new ClassScope);
     }
 }

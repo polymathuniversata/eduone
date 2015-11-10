@@ -15,6 +15,27 @@ h1,h2,h3{ font-weight: normal; }
 	max-width: 1200px;
 }
 
+.media, .media-body{
+	overflow: visible;
+}
+
+.media.member{
+	border: 1px solid #eee;
+	margin: 20px;
+	height: 102px;
+}
+.member h4 a{
+	font-size: 14px;
+	font-weight: bold;
+}
+.member .media-body{
+	padding: 10px;
+}
+
+.member .media-actions{
+	padding: 30px 10px 0 0;
+}
+
 #content{
 	min-height: 600px;
 }

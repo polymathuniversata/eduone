@@ -17,10 +17,10 @@ class Group extends Model
     	'student_count' => 'integer',
     	'program_id' 	=> 'integer',
     	'branch_id' 	=> 'integer',
-    	'creator_id' 		=> 'integer'
+    	'creator_id' 	=> 'integer'
     ];
 
-    protected $dates = ['started_at', 'finished_at', 'created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
     public function members()
     {
