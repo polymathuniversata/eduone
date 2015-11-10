@@ -9,6 +9,7 @@ use App\Classes;
 use App\Branch;
 use App\Program;
 use App\Subject;
+use App\User;
 use App\Repositories\ClassRepository;
 
 class ClassController extends Controller
@@ -61,12 +62,7 @@ class ClassController extends Controller
         $branches = $this->branches;
         $programs = $this->programs;
         
-        //$subjects = json_encode($this->subjects);
-
-        
-        //$programs_periods = Program::lists('periods', 'id')->toJson();
-        
-        return view('classes/create', compact('branches', 'programs', 'subjects', 'programs_periods'));
+        return view('classes/create', compact('branches', 'programs'));
     }
 
     /**
@@ -81,14 +77,6 @@ class ClassController extends Controller
 
         if ( empty($data['slug']))
             $data['slug'] = str_slug($data['name']);
-
-        if ( ! empty($data['subjects'])) {
-            if (is_string($data['subjects']))
-                $data['subjects'] = intval($data['subjects']);
-        }
-
-        if ( ! empty($data['periods']))
-            $data['periods'] = json_decode($data['periods']);
 
         try {
             $class = Classes::create($data);
@@ -125,6 +113,17 @@ class ClassController extends Controller
         return view('classes/update', compact('class', 'programs', 'branches'));
     }
 
+    public function members(Classes $class)
+    {
+        // Already Added Members
+        $members = $class->members->lists('name', 'id')->toArray();
+
+        // All Users available to add
+        // Todo: Only add users in current Program 
+        $users = User::lists('name', 'id')->toArray();
+
+        return view('classes/members', compact('class', 'members', 'users'));
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -25,9 +25,9 @@ class Classes extends Model
 
     protected $dates = ['started_at', 'finished_at', 'created_at', 'updated_at'];
 
-    public function students()
+    public function members()
     {
-    	return $this->belongsToMany('App\User', 'users_classes');
+    	return $this->belongsToMany('App\User', 'users_classes', 'user_id', 'class_id');
     }
 
     public function program()

@@ -19,7 +19,6 @@ class CreateUsersProgramsTable extends Migration
             $table->string('status')->nullable(); // Awaiting, Inprogress, Completed, Failed, Dropout
             $table->date('started_at');
             $table->date('finished_at')->nullable();
-            $table->text('meta');
             $table->integer('creator_id');
             $table->timestamps();
             $table->engine = 'InnoDB';

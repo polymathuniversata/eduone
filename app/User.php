@@ -58,6 +58,15 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Branch', 'users_branches');
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany('App\Classes', 'users_classes', 'class_id', 'user_id');
+    }
+
+    public function programs()
+    {
+        return $this->belongsToMany('App\Program', 'users_programs');
+    }
     /**
      * If user full name is set, return his full name. Otherwise, return username
      * 

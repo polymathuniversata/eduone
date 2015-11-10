@@ -33,16 +33,21 @@ h1,h2,h3{ font-weight: normal; }
 #sidebar h6{
 	font-weight: bold;
 }
-.navbar-default{
+#navbar-top.navbar-default{
 	background: #fff;
 	padding: 10px 20px;
 }
-.navbar-form{
+
+#navbar-top .navbar-form{
 	width: 50%;
 }
-.navbar-brand{
+#navbar-top .navbar-brand{
 	font-size: 26px;
 	color: #000 !important;
+}
+
+#navbar-top .navbar-form .input-group{
+	width: 100%;
 }
 #sidebar{
 	position: fixed;
@@ -98,6 +103,7 @@ h1,h2,h3{ font-weight: normal; }
 	max-width: 600px;
 }
 
+
 #main-menu ul > li a{
     display: block;
     line-height: 40px;
@@ -132,9 +138,6 @@ h1,h2,h3{ font-weight: normal; }
 	border-radius: 2px;
 }
 
-.navbar-form .input-group{
-	width: 100%;
-}
 #sign-out{
 	position: fixed;
 	bottom: 20px;
