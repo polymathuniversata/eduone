@@ -3,20 +3,20 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersClassesTable extends Migration
+class CreateUsersGroupsTable extends Migration
 {
-     /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users_classes', function (Blueprint $table) {
+        Schema::create('users_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('class_id');
-            $table->integer('creator_id');
+            $table->integer('group_id');
+            $table->integer('creator_id'); // Who invite
             // User can have special role in class. 
             // For example, users can becomes teacher and vise versa
             $table->integer('role')->nullable(); 
@@ -35,6 +35,6 @@ class CreateUsersClassesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_classes');
+        Schema::drop('users_groups');
     }
 }
