@@ -131,6 +131,25 @@ class ClassController extends Controller
 
         return view('classes/members', compact('class', 'members', 'users'));
     }
+
+    public function subjects($id)
+    {
+        $class = Group::findOrFail($id);
+
+        $program = $class->program;
+
+        $subjects = [];
+        $periods = $program->periods()->orderBy('ordr')->get();
+
+        foreach ($periods as $period) {
+            $subjects[$period->id] = $period->subjects()->orderBy('ordr')->get();
+        }
+
+        $class_subjects = $class->subjects->pluck('id')->toArray();
+        
+        return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -140,7 +159,20 @@ class ClassController extends Controller
      */
     public function update(Request $request, Group $class)
     {
-        //
+        $data = array_filter($request->all());
+
+        try {
+            $class->update($data);
+
+            if ( ! empty($data['subjects'])) {
+                // Save Subjects
+                $class->subjects()->sync($data['subjects']);
+            }
+            
+            return redirect(url('/classes/' . $class->id))->withMessage('Class was updated successfully!');
+        } catch (Exception $e) {
+            return redirect(url('/classes/' . $class->id))->withInput()->withMessage('Error during updating class!');
+        }
     }
 
     /**

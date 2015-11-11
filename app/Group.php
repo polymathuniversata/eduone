@@ -37,21 +37,11 @@ class Group extends Model
     	return $this->belongsTo('App\Branch');
     }
 
-    public function getSubjectsId()
+    public function subjects()
     {
-        if ( ! empty($this->subjects_id))
-            return (array) $this->subjects_id;
-    }
-
-    public function getSubjects()
-    {
-        $subjects_id = $this->getSubjectsId();
-        
-        if ( ! is_array($subjects_id))
-            return;
-
-        return Subject::where('id', 'in', $subjects_id)
-                        ->lists('name', 'id');
+        return $this->belongsToMany('App\Subject', 'classes_subjects', 'class_id', 'subject_id')
+                    ->withPivot('user_id')
+                    ->withTimestamps();
     }
 
     public function scopeOfType($query, $value)

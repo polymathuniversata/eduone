@@ -18,7 +18,7 @@
 				<div class="media member">
 				  <div class="media-left">
 				    <a href="{{url('users/' . $member['id'])}}">
-				      <img class="media-object" src="{{$member['photo']}}" alt="{{$member['name']}}">
+				      <img class="media-object" src="http://lorempixel.com/80/80" alt="{{$member['name']}}">
 				    </a>
 				  </div>
 				  <div class="media-body">
@@ -33,6 +33,8 @@
 					  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  	@if (in_array($member['role'],['Teacher']))
 						<i class="fa fa-star" title="{{$member['role']}}"></i>
+						@else
+						<i class="fa fa-check" title="{{$member['role']}}"></i>
 						@endif
 					    {{$member['role']}} <span class="caret"></span>
 					  </button>

@@ -38,6 +38,14 @@ class Subject extends Model
                     ->withTimestamps();
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany('App\Group', 'classes_subjects', 'subject_id', 'class_id')
+                    ->withPivot('user_id')
+                    ->withTimestamps();
+    }
+
+
     public function getSessionsCountAttribute($value)
     {
         return isset($value) ? $value : 0;
