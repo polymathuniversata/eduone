@@ -34,9 +34,4 @@ class Program extends Model
     {
         return $this->hasMany('App\Classes');
     }
-
-    public function allSubject()
-    {
-
-    }
 }

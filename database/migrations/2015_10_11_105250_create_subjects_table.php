@@ -26,6 +26,7 @@ class CreateSubjectsTable extends Migration
 
             $table->text('sessions_plan')->nullable(); // JSON Format
             $table->text('grades_plan')->nullable(); // JSON Format
+            $table->boolean('is_required')->default(0);
             // Grade plan included
             // Name, Percent, Min
             
