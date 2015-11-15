@@ -85,7 +85,6 @@ class Group extends Model
         $added = [];
 
         foreach ($user_ids as $user_id) {    
-            $user_id = intval($user_id);
 
             $this->addUser($user_id);
 
@@ -93,6 +92,21 @@ class Group extends Model
         }
 
         return $added;
+    }
+
+    public function removeUser($id)
+    {
+        return $this->users()->detach($id);
+    }
+
+    public function removeUsers(...$user_ids)
+    {
+        return $this->users()->detach($user_ids);
+    }
+
+    public function setRole($user_id, $role_id)
+    {
+        return $this->users()->updateExistingPivot($user_id, ['role' => $role_id], true);
     }
 
     public function program()
