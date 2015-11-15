@@ -118,18 +118,11 @@ class ClassController extends Controller
     {
         $class = Group::findOrFail($id);
 
-        // Already Added Members
-        $members = [
-            ['id' => 1, 'name' => 'Tan Nguyen', 'email' => 'tan@fitwp.com', 'role' => 'Teacher', 'photo' => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xlt1/v/t1.0-1/p100x100/11694742_702638139841881_3407774468465086624_n.jpg?oh=3e821c7cc35415570f815389a2e6b91e&oe=56B35EBC&__gda__=1455586043_b09d7ffe08072bb8da01d4537d508da5'],
-            ['id' => 2, 'name' => 'Hai Tran', 'email' => 'hai@fpt.edu.vn', 'role' => 'Student', 'photo' => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xlp1/v/t1.0-1/p100x100/11960032_10205265084689207_9163069548125985365_n.jpg?oh=74f1b16405469c14d5c5f51fda9d7be4&oe=56B96460&__gda__=1454596060_668c6e5ac01fa5a4c8f9668331401243'],
-            ['id' => 3, 'name' => 'Phan Anh', 'email' => 'phananh@gmail.vn', 'role' => 'Student', 'photo' => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p100x100/603826_961073040577277_1835077498336082614_n.jpg?oh=dcdd84cfabbb6f403b9870ae1cc544a0&oe=56F4B8D8&__gda__=1454782660_8fa501ac21b7526d133c81014366ea0a'],
-        ];
-
         // All Users available to add
-        // Todo: Only add users in current Program 
+        // Todo: Only add users in current Program and Branch 
         $users = User::lists('name', 'id')->toArray();
 
-        return view('classes/members', compact('class', 'members', 'users'));
+        return view('classes/members', compact('class', 'users'));
     }
 
     public function subjects($id)
@@ -161,21 +154,27 @@ class ClassController extends Controller
     {
         $data = array_filter($request->all());
 
+        $message = 'Class was updated successfully!';
+
         try {
             $class->update($data);
 
             if ( ! empty($data['subjects'])) {
                 // Save Subjects
                 $class->subjects()->sync($data['subjects']);
+                
+                $message = 'Class subjects was updated successfully!';
             }
 
             if ( ! empty($data['users'])) {
-                
+
                 // Parse $data['users'] to properly id to add to class
                 $class->addUsers($data['users']);
+
+                $message = 'Class members was added successfully!';
             }
             
-            return redirect(url('/classes/' . $class->id))->withMessage('Class was updated successfully!');
+            return redirect(url('/classes/' . $class->id))->withMessage($message);
         } catch (Exception $e) {
             return redirect(url('/classes/' . $class->id))->withInput()->withMessage('Error during updating class!');
         }

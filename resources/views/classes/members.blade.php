@@ -16,30 +16,30 @@
 		<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Add</button>
 
 		<div class="row">
-			@foreach ($members as $member)
+			@foreach ($class->users as $user)
 			<div class="col-md-6">
 				<div class="media member">
 				  <div class="media-left">
-				    <a href="{{url('users/' . $member['id'])}}">
-				      <img class="media-object" src="http://lorempixel.com/100/100" alt="{{$member['name']}}">
+				    <a href="{{url('users/' . $user->id)}}">
+				      <img class="media-object" src="{!! $user->getPhoto() !!}" alt="{{$user->getFullName()}}">
 				    </a>
 				  </div>
 				  <div class="media-body">
 				    <h4 class="media-heading">
-				    	<a href="{{url('users/' . $member['id'])}}">{{$member['name']}}</a> 
+				    	<a href="{{url('users/' . $user->id)}}">{{$user->getFullName()}}</a> 
 				    </h4>
-				    <small class="text-muted">{{$member['email']}}</small>
+				    <small class="text-muted">{{$user->email}}</small>
 				    <div class="text-muted"><small>Joined since 01/01/2014</small></div>
 				  </div>
 				  <div class="media-actions media-right">
 				  	<div class="btn-group">
 					  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  	@if (in_array($member['role'],['Teacher']))
-						<i class="fa fa-star" title="{{$member['role']}}"></i>
+					  	@if (in_array($user->role_id, [3]))
+						<i class="fa fa-star" title="{{$user->role->name}}"></i>
 						@else
-						<i class="fa fa-check" title="{{$member['role']}}"></i>
+						<i class="fa fa-check" title="{{$user->role->name}}"></i>
 						@endif
-					    {{$member['role']}} <span class="caret"></span>
+					    {{$user->role->name}} <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
 					    <li><a href="#">Set as Student</a></li>
