@@ -168,6 +168,12 @@ class ClassController extends Controller
                 // Save Subjects
                 $class->subjects()->sync($data['subjects']);
             }
+
+            if ( ! empty($data['users'])) {
+                
+                // Parse $data['users'] to properly id to add to class
+                $class->addUsers($data['users']);
+            }
             
             return redirect(url('/classes/' . $class->id))->withMessage('Class was updated successfully!');
         } catch (Exception $e) {

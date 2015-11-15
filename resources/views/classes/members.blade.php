@@ -60,23 +60,27 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add People to Class</h4>
-      </header>
-      <div class="modal-body">
-        <div class="alert alert-warning">
-        	Enter user id, or email, or roll no, separated by commas.
-        </div>
-        <input type="text" class="form-control" name="users" placeholder="Who do you want to add to this class?">
-      </div>
-      <footer class="modal-footer">
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Add</button>
-      </footer>
-    </div>
-  </div>
+  	<div class="modal-dialog" role="document">
+  		{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT']) !!}
+    	<div class="modal-content">
+
+		    <header class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Add People to Class</h4>
+		    </header>
+		    <div class="modal-body">
+		        <div class="alert alert-warning">
+		        	Enter user id, user name, or email, or roll no, separated by commas.
+		        </div>
+		        <input type="text" class="form-control" name="users" placeholder="Who do you want to add to this class?">
+		    </div>
+	      	<footer class="modal-footer">
+	        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+	        	<button type="submit" class="btn btn-primary btn-sm">Add</button>
+	      	</footer>
+    		
+    	</div>
+    	{!! Form::close() !!}
+  	</div>
 </div>
 @endsection
