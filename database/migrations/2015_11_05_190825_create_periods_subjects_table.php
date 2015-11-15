@@ -19,6 +19,8 @@ class CreatePeriodsSubjectsTable extends Migration
             $table->integer('program_id')->nullable();
             $table->integer('ordr')->default(0);
             $table->timestamps();
+            
+            $table->unique(['period_id', 'subject_id']);
         });
     }
 
