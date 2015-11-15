@@ -36,6 +36,19 @@ class Group extends Model
     }
 
     /**
+     * Check if this Group contains user or not
+     * 
+     * @param  Integer  $user_id User ID
+     * @return boolean
+     */
+    public function hasUser($user_id)
+    {
+        $group_users = \DB::table('users_groups')->whereGroupId($this->id)->lists('user_id', 'id');
+        
+        return in_array($user_id, $group_users);
+    }
+
+    /**
      * Add a User to Group
      * 
      * @param Mixed  $input   User ID, or User instance, or email or user name or roll no
@@ -94,19 +107,54 @@ class Group extends Model
         return $added;
     }
 
+    /**
+     * Remove one user from current group
+     * 
+     * @param  Integer $id User ID
+     */
     public function removeUser($id)
     {
         return $this->users()->detach($id);
     }
 
+    /**
+     * Remove list of user from current group
+     * 
+     * @param  List of integers $user_ids List of users
+     */
     public function removeUsers(...$user_ids)
     {
         return $this->users()->detach($user_ids);
     }
 
+    /**
+     * Set Role for User of this Group
+     * 
+     * @param Integer $user_id User ID
+     * @param Integer $role_id Role ID
+     */
     public function setRole($user_id, $role_id)
     {
         return $this->users()->updateExistingPivot($user_id, ['role' => $role_id], true);
+    }
+
+    /**
+     * Get Role ID of given user in Group
+     * 
+     * @param  Integer $user_id User ID
+     * 
+     * @return Integer Role ID
+     */
+    public function getRole($user_id)
+    {
+        // Get Role of User in this Group first
+        $role = \DB::table('users_groups')->whereGroupId($this->id)->whereUserId($user_id)->pluck('role');
+
+        // If not set, then role is current user role
+        if ( empty($role))
+            $role = User::findOrFail($user_id)->role->id;
+
+        return $role;
     }
 
     public function program()
