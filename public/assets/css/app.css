@@ -24,7 +24,10 @@ h1,h2,h3{ font-weight: normal; }
 .row-md{
 	max-width: 1200px;
 }
-
+.modal label{
+	font-size: 12px;
+	color: #4c4c4c;
+}
 .media, .media-body{
 	overflow: visible;
 }

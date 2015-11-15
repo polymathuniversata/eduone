@@ -4,9 +4,11 @@
 @section('main_title')
 {!! trans('app.classes') !!}
 @endsection
+
 @section('main_button')
-    <a href="/classes/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
+    <button class="btn btn-default" data-toggle="modal" data-target="#myModal">{!! trans('app.add_new') !!}</button>
 @endsection
+
 @section('search_box')
  {!! Form::model($request, ['url' => '/classes', 'method' => 'GET']) !!}
     <div class="input-group pull-right col-md-7" id="advanced-search">
@@ -80,7 +82,7 @@
     </div>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
+    <button type="button" class="btn btn-default btn-sm">{!! trans('app.mass_update') !!}</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
     <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>
@@ -90,29 +92,68 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">{!! trans('app.mass_update') !!}</h4>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-        	<div class="alert alert-warning">
-        		{!! trans('app.user_mass_update_attention') !!}
-        	</div>
-        	<div class="form-group">
-        		<label for="">{!! trans('app.select_a_property') !!}</label>
-        		{!! Form::select('property', ['Role', 'State', 'Postcode', 'Country'], null, ['class' => 'form-control']) !!}
-        	</div>
-        	<div class="form-group">
-        		<label for="">{!! trans('app.enter_value') !!}</label>
-        		<input type="text" class="form-control">
-        	</div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{!! trans('app.cancel') !!}</button>
-        <button type="button" class="btn btn-primary">{!! trans('app.update') !!}</button>
-      </div>
+        {!! Form::open(['url' => 'classes', 'class' => 'form-horizontal']) !!}
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{!! trans('app.create_new_class') !!}</h4>
+            </div>
+            <div class="modal-body">    
+                <div class="form-group">
+                    {!! Form::label('name', trans('app.name'), ['class' => 'col-md-3 control-label']) !!}
+                    <div class="col-md-9">
+                        {!! Form::text('name', null, [
+                            'class' => 'form-control', 
+                            'placeholder' => trans('app.name')]) 
+                        !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('program_id', trans('app.program'), ['class' => 'col-md-3 control-label']) !!}
+                    <div class="col-md-9">
+                        {!! Form::select('program_id', $programs, null, [
+                            'class' => 'form-control', 
+                            'placeholder' => 'Please select',
+                            'ng-model'  => 'selectedProgram'
+                        ]) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="started_at" class="col-md-3 control-label">Start Date</label>
+                    <div class="col-md-9">
+                        {!! Form::date('started_at', null, [
+                            'class' => 'form-control'
+                        ]) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="finished_at" class="col-md-3 control-label">Finish Date</label>
+                    <div class="col-md-9">
+                        {!! Form::date('finished_at', null, [
+                            'class' => 'form-control'
+                        ])!!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch_id" class="col-md-3 control-label">Branch</label>
+                    <div class="col-md-9">
+                        {!! Form::select('branch_id', $branches, null, [
+                            'class'         => 'form-control'
+                        ])!!}
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{!! trans('app.cancel') !!}</button>
+                <button type="submit" class="btn btn-primary">{!! trans('app.create') !!}</button>
+            </div>
+        {!! Form::close() !!}
     </div>
   </div>
 </div>

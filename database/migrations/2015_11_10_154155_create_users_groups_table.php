@@ -25,6 +25,8 @@ class CreateUsersGroupsTable extends Migration
             $table->date('date_finished')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
+
+            $table->unique(['user_id', 'group_id']);
         });
     }
 

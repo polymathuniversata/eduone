@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->string('email', 80)->nullable(); // Associate with Google Apps...
             $table->string('type', 30)->default('class');
             $table->integer('program_id')->nullable();
             $table->integer('branch_id')->nullable();

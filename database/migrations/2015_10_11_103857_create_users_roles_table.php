@@ -19,6 +19,8 @@ class CreateUsersRolesTable extends Migration
             $table->integer('creator_id');
             $table->date('expired');
             $table->timestamps();
+            
+            $table->unique(['user_id', 'role_id']);
         });
     }
 

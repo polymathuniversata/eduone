@@ -3,7 +3,7 @@
 return [
 	[
 		'icon' 	=> 'fa fa-bar-chart',
-		'title' => 'Overview',
+		'title' => 'Dashboard',
 		'url'	=> '/',
 	],
 	[
@@ -29,11 +29,10 @@ return [
 	[
 		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Teachers',
-		'url'	=> 'teachers',
+		'url'	=> 'users/?role=3',
 		'childs' => [
-			'teachers' 			=> 'All Teachers',
-			'teachers/create' 	=> 'Add New Teacher',
-			'users/import' 		=> 'Import'
+			'users/?role=3' 			=> 'All Teachers',
+			'teachers/create/?role_id=3' => 'Add New Teacher',
 		]
 	],
 

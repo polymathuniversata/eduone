@@ -10,7 +10,7 @@ class Group extends Model
     use CanUseCreator, CanUseMeta;
 	
     protected $fillable = [
-    	'name', 'slug', 'student_count', 'program_id', 
+    	'name', 'slug', 'description', 'email', 'student_count', 'program_id', 
     	'branch_id', 'creator', 'started_at', 'finished_at'
     ];
 
