@@ -10,7 +10,7 @@
     <li role="presentation"><a href='{!! url("/classes/$class->id") !!}/subjects' aria-controls="subjects">Subjects</a></li>
 </ul>
 
-<div class="row" ng-controller="ClassController">
+<div class="row" ng-controller="MemberController">
 	<div class="col-md-7 members">
 	
 		<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Add</button>
@@ -42,7 +42,7 @@
 					    {{$user->role->name}} <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
-					    <li><a href="#">Set as Student</a></li>
+					    <li><a href="#" ng-click="setRole()">Set as Student</a></li>
 					    <li><a href="#">Set as Teacher</a></li>
 					    <li role="separator" class="divider"></li>
 					    <li><a href="#">Promote...</a></li>

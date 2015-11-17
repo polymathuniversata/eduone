@@ -147,14 +147,26 @@ class Group extends Model
      */
     public function getRole($user_id)
     {
-        // Get Role of User in this Group first
-        $role = \DB::table('users_groups')->whereGroupId($this->id)->whereUserId($user_id)->pluck('role');
+        return \DB::table('users_groups')->whereGroupId($this->id)->whereUserId($user_id)->pluck('role');
+    }
 
-        // If not set, then role is current user role
-        if ( empty($role))
-            $role = User::findOrFail($user_id)->role->id;
+    public function getUsersByRole($role_id)
+    {
+        $all_users = \DB::table('users_groups')->whereRole($role_id)->lists('user_id');
+        
+        $users = User::whereIn('id', $all_users)->get();
 
-        return $role;
+        return $users;
+    }
+
+    public function getTeacherBySubject($subject_id)
+    {
+        
+    }
+
+    public function getSubjectByTeacher()
+    {
+
     }
 
     public function program()

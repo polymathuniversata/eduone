@@ -14,27 +14,45 @@
 	{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT', 'class' => 'col-md-6']) !!}
 
 	<div class="subjects">
-		@foreach($periods as $period)
-		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    <h3 class="panel-title"><input type="checkbox" class="panel-checkbox"> {{$period->name}}</h3>
+		    <h4 class="panel-title">
+		    	Select subjects to be learned and match with teachers
+		    </h4>
 		  </div>
 		  <div class="panel-body">
-		    @if( ! empty($subjects[$period->id]))
-				@foreach($subjects[$period->id] as $subject)
-				<div class="checkbox">
-					<label>
+		  	@foreach($periods as $period)
+				@if( ! empty($subjects[$period->id]))
+			  	<table class="table">
+			  		<thead>
+			  			<tr>
+			  				<th colspan="3">
+			  					 <h4><input type="checkbox" class="panel-checkbox"> {{$period->name}}</h4>
+			  				</th>
+			  			</tr>
+			  		</thead>
+					@foreach($subjects[$period->id] as $subject)
+					<tr>
+					<td>
 						{!! Form::checkbox('subjects[]', $subject->id, in_array($subject->id, $class_subjects)) !!}
+					</td>
+					<td>	
 						{{$subject['name']}}
-					</label>
-				</div>
-				@endforeach
-		    @endif
-		  </div>
+					</td>
+					<td>
+						<select name="fo" id="foo" class="form-control">
+							<option value="">Select a Teacher</option>
+							<option value="helenha">Helen Ha</option>
+						</select>
+					</td>
+					</tr>
+					@endforeach
+			    </table>
+				  	
+				@endif
+			@endforeach
+		  	</div>
 		</div>
-
-		@endforeach
 	</div><!--.subjects-->
 	
 	<button type="submit" class="btn btn-primary">Save Changes</button>

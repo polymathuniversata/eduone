@@ -30,6 +30,15 @@
 			{!! Form::label('program_id', trans('app.program')) !!}
 			{!! Form::select('program_id', $programs, null, ['class' => 'form-control', 'placeholder' => 'Select a Program...']) !!}
 		</div>
+		
+		<div class="form-group">
+			{!! Form::label('email', trans('app.email')) !!}
+			{!! Form::text('email', null, [
+				'class' => 'form-control', 
+				'placeholder' => trans('app.email')]) 
+			!!}
+			<div class="help-block">Class email, useful when you setup an email group or email forwarding</div>
+		</div>
 
 		<div class="form-group">
 			<label for="started_at">Start Date</label>

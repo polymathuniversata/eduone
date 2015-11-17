@@ -46,3 +46,5 @@ Route::resource('teachers', 'TeacherController');
 // Route::get('programs/periods/{id}', 'ProgramController@periods');
 Route::get('classes/{id}/members', 'ClassController@members');
 Route::get('classes/{id}/subjects', 'ClassController@subjects');
+
+Route::patch('classes/{id}/members', 'ClassController@setRole');

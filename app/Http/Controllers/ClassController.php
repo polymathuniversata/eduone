@@ -180,6 +180,10 @@ class ClassController extends Controller
         }
     }
 
+    public function setRole(Request $request, Group $class)
+    {
+        return $class;
+    }
     /**
      * Remove the specified resource from storage.
      *

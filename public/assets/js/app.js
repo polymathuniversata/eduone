@@ -231,6 +231,21 @@
 		};
 	});
 
+	app.controller('MemberController', function($scope, $http)
+	{
+		$scope.setRole = function(userId, roleId) {
+			$http.put('/classes', {
+				user_id: userId,
+				role_id: roleId 
+			}).success(function(data, status, headers, config) {
+			    console.log(data);
+			}).
+			error(function(data, status, headers, config) {
+			    	//
+			});
+		};
+	});
+
 	app.controller('UserController', function($scope, $http)
 	{
 		

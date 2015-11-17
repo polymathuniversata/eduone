@@ -96,6 +96,11 @@ class User extends Model implements AuthenticatableContract,
         return ! empty($this->photo) ? $this->photo : $default_photo;
     }
 
+    public function getTeacherSubjects()
+    {
+
+    }
+
     public function scopeSearch($query, $value)
     {
         if (! empty($value)) {
