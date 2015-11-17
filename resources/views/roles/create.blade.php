@@ -1,12 +1,9 @@
 @extends('master')
 
 @section('title', trans('app.create_new_role'))
+@section('main_title', trans('app.create_new_role'))
 
 @section('content')
-<header>
-	<h1>{!! trans('app.create_new_role') !!}</h1>
-</header>
-
 {!! Form::open(['url' => 'roles']) !!}
 
 	@include ('roles/_partials/form')

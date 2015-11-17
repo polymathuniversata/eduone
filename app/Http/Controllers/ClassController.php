@@ -57,13 +57,13 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         // Todo: If users isn't Administrator, branch is current branch
         $branches = $this->branches;
         $programs = $this->programs;
         
-        return view('classes/create', compact('branches', 'programs'));
+        return view('classes/create', compact('branches', 'programs', 'request'));
     }
 
     /**

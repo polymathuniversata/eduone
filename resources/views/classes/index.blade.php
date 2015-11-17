@@ -63,8 +63,8 @@
                 </td>
                 <td>0</td>
                 <td>0</td>
-    			<td>{!! $class->status !!}</td>
-    			<td>{!! $class->started_at !!}</td>
+    			<td>{{ $class->status }}</td>
+    			<td>{{ $class->started_at }}</td>
                 <td>{{ $class->finished_at }}</td>
     		</tr>
     		@endforeach

@@ -1,11 +1,9 @@
 @extends('master')
 
 @section('title', trans('app.roles_and_permissions'))
+@section('main_title', trans('app.roles_and_permissions'))
 
 @section('content')
-<header>
-	<h1>{!! trans('app.roles_and_permissions') !!} <a href="/roles/create" class="btn btn-default">{!! trans('app.add_new') !!}</a></h1>
-</header>
 
 <table class="table table-bordered table-condensed table-hover">
 	<thead>
