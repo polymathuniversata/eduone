@@ -82,4 +82,5 @@ return [
  	'add_student' => 'Add Student',
  	'delete_student' => 'Delete Student',
  	'create_new_student' => 'Create New Student',
+ 	'cancel'	=> 'Cancel',
  ];

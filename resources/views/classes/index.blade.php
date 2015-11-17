@@ -41,7 +41,7 @@
     <table class="table table-hover">
     	<thead class="panel-heading">
     		<tr>
-    			<th>#</th>
+    			<th><input type="checkbox"></th>
     			<th>{!! trans('app.name') !!}</th>
     			<th>{!! trans('app.program') !!}</th>
                 <th>{{ trans('app.active_subjects') }}</th>
@@ -55,7 +55,7 @@
     	<tbody>
     		@foreach ($classes as $class)
     		<tr>
-    			<td><input type="checkbox" disabled></td>
+    			<td><input type="checkbox"></td>
     			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
     			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
     			<td>
@@ -81,8 +81,6 @@
         </select>
     </div>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default btn-sm">{!! trans('app.mass_update') !!}</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
     <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>

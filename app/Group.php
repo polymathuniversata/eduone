@@ -59,6 +59,8 @@ class Group extends Model
     {
         // If input is user id, check if user exists then attach
         if (is_numeric($input) || intval($input) > 0) {
+            
+            $role = 4;
 
             if ($safe_check) {
                 
@@ -66,9 +68,21 @@ class Group extends Model
                 
                 if ( ! $user)
                     return;
+
+                $role = $user->role_id;
             }
             
-            return $this->users()->attach($input, ['role' => 1, 'creator_id' => 1]);
+            if ($input instanceof User && isset($input->role_id))
+                $role = $input->role_id;
+
+            // Only have Teacher and Student
+            if ($role !== 3)
+                $role = 4;
+
+            $creator_id = isset(\Auth::user()->id) ? \Auth::user()->id : 1;
+
+            // Attach current user with pivot data
+            return $this->users()->attach($input, compact('role', 'creator_id'));
         }
 
         // If input is instance of App\User, then add user id
@@ -157,6 +171,16 @@ class Group extends Model
         $users = User::whereIn('id', $all_users)->get();
 
         return $users;
+    }
+
+    public function getTeachers() 
+    {
+        return $this->getUsersByRole(3);
+    }
+
+    public function getStudents() 
+    {
+        return $this->getUsersByRole(4);
     }
 
     public function getTeacherBySubject($subject_id)
