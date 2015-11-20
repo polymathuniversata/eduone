@@ -40,10 +40,7 @@
 						{{$subject['name']}}
 					</td>
 					<td>
-						<select name="fo" id="foo" class="form-control">
-							<option value="">Select a Teacher</option>
-							<option value="helenha">Helen Ha</option>
-						</select>
+						{!! Form::select('teachers['.$subject->id.']', $teachers, null, ['class' => 'form-control']) !!}
 					</td>
 					</tr>
 					@endforeach

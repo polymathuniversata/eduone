@@ -129,6 +129,8 @@ class ClassController extends Controller
     {
         $class = Group::findOrFail($id);
 
+        $teachers   = $class->getTeachers()->lists('name', 'id')->toArray();
+        
         $program = $class->program;
 
         $subjects = [];
@@ -140,7 +142,7 @@ class ClassController extends Controller
 
         $class_subjects = $class->subjects->pluck('id')->toArray();
         
-        return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects'));
+        return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects', 'teachers'));
     }
 
     /**
@@ -160,8 +162,21 @@ class ClassController extends Controller
             $class->update($data);
 
             if ( ! empty($data['subjects'])) {
+                $pivot      = [];
+                $teachers   = $data['teachers'];
+
+                foreach ($data['subjects'] as $subject_id) {
+                    
+                    if (isset($teachers[$subject_id]) && $teachers[$subject_id] > 0)
+                        $pivot[$subject_id] = [
+                            'user_id' => intval($teachers[$subject_id])
+                        ];
+                    else
+                        $pivot[] = $subject_id;
+                }
+
                 // Save Subjects
-                $class->subjects()->sync($data['subjects']);
+                $class->subjects()->sync($pivot);
                 
                 $message = 'Class subjects was updated successfully!';
             }
@@ -173,7 +188,7 @@ class ClassController extends Controller
 
                 $message = 'Class members was added successfully!';
             }
-            
+
             return redirect(url('/classes/' . $class->id))->withMessage($message);
         } catch (Exception $e) {
             return redirect(url('/classes/' . $class->id))->withInput()->withMessage('Error during updating class!');
