@@ -61,8 +61,10 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data = array_filter($data);
+        $data = array_filter($request->all());
+        
+        if ( ! isset($data['is_required']))
+            $data['is_required'] = 0;
 
         if (! empty($data['grades_plan'])) {
             $grades_plan = json_decode( $data['grades_plan'] );
@@ -125,6 +127,9 @@ class SubjectController extends Controller
             $sessions_plan = json_decode( $data['sessions_plan'] );
             $data['sessions_count'] = count($sessions_plan);
         }
+
+        if ( ! isset($data['is_required']))
+            $data['is_required'] = 0;
 
         try {
             $subject->update($data);

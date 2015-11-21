@@ -2,40 +2,45 @@
 	
 	<div class="form-group">
 		{!! Form::label('name', trans('app.name')) !!}
-			{!! Form::text('name', null, [
-				'class' => 'form-control', 
-				'placeholder' => trans('app.name')]) 
-			!!}
+		{!! Form::text('name', null, [
+			'class' => 'form-control', 
+			'placeholder' => trans('app.name')]) 
+		!!}
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('total_grade_rate', trans('app.total_grade_rate')) !!}
-			{!! Form::number('total_grade_rate', null, [
-				'class' => 'form-control', 
-				'placeholder' => trans('app.total_grade_rate')]) 
-			!!}
+		{!! Form::number('total_grade_rate', null, [
+			'class' => 'form-control', 
+			'placeholder' => trans('app.total_grade_rate')]) 
+		!!}
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('minimum_student_present_session', trans('app.minimum_student_present_session')) !!}
-			{!! Form::number('minimum_student_present_session', null, [
-				'class' => 'form-control', 
-				'placeholder' => trans('app.minimum_student_present_session')]) 
-			!!}
+		{!! Form::number('minimum_student_present_session', null, [
+			'class' => 'form-control', 
+			'placeholder' => trans('app.minimum_student_present_session')]) 
+		!!}
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('minimum_student_grade', trans('app.minimum_student_grade')) !!}
-			{!! Form::number('minimum_student_grade', null, [
-				'class' => 'form-control', 
-				'placeholder' => trans('app.minimum_student_grade')]) 
-			!!}
+		{!! Form::number('minimum_student_grade', null, [
+			'class' => 'form-control', 
+			'placeholder' => trans('app.minimum_student_grade')]) 
+		!!}
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('grade_type', trans('app.grade_type')) !!}
-			{!! Form::select('grade_type', config('settings.grade_types'), 'vi', 
-			['class' => 'form-control'] ) !!}
+		{!! Form::select('grade_type', config('settings.grade_types'), 'vi', 
+		['class' => 'form-control'] ) !!}
+	</div>
+	
+	<div class="form-group">
+		{!! Form::label('is_required', trans('app.is_required')) !!}
+		{!! Form::checkbox('is_required', 1, null) !!}
 	</div>
 
 	<input type="hidden" name="grades_plan" value="@{{grades}}">
@@ -72,7 +77,7 @@
     			</tr>
     		</tbody>
     	</table>
-    	<button type="button" class="btn btn-default btn-sm" ng-click="addGrade()">Add Grade</button>
+    	<button type="button" class="btn btn-default btn-sm" ng-click="addGrade()"><i class="glyphicon glyphicon-plus-sign"></i></button>
     </div>
     <div role="tabpanel" class="tab-pane" id="sessions">
     	<table class="table table-condensed">

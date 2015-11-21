@@ -13,7 +13,7 @@ class Subject extends Model
     	'name', 'slug', 'grades_count', 'sessions_count', 'total_grade_rate', 
     	'minimum_student_present_session', 'minimum_student_grade', 
     	'grade_type', 'equal_to', 'sessions_plan', 'grades_plan', 
-    	'creator_id', 'created_at', 'updated_at'
+    	'creator_id', 'is_required', 'created_at', 'updated_at'
     ];
 
     protected $casts = [
@@ -23,7 +23,8 @@ class Subject extends Model
     	'minimum_student_grade' => 'integer',
     	'minimum_student_present_session' => 'integer',
     	'equal_to'				=> 'integer',
-    	'creator_id' 			=> 'integer'
+    	'creator_id' 			=> 'integer',
+        'is_required'           => 'boolean'
     ];
 
     public function program()
