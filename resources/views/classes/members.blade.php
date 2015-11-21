@@ -5,9 +5,9 @@
 @section('content')
 
 <ul class="nav nav-tabs">
-    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}' aria-controls="basic">Basic Info</a></li>
-    <li role="presentation" class="active"><a href='{!! url("/classes/$class->id") !!}/members' aria-controls="members">Members</a></li>
-    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}/subjects' aria-controls="subjects">Subjects</a></li>
+    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}' aria-controls="basic"><i class="glyphicon glyphicon-list-alt"></i> Basic Info</a></li>
+    <li role="presentation" class="active"><a href='{!! url("/classes/$class->id") !!}/members' aria-controls="members"><i class="fa fa-users"></i> Members</a></li>
+    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}/subjects' aria-controls="subjects"><i class="fa fa-book"></i> Subjects</a></li>
 </ul>
 
 <div class="row" ng-controller="MemberController">

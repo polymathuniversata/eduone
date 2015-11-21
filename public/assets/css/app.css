@@ -333,3 +333,11 @@ fieldset label{
 #subject-orders header.panel-heading{
 	height: 50px;
 }
+
+.nav-tabs>li>a{
+	color: #888;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	border-top: 3px solid #e74c3c;
+}
