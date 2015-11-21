@@ -85,5 +85,7 @@ return [
  	'cancel'	=> 'Cancel',
  	'type'	=> 'Type',
  	'capacity' => 'Capacity',
- 	'new_program' => 'New Program'
+ 	'new_program' => 'New Program',
+ 	'started'	=> 'Started',
+ 	'finished' => 'Finished',
  ];

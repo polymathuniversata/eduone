@@ -117,6 +117,14 @@ class User extends Model implements AuthenticatableContract,
         return $query;
     }
 
+    public function scopeProgram($query, $value)
+    {
+         if (is_numeric($value) && $value > 0)
+            return $query->has('programs', '=', $value);
+
+        return $query;
+    }
+
     public function scopeBranch($query, $value)
     {
         if (is_numeric($value) && $value > 0)

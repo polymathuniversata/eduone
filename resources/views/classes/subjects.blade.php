@@ -32,16 +32,21 @@
 			  			</tr>
 			  		</thead>
 					@foreach($subjects[$period->id] as $subject)
-					<tr>
-					<td>
-						{!! Form::checkbox('subjects[]', $subject->id, in_array($subject->id, $class_subjects)) !!}
-					</td>
-					<td>	
-						{{$subject['name']}}
-					</td>
-					<td>
-						{!! Form::select('teachers['.$subject->id.']', $teachers, isset($subjects_teachers[$subject->id]) ? $subjects_teachers[$subject->id] : null, ['class' => 'form-control', 'placeholder' => 'Please select...']) !!}
-					</td>
+
+					@if(in_array($subject->id, $class_subjects))
+						<tr>
+					@else
+						<tr class="inactive">
+					@endif
+							<td>
+								{!! Form::checkbox('subjects[]', $subject->id, in_array($subject->id, $class_subjects)) !!}
+							</td>
+							<td>	
+								{{$subject['name']}}
+							</td>
+							<td>
+								{!! Form::select('teachers['.$subject->id.']', $teachers, isset($subjects_teachers[$subject->id]) ? $subjects_teachers[$subject->id] : null, ['class' => 'form-control', 'placeholder' => 'Please select...']) !!}
+							</td>
 					</tr>
 					@endforeach
 			    </table>

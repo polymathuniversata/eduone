@@ -44,9 +44,7 @@
     			<th><input type="checkbox"></th>
     			<th>{!! trans('app.name') !!}</th>
     			<th>{!! trans('app.program') !!}</th>
-                <th>{{ trans('app.active_subjects') }}</th>
-                <th>{{ trans('app.student_count') }}</th>
-    			<th>{!! trans('app.teachers') !!}</th>
+                <th>{{ trans('app.users_count') }}</th>
     			<th>{!! trans('app.status') !!}</th>
     			<th>{!! trans('app.started') !!}</th>
                 <th>{{ trans('app.finished') }}</th>
@@ -58,11 +56,7 @@
     			<td><input type="checkbox"></td>
     			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
     			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
-    			<td>
-                    
-                </td>
-                <td>0</td>
-                <td>0</td>
+                <td><span class="badge">{{ $class->users_count }}</span></td>
     			<td>{{ $class->status }}</td>
     			<td>{{ $class->started_at }}</td>
                 <td>{{ $class->finished_at }}</td>

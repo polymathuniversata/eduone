@@ -143,7 +143,7 @@ class ClassController extends Controller
         $class_subjects = $class->subjects->pluck('id')->toArray();
         
         $subjects_teachers = $class->getSubjectsTeachers();
-        //dd($subjects_teachers);
+
         return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects', 'teachers', 'subjects_teachers'));
     }
 
@@ -163,6 +163,7 @@ class ClassController extends Controller
         try {
             $class->update($data);
 
+            // Save Subjects and assigned Teachers
             if ( ! empty($data['subjects'])) {
                 $pivot      = [];
                 $teachers   = $data['teachers'];
@@ -183,6 +184,7 @@ class ClassController extends Controller
                 $message = 'Class subjects was updated successfully!';
             }
 
+            // Save Users
             if ( ! empty($data['users'])) {
 
                 // Parse $data['users'] to properly id to add to class

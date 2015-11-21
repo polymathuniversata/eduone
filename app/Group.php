@@ -10,12 +10,12 @@ class Group extends Model
     use CanUseCreator, CanUseMeta;
 	
     protected $fillable = [
-    	'name', 'slug', 'description', 'email', 'student_count', 'program_id', 
+    	'name', 'slug', 'description', 'email', 'users_count', 'program_id', 
     	'branch_id', 'creator', 'started_at', 'finished_at'
     ];
 
     protected $casts = [
-    	'student_count' => 'integer',
+    	'users_count' => 'integer',
     	'program_id' 	=> 'integer',
     	'branch_id' 	=> 'integer',
     	'creator_id' 	=> 'integer'
@@ -82,7 +82,9 @@ class Group extends Model
             $creator_id = isset(\Auth::user()->id) ? \Auth::user()->id : 1;
 
             // Attach current user with pivot data
-            return $this->users()->attach($input, compact('role', 'creator_id'));
+            $this->users()->attach($input, compact('role', 'creator_id'));
+            $this->users_count++;
+            return $this->save();
         }
 
         // If input is instance of App\User, then add user id

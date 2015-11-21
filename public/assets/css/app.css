@@ -341,3 +341,7 @@ fieldset label{
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
 	border-top: 3px solid #e74c3c;
 }
+tr.inactive > td{
+	color: #888;
+	background: #eee
+}
