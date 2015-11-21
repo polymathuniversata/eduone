@@ -1,34 +1,34 @@
 @extends('master')
-@section('main_title')
-	{!! trans('app.programs') !!}
-@endsection
+@section('title', trans('app.programs'))
+@section('main_title', trans('app.programs'))
 @section('main_button')
  <a href="/programs/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
 @endsection
+
 @section('content')
 
 <div class="panel panel-default table-responsive">
 	<table class="table table-hover">
 		<thead class="panel-heading">
 			<tr>
-				<th>{!! trans('app.name') !!}</th>
-				<th>{!! trans('app.slug') !!}</th>
+				<th>{{ trans('app.name') }}</th>
+				<th>{{ trans('app.slug') }}</th>
 				<th>{{ trans('app.creator') }}</th>
-				<th>{!! trans('app.student_count') !!}</th>
+				<th>{{ trans('app.student_count') }}</th>
 			</tr>
 		</thead>
 		<tbody>
 			@if (count($programs) > 0)
 				@foreach ($programs as $program)
 				<tr>
-					<td class="table-title"><a href="/programs/{!! $program->id !!}/edit">{!! $program->name !!}</a></td>
-					<td>{!! $program->slug !!}</td>
+					<td class="table-title"><a href="/programs/{{ $program->id }}/edit">{{ $program->name }}</a></td>
+					<td>{{ $program->slug }}</td>
 					<td>
 						@if ($program->creator)
 						{{ $program->creator->getFullName() }}
 						@endif
 					</td>
-					<td>{!! count( $program->students ) !!}</td>
+					<td>{{ count( $program->students ) }}</td>
 				</tr>
 				@endforeach
 			@else

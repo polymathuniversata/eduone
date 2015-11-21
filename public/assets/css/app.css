@@ -10,11 +10,11 @@ h1,h2,h3{ font-weight: normal; }
 .modal-content{
 	border-radius: 3px;
 }
-.modal-header{
+.modal-header, .panel-heading{
 	background: #f1f1f1;
 	padding: 10px 13px;
 }
-.modal-title{
+.modal-title, .panel-heading{
 	font-weight: bold;
 	font-size: 14px;
 }
@@ -234,7 +234,7 @@ fieldset label{
 	color: #333;
 }
 .panel-group{
-	padding: 30px;
+	padding: 20px;
 }
 .panel-group.sortable li{
 	max-width: 500px;
@@ -324,4 +324,12 @@ fieldset label{
 
 .panel-subject{
 	margin-left: 20px;
+}
+
+#subject-orders{
+
+}
+
+#subject-orders header.panel-heading{
+	height: 50px;
 }

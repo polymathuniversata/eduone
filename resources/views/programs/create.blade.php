@@ -12,7 +12,7 @@
 </script>
 
 <div class="row row-md" ng-controller="ProgramController" ng-init="init()">
-	{!! Form::open(['url' => 'programs', 'class' => 'form-horizontal']) !!}
+	{!! Form::open(['url' => 'programs']) !!}
 	@include('programs/_partials/form')
 	{!! Form::close() !!}
 </div><!--.row-->
