@@ -4,11 +4,9 @@
 @section('main_title', $class->name)
 @section('content')
 
-<ul class="nav nav-tabs">
-    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}' aria-controls="basic"><i class="glyphicon glyphicon-list-alt"></i> Basic Info</a></li>
-    <li role="presentation"><a href='{!! url("/classes/$class->id") !!}/members' aria-controls="members"><i class="fa fa-users"></i> Members</a></li>
-    <li role="presentation" class="active"><a href='{!! url("/classes/$class->id") !!}/subjects' aria-controls="subjects"><i class="fa fa-book"></i> Subjects</a></li>
-</ul>
+
+@include('classes/_partials/tabs', ['active' => 3])
+
 
 <div class="row" ng-controller="ClassController">
 	{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT', 'class' => 'col-md-6']) !!}

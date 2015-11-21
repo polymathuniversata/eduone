@@ -88,4 +88,6 @@ return [
  	'new_program' => 'New Program',
  	'started'	=> 'Started',
  	'finished' => 'Finished',
+ 	'all_classes' => 'All Classes',
+ 	'users_count' => 'Users Count',
  ];
