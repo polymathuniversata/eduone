@@ -81,13 +81,11 @@
 		$scope.init = function() {
 			if (typeof window.subjects != 'undefined' && angular.isObject(window.subjects))
 				$scope.subjects 	= window.subjects;
-
+			
 			if (typeof window.periods != 'undefined' && angular.isArray(window.periods))
 				$scope.periods 			= window.periods;
 
 			$scope.setAlreadyAddedSubject();
-
-			console.log($scope.alreadyAddedSubject);
 		};
 
 		$scope.setActiveField = function (field) {
@@ -125,7 +123,7 @@
 		$scope.setAlreadyAddedSubject = function() {
 			angular.forEach($scope.periods, function(period) {
 				if (period.type === 'subject')
-					$scope.alreadyAddedSubject.push(period.id);
+					$scope.alreadyAddedSubject.push(period.id + '');
 			});
 		};
 	});

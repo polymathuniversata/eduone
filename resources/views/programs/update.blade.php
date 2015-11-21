@@ -9,7 +9,7 @@
 		periods = {!! json_encode($periods) !!};
 </script>
 
-<div class="row" ng-controller="ProgramController" ng-init="init()">
+<div class="row row-md" ng-controller="ProgramController" ng-init="init()">
 	{!! Form::model($program, ['route' => ['programs.update', $program->id], 'method' => 'PUT']) !!}
 	@include('programs/_partials/form')
 	{!! Form::close() !!}

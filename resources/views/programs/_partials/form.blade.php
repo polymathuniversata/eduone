@@ -9,6 +9,7 @@
 		<div class="panel-heading">Subjects</div>
 		<div class="panel-body">
 			<p class="text-muted">Click to Add</p>
+			
 			<div class="checkbox-list" id="subjects">
 				<div class="checkbox" ng-repeat="(key, value) in subjects" ng-hide="alreadyAddedSubject.indexOf(key)!=-1">
 					<label>
@@ -39,7 +40,8 @@
 			
 		</header>
 		<div class="panel-body">
-			<p class="text-muted">Drag subjects and periods to the order you want</p>
+			<p class="text-muted" ng-show="alreadyAddedSubject.length > 0">Drag subjects and periods to the order you want</p>
+			<p class="text-muted" ng-show="alreadyAddedSubject.length == 0">Get started by adding subjects and periods from the right panes</p>
 
 			<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="periods">
 				<li ng-repeat="item in periods track by $index" ng-click="setActiveField(item)">
