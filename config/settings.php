@@ -284,6 +284,14 @@ return [
 		'vi'	=> 'Vietnamese'
 	],
 
-	'calculate_formula' => ['Weighted Arithmetic Mean', 'Percent']
+	'calculate_formula' => ['Weighted Arithmetic Mean', 'Percent'],
 	
+	'room_types' => [
+		'classroom' 		=> 'Classroom',
+		'classroom_lab'		=> 'Lab',
+		'hall'				=> 'Hall',
+		'dorm_student_male' => 'Dorm Student Male', 
+		'dorm_student_female' 	=> 'Dorm Student Female', 
+		'dorm_staff' 			=> 'Dorm Staff', 
+	]
 ];

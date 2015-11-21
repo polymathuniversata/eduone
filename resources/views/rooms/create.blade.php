@@ -1,11 +1,9 @@
 @extends('master')
 
 @section('title', trans('app.create_new_room'))
-@section('content')
+@section('main_title', trans('app.create_new_room'))
 
-<header>
-	<h1>{!! trans('app.create_new_room') !!}</h1>
-</header>
+@section('content')
 
 {!! Form::open(['url' => 'rooms', 'class' => 'form-horizontal']) !!}
 

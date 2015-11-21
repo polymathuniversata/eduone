@@ -79,7 +79,6 @@
     </div>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">{!! trans('app.mass_update') !!}</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
     <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>

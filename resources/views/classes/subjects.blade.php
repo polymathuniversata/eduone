@@ -40,7 +40,7 @@
 						{{$subject['name']}}
 					</td>
 					<td>
-						{!! Form::select('teachers['.$subject->id.']', $teachers, null, ['class' => 'form-control']) !!}
+						{!! Form::select('teachers['.$subject->id.']', $teachers, null, ['class' => 'form-control', 'placeholder' => 'Please select...']) !!}
 					</td>
 					</tr>
 					@endforeach
