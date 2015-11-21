@@ -84,5 +84,6 @@ return [
  	'create_new_student' => 'Create New Student',
  	'cancel'	=> 'Cancel',
  	'type'	=> 'Type',
- 	'capacity' => 'Capacity'
+ 	'capacity' => 'Capacity',
+ 	'new_program' => 'New Program'
  ];

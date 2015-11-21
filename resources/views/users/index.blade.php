@@ -44,12 +44,12 @@
     	<thead class="panel-heading">
     		<tr>
     			<th><input type="checkbox"></th>
-    			<th>{!! trans('app.name') !!}</th>
-    			<th>{!! trans('app.email') !!}</th>
-    			<th>{!! trans('app.role') !!}</th>
-    			<th>{!! trans('app.status') !!}</th>
-    			<th>{!! trans('app.created_at') !!}</th>
-    			<th>{!! trans('app.login_as') !!}</th>
+    			<th>{{ trans('app.name') }}</th>
+    			<th>{{ trans('app.email') }}</th>
+    			<th>{{ trans('app.role') }}</th>
+    			<th>{{ trans('app.status') }}</th>
+    			<th>{{ trans('app.created_at') }}</th>
+    			<th>{{ trans('app.login_as') }}</th>
     		</tr>
     	</thead>
 

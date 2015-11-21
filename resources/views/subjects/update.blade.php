@@ -1,11 +1,8 @@
 @extends('master')
 
 @section('title', trans('app.update_subject'))
+@section('main_title', trans('app.update_subject'))
 @section('content')
-
-<header>
-	<h1>{!! trans('app.update_subject') !!}</h1>
-</header>
 
 <script type="text/javascript">
 	var grades 	= {!! $subject->grades_plan !!},

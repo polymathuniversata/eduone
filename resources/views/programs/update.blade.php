@@ -1,11 +1,8 @@
 @extends('master')
 
 @section('title', trans('app.program_designer'))
+@section('main_title', trans('app.program_designer'))
 @section('content')
-
-<header>
-	<h1>{!! trans('app.program_designer') !!}</h1>
-</header>
 
 <script type="text/javascript">
 	var subjects = {!! json_encode($subjects) !!},

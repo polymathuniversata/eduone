@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->roles       = Role::lists('name', 'id')->toArray();
+        $this->roles       = Role::orderBy('id')->lists('name', 'id')->toArray();
 
         $this->branches    = Branch::lists('name', 'id')->toArray();
     }
