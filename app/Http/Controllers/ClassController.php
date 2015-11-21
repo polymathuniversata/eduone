@@ -142,6 +142,7 @@ class ClassController extends Controller
 
         $class_subjects = $class->subjects->pluck('id')->toArray();
         
+
         return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects', 'teachers'));
     }
 

@@ -183,14 +183,31 @@ class Group extends Model
         return $this->getUsersByRole(4);
     }
 
-    public function getTeacherBySubject($subject_id)
+    public function getSubjectsTeachers()
     {
-        
+        return \DB::table('classes_subjects')->whereClassId($this->id)->lists('user_id', 'subject_id');
     }
 
-    public function getSubjectByTeacher()
+    public function getTeacherBySubject($subject_id)
     {
+        $subjects_teachers = $this->getSubjectsTeachers();
 
+        if (isset($subjects_teachers[$subject_id]))
+            return $subjects_teachers[$subject_id];
+
+        return null;
+    }
+
+    public function getSubjectsByTeacher($teacher_id)
+    {
+        $subjects_teachers = $this->getSubjectsTeachers();
+
+        $teacher_subjects = array_flip_deep($subjects_teachers);
+
+        if (isset($teacher_subjects[$teacher_id]))
+            return $teacher_subjects[$teacher_id];
+
+        return null;
     }
 
     public function program()
