@@ -24,6 +24,10 @@ class UserController extends Controller
      */
     protected $branches = [];
 
+    /**
+     * Available Programs
+     * @var array
+     */
     protected $programs = [];
 
 
@@ -110,8 +114,8 @@ class UserController extends Controller
         $user_programs = $user->programs->lists('id')->toArray();
 
         $permissions= config('settings.permissions');
-
-        return view('users.update', [
+        
+        $pass_to_view = [
             'user'          => $user,
             'roles'         => $this->roles,
             'branches'      => $this->branches,
@@ -119,7 +123,17 @@ class UserController extends Controller
             'user_programs' => $user_programs,
             'permissions'   => $permissions,
             'programs'      => $this->programs
-        ]);
+        ];
+
+        if ($user->isTeacher()) {
+            $subjects         = \App\Subject::lists('name', 'id')->toArray();
+            $teacher_subjects = $user->subjects->lists('id')->toArray(); 
+
+            $pass_to_view['subjects'] = $subjects;
+        }
+
+
+        return view('users.update', $pass_to_view);
     }
 
     /**
@@ -150,6 +164,9 @@ class UserController extends Controller
         if ( ! empty($data['programs']))
             $programs = (array) $data['programs'];
 
+        if ( ! empty($data['subjects']))
+            $subjects = (array) $data['subjects'];
+
         try {
             $user->update($data);
 
@@ -158,6 +175,9 @@ class UserController extends Controller
 
             if ( ! empty($data['programs']))
                 $user->programs()->sync($programs);
+
+             if ( ! empty($data['subjects']))
+                $user->subjects()->sync($subjects);
 
             return redirect('users/' . $user->id )
                 ->with('message', 'User was updated successfully!');

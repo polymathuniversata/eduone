@@ -8,27 +8,30 @@
 	<div class="thumbnail" id="profile-thumbnail">
 		<img src="{{$user->getPhoto()}}" alt="Profile Photo">
 	</div>
-	<h1>{{ $user->first_name }} {{ $user->last_name }}</h1>
+	<h1>{{ $user->getFullName() }}</h1>
 </header>
 
 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'PUT']) !!}
 
 <div class="row">
 	<div class="col-md-12">
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
-	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Contact</a></li>
-	    <li role="presentation"><a href="#permissions" aria-controls="permissions" role="tab" data-toggle="tab">Permissions</a></li>
-	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Meta</a></li>
-	  </ul>
+	  	<!-- Nav tabs -->
+	  	<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Basic Info</a></li>
+		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Contact</a></li>
+		    <li role="presentation"><a href="#permissions" aria-controls="permissions" role="tab" data-toggle="tab">Permissions</a></li>
+		    <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+		    @if ($user->isTeacher())
+		    <li role="presentation"><a href="#subjects" aria-controls="subjects" role="tab" data-toggle="tab">Subjects</a></li>
+			@endif
+	  	</ul>
 
 	  <!-- Tab panes -->
 	  <div class="tab-content col-md-9">
-	    <div role="tabpanel" class="tab-pane active" id="home">
+	    <div role="tabpanel" class="tab-pane active" id="basic">
 	    	<div class="form-group">
-	    		<label for="">{!! trans('app.name') !!}</label>
-	    		{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('app.name')]) !!}
+	    		<label for="">{!! trans('app.user_name') !!}</label>
+	    		{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('app.user_name')]) !!}
 	    	</div>
 
 	    	<div class="form-group">
@@ -153,7 +156,7 @@
 			@endforeach
 		</div>
 
-	    <div role="tabpanel" class="tab-pane" id="messages">
+	    <div role="tabpanel" class="tab-pane" id="meta">
 	    	<div class="panel panel-default">
 			  <div class="panel-body">
 			    <div class="row">
@@ -170,6 +173,22 @@
 			</div>
 			<button type="button" class="btn btn-sm btn-default">{!! trans('app.add_meta') !!}</button>
 	    </div>
+		@if ($user->isTeacher())
+	    <div role="tabpanel" class="tab-pane" id="subjects">
+	    	<h4>Subjects</h4>
+	    	<p class="text-muted">Select subjects which <strong>{{$user->getFullName()}}</strong> can teach. 
+	    	If none of them selected, that means current teacher can teaches all subject.</p>
+			
+			<div class="checkboxes">
+		    	@foreach($subjects as $id => $name)
+				<label class="checkbox label-thin subject-label">
+					{!! Form::checkbox('subjects[]', $id ) !!}
+					{{$name}}
+				</label>
+		    	@endforeach
+	    	</div>
+	    </div>
+	    @endif
 	  </div>
 
 	</div>

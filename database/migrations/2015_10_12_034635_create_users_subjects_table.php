@@ -9,7 +9,7 @@ class CreateUsersSubjectsTable extends Migration
     {
         Schema::create('users_subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
+            $table->integer('user_id');
             $table->integer('subject_id');
             $table->integer('class_id')->nullable();
             $table->text('attendance_detail')->nullable();

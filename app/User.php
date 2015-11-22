@@ -72,6 +72,13 @@ class User extends Model implements AuthenticatableContract,
                     ->withTimestamps();
     }
 
+    public function subjects()
+    {
+        return $this->belongsToMany('App\Subject', 'users_subjects')
+                    ->withPivot('class_id', 'attendance_detail', 'grade_detail', 'status', 'creator_id', 'branch_id')
+                    ->withTimestamps();
+    }
+
     /**
      * Check if user belongs to Role. Role can be slug or id
      * 
@@ -105,6 +112,11 @@ class User extends Model implements AuthenticatableContract,
     public function isSuperAdmin()
     {
         return $this->isRole(1);
+    }
+
+     public function isAdmin()
+    {
+        return $this->isRole(2);
     }
 
     /**

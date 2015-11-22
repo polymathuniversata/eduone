@@ -9,7 +9,7 @@
 <div class="row" ng-controller="MemberController">
 	<div class="col-md-7 members">
 	
-		<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Add</button>
+		<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Invite</button>
 
 		<div class="row">
 			@foreach ($class->users as $user)
@@ -62,7 +62,7 @@
 
 		    <header class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Add People to Class</h4>
+		        <h4 class="modal-title" id="myModalLabel">Invite People to Class</h4>
 		    </header>
 		    <div class="modal-body">
 		        <div class="alert alert-warning">
@@ -72,7 +72,7 @@
 		    </div>
 	      	<footer class="modal-footer">
 	        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-	        	<button type="submit" class="btn btn-primary btn-sm">Add</button>
+	        	<button type="submit" class="btn btn-primary btn-sm">Invite</button>
 	      	</footer>
     		
     	</div>
