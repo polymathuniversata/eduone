@@ -44,7 +44,7 @@
 		
 		<div class="form-group">
 			<label>{!! trans('app.branches') !!}</label>
-				{!! Form::select('branches', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
+			{!! Form::select('branches[]', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
 		</div>
 		
 		<div class="form-group" ng-show="role_id == 4">

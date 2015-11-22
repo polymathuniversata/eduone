@@ -55,7 +55,9 @@ class User extends Model implements AuthenticatableContract,
 
     public function branches()
     {
-        return $this->belongsToMany('App\Branch', 'users_branches');
+        return $this->belongsToMany('App\Branch', 'users_branches')
+                    ->withPivot('creator_id')
+                    ->withTimestamps();
     }
 
     public function classes()

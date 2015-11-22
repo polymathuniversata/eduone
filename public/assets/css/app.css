@@ -229,10 +229,16 @@ fieldset label{
 	font-size: 13px;
 	color: #555;
 }
+
 .table-title, .table-title a{
 	font-weight: bold;
 	color: #333;
 }
+
+.table-title img{
+	margin-right: 8px;
+}
+
 .panel-group{
 	padding: 20px;
 }

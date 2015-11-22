@@ -58,7 +58,9 @@
     			<th><input type="checkbox"></th>
     			<th>{{ trans('app.name') }}</th>
     			<th>{{ trans('app.email') }}</th>
+                 @if( ! isset($request->role))
     			<th>{{ trans('app.role') }}</th>
+                @endif
     			<th>{{ trans('app.status') }}</th>
     			<th>{{ trans('app.created_at') }}</th>
     			<th>{{ trans('app.login_as') }}</th>
@@ -69,10 +71,14 @@
     		@foreach ($users as $user)
     		<tr>
     			<td><input type="checkbox" disabled></td>
-    			<td class="table-title"><a href="/users/{{$user->id}}">{!! $user->getFullName() !!}</a></td>
+    			<td class="table-title"> <img src="{!! $user->getPhoto() !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
+                    {{ $user->getFullName() }}</a>
+                </td>
     			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
+                @if ( ! isset($request->role))
     			<td>{{ $user->role->name }}</td>
-    			<td>{!! $user->status !!}</td>
+    			@endif
+                <td>{!! $user->status !!}</td>
     			<td>{!! $user->created_at !!}</td>
     			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
     		</tr>

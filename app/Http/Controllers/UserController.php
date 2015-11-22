@@ -74,11 +74,11 @@ class UserController extends Controller
         
         if (! empty($data['branches']))
             $branches = (array) $data['branches'];
-    
+        
         try {
             $user = User::create($data);
             
-            if (! empty($data['branches']))
+            if (! empty($branches))
                 $user->branches()->sync($branches);
 
             return redirect('users/' . $user->id )
@@ -98,10 +98,10 @@ class UserController extends Controller
     {
         $roles      = $this->roles;
         $branches   = $this->branches;
-
+        $user_branches = $user->branches->lists('id')->toArray();
         $permissions= config('settings.permissions');
 
-        return view('users.update', compact('user', 'roles', 'branches', 'permissions'));
+        return view('users.update', compact('user', 'roles', 'branches', 'permissions', 'user_branches'));
     }
 
     /**
@@ -125,10 +125,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->all();        
+
         $data = array_filter($data);
+
+        if (! empty($data['branches']))
+            $branches = (array) $data['branches'];
 
         try {
             $user->update($data);
+
+            if (! empty($branches))
+                $user->branches()->sync($branches);
 
             return redirect('users/' . $user->id )
                 ->with('message', 'User was updated successfully!');
