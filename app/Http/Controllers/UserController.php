@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\Branch;
+use App\Program;
 
 class UserController extends Controller
 {
@@ -23,11 +24,16 @@ class UserController extends Controller
      */
     protected $branches = [];
 
+    protected $programs = [];
+
+
     public function __construct()
     {
         $this->roles       = Role::orderBy('id')->lists('name', 'id')->toArray();
 
         $this->branches    = Branch::lists('name', 'id')->toArray();
+
+        $this->programs    = Program::lists('name', 'id')->toArray();
     }
 
     /**
@@ -43,10 +49,12 @@ class UserController extends Controller
                             ->orderBy('created_at')
                             ->paginate(50);
 
-        $roles      = $this->roles;
-        $branches   = $this->branches;
-
-        return view('users.index', compact('users', 'roles', 'branches', 'request'));
+        return view('users.index', [
+            'users'     => $users,
+            'roles'     => $this->roles,
+            'branches'  => $this->branches,
+            'request'   => $request
+        ]);
     }
 
     /**
@@ -56,10 +64,12 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $roles      = $this->roles;
-        $branches   = $this->branches;
-
-        return view('users.create', compact('roles', 'branches', 'request'));
+        return view('users.create', [
+            'roles'     => $this->roles,
+            'branches'  => $this->branches,
+            'programs'  => $this->programs,
+            'request'   => $request
+        ]);
     }
 
     /**
@@ -96,12 +106,20 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $roles      = $this->roles;
-        $branches   = $this->branches;
         $user_branches = $user->branches->lists('id')->toArray();
+        $user_programs = $user->programs->lists('id')->toArray();
+
         $permissions= config('settings.permissions');
 
-        return view('users.update', compact('user', 'roles', 'branches', 'permissions', 'user_branches'));
+        return view('users.update', [
+            'user'          => $user,
+            'roles'         => $this->roles,
+            'branches'      => $this->branches,
+            'user_branches' => $user_branches,
+            'user_programs' => $user_programs,
+            'permissions'   => $permissions,
+            'programs'      => $this->programs
+        ]);
     }
 
     /**
@@ -124,21 +142,26 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = $request->all();        
+        $data = array_filter($request->all());
 
-        $data = array_filter($data);
-
-        if (! empty($data['branches']))
+        if ( ! empty($data['branches']))
             $branches = (array) $data['branches'];
+
+        if ( ! empty($data['programs']))
+            $programs = (array) $data['programs'];
 
         try {
             $user->update($data);
 
-            if (! empty($branches))
+            if ( ! empty($data['branches']))
                 $user->branches()->sync($branches);
+
+            if ( ! empty($data['programs']))
+                $user->programs()->sync($programs);
 
             return redirect('users/' . $user->id )
                 ->with('message', 'User was updated successfully!');
+
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }

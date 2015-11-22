@@ -67,8 +67,46 @@ class User extends Model implements AuthenticatableContract,
 
     public function programs()
     {
-        return $this->belongsToMany('App\Program', 'users_programs');
+        return $this->belongsToMany('App\Program', 'users_programs')
+                    ->withPivot('status', 'creator_id')
+                    ->withTimestamps();
     }
+
+    /**
+     * Check if user belongs to Role. Role can be slug or id
+     * 
+     * @param  Integer/String  $role Role ID or Slug
+     * 
+     * @return boolean
+     */
+    public function isRole($role)
+    {
+        if (is_numeric($role))
+            return $this->role_id == $role;
+
+        return Role::whereSlug($role)->exists();
+    }
+
+    /**
+     * Check if current user is student
+     * 
+     * @return boolean
+     */
+    public function isStudent()
+    {
+        return $this->isRole(4);
+    }
+
+    public function isTeacher()
+    {
+        return $this->isRole(3);
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->isRole(1);
+    }
+
     /**
      * If user full name is set, return his full name. Otherwise, return username
      * 

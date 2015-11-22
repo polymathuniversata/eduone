@@ -57,7 +57,6 @@
 	    		{!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('app.password_confirmation')]) !!}
 	    	</div>
 
-
 			<div class="form-group">
 				<label>{!! trans('app.branches') !!}</label>
 				{!! Form::select('branches[]', $branches, $user_branches, [
@@ -65,6 +64,17 @@
 					'multiple' => 'multiple'
 				]) !!}
 			</div>
+			
+			@if ($user->isStudent())
+			<div class="form-group">
+				{!! Form::label('programs', 'Programs') !!}
+
+				{!! Form::select('programs[]', $programs, $user_programs, [
+					'class' => 'form-control', 
+					'multiple' => 'multiple'
+				]) !!}
+			</div>
+			@endif
 
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="profile">
