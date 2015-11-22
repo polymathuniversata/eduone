@@ -3,11 +3,23 @@
 @section('title', trans('app.all_users'))
 
 @section('main_title')
-    {!! trans('app.users') !!}
+    @if(isset($request->role))
+    {{ $roles[$request->role] }}
+    @else
+    {{ trans('app.users') }}
+    @endif
+
+    <span class="badge">
+        {{$users->total()}}
+    </span>
 @endsection
 
 @section('main_button')
+    @if(isset($request->role))
+    <a href="/users/create/?role={{$request->role}}" role="button" class="btn btn-default">Add New</a>
+    @else
     <a href="/users/create" role="button" class="btn btn-default">Add New</a>
+    @endif
 @endsection
 
 @section('search_box')

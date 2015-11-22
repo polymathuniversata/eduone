@@ -18,10 +18,10 @@ return [
 	[
 		'icon' => 'fa fa-user',
 		'title' => 'Students',
-		'url'	=> 'students',
+		'url'	=> 'users?role=4',
 		'childs' => [
-			'students' 			=> 'All Students',
-			'students/create' 	=> 'Add New Student',
+			'users?role=4' 			=> 'All Students',
+			'users/create?role_id=4' 	=> 'Add New Student',
 			'users/import' 		=> 'Import'
 		]
 	],

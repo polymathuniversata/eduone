@@ -54,12 +54,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $roles      = $this->roles;
         $branches   = $this->branches;
 
-        return view('users.create', compact('roles', 'branches'));
+        return view('users.create', compact('roles', 'branches', 'request'));
     }
 
     /**

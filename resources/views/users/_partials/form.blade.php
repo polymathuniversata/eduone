@@ -14,7 +14,11 @@
 		@if (isset($roles))
 		<div class="form-group">
 			<label>{!! trans('app.role') !!}</label>
-			{!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'placeholder' => 'Please select', 'ng-model' => 'role_id'] ) !!}
+			{!! Form::select('role_id', $roles, isset($request->role) ? $request->role : null, [
+				'class' => 'form-control', 
+				'placeholder' => 'Please select', 
+				] ) 
+			!!}
 		</div>
 		@endif
 

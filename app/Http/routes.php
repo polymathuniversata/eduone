@@ -33,15 +33,16 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::resource('branches', 'BranchController');
 Route::resource('settings', 'SettingController');
-Route::resource('users', 'UserController');
-Route::resource('parents', 'UserController');
 Route::resource('rooms', 'RoomController');
 Route::resource('roles', 'RoleController');
 Route::resource('classes', 'ClassController');
 Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');
-Route::resource('students', 'StudentController');
-Route::resource('teachers', 'TeacherController');
+
+Route::resource('users', 'UserController');
+Route::resource('parents', 'UserController');
+Route::resource('students', 'UserController');
+Route::resource('teachers', 'UserController');
 
 // Route::get('programs/periods/{id}', 'ProgramController@periods');
 Route::get('classes/{id}/members', 'ClassController@members');
