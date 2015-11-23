@@ -109,12 +109,17 @@ class User extends Model implements AuthenticatableContract,
         return $this->isRole(3);
     }
 
+    public function isParent()
+    {
+        return $this->isRole(5);
+    }
+
     public function isSuperAdmin()
     {
         return $this->isRole(1);
     }
 
-     public function isAdmin()
+    public function isAdmin()
     {
         return $this->isRole(2);
     }

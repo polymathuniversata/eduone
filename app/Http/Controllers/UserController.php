@@ -108,7 +108,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
         $user_branches = $user->branches->lists('id')->toArray();
         $user_programs = $user->programs->lists('id')->toArray();
@@ -122,7 +122,8 @@ class UserController extends Controller
             'user_branches' => $user_branches,
             'user_programs' => $user_programs,
             'permissions'   => $permissions,
-            'programs'      => $this->programs
+            'programs'      => $this->programs,
+            'request'       => $request
         ];
 
         if ($user->isTeacher()) {

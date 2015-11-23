@@ -9,12 +9,13 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('caption');
-            $table->text('content');
-            $table->string('mime_type', 50);
             $table->string('url');
-            $table->integer('creator');
+            $table->string('name')->nullable();
+            $table->string('caption')->nullable();
+            $table->text('content')->nullable();
+            $table->string('mime_type', 50)->nullable();
+            $table->string('alt_text')->nullable();
+            $table->integer('creator')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

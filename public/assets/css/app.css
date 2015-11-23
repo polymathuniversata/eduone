@@ -213,14 +213,6 @@ fieldset label{
 	padding: 20px;
 }
 
-#profile-thumbnail{
-	width: 150px;
-	height: 150px;
-}
-#profile-thumbnail img {
-	width: 100%;
-	height: 100%;
-}
 .table th{
 	font-size: 13px;
 	color: #333;
@@ -350,4 +342,62 @@ fieldset label{
 tr.inactive > td{
 	color: #888;
 	background: #eee
+}
+
+#profile-picture{
+	width: 150px;
+	height: 150px;
+}
+
+#profile-picture img {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px 5px 0 0;
+}
+
+#profile-picture{
+	position: relative;
+}
+
+#update-profile-picture{
+	width: 100%;
+	padding: 5px;
+	height: 50px;
+	background: rgba(0, 0, 0, .5);
+	margin-top: -50px;
+	z-index: 99;
+	position: absolute;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	display: none;
+	transition: opacity 1s ease-out;
+}
+
+#update-profile-picture i{
+	font-size: 20px;
+}
+
+#profile-picture:hover #update-profile-picture{
+	display: block;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }

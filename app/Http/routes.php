@@ -40,9 +40,7 @@ Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');
 
 Route::resource('users', 'UserController');
-Route::resource('parents', 'UserController');
-Route::resource('students', 'UserController');
-Route::resource('teachers', 'UserController');
+Route::resource('media', 'MediaController');
 
 // Route::get('programs/periods/{id}', 'ProgramController@periods');
 Route::get('classes/{id}/members', 'ClassController@members');

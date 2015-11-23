@@ -5,9 +5,14 @@
 @section('content')
 
 <header>
-	<div class="thumbnail" id="profile-thumbnail">
-		<img src="{{$user->getPhoto()}}" alt="Profile Photo">
+	<div id="profile-picture">
+		<img src="{{$user->getPhoto()}}" alt="Profile Picture">
+	
+		<div role="button" id="update-profile-picture" data-toggle="modal" data-target="#update-profile-picture-modal">
+			<i class="fa fa-camera-retro"></i> Update Profile Picture
+		</div>
 	</div>
+	
 	<h1>{{ $user->getFullName() }}</h1>
 </header>
 
@@ -15,181 +20,27 @@
 
 <div class="row">
 	<div class="col-md-12">
+
 	  	<!-- Nav tabs -->
 	  	<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Basic Info</a></li>
-		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Contact</a></li>
-		    <li role="presentation"><a href="#permissions" aria-controls="permissions" role="tab" data-toggle="tab">Permissions</a></li>
-		    <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+		    <li role="presentation" class="{{ $request->tab === 'account' ? 'active' : ''  }}"><a href="?tab=account">Account Settings</a></li>
+		    <li role="presentation" class="{{ $request->tab === 'profile' ? 'active' : ''  }}"><a href="?tab=profile">Profile</a></li>
+		    <li role="presentation" class="{{ $request->tab === 'contact' ? 'active' : ''  }}"><a href="?tab=contact">Contact</a></li>
+		    @if ($user->isStudent() || $user->isParent())
+		    <li role="presentation" class="{{ $request->tab === 'family' ? 'active' : ''  }}"><a href="?tab=family">Family &amp; Relationship</a></li>
+		    @endif
+		    <li role="presentation" class="{{ $request->tab === 'permissions' ? 'active' : ''  }}"><a href="?tab=permissions">Permissions</a></li>
 		    @if ($user->isTeacher())
-		    <li role="presentation"><a href="#subjects" aria-controls="subjects" role="tab" data-toggle="tab">Subjects</a></li>
+		    <li role="presentation" class="{{ $request->tab === 'subjects' ? 'active' : ''  }}"><a href="?tab=subjects">Subjects</a></li>
 			@endif
 	  	</ul>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content col-md-9">
-	    <div role="tabpanel" class="tab-pane active" id="basic">
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.user_name') !!}</label>
-	    		{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('app.user_name')]) !!}
-	    	</div>
-
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.first_name') !!}</label>
-	    		{!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('app.first_name')]) !!}
-	    	</div>
-
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.last_name') !!}</label>
-	    		{!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('app.last_name')]) !!}
-	    	</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.role') !!}</label>
-				{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
-			</div>
-
-
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.password') !!}</label>
-	    		{!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('app.password')]) !!}
-	    	</div>
-
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.password_confirmation') !!}</label>
-	    		{!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('app.password_confirmation')]) !!}
-	    	</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.branches') !!}</label>
-				{!! Form::select('branches[]', $branches, $user_branches, [
-					'class' => 'form-control', 
-					'multiple' => 'multiple'
-				]) !!}
-			</div>
-			
-			@if ($user->isStudent())
-			<div class="form-group">
-				{!! Form::label('programs', 'Programs') !!}
-
-				{!! Form::select('programs[]', $programs, $user_programs, [
-					'class' => 'form-control', 
-					'multiple' => 'multiple'
-				]) !!}
-			</div>
+	  	<!-- Tab panes -->
+	  	<div class="col-md-9">
+			@if(isset($request->tab) && in_array($request->tab, ['account', 'profile', 'contact', 'permissions', 'subjects', 'meta']))
+				@include('users/_partials/' . $request->tab)
 			@endif
-
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="profile">
-	    	<div class="form-group">
-	    		<label for="">{!! trans('app.email') !!}</label>
-	    		{!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => trans('app.email')]) !!}
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<label>{!! trans('app.phone') !!}</label>
-				{!! Form::tel('phone', null, ['class' => 'form-control', 'placeholder' => trans('app.phone') ]) !!}
-			</div>
-			
-			<div class="form-group">
-				<label>{!! trans('app.date_of_birth') !!}</label>
-				{!! Form::date('date_of_birth', null, ['class' => 'form-control', 'placeholder' => trans('app.date_of_birth') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.gender') !!}</label>
-				{!! Form::select('gender', config('settings.genders'), null, ['class' => 'form-control'] ) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.id_code_or_passport') !!}</label>
-				{!! Form::text('id_code', null, ['class' => 'form-control', 'placeholder' => trans('app.id_code_or_passport') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.roll_no') !!}</label>
-				{!! Form::text('roll_no', null, ['class' => 'form-control', 'placeholder' => trans('app.roll_no') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.address') !!}</label>
-				{!! Form::textarea('address', null, ['rows' => 3, 'class' => 'form-control', 'placeholder' => trans('app.address') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.state_province') !!}</label>
-				{!! Form::select('state', ['A', 'B', 'C'], null, ['class' => 'form-control', 'placeholder' => trans('app.state_province') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.country') !!}</label>
-				{!! Form::select('country', config('settings.countries'), null, ['class' => 'form-control', 'placeholder' => trans('app.country') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.postcode') !!}</label>
-				{!! Form::number('postcode', null, ['class' => 'form-control', 'placeholder' => trans('app.postcode') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.parents') !!} multiple</label>
-				{!! Form::select('parents', config('settings.countries'), null, ['class' => 'form-control', 'placeholder' => trans('app.parents') ]) !!}
-			</div>
-
-			<div class="form-group">
-				<label>{!! trans('app.profile_picture') !!}</label>
-				{!! Form::file('profile_picture', ['class' => 'form-control']) !!}
-			</div>
-	    </div>
-
-	   	<div role="tabpanel" class="tab-pane" id="permissions">
-			<p>You can override role permission by using user permission here</p>
-			@foreach ($permissions as $group)
-			<header>
-				<h5>{!! $group['group'] !!}</h5>
-				@foreach ($group['permissions'] as $permission)
-				<label class="checkbox-inline label-thin permission-label">
-					{!! Form::checkbox('permissions[' . $permission . ']', 1 ) . ' ' . $permission !!}
-				</label>
-				@endforeach
-			</header>
-			@endforeach
-		</div>
-
-	    <div role="tabpanel" class="tab-pane" id="meta">
-	    	<div class="panel panel-default">
-			  <div class="panel-body">
-			    <div class="row">
-			    	<div class="form-group col-md-6">
-			    		<label for="">{!! trans('app.meta_key') !!}</label>
-			    		<input type="text" class="form-control">
-			    	</div>
-			    	<div class="form-group col-md-6">
-			    		<label for="">{!! trans('app.value') !!}</label>
-			    		<textarea name="meta_value[]" class="form-control" rows="3"></textarea>
-			    	</div>
-			    </div>
-			  </div>
-			</div>
-			<button type="button" class="btn btn-sm btn-default">{!! trans('app.add_meta') !!}</button>
-	    </div>
-		@if ($user->isTeacher())
-	    <div role="tabpanel" class="tab-pane" id="subjects">
-	    	<h4>Subjects</h4>
-	    	<p class="text-muted">Select subjects which <strong>{{$user->getFullName()}}</strong> can teach. 
-	    	If none of them selected, that means current teacher can teaches all subject.</p>
-			
-			<div class="checkboxes">
-		    	@foreach($subjects as $id => $name)
-				<label class="checkbox label-thin subject-label">
-					{!! Form::checkbox('subjects[]', $id ) !!}
-					{{$name}}
-				</label>
-		    	@endforeach
-	    	</div>
-	    </div>
-	    @endif
-	  </div>
+	  	</div>
 
 	</div>
 </div>
@@ -197,4 +48,33 @@
 <button class="btn btn-primary">{!! trans('app.save_changes') !!}</button>
 
 {!! Form::close() !!}
+
+
+<!-- Modal -->
+<div class="modal fade" id="update-profile-picture-modal" tabindex="-1" role="dialog" aria-labelledby="update-profile-picture-modal-label">
+  	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title" id="update-profile-picture-modal-label">Update Profile Picture</h4>
+	      	</div>
+	      	<div class="modal-body">
+		        <span class="btn btn-lg btn-default btn-file col-md-6 text-center">
+				    <i class="fa fa-upload"></i> Upload Photo <input type="file">
+				</span>
+				<br><br><br>
+		        or
+				<br><br><br>
+		        <h5>Browse on Photo Library</h5>
+		        <input type="text" name="browse_photo" id="browse_photo" class="form-control" placeholder="Enter image url or keyword to search...">
+
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        	<button type="button" class="btn btn-primary">Update</button>
+	      	</div>
+	    </div>
+  	</div>
+</div>
+
 @endsection

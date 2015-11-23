@@ -39,11 +39,10 @@ return [
 	[
 		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Parents',
-		'url'	=> 'parents',
+		'url'	=> 'users?role=5',
 		'childs' => [
-			'parents' 			=> 'Parents',
-			'parents/create' 	=> 'Add New Parent',
-			'users/import' 		=> 'Import'
+			'users?role=5' 				=> 'Parents',
+			'users/create?role_id=5' => 'Add New Parent',
 		]
 	],
 
@@ -93,6 +92,12 @@ return [
 			'rooms'				=> 'Rooms',
 			'rooms/create'		=> 'Add New Room'
 		]
+	],
+
+	[
+		'icon' => 'fa fa-picture-o',
+		'title' => 'Media',
+		'url'	=> 'media'
 	],
 
 	[
