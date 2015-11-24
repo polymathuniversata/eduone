@@ -10,7 +10,6 @@
 		        <h5>Upload from Computer</h5>
 		        {!! Form::file('photo', ['class' => 'form-control', 'placeholder' => 'Start Upload...']) !!}
 				
-				
 				<br><br><br>
 		        or
 				<br><br><br>
