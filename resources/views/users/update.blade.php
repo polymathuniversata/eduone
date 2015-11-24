@@ -6,7 +6,7 @@
 
 <header>
 	<div id="profile-picture">
-		<img src="{{$user->getPhoto()}}" alt="Profile Picture">
+		<img src="{{$user->photo}}" alt="Profile Picture">
 	
 		<div role="button" id="update-profile-picture" data-toggle="modal" data-target="#update-profile-picture-modal">
 			<i class="fa fa-camera-retro"></i> Update Profile Picture

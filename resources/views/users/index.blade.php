@@ -72,14 +72,18 @@
     		@foreach ($users as $user)
     		<tr>
     			<td><input type="checkbox" disabled></td>
-    			<td class="table-title"> <img src="{!! $user->getPhoto() !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
-                    {{ $user->getFullName() }}</a>
+    			<td class="table-title"> <img src="{!! $user->photo !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
+                    {{ $user->display_name }}</a>
                 </td>
     			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-                @if ( ! isset($request->role))
+                @if ( ! isset($request->role) && isset($user->role->name))
     			<td>{{ $user->role->name }}</td>
     			@endif
-                <td>{!! $user->status !!}</td>
+                <td>
+                    @if ( ! empty($user->status))
+                    {!! $user->status !!}
+                    @endif
+                </td>
     			<td>{!! $user->created_at !!}</td>
     			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
     		</tr>

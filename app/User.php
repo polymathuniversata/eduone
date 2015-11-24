@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'first_name', 'last_name', 'email', 'password', 'phone',
+    protected $fillable = ['name', 'first_name', 'last_name', 'display_name', 'email', 'password', 'phone',
         'date_of_birth', 'id_card', 'id_card_issued_date', 'id_card_expired_date',
         'id_card_issued_by', 'gender', 'roll_no', 'photo', 'postcode', 'address', 'state',
         'country', 'media', 'department_id', 'categories', 'expired_date', 'role_id', 'permissions',
@@ -47,6 +47,14 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     // protected $guarded = ['_token', 'password_confirmation'];
+
+    public static function create(array $attributes = [])
+    {
+        if ( ! isset($attributes['display_name']) && ! empty($attributes['first_name']) && ! empty($attributes['last_name']))
+            $attributes['display_name'] = ucfirst($attributes['first_name']) . ' ' . ucfirst($attributes['last_name']);
+
+        parent::create($attributes);
+    }
 
     public function role()
     {
@@ -156,6 +164,19 @@ class User extends Model implements AuthenticatableContract,
         return $default_photo;
     }
 
+    public function setDisplayNameAttribute($value)
+    {
+        $this->attributes['display_name'] = ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function getDisplayNameAttribute($value)
+    {
+        if (empty($value))
+            return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        
+        return $value;
+    }
+
     public function uploadPhoto($photo_path, $photo_name = '')
     {
         //
@@ -173,6 +194,7 @@ class User extends Model implements AuthenticatableContract,
 
             return $query->whereId($value)
                         ->orwhere('name', 'like', $search)
+                        ->orWhere('display_name', 'like', $search)
                         ->orWhere('first_name', 'like', $search)
                         ->orWhere('last_name', 'like', $search)
                         ->orWhere('email', 'like', $search)
