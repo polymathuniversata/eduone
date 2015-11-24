@@ -42,6 +42,9 @@ Route::resource('programs', 'ProgramController');
 Route::get('users/search', function(Illuminate\Http\Request $request)
 {
 	$exists = [1,2,3];
+	
+	if (empty($request->search))
+		return App\User::orderBy('created_at', 'desc')->get(['id', 'name', 'photo']);
 
 	return App\User::search($request->search)
 					->where('id', 'not in', $exists)

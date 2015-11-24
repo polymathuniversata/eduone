@@ -65,9 +65,6 @@
 		        <h4 class="modal-title" id="myModalLabel">Invite People to Class</h4>
 		    </header>
 		    <div class="modal-body">
-		        <div class="alert alert-warning">
-		        	Enter user id, user name, or email, or roll no, separated by commas.
-		        </div>
 		        <div class="row">
 		        	<div class="col-md-6">
 		        		<input type="text" class="form-control" name="search_users" ng-model="search" ng-model-options="{debounce: 500}" placeholder="Search people and click to add...">
@@ -86,7 +83,7 @@
 		        				<img ng-src="@{{user.photo}}"> @{{user.name}} 
 
 		        				<button class="btn btn-default btn-xs pull-right" ng-click="removeQueueUser($index)">
-		        					<i class="fa fa-trash"></i> 
+		        					<i class="fa fa-times"></i> 
 		        				</button>
 		        			</li>
 		        		</ul>
