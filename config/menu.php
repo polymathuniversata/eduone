@@ -60,12 +60,10 @@ return [
 
 	[
 		'icon' => 'fa fa-table',
-		'title' => 'Class Routines',
-		'url'	=> 'routines',
+		'title' => 'Schedules',
+		'url'	=> 'schedules',
 		'childs' => [
-			'routines' 			=> 'Manage Routines',
-			'routines/create' 	=> 'Add New Routine',
-			'routines/import'	=> 'Import Routine',
+			'schedules/import'	=> 'Import Schedules',
 		]
 	],
 

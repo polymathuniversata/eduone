@@ -401,3 +401,41 @@ tr.inactive > td{
     cursor: inherit;
     display: block;
 }
+
+#table-schedule th, #table-schedule td{
+	width: 100px;
+	height: 100px;
+	min-width: 100px;
+	vertical-align: middle;
+}
+
+#table-schedule thead th{
+	height: 50px;
+	vertical-align: middle;
+}
+
+#table-schedule td{
+	text-align: center;
+}
+
+#table-schedule .text-muted{
+	font-size: 16px;
+	display: none;
+}
+
+#table-schedule td:hover{
+	cursor: pointer;
+	background: #efefef;
+}
+
+#table-schedule td:hover .text-muted{
+	display: block;
+}
+
+.btn-toolbar{
+	margin-bottom: 30px;
+}
+
+.btn-group.right{
+	float:right;
+}

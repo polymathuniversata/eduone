@@ -7,12 +7,13 @@ class CreateScheduleTable extends Migration
 {
     public function up()
     {
-        Schema::create('schedule', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_id')->nullable();
             $table->integer('room_id');
             $table->integer('class_id')->nullable();
             $table->integer('subject_id')->nullable();
+            $table->integer('teacher_id')->nullable();
             $table->string('session_id')->nullable();
             $table->integer('event_id')->nullable();
             $table->timestamp('started_at');
@@ -27,6 +28,6 @@ class CreateScheduleTable extends Migration
 
     public function down()
     {
-        Schema::drop('schedule');
+        Schema::drop('schedules');
     }
 }
