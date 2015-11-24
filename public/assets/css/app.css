@@ -439,3 +439,28 @@ tr.inactive > td{
 .btn-group.right{
 	float:right;
 }
+
+#ajax-users-list, #queue-users-list{
+	border: 1px solid #eee;
+}
+
+#ajax-users-list li, #queue-users-list li{
+	margin-bottom: 10px;
+	font-weight: bold;
+	color: #0675b9;
+}
+
+#ajax-users-list li:hover{
+	cursor: pointer;
+	background: #0675b9;
+	color: #fff;
+}
+
+#ajax-users-list img, #queue-users-list img{
+	width: 48px;
+	height: 48px;
+}
+
+#queue-users-list .btn{
+	margin: 15px 15px 0 0;
+}

@@ -2,6 +2,10 @@
 
 	var app = angular.module('App', ['ui.bootstrap', 'tg.dynamicDirective', 'ui.sortable']);
 
+	app.config(['$httpProvider', function($httpProvider) {
+	    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+	}]);
+
 	app.run(function($rootScope) 
 	{
 		$rootScope.uniqId = function() {
@@ -246,7 +250,62 @@
 
 	app.controller('UserController', function($scope, $http)
 	{
-		
+		$scope.users = [];
+
+		$scope.exists = [];
+
+		$scope.search = '';
+
+		$scope.queue = [];
+
+		$scope.init = function() 
+		{
+			if (typeof window.exists != 'undefined')
+				$scope.exists = window.exists;
+		};
+
+		$scope.$watch('search', function()
+		{
+			var params = {
+				search: $scope.search
+			};
+
+			$http.get('/users/search/', {
+				params: params
+			}).
+			success(function(data, status, headers, config) {
+		    	$scope.users = data;
+		    	console.log($scope.users);
+		  	}).
+		  	error(function(data, status, headers, config) {
+		    	//
+			});
+		});
+
+		$scope.addUser = function($index)
+		{
+			var isDuplicated = false;
+
+			angular.forEach($scope.queue, function(user) {
+				if (user.id === $scope.users[$index].id) {
+					isDuplicated = true;
+					return;
+				}
+			});
+
+			if (isDuplicated)
+				return;
+			
+			$scope.queue.push($scope.users[$index]);
+
+			$scope.users.splice($index, 1);
+		};
+
+		$scope.removeQueueUser = function($index)
+		{
+			$scope.queue.splice($index, 1);
+		};
+
 	});
 
 })(jQuery, angular);

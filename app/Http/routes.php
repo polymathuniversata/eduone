@@ -39,9 +39,25 @@ Route::resource('classes', 'ClassController');
 Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');
 
+Route::get('users/search', function(Illuminate\Http\Request $request)
+{
+	$exists = [1,2,3];
+
+	return App\User::search($request->search)
+					->where('id', 'not in', $exists)
+					->get(['id', 'name', 'photo']);
+});
+
 Route::resource('users', 'UserController');
 Route::resource('media', 'MediaController');
 Route::resource('schedules', 'ScheduleController');
+
+// Route::get('users/search', function()
+// {
+// 	return App\User::orderBy('created_at', 'desc')->get(['id', 'name', 'photo']);
+// });
+
+
 
 // Route::get('programs/periods/{id}', 'ProgramController@periods');
 Route::get('classes/{id}/members', 'ClassController@members');

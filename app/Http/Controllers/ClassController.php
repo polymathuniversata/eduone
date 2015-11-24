@@ -185,10 +185,15 @@ class ClassController extends Controller
             }
 
             // Save Users
-            if ( ! empty($data['users'])) {
+            if ( ! empty($data['queue'])) {
+                $users = [];
+                $queue = json_decode($data['queue'], true);
+                foreach ($queue as $user) {
+                    $users[$user['id']] = $user['id'];
+                }
 
                 // Parse $data['users'] to properly id to add to class
-                $class->addUsers($data['users']);
+                $class->addUsers($users);
 
                 $message = 'Class members was added successfully!';
             }

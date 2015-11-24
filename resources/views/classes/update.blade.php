@@ -12,7 +12,6 @@
 
 @include('classes/_partials/tabs', ['active' => 1])
 
-
 <div class="row">
 	{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT', 'class' => 'col-md-6']) !!}
 		

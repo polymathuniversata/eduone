@@ -111,6 +111,9 @@ class Group extends Model
         if (count($user_ids) === 1 && is_string($user_ids[0]))
             $user_ids = explode(',', $user_ids[0]);
 
+        if (count($user_ids) === 1 && is_array($user_ids[0]))
+            $user_ids = $user_ids[0];
+        
         $added = [];
 
         foreach ($user_ids as $user_id) {    

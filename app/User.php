@@ -142,7 +142,7 @@ class User extends Model implements AuthenticatableContract,
      * 
      * @return String Photo Image URL
      */
-    public function getPhoto()
+    public function getPhotoAttribute($value)
     {
         $use_gravatar = true;
         $default_photo = '';
@@ -150,9 +150,8 @@ class User extends Model implements AuthenticatableContract,
         if ($use_gravatar)
             $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=80';
 
-        if ( ! empty($this->photo) && file_exists(base_path() . '/public/photos/' . $this->photo))
-            return url('/photos/' . $this->photo);
-        
+        if ( ! empty($value) && file_exists(base_path() . '/public/photos/' . $value))
+            return url('/photos/' . $value);
 
         return $default_photo;
     }
@@ -170,20 +169,21 @@ class User extends Model implements AuthenticatableContract,
     public function scopeSearch($query, $value)
     {
         if (! empty($value)) {
-            $value = "%$value%";
+            $search = "%$value%";
 
-            return $query->where('name', 'like', $value)
-                        ->orWhere('first_name', 'like', $value)
-                        ->orWhere('last_name', 'like', $value)
-                        ->orWhere('email', 'like', $value)
-                        ->orWhere('phone', 'lile', $value)
-                        ->orWhere('id_card', 'like', $value);
+            return $query->whereId($value)
+                        ->orwhere('name', 'like', $search)
+                        ->orWhere('first_name', 'like', $search)
+                        ->orWhere('last_name', 'like', $search)
+                        ->orWhere('email', 'like', $search)
+                        ->orWhere('phone', 'lile', $search)
+                        ->orWhere('id_card', 'like', $search);
         }
 
         return $query;
     }
 
-    public function scopeProgram($query, $value)
+    public function scopeOfProgram($query, $value)
     {
          if (is_numeric($value) && $value > 0)
             return $query->has('programs', '=', $value);
@@ -191,7 +191,7 @@ class User extends Model implements AuthenticatableContract,
         return $query;
     }
 
-    public function scopeBranch($query, $value)
+    public function scopeOfBranch($query, $value)
     {
         if (is_numeric($value) && $value > 0)
             return $query->has('branches', '=', $value);

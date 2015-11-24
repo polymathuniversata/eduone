@@ -47,11 +47,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users      = User::search($request->q)
-                            ->ofRole($request->role)
-                            ->branch($request->branch)
-                            ->orderBy('created_at')
-                            ->paginate(50);
+        $users = User::search($request->s)
+                    ->ofRole($request->role)
+                    ->ofBranch($request->branch)
+                    ->orderBy('created_at')
+                    ->paginate(50); 
 
         return view('users.index', [
             'users'     => $users,
