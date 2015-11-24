@@ -90,4 +90,5 @@ return [
  	'finished' => 'Finished',
  	'all_classes' => 'All Classes',
  	'users_count' => 'Users Count',
+ 	'update_user' => 'Update User',
  ];

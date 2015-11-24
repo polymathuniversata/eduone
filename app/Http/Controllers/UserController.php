@@ -115,6 +115,9 @@ class UserController extends Controller
 
         $permissions= config('settings.permissions');
         
+        if ( ! isset($request->tab))
+            $request->tab = 'account';
+
         $pass_to_view = [
             'user'          => $user,
             'roles'         => $this->roles,
@@ -168,6 +171,15 @@ class UserController extends Controller
         if ( ! empty($data['subjects']))
             $subjects = (array) $data['subjects'];
 
+        if ( ! empty($data['photo'])) {
+            $photo      = $request->file('photo');
+            $photo_path = $photo->getRealPath();
+            $photo_name = $photo->getClientOriginalName();
+
+            if ( $user->uploadPhoto($photo_path, $photo_name))
+                $data['photo'] = $photo_name;
+        }
+
         try {
             $user->update($data);
 
@@ -186,13 +198,6 @@ class UserController extends Controller
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }
-    }
-
-    public function updatePhoto(Request $request, User $user)
-    {
-        Storage::put('avatars' . $user->id, 
-            file_get_contents($request->file('avatar')->getRealPath())
-        );
     }
 
     /**
