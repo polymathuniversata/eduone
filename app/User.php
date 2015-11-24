@@ -150,8 +150,8 @@ class User extends Model implements AuthenticatableContract,
         if ($use_gravatar)
             $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=80';
 
-        if ( ! empty($this->photo) && \Storage::has('photos/' . $this->photo))
-            return \Storage::get('photos/' . $this->photo);
+        if ( ! empty($this->photo) && file_exists(base_path() . '/public/photos/' . $this->photo))
+            return url('/photos/' . $this->photo);
         
 
         return $default_photo;
@@ -159,9 +159,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function uploadPhoto($photo_path, $photo_name = '')
     {
-        return \Storage::put("photos/{$photo_name}", 
-            file_get_contents($photo_path)
-        );
+        //
     }
 
     public function getTeacherSubjects()

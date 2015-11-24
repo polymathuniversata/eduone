@@ -176,8 +176,11 @@ class UserController extends Controller
             $photo_path = $photo->getRealPath();
             $photo_name = $photo->getClientOriginalName();
 
-            if ( $user->uploadPhoto($photo_path, $photo_name))
-                $data['photo'] = $photo_name;
+            $photo->move(
+                base_path() . '/public/photos/', $photo_name
+            );
+
+            $data['photo'] = $photo_name;
         }
 
         try {
