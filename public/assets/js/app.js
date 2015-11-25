@@ -295,7 +295,7 @@
 
 			if (isDuplicated)
 				return;
-			
+
 			$scope.queue.push($scope.users[$index]);
 
 			$scope.users.splice($index, 1);
@@ -310,17 +310,20 @@
 
 })(jQuery, angular);
 
-$(function(){
-	$('.panel-checkbox').change(function() {
-		$this = $(this);
-		
-		if ($this.is(':checked'))
-			$this.parent('.panel').find('.panel-body [type=checkbox]').attr('checked', true);
-		else
-			$this.parent('.panel').find('.panel-body [type=checkbox]').attr('checked', false);
-	});
+$(function()
+{
 
 	$('.panel-checkbox').click (function () {
 	  	$(this).parents('.panel').find('.panel-body input[type=checkbox]').prop('checked', this.checked);
 	});
+
+	$('.subject-teacher').change(function() {
+		var checked = $(this).val() != '';
+		
+		$(this).parents('tr')
+				.find('input[type=checkbox]')
+				.prop('checked', checked);
+		
+	});
+
 });
