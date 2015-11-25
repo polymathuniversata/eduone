@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('header')
+<script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
+@stop
+
 @section('title', $class->name)
 @section('main_title', $class->name)
 @section('content')

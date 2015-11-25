@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('header')
+<script type="text/javascript" src="{{ url('/assets/js/controllers/subject-controller.js') }}"></script>
+@endsection
 @section('title', trans('app.update_subject'))
 @section('main_title', trans('app.update_subject'))
 @section('content')
