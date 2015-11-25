@@ -61,7 +61,7 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        return App\User::search(['keyword' => 'jesse'])->get();
+        return User::search($request->all())->get(['id', 'display_name', 'photo']);
     }
 
     /**

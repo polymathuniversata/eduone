@@ -32,6 +32,6 @@ class Program extends Model
 
     public function classes()
     {
-        return $this->hasMany('App\Classes');
+        return $this->hasMany('App\Group');
     }
 }

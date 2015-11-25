@@ -464,3 +464,23 @@ tr.inactive > td{
 #queue-users-list .btn{
 	margin: 15px 15px 0 0;
 }
+
+.card header{
+	background: #2980b9;
+	text-align: center;
+	padding: 20px 15px;
+	border-radius: 5px 5px 0 0;
+}
+.card h2{
+	font-size: 18px;
+}
+.card a{
+	color: #fafafa;
+}
+.card td, .card th{
+	border: none !important;
+}
+.card-body{
+	border: 1px solid #eee;
+	padding: 10px;
+}

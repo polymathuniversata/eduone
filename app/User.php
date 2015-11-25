@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract,
     protected $casts = [
         'permissions' => 'array'
     ];
-    
+
     /**
      * The attributes excluded from the model's JSON form.
      *
