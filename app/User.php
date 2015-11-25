@@ -187,22 +187,42 @@ class User extends Model implements AuthenticatableContract,
 
     }
 
-    public function scopeSearch($query, $value)
+    public static function search($request = [], $relation = 'and')
     {
-        if (! empty($value)) {
-            $search = "%$value%";
+        if (is_object($request))
+            $request = (array) $request;
 
-            return $query->whereId($value)
-                        ->orwhere('name', 'like', $search)
-                        ->orWhere('display_name', 'like', $search)
-                        ->orWhere('first_name', 'like', $search)
-                        ->orWhere('last_name', 'like', $search)
-                        ->orWhere('email', 'like', $search)
-                        ->orWhere('phone', 'lile', $search)
-                        ->orWhere('id_card', 'like', $search);
+        $user = new User;
+
+        if (isset($request['search']) || is_string($request))
+        {
+            $user = $user->where(function($query) use ($request)
+            {
+                $search_string = isset($request['search']) ? $request['search'] : $request;
+
+                $keyword = '%' . $search_string . '%';
+             
+                $query->whereId($search_string)
+                    ->orwhere('name', 'like', $keyword)
+                    ->orWhere('display_name', 'like', $keyword)
+                    ->orWhere('first_name', 'like', $keyword)
+                    ->orWhere('last_name', 'like', $keyword)
+                    ->orWhere('email', 'like', $keyword)
+                    ->orWhere('phone', 'lile', $keyword)
+                    ->orWhere('id_card', 'like', $keyword);
+            });
         }
 
-        return $query;
+        if (isset($request['program_id']))
+            $user = $user->ofProgram($request['program_id']);
+
+        if (isset($request['role_id']))
+            $user = $user->ofRole($request['role_id']);
+        
+        if (isset($request['branch_id']))
+            $user = $user->ofBranch($request['branch_id']);
+
+        return $user;
     }
 
     public function scopeOfProgram($query, $value)

@@ -47,9 +47,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::search($request->s)
-                    ->ofRole($request->role)
-                    ->ofBranch($request->branch)
+        $users = User::search($request->all())
                     ->orderBy('created_at')
                     ->paginate(50); 
 
@@ -59,6 +57,11 @@ class UserController extends Controller
             'branches'  => $this->branches,
             'request'   => $request
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        return App\User::search(['keyword' => 'jesse'])->get();
     }
 
     /**
