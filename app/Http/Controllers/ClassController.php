@@ -83,7 +83,7 @@ class ClassController extends Controller
             $class = Group::create($data);
             
             return redirect('classes/' . $class->id )
-                        ->with('message', 'Class was created successfully!');
+                        ->with('message', 'Congratulation! Class was created successfully!');
         } catch ( Exception $e ) {
             return back()->withInput()->with('message', 'Fooo!');
         }
@@ -95,9 +95,9 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $class)
+    public function show(Group $class, Request $request)
     {
-        return $this->edit($class);
+        return $this->edit($class, $request);
     }
 
     /**
@@ -106,41 +106,38 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $class)
+    public function edit(Group $class, Request $request)
     {
-        $programs = $this->programs;
-        $branches = $this->branches;
+        if ( ! isset($request->tab))
+            $request->tab = 'members';
+
+        $pass_to_view = [
+            'programs' => $this->programs,
+            'branches' => $this->branches,
+            'class'    => $class,
+            'request'   => $request
+        ];
         
-        return view('classes/update', compact('class', 'programs', 'branches'));
-    }
-
-    public function members($id)
-    {
-        $class = Group::findOrFail($id);
-
-        return view('classes/members', compact('class'));
-    }
-
-    public function subjects($id)
-    {
-        $class = Group::findOrFail($id);
-
-        $teachers   = $class->getTeachers()->lists('name', 'id')->toArray();
+        if ($request->tab === 'subjects' || $class->users_count > 0) {
+            $teachers   = $class->getTeachers()->lists('name', 'id')->toArray();
         
-        $program = $class->program;
+            $program = $class->program;
 
-        $subjects = [];
-        $periods = $program->periods()->orderBy('ordr')->get();
+            $subjects = [];
+            $periods = $program->periods()->orderBy('ordr')->get();
 
-        foreach ($periods as $period) {
-            $subjects[$period->id] = $period->subjects()->orderBy('ordr')->get();
+            foreach ($periods as $period) {
+                $subjects[$period->id] = $period->subjects()->orderBy('ordr')->get();
+            }
+
+            $class_subjects = $class->subjects->pluck('id')->toArray();
+            
+            $subjects_teachers = $class->getSubjectsTeachers();
+            
+            $pass_to_view += compact('periods', 'subjects', 'class_subjects', 'teachers', 'subjects_teachers');
         }
 
-        $class_subjects = $class->subjects->pluck('id')->toArray();
-        
-        $subjects_teachers = $class->getSubjectsTeachers();
-
-        return view('classes/subjects', compact('class', 'program', 'periods', 'subjects', 'class_subjects', 'teachers', 'subjects_teachers'));
+        return view('classes/update', $pass_to_view);
     }
 
     /**
@@ -194,9 +191,9 @@ class ClassController extends Controller
                 $message = 'Class members was added successfully!';
             }
 
-            return redirect(url('/classes/' . $class->id))->withMessage($message);
+            return redirect(url('/classes/' . $class->id . '?tab=' . $request->tab))->withMessage($message);
         } catch (Exception $e) {
-            return redirect(url('/classes/' . $class->id))->withInput()->withMessage('Error during updating class!');
+            return redirect(url('/classes/' . $class->id . '?tab=' . $request->tab))->withInput()->withMessage('Error during updating class!');
         }
     }
 

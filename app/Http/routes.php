@@ -43,12 +43,3 @@ Route::get('users/search', 'UserController@search');
 Route::resource('users', 'UserController');
 Route::resource('media', 'MediaController');
 Route::resource('schedules', 'ScheduleController');
-
-
-
-
-// Route::get('programs/periods/{id}', 'ProgramController@periods');
-Route::get('classes/{id}/members', 'ClassController@members');
-Route::get('classes/{id}/subjects', 'ClassController@subjects');
-
-Route::patch('classes/{id}/members', 'ClassController@setRole');
