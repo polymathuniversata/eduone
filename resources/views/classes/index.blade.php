@@ -3,6 +3,9 @@
 @section('title', trans('app.all_classes'))
 @section('main_title')
 {!! trans('app.classes') !!}
+<span class="badge">
+    {{$classes->total()}}
+</span>
 @endsection
 
 @section('main_button')
