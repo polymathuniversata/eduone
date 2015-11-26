@@ -14,8 +14,35 @@
 <div class="form-group" ng-controller="UserController" ng-init="init()">
 	
 	<div class="col-md-6">
+		@if ($user->isStudent())
 		<h4>Parents</h4>
+		@else
+		<h4>Childrens</h4>
+		@endif
 		<ul class="list-unstyled" id="queue-users-list">
+			@if ($user->isStudent())
+				@foreach ($user->parents as $parent)
+				<li>
+					<img src="{!! $parent->photo !!}"> {{ $parent->display_name }}
+
+					<button class="btn btn-default btn-xs pull-right">
+						<i class="fa fa-times"></i> 
+					</button>
+				</li>
+				@endforeach
+			@endif
+
+			@if ($user->isParent())
+				@foreach ($user->childrens as $children)
+				<li>
+					<img src="{!! $children->photo !!}"> {{ $children->display_name }}
+
+					<button class="btn btn-default btn-xs pull-right">
+						<i class="fa fa-times"></i> 
+					</button>
+				</li>
+				@endforeach
+			@endif
 			<li ng-repeat="user in queue track by $index">
 				<img ng-src="@{{user.photo}}"> @{{user.display_name}} 
 
