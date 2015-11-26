@@ -2,7 +2,7 @@
 
 @section('header')
 <script>
-	var role_id = 4;
+	var role_id = '3,4';
 </script>
 <script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
 @endsection
@@ -45,12 +45,15 @@
 					    {{$user->role->name}} <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
-					    <li><a href="#" ng-click="setRole()">Set as Student</a></li>
-					    <li><a href="#">Set as Teacher</a></li>
+					    <li><a href="#" ng-click="setRole()">View Profile</a></li>
+					    
+					    @if ($user->isStudent())
 					    <li role="separator" class="divider"></li>
 					    <li><a href="#">Promote...</a></li>
+					    @endif
+
 					    <li role="separator" class="divider"></li>
-					    <li><a href="#">Drop Out</a></li>
+					    <li><a href="#">Remove</a></li>
 					  </ul>
 					</div><!--btn-group-->
 				  </div>

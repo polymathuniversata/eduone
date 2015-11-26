@@ -118,11 +118,7 @@ class ClassController extends Controller
     {
         $class = Group::findOrFail($id);
 
-        // All Users available to add
-        // Todo: Only add users in current Program and Branch 
-        $users = User::lists('name', 'id')->toArray();
-
-        return view('classes/members', compact('class', 'users'));
+        return view('classes/members', compact('class'));
     }
 
     public function subjects($id)

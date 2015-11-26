@@ -232,10 +232,10 @@ class User extends Model implements AuthenticatableContract,
 
         if (isset($request['role_id']))
             $user = $user->ofRole($request['role_id']);
-        
+    
         if (isset($request['branch_id']))
             $user = $user->ofBranch($request['branch_id']);
-
+    
         return $user;
     }
 
@@ -257,8 +257,18 @@ class User extends Model implements AuthenticatableContract,
 
     public function scopeOfRole($query, $value)
     {
+        if (is_string($value))
+        {
+            if (str_contains($value, ','))
+                $value = explode(',', $value);
+        }
+                
         if (is_numeric($value) && $value > 0)
-            return $query->whereRoleId($value);
+            return $query->where('role_id', $value);
+
+        if (is_array($value))
+            return $query->whereIn('role_id', $value);
+        
 
         return $query;
     }

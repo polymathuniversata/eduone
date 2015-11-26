@@ -19,7 +19,7 @@ app.controller('UserController', function($scope, $http)
 		if (typeof window.exists != 'undefined')
 			$scope.exists = window.exists;
 
-		if (typeof window.role_id != 'undefined' && window.role_id > 0)
+		if (typeof window.role_id != 'undefined')
 			$scope.role_id = window.role_id;
 	};
 
@@ -29,7 +29,7 @@ app.controller('UserController', function($scope, $http)
 			search: $scope.search,
 			role_id: $scope.role_id
 		};
-
+		
 		if ( ! $scope.isLoading) {
 
 			$scope.isLoading = true;
