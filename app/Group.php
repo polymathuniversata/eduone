@@ -175,9 +175,11 @@ class Group extends Model
 
     public function getUsersByRole($role_id)
     {
-        $all_users = \DB::table('users_groups')->whereRole($role_id)->lists('user_id');
+        $all_users = \DB::table('users_groups')
+                        ->whereGroupId($this->id)
+                        ->lists('user_id');
         
-        $users = User::whereIn('id', $all_users)->get();
+        $users = User::whereIn('id', $all_users)->whereRoleId($role_id)->get();
 
         return $users;
     }

@@ -17,7 +17,8 @@
 	<div class="col-md-7 members">
 	
 		<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Invite</button>
-
+		
+		@if ( count($class->users) > 0 )
 		<div class="row">
 			@foreach ($class->users as $user)
 			<div class="col-md-6">
@@ -45,7 +46,7 @@
 					    {{$user->role->name}} <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
-					    <li><a href="#" ng-click="setRole()">View Profile</a></li>
+					    <li><a href="{{url('users/' . $user->id)}}">View Profile</a></li>
 					    
 					    @if ($user->isStudent())
 					    <li role="separator" class="divider"></li>
@@ -53,14 +54,21 @@
 					    @endif
 
 					    <li role="separator" class="divider"></li>
-					    <li><a href="#">Remove</a></li>
+					    <li><a href="{{url('classes/' . $class->id . '?remove=' . $user->id)}}">Remove</a></li>
 					  </ul>
 					</div><!--btn-group-->
 				  </div>
 				</div>
 			</div>
 			@endforeach
+		</div><!--.row-->
+		@else
+		<div class="alert alert-warning">
+			<p>
+				Start this class by <a href="#">inviting members</a>
+			</p>
 		</div>
+		@endif
 	</div><!--.members-->
 </div>
 
