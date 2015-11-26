@@ -35,6 +35,8 @@ Route::resource('branches', 'BranchController');
 Route::resource('settings', 'SettingController');
 Route::resource('rooms', 'RoomController');
 Route::resource('roles', 'RoleController');
+Route::get('classes/{id}/subjects', 'ClassController@subjects');
+Route::get('classes/{id}/subjects/{subject_id}', 'ClassController@teacher');
 Route::resource('classes', 'ClassController');
 Route::resource('subjects', 'SubjectController');
 Route::resource('programs', 'ProgramController');

@@ -197,10 +197,36 @@ class ClassController extends Controller
         }
     }
 
-    public function setRole(Request $request, Group $class)
+    public function subjects($id, Request $request)
     {
-        return $class;
+        $class = Group::findOrFail($id);
+
+        $subjects = $class->subjects;
+        
+        $subjects_teachers = [];
+
+        foreach ($subjects as $subject)
+        {
+            $subjects_teachers[$subject->id] = [
+                'id'        => $subject->id,
+                'name'      => $subject->name,
+                // Todo: Check performance of this line
+                'teacher'   => $subject->pivot->user_id 
+            ];
+        }
+
+        return $subjects_teachers;
     }
+
+    public function teacher($class_id, $subject_id, Request $request)
+    {
+        $class = Group::findOrFail($class_id);
+
+        $teacher = $class->getTeacherBySubject($subject_id);
+
+        return $teacher;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

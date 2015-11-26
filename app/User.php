@@ -56,11 +56,6 @@ class User extends Model implements AuthenticatableContract,
         parent::create($attributes);
     }
 
-    public function role()
-    {
-        return $this->belongsTo('App\Role');
-    }
-
     public function branches()
     {
         return $this->belongsToMany('App\Branch', 'users_branches')

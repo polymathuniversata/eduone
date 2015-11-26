@@ -9,29 +9,21 @@
         <time>Tue, December 1, 13:00 - 14:00</time>
         <div class="form-group">
           <label for="class">Class</label>
-          <select id="class" name="class" class="form-control">
+          <select id="class" name="class" class="form-control" ng-model="group.id" ng-change="getSubjects()">
             <option value="">Please select</option>
             <option value="1">T0907L</option>
             <option value="2">C0907M</option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="class">Subject</label>
-          <select id="class" name="class" class="form-control">
-            <option value="0">Math</option>
-            <option value="1">Chemistry</option>
-            <option value="2">Java</option>
-          </select>
+        <div class="form-group" ng-show="group.id">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" class="form-control" ng-model="group.subject" ng-options="subject.id as subject.name for subject in subjects" ng-change="setSelectedTeacher()"></select>
         </div>
 
-          <div class="form-group">
-          <label for="class">Teacher</label>
-          <select id="class" name="class" class="form-control">
-            <option value="0">Math</option>
-            <option value="1">Chemistry</option>
-            <option value="2">Java</option>
-          </select>
+        <div class="form-group" ng-show="group.subject">
+          <label for="teacher">Teacher</label>
+          <select id="teacher" name="teacher" class="form-control" ng-model="group.teacher" ng-options="key as value for (key, value) in teachers"></select>
         </div>
 
       </div>

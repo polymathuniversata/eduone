@@ -10,6 +10,13 @@ use App\Room;
 
 class ScheduleController extends Controller
 {
+    protected $teachers = [];
+
+    public function __construct()
+    {
+        $this->teachers = \App\User::ofRole(3)->lists('display_name', 'id')->toArray();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +38,15 @@ class ScheduleController extends Controller
 
         $rooms = Room::lists('name', 'id')->toArray();
 
-        return view('schedules/index', compact('schedule', 'slots', 'rooms', 'request'));
+        $pass_to_view = [
+            'date' => $date,
+            'schedule' => $schedule,
+            'teachers' => $this->teachers,
+            'slots' => $slots,
+            'rooms' => $rooms
+        ];
+
+        return view('schedules/index', $pass_to_view);
     }
 
     /**
