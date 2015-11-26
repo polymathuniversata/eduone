@@ -293,5 +293,11 @@ return [
 		'dorm_student_male' => 'Dorm Student Male', 
 		'dorm_student_female' 	=> 'Dorm Student Female', 
 		'dorm_staff' 			=> 'Dorm Staff', 
+	],
+
+	'class_statuses' => [
+		'inprogress' 	=> 'In Progress',
+		'done' 			=> 'Done',
+		'canceled' 		=> 'Canceled',
 	]
 ];

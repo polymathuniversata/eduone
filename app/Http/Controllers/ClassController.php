@@ -115,7 +115,7 @@ class ClassController extends Controller
             'programs' => $this->programs,
             'branches' => $this->branches,
             'class'    => $class,
-            'request'   => $request
+            'request'  => $request
         ];
         
         if ($request->tab === 'subjects' || $class->users_count > 0) {
@@ -151,10 +151,10 @@ class ClassController extends Controller
     {
         $data = array_filter($request->all());
 
-        $message = 'Class was updated successfully!';
-
         try {
             $class->update($data);
+
+            $message = 'Class was updated successfully!';
 
             // Save Subjects and assigned Teachers
             if ( ! empty($data['subjects'])) {

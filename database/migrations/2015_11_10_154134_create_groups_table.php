@@ -23,6 +23,7 @@ class CreateGroupsTable extends Migration
             $table->integer('branch_id')->nullable();
             $table->integer('creator_id');
             $table->integer('users_count')->default(0);
+            $table->string('status')->nullable();
             $table->date('started_at')->nullable();
             $table->date('finished_at')->nullable();
             $table->timestamps();

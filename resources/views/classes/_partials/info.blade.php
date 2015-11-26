@@ -42,4 +42,11 @@
 	])!!}
 </div>
 
+<div class="form-group">
+	<label for="status">Status</label>
+	{!! Form::select('status', config('settings.class_statuses'), null, [
+		'class' 		=> 'form-control'
+	])!!}
+</div>
+
 <button class="btn btn-primary">Save Changes</button>

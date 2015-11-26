@@ -11,7 +11,7 @@ class Group extends Model
 	
     protected $fillable = [
     	'name', 'slug', 'description', 'email', 'users_count', 'program_id', 
-    	'branch_id', 'creator', 'started_at', 'finished_at'
+    	'branch_id', 'creator', 'status', 'started_at', 'finished_at'
     ];
 
     protected $casts = [
