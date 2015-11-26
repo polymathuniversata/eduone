@@ -37,7 +37,7 @@ app.controller('UserController', function($scope, $http)
 			$http.get('/users/search/', {
 				params: params
 			}).
-			success(function(data, status, headers, config) {
+			success(function(data, status, headers, config) {	
 		    	$scope.users = data;
 		  	}).
 		  	error(function(data, status, headers, config) {

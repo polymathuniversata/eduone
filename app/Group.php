@@ -66,23 +66,27 @@ class Group extends Model
                 
                 $user = User::findOrFail($input);
                 
-                if ( ! $user)
+                if ( ! $user )
                     return;
 
-                $role = $user->role_id;
+                if ('class' === $this->type && ! in_array($user->role_id, [3,4]))
+                    return;
+
+             //   $role = $user->role_id;
             }
             
-            if ($input instanceof User && isset($input->role_id))
-                $role = $input->role_id;
+            //if ($input instanceof User && isset($input->role_id))
+                // $role = $input->role_id;
 
             // Only have Teacher and Student
-            if ($role !== 3)
-                $role = 4;
+            // if ($role !== 3)
+            //     $role = 4;
 
             $creator_id = isset(\Auth::user()->id) ? \Auth::user()->id : 1;
 
             // Attach current user with pivot data
-            $this->users()->attach($input, compact('role', 'creator_id'));
+            $this->users()->attach($input, compact('creator_id'));
+            
             $this->users_count++;
             return $this->save();
         }

@@ -1,8 +1,11 @@
 @extends('master')
 
 @section('header')
+<script>
+	var role_id = 4;
+</script>
 <script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
-@stop
+@endsection
 
 @section('title', $class->name)
 @section('main_title', $class->name)
