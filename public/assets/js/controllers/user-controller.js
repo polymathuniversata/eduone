@@ -12,16 +12,22 @@ app.controller('UserController', function($scope, $http)
 
 	$scope.isLoading = false;
 
+	$scope.role_id = null;
+
 	$scope.init = function() 
 	{
 		if (typeof window.exists != 'undefined')
 			$scope.exists = window.exists;
+
+		if (typeof window.role_id != 'undefined' && window.role_id > 0)
+			$scope.role_id = window.role_id;
 	};
 
 	$scope.$watch('search', function()
 	{
 		var params = {
-			search: $scope.search
+			search: $scope.search,
+			role_id: $scope.role_id
 		};
 
 		if ( ! $scope.isLoading) {

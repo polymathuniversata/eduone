@@ -14,10 +14,12 @@ class CreateUserRelationshipsTable extends Migration
     {
         Schema::create('user_relationships', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('student_id');
             $table->string('relationship');
-            $table->integer('target_user_id');
+            $table->integer('user_id');
             $table->timestamps();
+
+            $table->unique(['student_id', 'user_id']);
         });
     }
 

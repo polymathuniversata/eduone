@@ -87,6 +87,20 @@ class User extends Model implements AuthenticatableContract,
                     ->withTimestamps();
     }
 
+    public function childrens()
+    {
+        return $this->belongsToMany('App\User', 'user_relationships', 'user_id', 'student_id')
+                    ->withPivot('relationship')
+                    ->withTimestamps();
+    }
+
+    public function parents()
+    {
+        return $this->belongsToMany('App\User', 'user_relationships', 'student_id', 'user_id')
+                    ->withPivot('relationship')
+                    ->withTimestamps();
+    }
+
     /**
      * Check if user belongs to Role. Role can be slug or id
      * 

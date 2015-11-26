@@ -61,6 +61,7 @@ class UserTableSeeder extends Seeder
             'name'          => 'admin',
             'first_name'    => 'Tan',
             'last_name'     => 'Nguyen',
+            'display_name'  => 'Tan Nguyen',
             'email'         => 'tan@fitwp.com',
             'phone'         => '0932292225',
             'id_card'       => '123456789',
@@ -71,6 +72,7 @@ class UserTableSeeder extends Seeder
             'name'          => 'walter_white',
             'first_name'    => 'Walter',
             'last_name'     => 'White',
+            'display_name'  => 'Walter White',
             'email'         => 'walterwhite@cook.com',
             'phone'         => '(1) 234 5679',
             'role_id'       => $teacher->id

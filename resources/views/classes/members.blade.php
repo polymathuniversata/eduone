@@ -75,7 +75,7 @@
 		        		
 		        		<ul class="list-unstyled" id="ajax-users-list">
 		        			<li ng-repeat="user in users track by $index" ng-click="addUser($index)">
-		        				<img ng-src="@{{user.photo}}"> @{{user.name}}
+		        				<img ng-src="@{{user.photo}}"> @{{user.display_name}}
 		        			</li>
 		        		</ul>
 		        	</div>
@@ -84,7 +84,7 @@
 		        		<h4>People in queue <span class="badge">@{{queue.length}}</span></h4>
 		        		<ul class="list-unstyled" id="queue-users-list">
 		        			<li ng-repeat="user in queue track by $index">
-		        				<img ng-src="@{{user.photo}}"> @{{user.name}} 
+		        				<img ng-src="@{{user.photo}}"> @{{user.display_name}} 
 
 		        				<button class="btn btn-default btn-xs pull-right" ng-click="removeQueueUser($index)">
 		        					<i class="fa fa-times"></i> 

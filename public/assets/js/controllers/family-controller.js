@@ -1,43 +1,70 @@
 var app = app || {};
 
-app.controller('FamilyController', function($scope)
+app.controller('FamilyController', function($scope, $http)
 {
-	$scope.members = [];
+	$scope.users = [];
 
-	$scope.role_id = [];
+	$scope.exists = [];
 
-	$scope.init = function()
+	$scope.search = '';
+
+	$scope.queue = [];
+
+	$scope.isLoading = false;
+
+	$scope.init = function() 
 	{
-		if (typeof window.members != 'undefined')
-			$scope.members = window.members;
+		if (typeof window.exists != 'undefined')
+			$scope.exists = window.exists;
 	};
 
 	$scope.$watch('search', function()
 	{
 		var params = {
 			search: $scope.search,
-			role_id: $scope.role_id
+
 		};
 
-		$http.get('/users/search/', {
-			params: params
-		}).
-		success(function(data, status, headers, config) {
-	    	$scope.members = data;
-	    	console.log($scope.members);
-	  	}).
-	  	error(function(data, status, headers, config) {
-	    	//
-		});
+		if ( ! $scope.isLoading) {
+
+			$scope.isLoading = true;
+
+			$http.get('/users/search/', {
+				params: params
+			}).
+			success(function(data, status, headers, config) {
+		    	$scope.users = data;
+		  	}).
+		  	error(function(data, status, headers, config) {
+		    	//
+			});
+
+			$scope.isLoading = false;
+	  	}
 	});
 
-	$scope.add = function()
+	$scope.addUser = function($index)
 	{
+		var isDuplicated = false;
 
+		angular.forEach($scope.queue, function(user) {
+			if (user.id === $scope.users[$index].id) {
+				isDuplicated = true;
+				return;
+			}
+		});
+
+		if (isDuplicated)
+			return;
+
+		$scope.queue.push($scope.users[$index]);
+
+		$scope.users.splice($index, 1);
 	};
 
-	$scope.remove = function()
+	$scope.removeQueueUser = function($index)
 	{
-
+		$scope.queue.splice($index, 1);
 	};
+
 });

@@ -1,8 +1,10 @@
 @extends('master')
 
-@section('header')
-<script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
-@endsection
+@if ($request->tab === 'family')
+	@section('header')
+	<script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
+	@endsection
+@endif
 
 @section('title', trans('app.update_user'))
 

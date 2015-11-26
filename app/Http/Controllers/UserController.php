@@ -186,6 +186,22 @@ class UserController extends Controller
             $data['photo'] = $photo_name;
         }
 
+        if ( ! empty($data['family_members']) )
+        {
+            $users = [];
+            $queue = json_decode($data['family_members'], true);
+
+            // Todo: Use better function that foreach
+            foreach ($queue as $member) {
+                $users[$member['id']] = $member['id'];
+            }
+
+            if ($user->isStudent())
+                $user->parents()->attach($users);
+            else
+                $user->childrens()->attach($users);
+        }
+
         try {
             $user->update($data);
 
