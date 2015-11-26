@@ -14,7 +14,6 @@
 @endif
 @endsection
 
-
 @include('classes/_partials/tabs')
 
 <div class="row">

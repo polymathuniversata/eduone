@@ -8,7 +8,7 @@
 @if ( count($class->users) > 0 )
 	<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Invite</button>
 <div class="row">
-	@foreach ($class->users as $user)
+	@foreach ($class->users as $index => $user)
 	<div class="col-md-6">
 		<div class="media member">
 		  <div class="media-left">
@@ -18,10 +18,10 @@
 		  </div>
 		  <div class="media-body">
 		    <h4 class="media-heading">
-		    	<a href="{{url('users/' . $user->id)}}">{{$user->getFullName()}}</a> 
+		    	<a href="{{url('users/' . $user->id)}}">{{$user->display_name}}</a> 
 		    </h4>
 		    <small class="text-muted">{{$user->email}}</small>
-		    <div class="text-muted"><small>Joined since 01/01/2014</small></div>
+		    <div class="text-muted"><small>Joined since {{$class->users[$index]->created_at->format('Y-m-d') }}</small></div>
 		  </div>
 		  <div class="media-actions media-right">
 		  	<div class="btn-group">
