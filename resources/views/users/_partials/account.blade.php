@@ -18,7 +18,9 @@
 	<label>{!! trans('app.role') !!}</label>
 	{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
 </div>
-@else
+@endif
+
+@if (isset($request->role_id) && ! isset($user))
 <input type="hidden" name="role_id" value="{{$request->role_id}}">
 @endif
 
