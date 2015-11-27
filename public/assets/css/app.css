@@ -484,3 +484,7 @@ tr.inactive > td{
 	border: 1px solid #eee;
 	padding: 10px;
 }
+
+.progress-thin{
+	height: 5px;
+}

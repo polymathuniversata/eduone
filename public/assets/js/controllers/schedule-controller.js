@@ -67,6 +67,8 @@ app.controller('ScheduleController', function($scope, $http)
 			.success(function(data, status, headers, config) {
 			console.log(data);
 		});
+
+		jQuery('#myModal').modal('hide');
 	};
 
 	$scope.removeGroup = function()
@@ -76,6 +78,7 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.cancel = function()
 	{
-		//$scope.schedules[$scope.currentRoomId][$scope.currentSlot] = {};
+		
+		$scope.schedule = {};
 	};
 });
