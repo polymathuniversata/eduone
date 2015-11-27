@@ -51,7 +51,7 @@
 						<span class="text-muted" ng-hide="schedule.class_id">Click to Add</span>
 						<div ng-show="schedule.class_id">
 							
-							<p>@{{classes[schedule.class_id]}}</p>
+							<h4>@{{classes[schedule.class_id]}}</h4>
 
 							<span class="label label-success">@{{subjects[schedule.subject_id]}}</span>
 							

@@ -22,10 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('phone');
             $table->date('date_of_birth')->nullable();
-            $table->string('id_card', 60);
-            $table->string('id_card_issued_date')->nullable();
-            $table->string('id_card_expired_date')->nullable();
-            $table->string('id_card_issued_by')->nullable();
+            $table->string('id_card', 60)->nullable();
+            $table->string('job')->nullable();
             $table->string('gender', 20);
             $table->string('roll_no', 60)->unique()->nullable();
             $table->string('photo')->nullable();
