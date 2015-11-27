@@ -12,9 +12,17 @@ class ScheduleController extends Controller
 {
     protected $teachers = [];
 
+    protected $classes = [];
+
+    protected $subjects = [];
+
     public function __construct()
     {
         $this->teachers = \App\User::ofRole(3)->lists('display_name', 'id')->toArray();
+        
+        $this->classes = \App\Group::ofType('class')->lists('name', 'id')->toArray();
+        
+        $this->subjects = \App\Subject::lists('name', 'id')->toArray();
     }
 
     /**
@@ -29,21 +37,35 @@ class ScheduleController extends Controller
         $schedule = Schedule::whereStartedAt($date)->get();
 
         $slots = [
-            'Slot 1' => '7:45 - 9:30',
-            'Slot 2' => '9:45 - 11:30',
-            'Slot 3' => '13:45 - 15:30',
-            'Slot 4' => '15:45 - 16:30',
-            'Slot 5' => '16:45 - 18:30',
+            'slot_1' => '7:45 - 9:30',
+            'slot_2' => '9:45 - 11:30',
+            'slot_3' => '13:45 - 15:30',
+            'slot_4' => '15:45 - 16:30',
+            'slot_5' => '16:45 - 18:30',
         ];
 
         $rooms = Room::lists('name', 'id')->toArray();
+
+        $schedules = [];
+
+        foreach ($rooms as $room_id => $room_name) {
+            if ( ! isset($schedules[$room_id]))
+                $schedules[$room_id] = [];
+
+            foreach ($slots as $slot_name => $time) {
+                $schedules[$room_id][$slot_name] = new \stdClass;
+            }   
+        }
 
         $pass_to_view = [
             'date' => $date,
             'schedule' => $schedule,
             'teachers' => $this->teachers,
             'slots' => $slots,
-            'rooms' => $rooms
+            'rooms' => $rooms,
+            'schedules' => $schedules,
+            'classes' => $this->classes,
+            'subjects' => $this->subjects
         ];
 
         return view('schedules/index', $pass_to_view);
@@ -67,7 +89,11 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->json()->all();
+
+        $data['branch_id'] = 1;
+
+        return Schedule::create($data);
     }
 
     /**

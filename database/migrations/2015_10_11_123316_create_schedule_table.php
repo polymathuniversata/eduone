@@ -16,6 +16,7 @@ class CreateScheduleTable extends Migration
             $table->integer('teacher_id')->nullable();
             $table->string('session_id')->nullable();
             $table->integer('event_id')->nullable();
+            $table->integer('slot_id')->nullable();
             $table->timestamp('started_at');
             $table->timestamp('finished_at');
             $table->text('attendance_detail');

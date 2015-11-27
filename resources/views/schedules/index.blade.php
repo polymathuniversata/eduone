@@ -3,7 +3,12 @@
 @section('title', 'Schedule')
 @section('header')
 	<script>
-	var teachers = {!! json_encode($teachers) !!}
+		var teachers 	= {!! json_encode($teachers) !!},
+			rooms 		= {!! json_encode($rooms) !!},
+			slots 		= {!! json_encode($slots) !!},
+			schedules 	= {!! json_encode($schedules) !!},
+			classes 	= {!! json_encode($classes) !!},
+			subjects 	= {!! json_encode($subjects) !!};
 	</script>
 	<script type="text/javascript" src="{{ url('/assets/js/controllers/schedule-controller.js') }}"></script>
 @endsection
@@ -32,25 +37,29 @@
 			<thead>
 				<tr>
 					<th style="max-width: 50px;"></th>
-					@foreach ($slots as $slot_name => $time)
-					<th>
-						{{$slot_name}}
-						<small>{{$time}}</small>
+					<th ng-repeat="(slot_name, time) in slots">
+						@{{slot_name}}
+						<small>@{{time}}</small>
 					</th>
-					@endforeach
 				</tr>
 			</thead>
 			<tbody>
-				@foreach ($rooms as $room_id => $room_name)
-				<tr>
-					<th style="max-width: 50px;">{{$room_name}}</th>
-					@foreach ($slots as $slot_name => $time)
-					<td data-toggle="modal" data-target="#myModal">
-						<span class="text-muted" ng-hide="schedules[{{$room_id}}]['{{$slot_name}}']">Click to Add</span>
+				<tr ng-repeat="(room_id, slots) in schedules">
+					<th style="max-width: 50px;">@{{room_id}}</th>
+					<td data-toggle="modal" data-target="#myModal" ng-repeat="(slot_name, schedule) in slots" ng-click="setSchedule(schedule, slot_name, room_id)">
+
+						<span class="text-muted" ng-hide="schedule.class_id">Click to Add</span>
+						<div ng-show="schedule.class_id">
+							
+							<p>@{{classes[schedule.class_id]}}</p>
+
+							<span class="label label-success">@{{subjects[schedule.subject_id]}}</span>
+							
+							@{{teachers[schedule.teacher_id]}}
+							
+						</div>
 					</td>
-					@endforeach
 				</tr>
-				@endforeach
 			</tbody>
 		</table>
 	</div>

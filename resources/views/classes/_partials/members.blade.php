@@ -9,6 +9,7 @@
 	<button ng-click="addMember()" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#myModal">Invite</button>
 <div class="row">
 	@foreach ($class->users as $index => $user)
+	
 	<div class="col-md-6">
 		<div class="media member">
 		  <div class="media-left">
