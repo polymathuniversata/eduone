@@ -13,11 +13,14 @@
 	{!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('app.last_name')]) !!}
 </div>
 
+@if ( ! isset($request->role_id))
 <div class="form-group">
 	<label>{!! trans('app.role') !!}</label>
 	{!! Form::select('role_id', $roles, null, ['class' => 'form-control'] ) !!}
 </div>
-
+@else
+<input type="hidden" name="role_id" value="{{$request->role_id}}">
+@endif
 
 <div class="form-group">
 	<label for="">{!! trans('app.password') !!}</label>

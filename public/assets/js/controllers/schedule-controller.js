@@ -8,10 +8,15 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.teachers = [];
 
+	$scope.schedules = [];
+
 	$scope.init = function()
 	{
 		if (typeof window.teachers != 'undefined')
 			$scope.teachers = window.teachers;
+
+		if (typeof window.schedules != 'undefined')
+			$scope.schedules = window.schedules;
 	};
 	
 	$scope.getSubjects = function() {
@@ -28,13 +33,13 @@ app.controller('ScheduleController', function($scope, $http)
 		$scope.group.teacher = $scope.subjects[$scope.group.subject].teacher + '';
 	};
 
-	$scope.addGroup = function(group)
+	$scope.addGroup = function()
 	{
-
+		$scope.schedules[1]['Slot 1'] = $scope.group;
 	};
 
-	$scope.removeGroup = function(group)
+	$scope.removeGroup = function()
 	{
-
+		$scope.group = {};
 	};
 });

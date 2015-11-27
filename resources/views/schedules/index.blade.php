@@ -46,7 +46,7 @@
 					<th style="max-width: 50px;">{{$room_name}}</th>
 					@foreach ($slots as $slot_name => $time)
 					<td data-toggle="modal" data-target="#myModal">
-						<span class="text-muted">Click to Add</span>
+						<span class="text-muted" ng-hide="schedules[{{$room_id}}]['{{$slot_name}}']">Click to Add</span>
 					</td>
 					@endforeach
 				</tr>
