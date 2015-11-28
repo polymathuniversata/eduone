@@ -299,5 +299,33 @@ return [
 		'inprogress' 	=> 'In Progress',
 		'done' 			=> 'Done',
 		'canceled' 		=> 'Canceled',
-	]
+	],
+
+	'slots' => [
+		[
+			'id' 	=> 1,
+			'name' 	=> 'Slot 1',
+			'time'	=> '7:45 - 9:30'
+		],
+		[
+			'id'	=> 2,
+			'name'	=> 'Slot 2',
+			'time' 	=> '9:45 - 11:30'
+		],
+		[
+			'id'	=> 3,
+			'name'	=> 'Slot 3',
+			'time'	=> '13:45 - 15:30'
+		],
+		[
+			'id'	=> 4,
+			'name'	=> 'Slot 4',
+			'time'	=> '15:45 - 16:30'
+		],
+		[
+			'id'	=> 5,
+			'name'	=> 'Slot 5',
+			'time'	=> '16:45 - 18:30'
+		]
+	],
 ];

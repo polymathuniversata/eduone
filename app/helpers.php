@@ -40,3 +40,17 @@ function array_flip_deep(array $array)
 	return $flipped;
 }
 
+function get_slot($id)
+{
+	return array_filter(config('settings.slots'), function($slot) use ($id){
+		return $slot['id'] === $id;
+	})[0];
+}
+
+function get_slot_time($slot)
+{
+	if ( ! is_array($slot))
+		$slot = get_slot($slot);
+	
+	return array_map('trim', explode('-', $slot['time']));
+}

@@ -65,7 +65,7 @@ app.controller('ScheduleController', function($scope, $http)
 	{
 		$http.post('/schedules', $scope.schedule)
 			.success(function(data, status, headers, config) {
-			console.log(data);
+			// console.log(data);
 		});
 
 		jQuery('#myModal').modal('hide');
@@ -78,7 +78,6 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.cancel = function()
 	{
-		
 		$scope.schedule = {};
 	};
 });
