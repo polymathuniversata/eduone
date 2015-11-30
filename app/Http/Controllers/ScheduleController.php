@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Schedule;
 use App\Room;
+use \Carbon\Carbon as Carbon;
 
 class ScheduleController extends Controller
 {
@@ -32,42 +33,51 @@ class ScheduleController extends Controller
      */
     public function index(Request $request)
     {
-        $date = isset($request->date) ? $request->date : date('Y-m-d');
+        if ($request->date === 'today')
+            $request->date = date('Y-m-d');
 
-        $schedule = Schedule::whereStartedAt($date)->get();
+        $request->date = isset($request->date) ? $request->date : date('Y-m-d');
 
-        $slots = [
-            'slot_1' => '7:45 - 9:30',
-            'slot_2' => '9:45 - 11:30',
-            'slot_3' => '13:45 - 15:30',
-            'slot_4' => '15:45 - 16:30',
-            'slot_5' => '16:45 - 18:30',
-        ];
+        $request_date = Carbon::createFromFormat('Y-m-d', $request->date);
+
+        $today          = Carbon::today()->format('Y-m-d');
+        $previous_day   = $request_date->copy()->subDay()->format('Y-m-d');
+        $next_day       = $request_date->copy()->addDay()->format('Y-m-d');
+        $viewing_day    = $request_date->copy()->format('Y-m-d');
+
+        // Todo: Should cast $request->date to date type
+        
+        $slots = config('settings.slots');
 
         $rooms = Room::lists('name', 'id')->toArray();
 
+        $available_schedules = Schedule::whereStartedAt($request->date)->ofBranch(1)->get();
+
         $schedules = [];
-
         foreach ($rooms as $room_id => $room_name) {
-            if ( ! isset($schedules[$room_id]))
-                $schedules[$room_id] = [];
-
-            foreach ($slots as $slot_name => $time) {
-                $schedules[$room_id][$slot_name] = new \stdClass;
-            }   
+            foreach ($slots as $slot) {                    
+                $schedules[$room_id][$slot['id']] = new \stdClass;
+            }
+        }
+        
+        foreach ($available_schedules as $schedule)
+        {
+            if (isset($schedule->room_id) && isset($schedule->slot_id)) {
+                $schedules[$schedule->room_id][$schedule->slot_id] = $schedule;
+            }
         }
 
         $pass_to_view = [
-            'date' => $date,
-            'schedule' => $schedule,
             'teachers' => $this->teachers,
             'slots' => $slots,
             'rooms' => $rooms,
             'schedules' => $schedules,
             'classes' => $this->classes,
-            'subjects' => $this->subjects
+            'subjects' => $this->subjects,
+            'request' => $request,
+            'dates' => compact('today', 'previous_day', 'next_day', 'viewing_day')
         ];
-
+        
         return view('schedules/index', $pass_to_view);
     }
 

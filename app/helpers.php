@@ -42,15 +42,16 @@ function array_flip_deep(array $array)
 
 function get_slot($id)
 {
-	return array_filter(config('settings.slots'), function($slot) use ($id){
-		return $slot['id'] === $id;
-	})[0];
+	foreach (config('settings.slots') as $slot) {
+		if ($slot['id'] === $id)
+			return $slot;
+	}
 }
 
 function get_slot_time($slot)
 {
 	if ( ! is_array($slot))
 		$slot = get_slot($slot);
-	
+
 	return array_map('trim', explode('-', $slot['time']));
 }

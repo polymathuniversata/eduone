@@ -12,10 +12,6 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.slots = {};
 
-	$scope.currentRoomId = 0;
-
-	$scope.currentSlot = '';
-
 	$scope.classes = [];
 
 	$scope.subjects = [];
@@ -32,10 +28,10 @@ app.controller('ScheduleController', function($scope, $http)
 		});
 	};
 
-	$scope.setSchedule = function(schedule, slot_name, room_id)
+	$scope.setSchedule = function(schedule, slot_id, room_id)
 	{
 		$scope.schedule 			= schedule;
-		$scope.schedule.slot_name 	= slot_name;
+		$scope.schedule.slot_id 	= slot_id;
 		$scope.schedule.room_id 	= room_id; 
 	};
 	
