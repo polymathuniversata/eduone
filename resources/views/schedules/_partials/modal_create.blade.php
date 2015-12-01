@@ -7,13 +7,13 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="class">Class</label>
-          <select id="class" name="class" class="form-control" ng-model="schedule.class_id" ng-options="key as value for (key,value) in classes" ng-change="getSubjects()"></select>
+          <label for="class_id">Class</label>
+          <select id="class_id" name="class_id" class="form-control" ng-model="schedule.class_id" ng-options="key*1 as value for (key,value) in classes" ng-change="getSubjects()"></select>
         </div>
 
-        <div class="form-group" ng-show="schedule.class_id">
-          <label for="subject">Subject</label>
-          <select id="subject" name="subject" class="form-control" ng-model="schedule.subject_id" ng-options="subject.id as subject.name for subject in classSubjects" ng-change="setSelectedTeacher()"></select>
+        <div class="form-group" ng-if="schedule.class_id">
+          <label for="subject_id">Subject</label>
+          <select id="subject_id" ng-init="getSubjects()" name="subject_id" class="form-control" ng-model="schedule.subject_id" ng-options="subject.id as subject.name for subject in class_subjects[schedule.class_id]" ng-change="setSelectedTeacher()"></select>
         </div>
         
         <div class="progress progress-thin" ng-show="schedule.subject_id">
@@ -21,14 +21,17 @@
         </div>
 
         <div class="form-group" ng-show="schedule.subject_id">
-          <label for="teacher">Teacher</label>
-          <select id="teacher" name="teacher" class="form-control" ng-model="schedule.teacher_id" ng-options="key as value for (key, value) in teachers"></select>
+          <label for="teacher_id">Teacher</label>
+          <select id="teacher_id" name="teacher_id" class="form-control" ng-model="schedule.teacher_id" ng-options="key*1 as value for (key, value) in teachers"></select>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="addGroup()" ng-show="schedule.teacher_id">Create</button>
+        <button type="button" class="btn btn-primary" ng-click="addGroup()" ng-show="schedule.teacher_id && schedule.subject_id">
+          <span ng-show="!schedule.id">Create</span>
+          <span ng-show="schedule.id">Update</span>
+        </button>
       </div>
     </div>
   </div>

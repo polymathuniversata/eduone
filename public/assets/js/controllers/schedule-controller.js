@@ -2,7 +2,7 @@ app = app || {};
 
 app.controller('ScheduleController', function($scope, $http)
 {
-	$scope.classSubjects = [];
+	$scope.class_subjects = [];
 
 	$scope.teachers = {};
 
@@ -20,9 +20,11 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.isLoading = false;
 
+	$scope.current_date = null;
+
 	$scope.init = function()
 	{
-		angular.forEach(['teachers', 'slots', 'rooms', 'schedules', 'classes', 'subjects'], function(object) {
+		angular.forEach(['teachers', 'slots', 'rooms', 'schedules', 'classes', 'subjects', 'current_date'], function(object) {
 			if (typeof window[object] != 'undefined')
 				$scope[object] = window[object];
 		});
@@ -32,17 +34,21 @@ app.controller('ScheduleController', function($scope, $http)
 	{
 		$scope.schedule 			= schedule;
 		$scope.schedule.slot_id 	= slot_id;
-		$scope.schedule.room_id 	= room_id; 
+		$scope.schedule.room_id 	= room_id;
 	};
 	
 	$scope.getSubjects = function() 
 	{
-		if ( ! $scope.isLoading) {
+		if ( ! $scope.isLoading 
+			&& typeof $scope.schedule.class_id != 'undefined'
+			&& typeof $scope.class_subjects[$scope.schedule.class_id] == 'undefined'
+		) 
+		{
 			$scope.isLoading = true;
 			
 			$http.get('/classes/' + $scope.schedule.class_id + '/subjects').
 				success(function(data, status, headers, config) {
-			    	$scope.classSubjects = data;
+			    	$scope.class_subjects[$scope.schedule.class_id] = data;
 			  	}).
 			  	error(function(data, status, headers, config) {
 			    	//
@@ -52,16 +58,20 @@ app.controller('ScheduleController', function($scope, $http)
 		}
 	};
 
-	$scope.setSelectedTeacher = function() {
-		
-		$scope.schedule.teacher_id = $scope.classSubjects[$scope.schedule.subject_id].teacher + '';
+	$scope.setSelectedTeacher = function() 
+	{
+		if (typeof $scope.class_subjects[$scope.schedule.class_id] != 'undefined')
+			$scope.schedule.teacher_id = $scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].teacher;
 	};
 
 	$scope.addGroup = function()
 	{
+
+		$scope.schedule.started_at = $scope.current_date;
+
 		$http.post('/schedules', $scope.schedule)
 			.success(function(data, status, headers, config) {
-			// console.log(data);
+			//console.log(data);
 		});
 
 		jQuery('#myModal').modal('hide');

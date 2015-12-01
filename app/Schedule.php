@@ -12,8 +12,18 @@ class Schedule extends Model
     						'teacher_id', 'session_id', 'event_id', 'slot_id', 'started_at', 'finished_at', 
     						'attendance_detail', 'creator_id'];
 
+    protected $dates = ['started_at', 'finished_at', 'created_at', 'updated_at'];
+
     protected $casts = [
     	'attendance_detail' => 'array'
     ];
 
+    public static function findByUnique($date, $room_id, $slot_id, $branch_id = 1)
+    {
+    	return self::ofBranch($branch_id)
+    				->whereRoomId($room_id)
+    				->whereDate('started_at', '=', $date)
+    				->whereSlotId($slot_id)
+    				->first();
+    }
 }

@@ -8,7 +8,8 @@
 			slots 		= {!! json_encode($slots) !!},
 			schedules 	= {!! json_encode($schedules) !!},
 			classes 	= {!! json_encode($classes) !!},
-			subjects 	= {!! json_encode($subjects) !!};
+			subjects 	= {!! json_encode($subjects) !!},
+			current_date= '{{$dates['viewing_day']}}';
 	</script>
 	<script type="text/javascript" src="{{ url('/assets/js/controllers/schedule-controller.js') }}"></script>
 @endsection
@@ -49,12 +50,12 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="(room_id, slot_schedules) in schedules">
-					<th style="max-width: 50px;">@{{room_id}}</th>
+					<th style="max-width: 50px;">@{{rooms[room_id]}}</th>
 					<td data-toggle="modal" data-target="#myModal" ng-repeat="(slot_id, schedule) in slot_schedules" ng-click="setSchedule(schedule, slot_id, room_id)">
 
 						<span class="text-muted" ng-hide="schedule.class_id">Click to Add</span>
 						<div ng-show="schedule.class_id">
-							
+							<pre>@{{schedule.id}}</pre>
 							<h4>@{{classes[schedule.class_id]}}</h4>
 
 							<span class="label label-success">@{{subjects[schedule.subject_id]}}</span>
