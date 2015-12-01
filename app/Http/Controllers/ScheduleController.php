@@ -23,7 +23,7 @@ class ScheduleController extends Controller
         
         $this->classes = \App\Group::ofType('class')->lists('name', 'id')->toArray();
         
-        $this->subjects = \App\Subject::lists('name', 'id')->toArray();
+        $this->subjects = \App\Subject::get(['id', 'name', 'sessions_count'])->getDictionary();
     }
 
     /**
@@ -125,7 +125,7 @@ class ScheduleController extends Controller
         
         $schedule->update($data);
 
-        return 'success';
+        return $schedule;
     }
 
     /**

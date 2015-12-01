@@ -58,7 +58,7 @@
 							<pre>@{{schedule.id}}</pre>
 							<h4>@{{classes[schedule.class_id]}}</h4>
 
-							<span class="label label-success">@{{subjects[schedule.subject_id]}}</span>
+							<span class="label label-success">@{{subjects[schedule.subject_id].name}}</span>
 							
 							@{{teachers[schedule.teacher_id]}}
 							

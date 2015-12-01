@@ -16,8 +16,8 @@
           <select id="subject_id" ng-init="getSubjects()" name="subject_id" class="form-control" ng-model="schedule.subject_id" ng-options="subject.id as subject.name for subject in class_subjects[schedule.class_id]" ng-change="setSelectedTeacher()"></select>
         </div>
         
-        <div class="progress progress-thin" ng-show="schedule.subject_id">
-          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
+        <div class="progress progress-thin" ng-show="schedule.subject_id" ng-if="schedule.class_id && schedule.subject_id">
+          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="@{{getCompletedPercent()}}" aria-valuemin="0" aria-valuemax="100" style="width: @{{getCompletedPercent()}}%"></div>
         </div>
 
         <div class="form-group" ng-show="schedule.subject_id">

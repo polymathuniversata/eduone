@@ -203,19 +203,19 @@ class ClassController extends Controller
 
         $subjects = $class->subjects;
         
-        $subjects_teachers = [];
+        $subjects_info = [];
 
         foreach ($subjects as $subject)
         {
-            $subjects_teachers[$subject->id] = [
+            $subjects_info[$subject->id] = [
                 'id'        => $subject->id,
                 'name'      => $subject->name,
-                // Todo: Check performance of this line
-                'teacher'   => $subject->pivot->user_id 
+                'completed' => $class->getSubjectCompletedSessions($subject->id),
+                'teacher'   => $subject->pivot->user_id // Todo: Check performance this line
             ];
         }
 
-        return $subjects_teachers;
+        return $subjects_info;
     }
 
     public function teacher($class_id, $subject_id, Request $request)

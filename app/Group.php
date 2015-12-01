@@ -264,4 +264,24 @@ class Group extends Model
 
         return $query;
     }
+
+    public function getSubjectCompletedSessions($subject_id)
+    {
+        return Schedule::ofBranch(1)
+                        ->whereClassId($this->id)
+                        ->whereSubjectId($subject_id)->count();
+
+    }
+
+    public function getSubjectCompletedPercent($subject_id)
+    {
+        $sessions = Subject::find($subject_id)->sessions_count;
+
+        $completed_sessions = $this->getSubjectCompletedSessions($subject_id);
+
+        if ($completed_sessions > 0 && $sessions > 0)
+            return round($completed_sessions / $sessions * 100, 2);
+
+        return 0;
+    }
 }

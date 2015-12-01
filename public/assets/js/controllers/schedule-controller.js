@@ -66,15 +66,32 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.addGroup = function()
 	{
-
 		$scope.schedule.started_at = $scope.current_date;
 
 		$http.post('/schedules', $scope.schedule)
 			.success(function(data, status, headers, config) {
-			//console.log(data);
+			$scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].completed++;
 		});
 
 		jQuery('#myModal').modal('hide');
+	};
+
+	$scope.getCompletedPercent = function()
+	{
+		if (typeof $scope.schedule.subject_id == 'undefined' || typeof $scope.schedule.class_id == 'undefined')
+			return;
+
+		var subjectId = $scope.schedule.subject_id,
+			classId   = $scope.schedule.class_id;
+
+		if (typeof $scope.class_subjects[classId] == 'undefined')
+			return;
+
+		var sessionsCount = $scope.subjects[subjectId].sessions_count;
+
+		var alreadyScheduled = $scope.class_subjects[classId][subjectId].completed;
+
+		return Math.round(alreadyScheduled / sessionsCount * 100);
 	};
 
 	$scope.removeGroup = function()
