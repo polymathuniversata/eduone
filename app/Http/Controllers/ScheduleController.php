@@ -103,23 +103,24 @@ class ScheduleController extends Controller
 
         $data['branch_id'] = 1;
 
-        $schedule = Schedule::findByUnique($data['started_at'], $data['room_id'], $data['slot_id']);
-
         // Convert Slot to time
         $slot_id                = intval($data['slot_id']);
         $slot_time              = get_slot_time($slot_id);
         $date                   = $data['started_at'];
 
-        if ( ! $schedule) {
+        if ( ! isset($data['id'])) {
             $data['started_at']    .= ' ' .$slot_time[0];
             $data['finished_at']    = $date . ' ' . $slot_time[1];
+
+            $data['started_at']     = Carbon::parse($data['started_at'])->format('Y-m-d H:i:s');
+            $data['finished_at']    = Carbon::parse($data['finished_at'])->format('Y-m-d H:i:s');
         }
 
-        $data['started_at']     = Carbon::parse($data['started_at'])->format('Y-m-d H:i:s');
-        $data['finished_at']    = Carbon::parse($data['finished_at'])->format('Y-m-d H:i:s');
-
-        if ( ! $schedule )
+      
+        if ( ! isset($data['id']) )
             return Schedule::create($data);
+
+        $schedule = Schedule::findOrFail($data['id']);
 
         unset($data['updated_at']);
         
