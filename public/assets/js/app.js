@@ -63,4 +63,11 @@ $(function()
 		
 	});
 
+	$('#present-checkbox').click(function() {
+		$(this).parents('table').find('input[type=checkbox]').prop('checked', this.checked);
+	});
+
+	$('.cell-label').click(function () {
+		$(this).find('input[type=checkbox]').trigger('click');
+	});
 });

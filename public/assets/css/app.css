@@ -21,6 +21,9 @@ h1,h2,h3{ font-weight: normal; }
 .help-block{
 	font-size: 12px;
 }
+.cell-label:hover{
+	cursor: pointer;
+}
 .row-md{
 	max-width: 1200px;
 }

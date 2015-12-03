@@ -17,7 +17,7 @@
 				<tr>
 					<th>#</th>
 					<th>Student</th>
-					<th><input type="checkbox"> Present?</th>
+					<th><input type="checkbox" id="present-checkbox"> Present?</th>
 					<th>Note</th>
 				</tr>
 			</thead>
@@ -26,9 +26,8 @@
 				<tr>
 					<td>1</td>
 					<td>{{$student_name}}</td>
-					<td>
+					<td class="cell-label">
 						{!! Form::checkbox("students[{$id}][status]", 'present', ! empty($attendance_detail[$id]['status']) && $attendance_detail[$id]['status'] == 'present') !!}
-						
 					</td>
 					<td><textarea name="students[{{$id}}][note]" class="form-control" rows="2">{{ ( ! empty($attendance_detail[$id]['note'])) ? $attendance_detail[$id]['note'] : '' }}</textarea></td>
 				</tr>
