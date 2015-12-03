@@ -116,12 +116,14 @@ class ClassController extends Controller
         $pass_to_view = [
             'programs' => $this->programs,
             'branches' => $this->branches,
+            'all_subjects' => $this->subjects,
             'class'    => $class,
             'request'  => $request
         ];
         
-        if ($request->tab === 'subjects' || $class->users_count > 0) {
-            $teachers   = $class->getTeachers()->lists('name', 'id')->toArray();
+        if ( in_array($request->tab, ['subjects', 'schedules']) && $class->users_count > 0) 
+        {
+            $teachers   = $class->getTeachers()->lists('display_name', 'id')->toArray();
         
             $program = $class->program;
 
@@ -141,12 +143,12 @@ class ClassController extends Controller
 
         if ($request->tab === 'schedules') {
 
-             if ($request->date === 'today')
-                $request->date = date('Y-m-d');
+             if ($request->date_start === 'today')
+                $request->date_start = date('Y-m-d');
 
-            $request->date = isset($request->date) ? $request->date : date('Y-m-d');
+            $request->date_start = isset($request->date_start) ? $request->date_start : date('Y-m-d');
 
-            $request_date = Carbon::createFromFormat('Y-m-d', $request->date);
+            $request_date = Carbon::createFromFormat('Y-m-d', $request->date_start);
 
             $today         = Carbon::today()->format('Y-m-d');
             
@@ -178,9 +180,8 @@ class ClassController extends Controller
                                 ->get();
 
             $pass_to_view['schedules'] = $schedules;
-            $pass_to_view['this_week'] = $this_week;
-            $pass_to_view['weekdays'] = $weekdays;
-            
+
+            $pass_to_view['dates'] = compact('this_week', 'weekdays', 'previous_week', 'next_week', 'today');
         }
 
         return view('classes/update', $pass_to_view);
