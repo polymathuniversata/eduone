@@ -328,4 +328,6 @@ return [
 			'time'	=> '16:45 - 18:30'
 		]
 	],
+
+	'weekdays' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 ];

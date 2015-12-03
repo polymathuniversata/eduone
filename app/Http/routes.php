@@ -45,3 +45,6 @@ Route::get('users/search', 'UserController@search');
 Route::resource('users', 'UserController');
 Route::resource('media', 'MediaController');
 Route::resource('schedules', 'ScheduleController');
+Route::resource('attendances', 'AttendanceController');
+Route::resource('grades', 'GradeController');
+Route::resource('transports', 'TransportController');

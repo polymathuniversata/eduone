@@ -28,7 +28,7 @@
 	  	<div class="btn-group" role="group">
 	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['previous_day'] )}}"><i class="fa fa-chevron-left"></i></a>
 	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['next_day'])}}"><i class="fa fa-chevron-right"></i></a>
-			{!! Form::date('date', $dates['viewing_day'], ['class' => 'form-control']) !!}
+			{!! Form::date('date', $dates['viewing_day'], ['class' => 'form-control']) !!} ({{$dates['weekday']}})
 	  	</div>
 
 	  	<div class="btn-group right" role="group">
@@ -55,7 +55,6 @@
 
 						<span class="text-muted" ng-hide="schedule.class_id">Click to Add</span>
 						<div ng-show="schedule.class_id">
-							<pre>@{{schedule.id}}</pre>
 							<h4>@{{classes[schedule.class_id]}}</h4>
 
 							<span class="label label-success">@{{subjects[schedule.subject_id].name}}</span>

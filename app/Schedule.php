@@ -26,4 +26,13 @@ class Schedule extends Model
     				->whereSlotId($slot_id)
     				->first();
     }
+
+    public static function isClassConflict($class_id, $date, $slot_id, $branch_id = 1)
+    {
+        return self::ofBranch($branch_id)
+                    ->whereClassId($class_id)
+                    ->whereDate('started_at', '=', $date)
+                    ->whereSlotId($slot_id)
+                    ->exists();
+    }
 }

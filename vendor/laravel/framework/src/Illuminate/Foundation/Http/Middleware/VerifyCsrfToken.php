@@ -62,6 +62,10 @@ class VerifyCsrfToken
     protected function shouldPassThrough($request)
     {
         foreach ($this->except as $except) {
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
+
             if ($request->is($except)) {
                 return true;
             }
@@ -84,7 +88,7 @@ class VerifyCsrfToken
             $token = $this->encrypter->decrypt($header);
         }
 
-        return Str::equals($request->session()->token(), $token);
+        return Str::equals((string) $request->session()->token(), $token);
     }
 
     /**

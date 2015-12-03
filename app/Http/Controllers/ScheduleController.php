@@ -45,6 +45,8 @@ class ScheduleController extends Controller
         $next_day       = $request_date->copy()->addDay()->format('Y-m-d');
         $viewing_day    = $request_date->copy()->format('Y-m-d');
 
+        $weekday        = config('settings.weekdays')[$request_date->dayOfWeek];
+
         // Todo: Should cast $request->date to date type
         
         $slots = config('settings.slots');
@@ -75,7 +77,7 @@ class ScheduleController extends Controller
             'classes' => $this->classes,
             'subjects' => $this->subjects,
             'request' => $request,
-            'dates' => compact('today', 'previous_day', 'next_day', 'viewing_day')
+            'dates' => compact('today', 'previous_day', 'next_day', 'viewing_day', 'weekday')
         ];
         
         return view('schedules/index', $pass_to_view);
@@ -116,6 +118,10 @@ class ScheduleController extends Controller
             $data['finished_at']    = Carbon::parse($data['finished_at'])->format('Y-m-d H:i:s');
         }
 
+        // Check if class is already learn in same slot, same time
+        $conflict = Schedule::isClassConflict($data['class_id'], $date, $data['slot_id']);
+        if ($conflict)
+            return 'Class schedule is already set';
       
         if ( ! isset($data['id']) )
             return Schedule::create($data);

@@ -11,6 +11,8 @@ use App\Program;
 use App\Subject;
 use App\User;
 use App\Repositories\ClassRepository;
+use App\Schedule;
+use Carbon\Carbon;
 
 class ClassController extends Controller
 {
@@ -109,7 +111,7 @@ class ClassController extends Controller
     public function edit(Group $class, Request $request)
     {
         if ( ! isset($request->tab))
-            $request->tab = 'members';
+            $request->tab = 'info';
 
         $pass_to_view = [
             'programs' => $this->programs,
@@ -135,6 +137,50 @@ class ClassController extends Controller
             $subjects_teachers = $class->getSubjectsTeachers();
             
             $pass_to_view += compact('periods', 'subjects', 'class_subjects', 'teachers', 'subjects_teachers');
+        }
+
+        if ($request->tab === 'schedules') {
+
+             if ($request->date === 'today')
+                $request->date = date('Y-m-d');
+
+            $request->date = isset($request->date) ? $request->date : date('Y-m-d');
+
+            $request_date = Carbon::createFromFormat('Y-m-d', $request->date);
+
+            $today         = Carbon::today()->format('Y-m-d');
+            
+            $this_week = [
+                'start' => $request_date->copy()->startOfWeek()->format('Y-m-d'),
+                'end'   => $request_date->copy()->endOfWeek()->format('Y-m-d')
+            ];
+            
+            $previous_week = [
+                'start' => $request_date->copy()->subWeek()->startOfWeek()->format('Y-m-d'),
+                'end' => $request_date->copy()->subWeek()->endOfWeek()->format('Y-m-d'),
+            ];
+
+            $next_week = [
+                'start' => $request_date->copy()->addWeek()->startOfWeek()->format('Y-m-d'),
+                'end' => $request_date->copy()->addWeek()->endOfWeek()->format('Y-m-d'),
+            ];
+
+            $weekdays = [];
+            for ($i = 0; $i < 6; $i++) {
+                $weekdays[$i] = \Carbon\Carbon::createFromFormat('Y-m-d', $this_week['start'])
+                                    ->addDay($i)
+                                    ->format('Y-m-d');
+            }
+
+            $schedules = Schedule::ofBranch(1)
+                                ->whereClassId($class->id)
+                                ->whereBetween('started_at', [$this_week['start'], $this_week['end']])
+                                ->get();
+
+            $pass_to_view['schedules'] = $schedules;
+            $pass_to_view['this_week'] = $this_week;
+            $pass_to_view['weekdays'] = $weekdays;
+            
         }
 
         return view('classes/update', $pass_to_view);

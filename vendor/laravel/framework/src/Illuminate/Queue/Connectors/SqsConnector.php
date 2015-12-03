@@ -16,7 +16,13 @@ class SqsConnector implements ConnectorInterface
      */
     public function connect(array $config)
     {
-        $config += ['version' => 'latest'];
+        $config = array_merge([
+            'version' => 'latest',
+            'http' => [
+                'timeout' => 60,
+                'connect_timeout' => 60,
+            ],
+        ], $config);
 
         if ($config['key'] && $config['secret']) {
             $config['credentials'] = Arr::only($config, ['key', 'secret']);
