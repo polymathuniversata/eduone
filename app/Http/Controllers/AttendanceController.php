@@ -33,10 +33,13 @@ class AttendanceController extends Controller
         $schedule_id = intval($request->schedule_id);
 
         $schedule   = Schedule::find($schedule_id);
+        
+        $attendance_detail = $schedule->attendance_detail;
+
         $class      = Group::find($schedule->class_id);
         $students   = $class->getStudents()->lists('display_name', 'id')->toArray();
 
-        $view = compact('schedule', 'class', 'students', 'request');
+        $view = compact('schedule', 'class', 'students', 'request', 'attendance_detail');
 
         return view('attendances/create', $view);
     }
@@ -49,7 +52,31 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array_filter($request->all());
+
+        if ( ! $data['schedule_id'])
+            return redirect(url('/'))->withMessage('Please select a class session');
+
+        $schedule = Schedule::findOrFail($data['schedule_id']);
+
+        $students = $data['students'];
+
+        $attendance_detail = [];
+
+        foreach ($students as $student_id => $state) {
+            $id = intval($student_id);
+            
+            $attendance_detail[$id] = [
+                'status' => isset($state['status']) ? $state['status'] : 'absent',
+                'note'   => isset($state['note']) ? $state['note'] : ''
+            ];
+        }
+
+        $schedule->attendance_detail = $attendance_detail;
+
+        $schedule->save();
+
+        return redirect(url('attendances/create?schedule_id=' . $schedule->id));
     }
 
     /**

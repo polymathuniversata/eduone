@@ -43,7 +43,7 @@
 
 								<h5 class="schedule-teacher">{{$teachers[$schedule->teacher_id]}}</h5>
 
-								<a href="{{url('attendances/')}}" class="btn btn-info btn-xs">Take Attendance</a>
+								<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
 							@endif
 						@endforeach
 					</td>
