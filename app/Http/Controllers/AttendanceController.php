@@ -77,17 +77,19 @@ class AttendanceController extends Controller
             $attendance_detail[$id] = compact('status', 'note');
 
             $student_attendance_detail = [
+                'date'      => $schedule->started_at->format('Y-m-d H:i:s'),
+                'slot'      => $schedule->slot_id,
+                'status'    => $status,
+                'note'      => $note
+            ];
+            
+            $student_subjects_pivot = [
                 'user_id'       => $id,
                 'class_id'      => $schedule->class_id,
                 'subject_id'    => $schedule->subject_id,
                 'creator_id'    => $schedule->creator_id,
                 'branch_id'     => $schedule->branch_id,
-                'attendance_detail' => json_encode([
-                    'date'      => $schedule->started_at->format('Y-m-d H:i:s'),
-                    'slot'      => $schedule->slot_id,
-                    'status'    => $status,
-                    'note'      => $note
-                ])
+                'attendance_detail' => json_encode([$student_attendance_detail])
             ];
 
             // Todo: Improve performance of these lines
@@ -98,10 +100,29 @@ class AttendanceController extends Controller
                         ->first();
 
             if ( ! $student_attendance) {
-                \DB::table('users_subjects')->insert($student_attendance_detail);
+                \DB::table('users_subjects')->insert($student_subjects_pivot);
             } else {
+
+                $attendance_details = json_decode($student_attendance->attendance_detail);
+
+                $new = true;
+
+                foreach ($attendance_details as $index => $attendance) {
+                    
+                    if ($attendance->date === $student_attendance_detail['date']
+                        && $attendance->slot = $schedule->slot_id
+                    ) {
+                        $attendance_details[$index] = $student_attendance_detail;
+
+                        $new = false;
+                    }
+                }
+
+                if ($new)
+                    $attendance_details[] = $student_attendance_detail;
+
                 \DB::table('users_subjects')->where('id', $student_attendance->id)
-                                            ->update(['attendance_detail' => $student_attendance_detail['attendance_detail']]);
+                                            ->update(['attendance_detail' => json_encode($attendance_details)]);
             }
         }
 

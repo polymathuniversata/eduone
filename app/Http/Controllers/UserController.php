@@ -132,31 +132,25 @@ class UserController extends Controller
             'request'       => $request
         ];
 
-        if ($user->isTeacher()) {
+        if ($user->isRole([3,4])) {
             $subjects         = \App\Subject::lists('name', 'id')->toArray();
-            $teacher_subjects = $user->subjects->lists('id')->toArray(); 
 
             $pass_to_view['subjects'] = $subjects;
         }
 
+        if ($user->isTeacher()) {
+            
+            $teacher_subjects = $user->subjects->lists('id')->toArray(); 
+
+        }
+
         if ($user->isStudent()) {
-            $attendances    = [
-                [
-                    'subject_id' => 1,
-                    'class_id'  => 1,
-                    'attendance_detail' => [
-                        'date'      => '2015-05-05',
-                        'slot'      => 1,
-                        'status'    => 'present',
-                        'note'      => ''
-                    ]
-                ]
-            ];
 
-            $grades         = [];
+            $user_subjects_pivot = \DB::table('users_subjects')
+                                        ->where('user_id', $user->id)
+                                        ->get();
 
-            $pass_to_view['attendances'] = $attendances;
-            $pass_to_view['grades'] = $grades;
+            $pass_to_view['user_subjects_pivot'] = $user_subjects_pivot;
         }
 
         return view('users.update', $pass_to_view);

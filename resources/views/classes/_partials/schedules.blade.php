@@ -43,7 +43,7 @@
 
 								<h5 class="schedule-teacher">{{$teachers[$schedule->teacher_id]}}</h5>
 								
-								@if ($schedule->started_at <= \Carbon\Carbon::today())
+								@if (1==1)
 									@if (empty($schedule->attendance_detail))
 									<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
 									@else
