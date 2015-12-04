@@ -81,6 +81,9 @@ class ClassController extends Controller
         if ( empty($data['slug']))
             $data['slug'] = str_slug($data['name']);
 
+        if ( empty($data['status']))
+            $data['status'] = 'inprogress';
+        
         try {
             $class = Group::create($data);
             
