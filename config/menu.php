@@ -18,9 +18,9 @@ return [
 	[
 		'icon' => 'fa fa-user',
 		'title' => 'Students',
-		'url'	=> 'users?role=4',
+		'url'	=> 'users?role_id=4',
 		'childs' => [
-			'users?role=4' 			=> 'All Students',
+			'users?role_id=4' 			=> 'All Students',
 			'users/create?role_id=4' 	=> 'Add New Student',
 			'users/import' 		=> 'Import'
 		]
@@ -29,9 +29,9 @@ return [
 	[
 		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Teachers',
-		'url'	=> 'users/?role=3',
+		'url'	=> 'users/?role_id=3',
 		'childs' => [
-			'users/?role=3' 			=> 'All Teachers',
+			'users/?role_id=3' 			=> 'All Teachers',
 			'teachers/create/?role_id=3' => 'Add New Teacher',
 		]
 	],
@@ -39,9 +39,9 @@ return [
 	[
 		'icon' => 'glyphicon glyphicon-user',
 		'title' => 'Parents',
-		'url'	=> 'users?role=5',
+		'url'	=> 'users?role_id=5',
 		'childs' => [
-			'users?role=5' 				=> 'Parents',
+			'users?role_id=5' 				=> 'Parents',
 			'users/create?role_id=5' => 'Add New Parent',
 		]
 	],
