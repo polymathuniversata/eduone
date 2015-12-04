@@ -6,6 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddNullableToLastReadInParticipantsTable' => $baseDir . '/database/migrations/2014_11_10_083449_add_nullable_to_last_read_in_participants_table.php',
+    'AddSoftDeletesToParticipantsTable' => $baseDir . '/database/migrations/2014_11_03_154831_add_soft_deletes_to_participants_table.php',
+    'AddSoftdeletesToThreadsTable' => $baseDir . '/database/migrations/2014_12_04_124531_add_softdeletes_to_threads_table.php',
+    'AlterLastReadInParticipantsTable' => $baseDir . '/database/migrations/2014_11_20_131739_alter_last_read_in_participants_table.php',
     'App\\Algolia' => $baseDir . '/app/Plugins/Algolia/Algolia.php',
     'App\\Branch' => $baseDir . '/app/Branch.php',
     'App\\BranchTrait' => $baseDir . '/app/BranchTrait.php',
@@ -114,7 +118,9 @@ return array(
     'CreateGroupsSubjectsTable' => $baseDir . '/database/migrations/2015_11_10_161805_create_groups_subjects_table.php',
     'CreateGroupsTable' => $baseDir . '/database/migrations/2015_11_10_154134_create_groups_table.php',
     'CreateMediaTable' => $baseDir . '/database/migrations/2015_10_11_112711_create_media_table.php',
+    'CreateMessagesTable' => $baseDir . '/database/migrations/2014_10_28_175710_create_messages_table.php',
     'CreateMetaTable' => $baseDir . '/database/migrations/2015_10_11_130844_create_meta_table.php',
+    'CreateParticipantsTable' => $baseDir . '/database/migrations/2014_10_28_180224_create_participants_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePeriodsSubjectsTable' => $baseDir . '/database/migrations/2015_11_05_190825_create_periods_subjects_table.php',
     'CreatePeriodsTable' => $baseDir . '/database/migrations/2015_11_05_190802_create_periods_table.php',
@@ -129,6 +135,7 @@ return array(
     'CreateSubjectMetaTable' => $baseDir . '/database/migrations/2015_10_14_171715_create_subject_meta_table.php',
     'CreateSubjectsTable' => $baseDir . '/database/migrations/2015_10_11_105250_create_subjects_table.php',
     'CreateTermsTable' => $baseDir . '/database/migrations/2015_10_09_104933_create_terms_table.php',
+    'CreateThreadsTable' => $baseDir . '/database/migrations/2014_10_28_175635_create_threads_table.php',
     'CreateUserMetaTable' => $baseDir . '/database/migrations/2015_10_09_101837_create_user_meta_table.php',
     'CreateUserRelationshipsTable' => $baseDir . '/database/migrations/2015_11_05_191715_create_user_relationships_table.php',
     'CreateUsersBranchesTable' => $baseDir . '/database/migrations/2015_10_09_105146_create_users_branches_table.php',
