@@ -21,7 +21,7 @@ class ScheduleController extends Controller
     {
         $this->teachers = \App\User::ofRole(3)->lists('display_name', 'id')->toArray();
         
-        $this->classes = \App\Group::ofType('class')->lists('name', 'id')->toArray();
+       
         
         $this->subjects = \App\Subject::get(['id', 'name', 'sessions_count'])->getDictionary();
     }
@@ -69,12 +69,17 @@ class ScheduleController extends Controller
             }
         }
 
+        $classes = \App\Group::ofType('class')
+                    ->whereDate('started_at', '<=', $viewing_day)
+                    ->lists('name', 'id')
+                    ->toArray();
+
         $pass_to_view = [
             'teachers' => $this->teachers,
             'slots' => $slots,
             'rooms' => $rooms,
             'schedules' => $schedules,
-            'classes' => $this->classes,
+            'classes' => $classes,
             'subjects' => $this->subjects,
             'request' => $request,
             'dates' => compact('today', 'previous_day', 'next_day', 'viewing_day', 'weekday')
