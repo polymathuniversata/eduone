@@ -56,7 +56,13 @@
 	<div class="clearfix"></div>
 	<br><br><br>
 	<div class="col-md-6">
-		<label for="search-family-member">Add Family Member</label>
+		<label for="search-family-member">
+		@if ($user->isStudent())
+		<h4>Add Parents</h4>
+		@else
+		<h4>Add Childrens</h4>
+		@endif
+		</label>
 		<input id="search-family-member" type="text" class="form-control" ng-model="search" ng-model-options="{debounce: 500}" placeholder="Search for user and click to add...">
 
 		<ul class="list-unstyled" id="ajax-users-list">

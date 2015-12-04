@@ -19,6 +19,8 @@ class CreateUsersSubjectsTable extends Migration
             $table->integer('branch_id'); // This helps query only in branch scope
             $table->timestamps();
             $table->engine = 'InnoDB';
+
+            $table->unique(['user_id', 'subject_id', 'class_id']);
         });
     }
 

@@ -139,6 +139,25 @@ class UserController extends Controller
             $pass_to_view['subjects'] = $subjects;
         }
 
+        if ($user->isStudent()) {
+            $attendances    = [
+                [
+                    'subject_id' => 1,
+                    'class_id'  => 1,
+                    'attendance_detail' => [
+                        'date'      => '2015-05-05',
+                        'slot'      => 1,
+                        'status'    => 'present',
+                        'note'      => ''
+                    ]
+                ]
+            ];
+
+            $grades         = [];
+
+            $pass_to_view['attendances'] = $attendances;
+            $pass_to_view['grades'] = $grades;
+        }
 
         return view('users.update', $pass_to_view);
     }

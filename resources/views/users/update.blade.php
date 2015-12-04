@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	
-	<h1>{{ $user->getFullName() }}</h1>
+	<h1>{{ $user->display_name }}</h1>
 </header>
 
 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'PUT', 'files' => true]) !!}
@@ -39,11 +39,17 @@
 		    @if ($user->isTeacher())
 		    <li role="presentation" class="{{ $request->tab === 'subjects' ? 'active' : ''  }}"><a href="?tab=subjects">Subjects</a></li>
 			@endif
+
+			@if ($user->isStudent())
+			<li role="presentation" class="{{ $request->tab === 'attendances' ? 'active' : ''  }}"><a href="?tab=attendances">Attendances</a></li>
+			<li role="presentation" class="{{ $request->tab === 'grades' ? 'active' : ''  }}"><a href="?tab=grades">Grades</a></li>
+		
+			@endif
 	  	</ul>
 
 	  	<!-- Tab panes -->
 	  	<div class="col-md-9">
-			@if(isset($request->tab) && in_array($request->tab, ['account', 'profile', 'family', 'contact', 'permissions', 'subjects', 'meta']))
+			@if(isset($request->tab) && in_array($request->tab, ['account', 'profile', 'family', 'contact', 'permissions', 'subjects', 'meta', 'attendances', 'grades']))
 				@include('users/_partials/' . $request->tab)
 			@endif
 	  	</div>

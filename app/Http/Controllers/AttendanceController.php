@@ -65,19 +65,47 @@ class AttendanceController extends Controller
 
         $students = $data['students'];
 
+        // Attendance Detail for Class
         $attendance_detail = [];
 
         foreach ($students as $student_id => $state) {
             $id = intval($student_id);
             
-            $attendance_detail[$id] = [
-                'status' => isset($state['status']) ? $state['status'] : 'absent',
-                'note'   => isset($state['note']) ? $state['note'] : ''
+            $status = isset($state['status']) ? $state['status'] : 'absent';
+            $note   = isset($state['note']) ? $state['note'] : '';
+
+            $attendance_detail[$id] = compact('status', 'note');
+
+            $student_attendance_detail = [
+                'user_id'       => $id,
+                'class_id'      => $schedule->class_id,
+                'subject_id'    => $schedule->subject_id,
+                'creator_id'    => $schedule->creator_id,
+                'branch_id'     => $schedule->branch_id,
+                'attendance_detail' => json_encode([
+                    'date'      => $schedule->started_at->format('Y-m-d H:i:s'),
+                    'slot'      => $schedule->slot_id,
+                    'status'    => $status,
+                    'note'      => $note
+                ])
             ];
+
+            // Todo: Improve performance of these lines
+            $student_attendance = \DB::table('users_subjects')
+                        ->whereUserId($id)
+                        ->whereClassId($schedule->class_id)
+                        ->whereSubjectId($schedule->subject_id)
+                        ->first();
+
+            if ( ! $student_attendance) {
+                \DB::table('users_subjects')->insert($student_attendance_detail);
+            } else {
+                \DB::table('users_subjects')->where('id', $student_attendance->id)
+                                            ->update(['attendance_detail' => $student_attendance_detail['attendance_detail']]);
+            }
         }
 
         $schedule->attendance_detail = $attendance_detail;
-
         $schedule->save();
 
         return redirect(url('attendances/create?schedule_id=' . $schedule->id));
