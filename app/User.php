@@ -113,6 +113,9 @@ class User extends Model implements AuthenticatableContract,
         if (is_numeric($role))
             return $this->role_id == $role;
 
+        if (is_array($role))
+            return in_array($this->role_id, $role);
+        
         return Role::whereSlug($role)->exists();
     }
 
