@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Group;
 use App\Schedule;
+use App\Subject;
 
 class AttendanceController extends Controller
 {
@@ -37,9 +38,12 @@ class AttendanceController extends Controller
         $attendance_detail = $schedule->attendance_detail;
 
         $class      = Group::find($schedule->class_id);
+        
         $students   = $class->getStudents()->lists('display_name', 'id')->toArray();
 
-        $view = compact('schedule', 'class', 'students', 'request', 'attendance_detail');
+        $subject = Subject::findOrFail($schedule->subject_id);
+        
+        $view = compact('schedule', 'class', 'students', 'request', 'subject', 'attendance_detail');
 
         return view('attendances/create', $view);
     }

@@ -42,8 +42,14 @@
 								<h4 class="schedule-subject">{{$all_subjects[$schedule->subject_id]}}</h4>
 
 								<h5 class="schedule-teacher">{{$teachers[$schedule->teacher_id]}}</h5>
-
-								<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
+								
+								@if ($schedule->started_at <= \Carbon\Carbon::today())
+									@if (empty($schedule->attendance_detail))
+									<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
+									@else
+									<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-default btn-xs">View Attendance</a>
+									@endif
+								@endif
 							@endif
 						@endforeach
 					</td>

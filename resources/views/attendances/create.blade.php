@@ -7,6 +7,12 @@
 	
 	{!! Form::open(['url' => 'attendances']) !!}
 	
+	<div class="row">
+		<div class="col-md-12">
+			<p>Attendance for {{$class->name}} subject {{$subject->name}} at {{$schedule->started_at}} <a href="{{url('schedules')}}">View schedule</a></p>
+		</div>
+	</div>
+
 	<button class="btn btn-primary pull-right">Save Changes</button>
 
 	<br><br>
