@@ -4,6 +4,7 @@
         <title>Uniform @yield('title')</title>
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/typicons.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="/assets/js/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>

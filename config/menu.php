@@ -2,12 +2,12 @@
 
 return [
 	[
-		'icon' 	=> 'fa fa-bar-chart',
+		'icon' 	=> 'typcn typcn-chart-line-outline',
 		'title' => 'Dashboard',
 		'url'	=> '/',
 	],
 	[
-		'icon' => 'fa fa-tree',
+		'icon' => 'typcn typcn-tree',
 		'title' => 'Classes',
 		'url'	=> 'classes',
 		'childs' => [
@@ -16,7 +16,7 @@ return [
 		]
 	],
 	[
-		'icon' => 'fa fa-user',
+		'icon' => 'typcn typcn-mortar-board',
 		'title' => 'Students',
 		'url'	=> 'users?role_id=4',
 		'childs' => [
@@ -27,7 +27,7 @@ return [
 	],
 
 	[
-		'icon' => 'glyphicon glyphicon-user',
+		'icon' => 'typcn typcn-user-outline',
 		'title' => 'Teachers',
 		'url'	=> 'users/?role_id=3',
 		'childs' => [
@@ -37,7 +37,7 @@ return [
 	],
 
 	[
-		'icon' => 'glyphicon glyphicon-user',
+		'icon' => 'typcn typcn-user-outline',
 		'title' => 'Parents',
 		'url'	=> 'users?role_id=5',
 		'childs' => [
@@ -47,7 +47,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-cubes',
+		'icon' => 'typcn typcn-compass',
 		'title' => 'Programs',
 		'url'	=> 'programs',
 		'childs' => [
@@ -59,7 +59,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-table',
+		'icon' => 'typcn typcn-calendar-outline',
 		'title' => 'Schedules',
 		'url'	=> 'schedules',
 		'childs' => [
@@ -68,7 +68,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-users',
+		'icon' => 'typcn typcn-group-outline',
 		'title' => 'Users',
 		'url'	=> 'users',
 		'childs' => [
@@ -81,7 +81,7 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-university',
+		'icon' => 'typcn typcn-point-of-interest-outline',
 		'title' => 'Branches & Assets',
 		'url'	=> 'branches',
 		'childs' => [
@@ -93,13 +93,13 @@ return [
 	],
 
 	[
-		'icon' => 'fa fa-picture-o',
+		'icon' => 'typcn typcn-image-outline',
 		'title' => 'Media',
 		'url'	=> 'media'
 	],
 
 	[
-		'icon' => 'fa fa-sliders',
+		'icon' => 'typcn typcn-spanner-outline',
 		'title' => 'Settings',
 		'url'	=> 'settings',
 		'childs' => [
