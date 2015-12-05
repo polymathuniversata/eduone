@@ -152,7 +152,7 @@ h1,h2,h3{ font-weight: normal; }
     font-size: 14px;
     text-decoration: none;
     position: relative;
-    padding: 0 30px;
+    padding: 0 20px;
     font-family: "Open Sans", sans-serif;
 }
 #main-menu .caret{
@@ -160,8 +160,10 @@ h1,h2,h3{ font-weight: normal; }
 	margin-right: -5px;
 }
 #main-menu ul > li a i{
-	font-size: 16px;
+	font-size: 18px;
 	margin-right: 12px;
+	width: 18px;
+	color: #aaa;
 }
 #main-menu > ul > li.active, #main-menu > ul > li.child-active{
 	background: #30333A;
@@ -170,6 +172,10 @@ h1,h2,h3{ font-weight: normal; }
 
 #main-menu li.active > a{
 	color: #fff;
+}
+
+#main-menu li.child-active > a{
+	color: #ccc;
 }
 
 #main > .container-fluid > .row{
@@ -563,4 +569,15 @@ body {
   .row-offcanvas-left.active {
     left: 220px; /* 6 columns */
   }
+}
+
+/** Buttons */
+.btn-primary {
+    background-color: #039BE5;
+    border-color: #039BE5;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+	background-color: #0288D1;
+    border-color: #0288D1;
 }

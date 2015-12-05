@@ -75,4 +75,7 @@ $(function()
 	    $('.row-offcanvas').toggleClass('active')
 	});
 
+	$('.dropdown-menu').click(function(e) {
+        e.stopPropagation();
+    });
 });

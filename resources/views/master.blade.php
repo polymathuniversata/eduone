@@ -15,17 +15,11 @@
         <script type="text/javascript" src="/assets/js/tg.dynamic.directive.js"></script>
         <script type="text/javascript" src="/assets/js/app.js"></script>
         <script type="text/javascript">
-        var APP_URL = 'http://uniform.dev/';
+        var APP_URL = '{{url('/')}}/';
         // before loading pace.js
         window.paceOptions = {
           target: 'main'
         };
-
-        $(function(){
-          $('.dropdown-menu').click(function(e) {
-            e.stopPropagation();
-          });
-        });
         </script>
                 <script type="text/javascript" src="/assets/js/pace.min.js"></script>
 
