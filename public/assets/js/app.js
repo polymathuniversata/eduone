@@ -70,4 +70,9 @@ $(function()
 	$('.cell-label').click(function () {
 		$(this).find('input[type=checkbox]').trigger('click');
 	});
+
+	$('[data-toggle="offcanvas"]').click(function () {
+	    $('.row-offcanvas').toggleClass('active')
+	});
+
 });

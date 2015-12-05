@@ -34,8 +34,8 @@
     <body>
       
         <div class="container-fluid" id="wrapper">
-            <div class="row">
-                <aside id="sidebar">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <aside id="sidebar" class="sidebar-offcanvas">
                     <header id="header">
                         <h1><a href="/">binaty</a></h1>
                     </header>
@@ -46,6 +46,9 @@
                 </aside>          
               
                 <main id="main">
+                    
+                    <button type="button" class="btn btn-default btn-offcanvas visible-sm visible-xs" data-toggle="offcanvas"><i class="fa fa-bars"></i></button>
+                    
                     <nav id="navbar-top" class="navbar navbar-default">
                       <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->

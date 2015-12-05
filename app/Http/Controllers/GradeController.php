@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Group;
+use App\Subject;
 
 class GradeController extends Controller
 {
@@ -13,9 +15,11 @@ class GradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ( ! isset($request->class_id) || ! isset($request->subject_id) || ! isset($request->grade_id))
+            return redirect('/')->withMessage('Please select correct destination');
+        
     }
 
     /**

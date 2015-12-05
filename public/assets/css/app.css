@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Cuprum);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 html{
 	min-height: 100%;
 }
@@ -55,6 +57,16 @@ h1,h2,h3{ font-weight: normal; }
 #content{
 	min-height: 600px;
 }
+
+#sidebar{
+	position: fixed;
+	width: 220px;
+	top: 0;
+	left: 0;
+	background: #1D1E23;
+	color: #fff;
+	z-index: 999;
+}
 #sidebar a{
 	color: #c5cfdd;
 }
@@ -86,16 +98,6 @@ h1,h2,h3{ font-weight: normal; }
 
 #navbar-top .navbar-form .input-group{
 	width: 100%;
-}
-#sidebar{
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	z-index: 99;
-	width: 220px;
-	background: #1D1E23;
-	color: #fff;
 }
 
 #header{
@@ -142,17 +144,16 @@ h1,h2,h3{ font-weight: normal; }
 	max-width: 600px;
 }
 
-
 #main-menu ul > li a{
     display: block;
     line-height: 40px;
-    color: #c5cfdd;
+    color: #ccc;
     transition: all .2s;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
-    font-weight: 600;
     position: relative;
     padding: 0 30px;
+    font-family: "Open Sans", sans-serif;
 }
 #main-menu .caret{
 	margin-top: 13px;
@@ -164,6 +165,9 @@ h1,h2,h3{ font-weight: normal; }
 }
 #main-menu > ul > li.active, #main-menu > ul > li.child-active{
 	background: #30333A;
+}
+#main-menu > ul > li.active{
+	border-left: 3px solid #2980b9;
 }
 #main-menu li.active > a{
 	color: #fff;
@@ -183,8 +187,11 @@ h1,h2,h3{ font-weight: normal; }
 }
 
 #main{
-	min-height: 600px;
-	margin-left: 220px;
+	position: relative;
+	overflow: hidden;
+	padding-left: 220px;
+	padding-bottom: 100px;
+	height: 100%;
 }
 
 .tab-pane{
@@ -201,8 +208,10 @@ fieldset label{
 }
 
 #footer{
-	margin-top: 60px;
+	position: absolute;
+	bottom: 0;
 }
+
 .label-thin{
 	font-weight: normal;
 }
@@ -283,11 +292,6 @@ fieldset label{
 	margin-left: -3px;
 	border-left: 3px solid #2980B9
 }
-
-#footer{
-	border-top: 1px solid #efefef;
-}
-
 
 /* #Buttons
 ==================================================*/
@@ -490,4 +494,74 @@ tr.inactive > td{
 
 .progress-thin{
 	height: 5px;
+}
+
+/** OffCanvas */
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+.row-offcanvas{
+	height: 100%;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+
+	#sidebar{
+		position: absolute;
+		left: -220px;
+	}
+
+	#main{
+		top: 0;
+		padding-left: 0;
+		width: 100%;
+	}
+	
+	.btn-offcanvas{
+		position: fixed;
+		z-index: 999;
+	}
+  .row-offcanvas {
+
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -220px; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: 220px; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 220px; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 220px; /* 6 columns */
+  }
 }
