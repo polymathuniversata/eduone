@@ -4,6 +4,6 @@
 
 @section('content')
 {!! Form::open(['url' => 'branches', 'class' => 'form-horizontal']) !!}
-	@include('branches/_partials/form');
+	@include('branches/_partials/form')
 {!! Form::close() !!}
 @endsection

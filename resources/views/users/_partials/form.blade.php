@@ -44,7 +44,14 @@
 		
 		<div class="form-group">
 			<label>{!! trans('app.branches') !!}</label>
-			{!! Form::select('branches[]', $branches, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
+			<br>
+			<div class="checkbox">
+			@foreach ($branches as $id => $branch)
+				<label class="checkbox-inline">
+					{!! Form::checkbox('branches[]', $id) !!} {{$branch}}
+				</label>
+			@endforeach
+			</div>
 		</div>
 		
 		<div class="form-group" ng-show="role_id == 4">

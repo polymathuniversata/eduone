@@ -53,7 +53,7 @@ class User extends Model implements AuthenticatableContract,
         if ( ! isset($attributes['display_name']) && ! empty($attributes['first_name']) && ! empty($attributes['last_name']))
             $attributes['display_name'] = ucfirst($attributes['first_name']) . ' ' . ucfirst($attributes['last_name']);
 
-        parent::create($attributes);
+        return parent::create($attributes);
     }
 
     public function role()

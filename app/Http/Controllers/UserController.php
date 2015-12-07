@@ -89,13 +89,19 @@ class UserController extends Controller
     {
         $data = array_filter($request->all());
         
-        if (! empty($data['branches']))
-            $branches = (array) $data['branches'];
-        
+        if (! empty($data['branches'])) {
+            $branches = $data['branches'];
+
+            foreach($branches as $index => $branch)
+            {
+                $branches[$index] = intval($branch);
+            }
+        }
+
         try {
             $user = User::create($data);
-            
-            if (! empty($branches))
+
+            if (isset($branches))
                 $user->branches()->sync($branches);
 
             return redirect('users/' . $user->id )

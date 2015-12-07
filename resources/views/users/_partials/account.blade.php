@@ -36,10 +36,14 @@
 
 <div class="form-group">
 	<label>{!! trans('app.branches') !!}</label>
-	{!! Form::select('branches[]', $branches, $user_branches, [
-		'class' => 'form-control', 
-		'multiple' => 'multiple'
-	]) !!}
+	<br>
+	<div class="checkbox">
+	@foreach ($branches as $id => $branch)
+		<label class="checkbox-inline">
+			{!! Form::checkbox('branches[]', $id, null) !!} {{$branch}}
+		</label>
+	@endforeach
+	</div>
 </div>
 
 @if ($user->isStudent())
