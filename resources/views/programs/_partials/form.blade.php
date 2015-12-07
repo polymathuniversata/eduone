@@ -48,17 +48,25 @@
 				
 				<div class="panel panel-default panel-@{{item.type}}">
 				    <div class="panel-heading" role="tab">
-				      <h4 class="panel-title">
-				      	<span ng-show="item.name">
-				      		@{{item.name}}
-				      	</span>
-				       <span ng-show="!item.name">
-							@{{subjects[item.id]}}
-				       </span>
-					   <span ng-show="item.type === 'period'" class="pull-right" data-toggle="collapse" data-parent="#accordion" href="#field-@{{$index}}" aria-expanded="true" aria-controls="field-@{{$index}}">
-				          <i class="fa fa-caret-down"></i>
-				        </span>
-				      </h4>
+				      	<h4 class="panel-title">
+				      		<div class="btn-group pull-right">
+							<button title="Delete" type="button" ng-show="$index != 0" ng-click="removeItem($index)" class="btn btn-xs btn-danger"><i class="typcn typcn-delete"></i></button>
+							
+							<a ng-show="item.type != 'period'" role="button" class="btn btn-default btn-xs" href="{{url('/subjects')}}/@{{item.id}}"><i class="typcn typcn-arrow-forward-outline" title="Go to Edit Subject"></i></a>
+							
+							<button title="Edit This Period" class="btn btn-default btn-xs" ng-show="item.type === 'period'" class="pull-right" data-toggle="collapse" data-parent="#accordion" href="#field-@{{$index}}" aria-expanded="true" aria-controls="field-@{{$index}}">
+					          <i class="typcn typcn-pencil"></i>
+					        </button>
+
+							</div>
+					      	<span ng-show="item.name">
+					      		@{{item.name}}
+					      	</span>
+
+					       	<span ng-show="!item.name">
+								@{{subjects[item.id]}}
+					       	</span>
+				      	</h4>
 				    </div>
 				    <div id="field-@{{$index}}" class="panel-collapse collapse @{{active==field}}" role="tabpanel" ng-if="item.type">
 				      	<div class="panel-body">
