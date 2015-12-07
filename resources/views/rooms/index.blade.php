@@ -1,6 +1,9 @@
 @extends('master')
 @section('title', 'Rooms')
 @section('main_title', 'Rooms')
+@section('main_button')
+    <a href="{{url('/rooms/create')}}" role="button" class="btn btn-default">Add New</a>
+@endsection
 @section('content')
 
 <div class="table-responsive panel panel-default">

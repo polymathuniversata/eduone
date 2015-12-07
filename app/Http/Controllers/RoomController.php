@@ -10,6 +10,14 @@ use App\Branch;
 
 class RoomController extends Controller
 {
+    protected $branches;
+
+
+    public function __construct()
+    {
+        $this->branches =  Branch::lists('name', 'id')->toArray();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::orderBy('created_at')->paginate(50);
 
         return view('rooms.index', compact('rooms'));
     }
@@ -29,7 +37,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        $branches = Branch::lists('name', 'id')->toArray();
+        $branches = $this->branches;
 
         return view('rooms.create', compact('branches'));
     }
@@ -57,9 +65,10 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Room $room, Request $request)
     {
-        //
+        $branches = $this->branches;
+        return view('rooms/update', compact('room', 'request', 'branches'));
     }
 
     /**
@@ -68,9 +77,9 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Room $room, Request $request)
     {
-        //
+        return $this->show($room, $request);
     }
 
     /**
@@ -80,9 +89,13 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Room $room)
     {
-        //
+        $data = array_filter($request->all());
+
+        $room->update($data);
+
+        return redirect(url("/rooms/{$room->id}"))->withMessage('Room was updated successfully');
     }
 
     /**
