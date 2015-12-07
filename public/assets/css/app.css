@@ -18,10 +18,17 @@ h1,h2,h3{
 .modal-content{
 	border-radius: 3px;
 }
+
+.panel-default .panel-heading{
+	background: #fff;
+}
 .modal-header, .panel-heading{
-	background: #f1f1f1;
 	padding: 10px 13px;
 }
+.modal-header{
+	background: #f1f1f1;
+}
+
 .modal-title, .panel-heading{
 	font-weight: bold;
 	font-size: 14px;
@@ -269,22 +276,22 @@ fieldset label{
 }
 
 .panel-period {
-  border-color: #bce8f1;
+  border-color: #03A9F4;
 }
 .panel-period > .panel-heading {
-  color: #2980b9;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  color: #fff;
+  background-color: #039BE5;
+  border-color: #03A9F4;
 }
 .panel-period > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #bce8f1;
+  border-top-color: #03A9F4;
 }
 .panel-period > .panel-heading .badge {
-  color: #d9edf7;
+  color: #039BE5;
   background-color: #2980b9;
 }
 .panel-period > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #bce8f1;
+  border-bottom-color: #03A9F4;
 }
 
 .sortable .panel:hover{
