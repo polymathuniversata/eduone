@@ -44,7 +44,7 @@
 			<p class="text-muted" ng-show="alreadyAddedSubject.length == 0">Get started by adding subjects and periods from the right panes</p>
 
 			<ul class="panel-group sortable list-unstyled" id="accordion" ui-sortable="sortableOptions" ng-model="periods">
-				<li ng-repeat="item in periods track by $index" ng-click="setActiveField(item)">
+				<li ng-repeat="item in periods track by $index" class="@{{item.type}}" ng-click="setActiveField(item)">
 				
 				<div class="panel panel-default panel-@{{item.type}}">
 				    <div class="panel-heading" role="tab">
