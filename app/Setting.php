@@ -19,13 +19,21 @@ class Setting extends Model
     	$setting->update();
     }
 
-    public function has()
+    public static function get($name, $default = '', $branch_id = null)
     {
-    	
+        $setting = Setting::branch($branch_id)->whereName($name)->pluck('val');
+
+        if (empty($setting))
+            $setting = config($name, $default);
+
+        return $setting;
     }
 
-    public function get()
+    public function scopeBranch($query, $value)
     {
+        if ( is_numeric($value))
+            return $query->whereBranchId($value);
 
+        return $query;
     }
 }
