@@ -27,16 +27,22 @@
 
 	  	<div class="btn-group" role="group">
 	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['previous_day'] )}}"><i class="fa fa-chevron-left"></i></a>
-	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['next_day'])}}"><i class="fa fa-chevron-right"></i></a>
-			{!! Form::date('date', $dates['viewing_day'], ['class' => 'form-control']) !!} ({{$dates['weekday']}})
+	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['next_day'])}}"><i class="fa fa-chevron-right"></i></a>	  		
 	  	</div>
+	
+		<div class="col-md-2 form-horizontal">
+	  		{!! Form::date('date', $dates['viewing_day'], ['class' => 'form-control']) !!}
+		</div>
+
+		<button type="submit" class="btn btn-default">View</button>
 
 	  	<div class="btn-group right" role="group">
 			<button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
 	  	</div>
 	</div>
 	{!! Form::close() !!}
-
+	
+	 <span class="text-muted">{{$dates['weekday']}}</span>
 	<div class="table-responsive">
 		<table class="table table-bordered" id="table-schedule">
 			<thead>
