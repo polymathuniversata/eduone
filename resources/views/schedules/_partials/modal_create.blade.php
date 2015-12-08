@@ -17,7 +17,13 @@
         </div>
         
         <div class="progress progress-thin" ng-show="schedule.subject_id" ng-if="schedule.class_id && schedule.subject_id">
-          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="@{{getCompletedPercent()}}" aria-valuemin="0" aria-valuemax="100" style="width: @{{getCompletedPercent()}}%"></div>
+          <div class="progress-bar progress-bar-danger" ng-show="getCompletedPercent() <= 30" role="progressbar" aria-valuenow="@{{getCompletedPercent()}}" aria-valuemin="0" aria-valuemax="100" style="width: @{{getCompletedPercent()}}%"></div>
+          <div class="progress-bar progress-bar-warning" ng-show="getCompletedPercent() > 30 && getCompletedPercent() <= 60" role="progressbar" aria-valuenow="@{{getCompletedPercent()}}" aria-valuemin="0" aria-valuemax="100" style="width: @{{getCompletedPercent()}}%"></div>
+          <div class="progress-bar progress-bar-info" ng-show="getCompletedPercent() >= 90" role="progressbar" aria-valuenow="@{{getCompletedPercent()}}" aria-valuemin="0" aria-valuemax="100" style="width: @{{getCompletedPercent()}}%"></div>
+        </div>
+
+        <div class="alert alert-info" ng-show="getCompletedPercent() > 100" ng-if="schedule.class_id && schedule.subject_id">
+          This subject's schedule has completed. Do you still want to add?
         </div>
 
         <div class="form-group" ng-show="schedule.subject_id">
@@ -27,6 +33,8 @@
 
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="deleteGroup()">Delete</button>
+
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="addGroup()" ng-show="schedule.teacher_id && schedule.subject_id">
           <span ng-show="!schedule.id">Create</span>

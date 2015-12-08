@@ -22,6 +22,8 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.current_date = null;
 
+	$scope.oldSchedule = {};
+
 	$scope.init = function()
 	{
 		angular.forEach(['teachers', 'slots', 'rooms', 'schedules', 'classes', 'subjects', 'current_date'], function(object) {
@@ -32,43 +34,25 @@ app.controller('ScheduleController', function($scope, $http)
 
 	$scope.setSchedule = function(schedule, slot_id, room_id)
 	{
-		// if ( typeof $scope.schedule != 'undefined'
-		// 	&& $scope.schedule.class_id != schedule.class_id 
-		// 	&& $scope.schedule.subject_id != schedule.subject_id
-		// 	&& typeof $scope.class_subjects != 'undefined'
-		// 	&& typeof $scope.class_subjects[$scope.schedule.class_id] != 'undefined'
-		// 	&& typeof $scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id] != 'undefined') {
-			
-		// 	$scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].completed--;
-		// }
+		$scope.oldSchedule 			= angular.copy(schedule);
 
 		$scope.schedule 			= schedule;
 		$scope.schedule.slot_id 	= slot_id;
 		$scope.schedule.room_id 	= room_id;
-
-		// if ( typeof $scope.class_subjects != 'undefined'
-		// 	&& typeof $scope.class_subjects[$scope.schedule.class_id] != 'undefined'
-		// 	&& typeof $scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id] != 'undefined') {
-
-		// 	$scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].completed++;
-		// }
 	};
 	
 	$scope.getSubjects = function() 
 	{
 		if ( ! $scope.isLoading 
 			&& typeof $scope.schedule.class_id != 'undefined'
-			&& typeof $scope.class_subjects[$scope.schedule.class_id] == 'undefined'
+			//&& typeof $scope.class_subjects[$scope.schedule.class_id] == 'undefined'
 		) 
 		{
 			$scope.isLoading = true;
 			
-			$http.get('/classes/' + $scope.schedule.class_id + '/subjects').
-				success(function(data, status, headers, config) {
-			    	$scope.class_subjects[$scope.schedule.class_id] = data;
-			  	}).
-			  	error(function(data, status, headers, config) {
-			    	//
+			$http.get(window.APP_URL + 'classes/' + $scope.schedule.class_id + '/subjects').
+				then(function(response) {
+			    	$scope.class_subjects[$scope.schedule.class_id] = response.data;
 			});
 
 			$scope.isLoading = false;
@@ -85,19 +69,19 @@ app.controller('ScheduleController', function($scope, $http)
 	{
 		$scope.schedule.started_at = $scope.current_date;
 
-		console.log($scope.schedule);
-
-		$http.post('/schedules', $scope.schedule)
-			.success(function(data, status, headers, config) {
-			console.log(data);
-			$scope.schedule.id = data.id;
-
-			$scope.schedules[$scope.schedule.room_id][$scope.schedule.slot_id].id = data.id
+		$http.post(window.APP_URL + '/schedules', $scope.schedule)
+			.then(function(response) {
 			
+			if (response.data === 'conflict') {
+				return alert('Error. This class is already scheduled in same slot!');
+			}
 
-			$scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].completed++;
+			$scope.schedule.id = response.data.id;
+
+			$scope.schedules[$scope.schedule.room_id][$scope.schedule.slot_id].id = response.data.id
 			
-
+			// $scope.class_subjects[$scope.schedule.class_id][$scope.schedule.subject_id].completed++;
+			
 			// Todo completed-- when new class is override
 		});
 
@@ -119,16 +103,40 @@ app.controller('ScheduleController', function($scope, $http)
 
 		var alreadyScheduled = $scope.class_subjects[classId][subjectId].completed;
 
-		return Math.round(alreadyScheduled / sessionsCount * 100);
+		return Math.round((alreadyScheduled+1) / sessionsCount * 100);
 	};
 
+	/**
+	 * Just remove Group from Schedule. Do not persist data
+	 * 
+	 * @return void
+	 */
 	$scope.removeGroup = function()
 	{
-		$scope.group = {};
+		$scope.schedules[$scope.schedule.room_id][$scope.schedule.slot_id] = {};
+		$scope.schedule = {};
+	};
+
+	/**
+	 * Remove Group from Schedule and persist data
+	 * 
+	 * @return void
+	 */
+	$scope.deleteGroup = function()
+	{
+		$http.delete(window.APP_URL + 'schedules/' + $scope.schedule.id)
+			.then(function(response) {
+			
+			if (response.data === 'success')
+				$scope.removeGroup();
+		});
+
+		jQuery('#myModal').modal('hide');
 	};
 
 	$scope.cancel = function()
 	{
-		$scope.schedule = {};
+		if (typeof $scope.schedule.room_id != 'undefined' && typeof $scope.schedule.slot_id != 'undefined')
+			$scope.schedules[$scope.schedule.room_id][$scope.schedule.slot_id] = $scope.oldSchedule;
 	};
 });

@@ -21,8 +21,6 @@ class ScheduleController extends Controller
     {
         $this->teachers = \App\User::ofRole(3)->lists('display_name', 'id')->toArray();
         
-       
-        
         $this->subjects = \App\Subject::get(['id', 'name', 'sessions_count'])->getDictionary();
     }
 
@@ -126,7 +124,7 @@ class ScheduleController extends Controller
         // Check if class is already learn in same slot, same time
         $conflict = Schedule::isClassConflict($data['class_id'], $date, $data['slot_id']);
         if ($conflict)
-            return 'Class schedule is already set';
+            return 'conflict';
       
         if ( ! isset($data['id']) )
             return Schedule::create($data);
@@ -182,6 +180,11 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Schedule::findOrFail($id)->delete();
+            return 'success';
+        } catch (Exception $e) {
+            return 'error';
+        }
     }
 }

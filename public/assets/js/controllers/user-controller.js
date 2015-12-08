@@ -34,7 +34,7 @@ app.controller('UserController', function($scope, $http)
 
 			$scope.isLoading = true;
 
-			$http.get('/users/search/', {
+			$http.get( window.APP_URL + 'users/search/', {
 				params: params
 			}).
 			success(function(data, status, headers, config) {	
