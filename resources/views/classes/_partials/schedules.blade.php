@@ -1,11 +1,11 @@
 <div class="btn-toolbar" role="toolbar">
   	<div class="btn-group" role="group">
-		<a role="button" class="btn btn-default" href="{{url('classes/1?tab=schedules&amp;date_start=' . $dates['today'])}}">This Week</a>
+		<a role="button" class="btn btn-default" href="{{url('classes/' .$class->id. '?tab=schedules&amp;date_start=' . $dates['today'])}}">This Week</a>
   	</div>
 
   	<div class="btn-group" role="group">
-  		<a role="button" class="btn btn-default" href="{{url('classes/1?tab=schedules&amp;date_start=' . $dates['previous_week']['start'] )}}"><i class="fa fa-chevron-left"></i></a>
-  		<a role="button" class="btn btn-default" href="{{url('classes/1?tab=schedules&amp;date_start=' . $dates['next_week']['start'])}}"><i class="fa fa-chevron-right"></i></a>
+  		<a role="button" class="btn btn-default" href="{{url('classes/' .$class->id. '?tab=schedules&amp;date_start=' . $dates['previous_week']['start'] )}}"><i class="fa fa-chevron-left"></i></a>
+  		<a role="button" class="btn btn-default" href="{{url('classes/' .$class->id. '?tab=schedules&amp;date_start=' . $dates['next_week']['start'])}}"><i class="fa fa-chevron-right"></i></a>
   	</div>
 
   	<date class="text-muted">From: {{$dates['weekdays'][0]}} to {{$dates['weekdays'][5]}}</date>
