@@ -17,6 +17,10 @@ app.controller('ProgramController', function($scope) {
 	$scope.sortableOptions = {
 	    connectWith: ".sortable",
 	    placeholder: "ui-state-highlight",
+	    start: function(e, ui) {
+	    	if (ui.item.hasClass('subject'))
+	    		ui.placeholder.attr('placeholder-subject', 1);
+	    }
 	};
 
 	$scope.subjects = [];

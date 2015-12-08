@@ -270,9 +270,17 @@ fieldset label{
 	margin: 10px 0;
 }
 
+.panel-subject{
+	margin-left: 20px;
+}
+
 .ui-state-highlight{
 	border: 1px dashed #ccc;
 	height: 40px;
+}
+
+li[placeholder-subject]{
+	margin-left: 20px !important;
 }
 
 .panel-period {
@@ -344,10 +352,6 @@ fieldset label{
 
 .nav img{
 	border-radius: 2px;
-}
-
-.panel-subject{
-	margin-left: 20px;
 }
 
 #subject-orders{
