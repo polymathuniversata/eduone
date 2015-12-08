@@ -21,7 +21,7 @@
 			<thead class="panel-heading">
 				<tr>
 					<th>Date</th>
-					@foreach (config('settings.slots') as $slot)
+					@foreach (Setting::get('settings.slots') as $slot)
 					<th>{{$slot['name']}}</th>
 					@endforeach
 				</tr>
@@ -30,12 +30,12 @@
 				@for($i = 0; $i < 6; $i++)
 				<tr>
 					<td>
-						{{config('settings.weekdays')[$i]}} <br>
+						{{Setting::get('settings.weekdays')[$i]}} <br>
 						
 						{{ $dates['weekdays'][$i] }}
 					</td>
 					
-					@foreach (config('settings.slots') as $slot)
+					@foreach (Setting::get('settings.slots') as $slot)
 					<td>
 						@foreach ($schedules as $schedule)
 							@if ($schedule->slot_id == $slot['id'] && str_contains($schedule->started_at, $dates['weekdays'][$i]))

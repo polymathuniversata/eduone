@@ -17,9 +17,18 @@ class GradeController extends Controller
      */
     public function index(Request $request)
     {
-        if ( ! isset($request->class_id) || ! isset($request->subject_id) || ! isset($request->grade_id))
-            return redirect('/')->withMessage('Please select correct destination');
+
+        $subjects = Subject::orderBy('name')->get()->getDictionary();
         
+        $classes = Group::with('subjects')->ofType('class')->paginate(5);
+
+        $view = [
+            'request' => $request,
+            'classes' => $classes,   
+            'subjects'=> $subjects
+        ];
+
+        return view('grades/index', $view);
     }
 
     /**
