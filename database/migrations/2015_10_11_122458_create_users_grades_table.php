@@ -11,12 +11,17 @@ class CreateUsersGradesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('subject_id');
+            $table->integer('class_id')->nullable();
             $table->integer('grade_id');
             $table->integer('total');
             $table->integer('creator_id');
             $table->string('status')->nullable(); // Passed or not
+            $table->string('notes')->nullable();
+
             $table->timestamps();
             $table->engine = 'InnoDB';
+
+            $table->unique(['user_id', 'subject_id', 'class_id', 'grade_id']);
         });
     }
 
