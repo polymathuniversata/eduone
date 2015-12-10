@@ -27,7 +27,7 @@ class Program extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany('App\Subject', 'periods_subjects', 'subject_id', 'program_id');
+        return $this->belongsToMany('App\Subject', 'periods_subjects', 'program_id', 'subject_id');
     }
 
     public function classes()
