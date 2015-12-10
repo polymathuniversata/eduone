@@ -12,7 +12,7 @@ class Subject extends Model
     protected $fillable = [
     	'name', 'slug', 'grades_count', 'sessions_count', 'total_grade_rate', 
     	'minimum_student_present_session', 'minimum_student_grade', 
-    	'grade_type', 'equal_to', 'sessions_plan', 'grades_plan', 
+    	'sessions_plan', 'grades_plan', 
     	'creator_id', 'is_required', 'created_at', 'updated_at'
     ];
 
@@ -22,7 +22,6 @@ class Subject extends Model
     	'total_grade_rate' 		=> 'integer',
     	'minimum_student_grade' => 'integer',
     	'minimum_student_present_session' => 'integer',
-    	'equal_to'				=> 'integer',
     	'creator_id' 			=> 'integer',
         'is_required'           => 'boolean'
     ];

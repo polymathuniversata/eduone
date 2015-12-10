@@ -21,8 +21,6 @@ class CreateSubjectsTable extends Migration
             $table->integer('total_grade_rate')->default(0); // This subject hold how much in program?
             $table->float('minimum_student_present_session')->nullable();
             $table->string('minimum_student_grade')->nullable(); // 7.6 means 76. A means 80
-            $table->string('grade_type'); // A+..F, 0..10, 0..5
-            $table->integer('equal_to')->nullable(); // This subject is equal to another subject
 
             $table->text('sessions_plan')->nullable(); // JSON Format
             $table->text('grades_plan')->nullable(); // JSON Format

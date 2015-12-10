@@ -31,12 +31,6 @@
 			'placeholder' => trans('app.minimum_student_grade')]) 
 		!!}
 	</div>
-
-	<div class="form-group">
-		{!! Form::label('grade_type', trans('app.grade_type')) !!}
-		{!! Form::select('grade_type', config('settings.grade_types'), 'vi', 
-		['class' => 'form-control'] ) !!}
-	</div>
 	
 	<div class="form-group">
 		{!! Form::label('is_required', trans('app.is_required')) !!}
