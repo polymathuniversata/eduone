@@ -92,7 +92,7 @@ class GradeController extends Controller
                 'creator_id'    => 1,
                 'created_at'    => \Carbon\Carbon::now()->format('Y-m-d H:i:s')
             ];
-            
+
             $ins = true;
 
             // If record exists, then assign to $update with key is row id to perform update
@@ -118,7 +118,7 @@ class GradeController extends Controller
             $rows_affected++;
         }
 
-        return redirect()->back()->withMessage('Success' . $rows_affected);
+        return back()->withMessage('Success' . $rows_affected);
     }
 
     /**

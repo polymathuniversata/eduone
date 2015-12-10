@@ -129,7 +129,7 @@ class AttendanceController extends Controller
         $schedule->attendance_detail = $attendance_detail;
         $schedule->save();
 
-        return redirect()->back();
+        return back();
     }
 
     /**
