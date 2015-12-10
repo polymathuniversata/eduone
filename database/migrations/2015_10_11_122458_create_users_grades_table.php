@@ -20,8 +20,6 @@ class CreateUsersGradesTable extends Migration
 
             $table->timestamps();
             $table->engine = 'InnoDB';
-
-            $table->unique(['user_id', 'subject_id', 'class_id', 'grade_id']);
         });
     }
 
