@@ -5,7 +5,7 @@
 
 @section('content')
 
-@if (isset($request->class_id) && isset($request->subject_id) && isset($request->grade_id))
+@if (isset_all($request->class_id, $request->subject_id, $request->grade_id))
 	@include('grades/_partials/update')
 @else
 	@include('grades/_partials/list')

@@ -1,4 +1,4 @@
-<div class="table-responsive panel-default">
+<div class="table-responsive panel panel-default">
 	<table class="table table-bordered">
 		<thead class="panel-heading">
 			<tr>
