@@ -129,7 +129,7 @@ class AttendanceController extends Controller
         $schedule->attendance_detail = $attendance_detail;
         $schedule->save();
 
-        return redirect(url('attendances/create?schedule_id=' . $schedule->id));
+        return redirect()->back();
     }
 
     /**
