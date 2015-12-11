@@ -92,3 +92,20 @@ if ( ! function_exists('isset_val'))
 		return isset($var) ? $var : $value;
 	}
 }
+
+if ( ! function_exists('ss'))
+{
+	/**
+	 * Spaceship operator
+	 */
+	function ss($a, $b)
+	{
+		if ($a > $b)
+			return 1;
+
+		if ($a == $b)
+			return 0;
+
+		return -1;
+	}
+}
