@@ -81,3 +81,14 @@ if ( ! function_exists('isset_any'))
 		return false;
 	}
 }
+
+if ( ! function_exists('isset_val'))
+{
+	function isset_val($var, $value = '')
+	{
+		if (empty($value) && is_integer($var))
+			$value = 0;
+
+		return isset($var) ? $var : $value;
+	}
+}
