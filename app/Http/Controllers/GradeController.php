@@ -87,8 +87,8 @@ class GradeController extends Controller
                 'subject_id'    => intval($data['subject_id']),
                 'class_id'      => intval($data['class_id']),
                 'grade_id'      => intval($data['grade_id']),
-                'total'         => isset($grade['mark']) ? $grade['mark'] : 0,
-                'notes'         => isset($grade['notes']) ? $grade['notes'] : '',
+                'total'         => isset_val($grade['mark']),
+                'notes'         => isset_val($grade['notes']),
                 'creator_id'    => 1,
                 'created_at'    => \Carbon\Carbon::now()->format('Y-m-d H:i:s')
             ];
