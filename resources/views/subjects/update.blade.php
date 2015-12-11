@@ -8,8 +8,8 @@
 @section('content')
 
 <script type="text/javascript">
-	var grades 	= {!! $subject->grades_plan !!},
-		sessions= {!! $subject->sessions_plan !!};
+	var grades 	= {!! json_encode($subject->grades_plan) !!},
+		sessions= {!! json_encode($subject->sessions_plan) !!};
 </script>
 
 <div class="row" ng-controller="SubjectController" ng-init="init()">

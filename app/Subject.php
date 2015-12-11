@@ -23,7 +23,9 @@ class Subject extends Model
     	'minimum_student_grade' => 'integer',
     	'minimum_student_present_session' => 'integer',
     	'creator_id' 			=> 'integer',
-        'is_required'           => 'boolean'
+        'is_required'           => 'boolean',
+        'grades_plan'           => 'array',
+        'sessions_plan'         => 'array'
     ];
 
     public function program()
