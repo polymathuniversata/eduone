@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 use App\Branch;
 use App\Program;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
@@ -30,14 +31,17 @@ class UserController extends Controller
      */
     protected $programs = [];
 
+    protected $user;
 
-    public function __construct()
+    public function __construct(UserRepository $user)
     {
         $this->roles       = Role::orderBy('id')->lists('name', 'id')->toArray();
 
         $this->branches    = Branch::lists('name', 'id')->toArray();
 
         $this->programs    = Program::lists('name', 'id')->toArray();
+
+        $this->user        = $user;
     }
 
     /**
@@ -156,7 +160,17 @@ class UserController extends Controller
                                         ->where('user_id', $user->id)
                                         ->get();
 
-            $pass_to_view['user_subjects_pivot'] = $user_subjects_pivot;
+            $student_grades = \DB::table('users_grades')
+                                    ->where('user_id', $user->id)
+                                    ->orderBy('subject_id')
+                                    ->orderBy('grade_id')
+                                    ->get();
+
+            $student_grades = collect($student_grades)->sortBy('grade_id')->groupBy('subject_id')->toArray();
+            
+
+            $pass_to_view['user_subjects_pivot']    = $user_subjects_pivot;
+            $pass_to_view['student_grades']         = $student_grades;
         }
 
         return view('users.update', $pass_to_view);
