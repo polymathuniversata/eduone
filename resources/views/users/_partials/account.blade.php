@@ -48,11 +48,14 @@
 
 @if ($user->isStudent())
 <div class="form-group">
-	{!! Form::label('programs', 'Programs') !!}
-
-	{!! Form::select('programs[]', $programs, $user_programs, [
-		'class' => 'form-control', 
-		'multiple' => 'multiple'
-	]) !!}
+	<label>{!! trans('app.programs') !!}</label>
+	<br>
+	<div class="checkbox">
+	@foreach ($programs as $id => $program)
+		<label class="checkbox-inline">
+			{!! Form::checkbox('programs[]', $id, null) !!} {{$program}}
+		</label>
+	@endforeach
+	</div>
 </div>
 @endif

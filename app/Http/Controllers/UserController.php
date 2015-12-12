@@ -131,6 +131,9 @@ class UserController extends Controller
         if ( ! isset($request->tab))
             $request->tab = 'account';
 
+        $user_repository = $this->user;
+        $user_repository->setUser($user);
+
         $pass_to_view = [
             'user'          => $user,
             'roles'         => $this->roles,
@@ -139,7 +142,8 @@ class UserController extends Controller
             'user_programs' => $user_programs,
             'permissions'   => $permissions,
             'programs'      => $this->programs,
-            'request'       => $request
+            'request'       => $request,
+            'user_repository' => $user_repository
         ];
 
         if ($user->isRole([3,4])) {
@@ -196,16 +200,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = array_filter($request->all());
+        $data = $request->all();
 
-        if ( ! empty($data['branches']))
-            $branches = (array) $data['branches'];
-
-        if ( ! empty($data['programs']))
-            $programs = (array) $data['programs'];
-
-        if ( ! empty($data['subjects']))
-            $subjects = (array) $data['subjects'];
+        $branches = isset($data['branches']) ? $data['branches'] : [];
+        $programs = isset($data['programs']) ? $data['programs'] : [];
+        
+        // $subjects = isset($data['subjects']) ? $data['subjects'] : [];
 
         if ( ! empty($data['photo'])) {
             $photo      = $request->file('photo');
@@ -238,14 +238,11 @@ class UserController extends Controller
         try {
             $user->update($data);
 
-            if ( ! empty($data['branches']))
-                $user->branches()->sync($branches);
+            $user->branches()->sync($branches);
+            
+            $user->programs()->sync($programs);
 
-            if ( ! empty($data['programs']))
-                $user->programs()->sync($programs);
-
-             if ( ! empty($data['subjects']))
-                $user->subjects()->sync($subjects);
+            // $user->subjects()->sync($subjects);
 
             return redirect('users/' . $user->id )
                 ->with('message', 'User was updated successfully!');
