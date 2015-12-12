@@ -31,7 +31,7 @@
 				@foreach ($students as $id => $student_name)
 				<tr>
 					<td>1</td>
-					<td>{{$student_name}}</td>
+					<td><a href="{{url('users/' . $id)}}">{{$student_name}}</a></td>
 					<td class="cell-label">
 						{!! Form::checkbox("students[{$id}][status]", 'present', ! empty($attendance_detail[$id]['status']) && $attendance_detail[$id]['status'] == 'present') !!}
 					</td>
