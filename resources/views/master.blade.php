@@ -78,13 +78,7 @@
 
                     <div class="container-fluid">
                         
-                        @if (! empty(session('message')))
-                        <header class="row" id="messages">    
-                            <div class="alert alert-warning col-md-12">
-                                {!! session('message') !!}
-                            </div>
-                        </header>
-                        @endif
+                        @include('_partials/messages')
 
                         <section class="row" id="content">
                             <div class="col-md-12">
@@ -92,11 +86,7 @@
                             </div>
                         </section>
 
-                        <footer class="row" id="footer">
-                            <div class="col-md-12">
-                                <em class="text-muted">Thanks for creating with <a href="https://binaty.org">Binaty</a></em>
-                            </div>
-                        </footer>
+                        @include('_partials/footer')
                     </div>
                 </main>
             </div><!--.rơ-->
