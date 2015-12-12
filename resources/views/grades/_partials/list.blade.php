@@ -32,10 +32,10 @@
 							@if ( ! empty($subjects[$request->subject_id]))
 							
 							<ul class="list-unstyled">
-								@foreach (json_decode($subjects[$request->subject_id]->grades_plan) as $id => $grade)
+								@foreach ($subjects[$request->subject_id]->grades_plan as $id => $grade)
 								<li>
 									<a href="{{url('grades?class_id=' . $class->id . '&amp;subject_id=' . $subject->id . '&amp;grade_id=' . $id)}}">
-										{{$grade->name}}
+										{{$grade['name']}}
 									</a>
 								</li>
 								@endforeach
