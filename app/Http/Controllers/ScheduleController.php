@@ -34,7 +34,7 @@ class ScheduleController extends Controller
         if ($request->date === 'today')
             $request->date = date('Y-m-d');
 
-        $request->date = isset_val($request->date, date('Y-m-d'));
+        $request->date = isset($request->date) ? $request->date : date('Y-m-d');
 
         $request_date = Carbon::createFromFormat('Y-m-d', $request->date);
 

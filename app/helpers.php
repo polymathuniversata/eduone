@@ -82,17 +82,6 @@ if ( ! function_exists('isset_any'))
 	}
 }
 
-if ( ! function_exists('isset_val'))
-{
-	function isset_val($var, $value = '')
-	{
-		if (empty($value) && is_integer($var))
-			$value = 0;
-
-		return isset($var) ? $var : $value;
-	}
-}
-
 if ( ! function_exists('ss'))
 {
 	/**
