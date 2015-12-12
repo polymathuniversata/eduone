@@ -96,7 +96,7 @@ class UserRepository
 		{
 			$marks[$index] = [
 				'percent' 	=> $plan['percent'],
-				'value'		=> isset_val($grades[$index]->total)
+				'value'		=> isset($grades[$index]->total) ? $grades[$index]->total : 0
 			];
 		}
 		

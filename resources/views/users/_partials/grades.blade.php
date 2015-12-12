@@ -10,8 +10,8 @@
 						<th>Grade Name</th>
 						<th>Score (%)</th>
 						<th>Grade</th>
-						<th>Note</th>
-						<th>Date</th>
+						<th>Status</th>
+						<th>Notes</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -19,16 +19,16 @@
 					<tr>
 						<td>{{$grade->grade_id}}</td>
 						<td>{{$grade->total}}</td>
-						<td>{{$grade->total}}</td>
+						<td>A</td>
+						<td><span class="label label-success">Pass</span></td>
 						<td>{{$grade->notes}}</td>
-						<td>{{$grade->created_at}}</td>
 					</tr>
 					@endforeach
 					<tr>
-						<td>Average</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><span class="label label-default">Average</span></td>
+						<td>{{$user_repository->getSubjectAverageGrade($subject_id)}}</td>
+						<td>A</td>
+						<td><span class="label label-success">Pass</span></td>
 						<td></td>
 					</tr>
 				</tbody>
