@@ -109,3 +109,20 @@ if ( ! function_exists('ss'))
 		return -1;
 	}
 }
+
+function average_of($marks)
+{
+	// Todo: Get Calculation method from Setting::('calculation_method')
+	$calculation_method = 'arithmetic_mean';
+
+	$average = 0;
+
+	foreach ($marks as $mark) {
+		if ($calculation_method === 'percent')
+			$average += $mark['value'] * $mark['percent'] / 100;
+		else
+			$average += $mark['value'] * $mark['percent'] / array_sum(array_pluck($marks, 'percent'));	
+	}
+
+	return round($average, 1);
+}

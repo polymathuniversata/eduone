@@ -100,7 +100,7 @@ class UserRepository
 			];
 		}
 		
-		return $this->calculateAverage($marks);
+		return average_of($marks);
 	}
 
 	public function getPeriodAverageGrade($period_id)
@@ -122,7 +122,7 @@ class UserRepository
 		}
 
 		// Calculate percent
-		return $this->calculateAverage($marks);
+		return average_of($marks);
 	}
 
 	public function getProgramAverageGrade($program_id)
@@ -142,23 +142,6 @@ class UserRepository
 			];
 		}
 
-		return $this->calculateAverage($marks);
-	}
-
-	protected function calculateAverage($marks)
-	{
-		// Todo: Get Calculation method from Setting::('calculation_method')
-		$calculation_method = 'arithmetic_mean';
-
-		$average = 0;
-
-		foreach ($marks as $mark) {
-			if ($calculation_method === 'percent')
-				$average += $mark['value'] * $mark['percent'] / 100;
-			else
-				$average += $mark['value'] * $mark['percent'] / array_sum(array_pluck($marks, 'percent'));	
-		}
-
-		return round($average);
+		return average_of($marks);
 	}
 }
