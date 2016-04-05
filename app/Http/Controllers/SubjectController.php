@@ -67,13 +67,13 @@ class SubjectController extends Controller
             $data['is_required'] = 0;
 
         if (! empty($data['grades_plan'])) {
-            $grades_plan = json_decode( $data['grades_plan'] );
-            $data['grades_count'] = count($grades_plan);
+            $data['grades_plan'] = json_decode( $data['grades_plan'] );
+            $data['grades_count'] = count($data['grades_plan']);
         }
 
         if (! empty($data['sessions_plan'])) {
-            $sessions_plan = json_decode( $data['sessions_plan'] );
-            $data['sessions_count'] = count($sessions_plan);
+            $data['sessions_plan'] = json_decode( $data['sessions_plan'] );
+            $data['sessions_count'] = count($data['sessions_plan']);
         }
 
         try {
@@ -119,18 +119,18 @@ class SubjectController extends Controller
         $data = array_filter($data);
 
         if (! empty($data['grades_plan'])) {
-            $grades_plan = json_decode( $data['grades_plan'] );
-            $data['grades_count'] = count($grades_plan);
+            $data['grades_plan'] = json_decode( $data['grades_plan'] );
+            $data['grades_count'] = count($data['grades_plan']);
         }
 
         if (! empty($data['sessions_plan'])) {
-            $sessions_plan = json_decode( $data['sessions_plan'] );
-            $data['sessions_count'] = count($sessions_plan);
+            $data['sessions_plan'] = json_decode( $data['sessions_plan'] );
+            $data['sessions_count'] = count($data['sessions_plan']);
         }
 
         if ( ! isset($data['is_required']))
             $data['is_required'] = 0;
-
+        
         try {
             $subject->update($data);
 

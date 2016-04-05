@@ -25,7 +25,7 @@
 @section('search_box')
     {!! Form::model($request, ['url' => '/users', 'method' => 'GET']) !!}
     <div class="input-group" id="advanced-search">
-        {!! Form::text('s', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
+        {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
         
         <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Show Advanced Search Options">
@@ -138,5 +138,6 @@
       </div>
     </div>
   </div>
+  
 </div>
 @endsection

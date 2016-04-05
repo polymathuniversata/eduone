@@ -56,32 +56,6 @@ function get_slot_time($slot)
 	return array_map('trim', explode('-', $slot['time']));
 }
 
-if ( ! function_exists('isset_all')) 
-{
-	function isset_all(...$vars)
-	{
-		foreach ($vars as $var) {
-			if ( ! isset($var))
-				return false;
-		}
-
-		return true;
-	}
-}
-
-if ( ! function_exists('isset_any')) 
-{
-	function isset_any(...$vars)
-	{
-		foreach ($vars as $var) {
-			if (isset($var))
-				return true;
-		}
-
-		return false;
-	}
-}
-
 if ( ! function_exists('ss'))
 {
 	/**
