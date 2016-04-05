@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="App">
     <head>
-        <title>Uniform @yield('title')</title>
+        <title>EduOne @yield('title')</title>
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/typicons.css" rel="stylesheet" type="text/css">
@@ -22,7 +22,7 @@
           target: 'main'
         };
         </script>
-                <script type="text/javascript" src="/assets/js/pace.min.js"></script>
+        <script type="text/javascript" src="/assets/js/pace.min.js"></script>
 
         @yield('header')
     </head>
@@ -32,7 +32,7 @@
             <div class="row row-offcanvas row-offcanvas-left">
                 <aside id="sidebar" class="sidebar-offcanvas">
                     <header id="header">
-                        <h1><a href="/">binaty</a></h1>
+                        <h1><a href="/">eduone</a></h1>
                     </header>
                     
                     <nav id="main-menu">

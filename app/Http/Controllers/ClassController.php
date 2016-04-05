@@ -231,19 +231,25 @@ class ClassController extends Controller
             if ( ! empty($data['queue'])) {
                 $users = [];
                 $queue = json_decode($data['queue'], true);
+
                 foreach ($queue as $user) {
                     $users[$user['id']] = $user['id'];
                 }
 
                 // Parse $data['users'] to properly id to add to class
-                $class->addUsers($users);
-
-                $message = 'Class members was added successfully!';
+                try {
+                    $class->addUsers($users);
+                    $message = 'Class members was added successfully!';
+                } catch (\Illuminate\Database\QueryException $e) {
+                    $message = 'Member(s) is already added!';
+                }
             }
 
             return redirect(url('/classes/' . $class->id . '?tab=' . $request->tab))->withMessage($message);
+
         } catch (Exception $e) {
-            return redirect(url('/classes/' . $class->id . '?tab=' . $request->tab))->withInput()->withMessage('Error during updating class!');
+            return redirect(url('/classes/' . $class->id . '?tab=' . $request->tab))
+                    ->withInput()->withMessage('Error during updating class!');
         }
     }
 
