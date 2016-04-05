@@ -491,6 +491,13 @@ tr.inactive > td{
 	height: 48px;
 }
 
+#ajax-users-list li.not-found{
+	background: #ccc;
+	font-weight: normal;
+	color: #222;
+	padding: 8px 10px;
+}
+
 #queue-users-list .btn{
 	margin: 15px 15px 0 0;
 }
