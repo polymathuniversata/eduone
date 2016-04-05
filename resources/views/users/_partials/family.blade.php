@@ -1,16 +1,10 @@
+<script>
 @if ($user->isParent())
-<script>
 	var role_id = 4;
-</script>
-@endif
-
-@if ($user->isStudent())
-
-<script>
+@elseif ($user->isStudent())
 	var role_id = 5;
-</script>
 @endif
-
+</script>
 <div class="form-group" ng-controller="UserController" ng-init="init()">
 	
 	<div class="col-md-6">

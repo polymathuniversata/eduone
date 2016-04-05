@@ -26,7 +26,7 @@
 						<td>
 							{!! Form::checkbox('subjects[]', $subject->id, in_array($subject->id, $class_subjects)) !!}
 						</td>
-						<td>	
+						<td width="50%">	
 							{{$subject['name']}}
 						</td>
 						<td>
