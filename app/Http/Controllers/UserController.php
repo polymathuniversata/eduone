@@ -65,7 +65,10 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        return User::search($request->all())->get(['id', 'display_name', 'photo']);
+        return User::search($request->all())
+                    ->orderBy('created_at', 'DESC')
+                    ->get(['id', 'display_name', 'photo'])
+                    ->take(20);
     }
 
     /**
@@ -96,8 +99,7 @@ class UserController extends Controller
         if (! empty($data['branches'])) {
             $branches = $data['branches'];
 
-            foreach($branches as $index => $branch)
-            {
+            foreach($branches as $index => $branch) {
                 $branches[$index] = intval($branch);
             }
         }
@@ -110,7 +112,7 @@ class UserController extends Controller
 
             return redirect('users/' . $user->id )
                         ->with('message', 'User was created successfully!');
-        } catch ( Exception $e ) {
+        } catch (Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }
     }

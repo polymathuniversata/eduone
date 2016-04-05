@@ -1,5 +1,6 @@
 <script>
-	var role_id = '3,4';
+	var role_id 	= '3,4',
+		group_id 	= {{$class->id}};
 </script>
 <script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
 

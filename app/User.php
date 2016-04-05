@@ -238,6 +238,17 @@ class User extends Model implements AuthenticatableContract,
     
         if (isset($request['branch_id']))
             $user = $user->ofBranch($request['branch_id']);
+
+        if (isset($request['not_in']))
+            $user = $user->whereNotIn('id', (array) $request['not_in']);
+
+        if (isset($request['not_in_group'])) 
+        {
+            // Retrieve a list of user id in current group
+            $group_users = \App\Group::find($request['not_in_group'])->users->pluck('id')->toArray();
+            
+            $user = $user->whereNotIn('id', $group_users);
+        }
     
         return $user;
     }
