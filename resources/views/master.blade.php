@@ -61,7 +61,7 @@
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Signed in as <strong>Tan Nguyen</strong></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{url('/profiles')}}">My Profile</a></li>
+                                    <li><a href="{{url('/profile')}}">My Profile</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{url('/sign-out')}}">Sign out</a></li>
                                 </ul>

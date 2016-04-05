@@ -59,11 +59,10 @@ class ScheduleController extends Controller
                 $schedules[$room_id][$slot['id']] = new \stdClass;
             }
         }
-        
-        foreach ($available_schedules as $schedule)
-        {
-            if (isset_all($schedule->room_id, $schedule->slot_id)) {
-                $schedules[$schedule->room_id][$schedule->slot_id] = $schedule;
+
+        foreach ($available_schedules as $schedule){
+            if (isset($schedule->room_id) && isset($schedule->slot_id)) {
+                $schedules[$schedule->room_id][$schedule->slot_id] = $schedule->toArray();
             }
         }
 
@@ -73,14 +72,14 @@ class ScheduleController extends Controller
                     ->toArray();
 
         $pass_to_view = [
-            'teachers' => $this->teachers,
-            'slots' => $slots,
-            'rooms' => $rooms,
+            'teachers'  => $this->teachers,
+            'slots'     => $slots,
+            'rooms'     => $rooms,
             'schedules' => $schedules,
-            'classes' => $classes,
-            'subjects' => $this->subjects,
-            'request' => $request,
-            'dates' => compact('today', 'previous_day', 'next_day', 'viewing_day', 'weekday')
+            'classes'   => $classes,
+            'subjects'  => $this->subjects,
+            'request'   => $request,
+            'dates'     => compact('today', 'previous_day', 'next_day', 'viewing_day', 'weekday')
         ];
         
         return view('schedules/index', $pass_to_view);
