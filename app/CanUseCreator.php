@@ -15,7 +15,7 @@
  * $post->creator->email
  *
  * 
- * @see  http://binaty.org/docs/dev/can-use-creator
+ * @see  http://eduone.co/docs/dev/can-use-creator
  * @author Tan Nguyen <tan@binaty.org>
  * @since  1.0
  */

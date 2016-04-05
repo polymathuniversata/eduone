@@ -13,5 +13,4 @@ class Student extends User
     {
         return $this->belongsToMany('App\Branch', 'users_branches', 'user_id', 'id');
     }
-
 }

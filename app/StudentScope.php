@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\ScopeInterface;
 
 class StudentScope implements ScopeInterface 
 {
-
     public function apply(Builder $builder, Model $model) 
     {
         $builder->whereRoleId(4);

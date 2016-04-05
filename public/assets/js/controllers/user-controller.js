@@ -25,17 +25,15 @@ app.controller('UserController', function($scope, $http)
 
 	$scope.$watch('search', function()
 	{
-		var params = {
-			search: $scope.search,
-			role_id: $scope.role_id
-		};
-		
 		if ( ! $scope.isLoading) {
 
 			$scope.isLoading = true;
 
-			$http.get( window.APP_URL + 'users/search/', {
-				params: params
+			$http.get(APP_URL + 'users/search/', {
+				params: {
+					search: $scope.search,
+					role_id: $scope.role_id
+				}
 			}).
 			success(function(data, status, headers, config) {	
 		    	$scope.users = data;

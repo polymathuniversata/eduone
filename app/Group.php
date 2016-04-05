@@ -137,6 +137,9 @@ class Group extends Model
      */
     public function removeUser($id)
     {
+        if ( ! is_integer($id))
+            return $this->removeUsers($id);
+
         return $this->users()->detach($id);
     }
 
@@ -170,7 +173,8 @@ class Group extends Model
      */
     public function getRole($user_id)
     {
-        return \DB::table('users_groups')->whereGroupId($this->id)->whereUserId($user_id)->pluck('role');
+        return \DB::table('users_groups')->whereGroupId($this->id)
+                ->whereUserId($user_id)->pluck('role');
     }
 
     public function getUsersByRole($role_id)
@@ -196,7 +200,8 @@ class Group extends Model
 
     public function getSubjectsTeachers()
     {
-        return \DB::table('classes_subjects')->whereClassId($this->id)->lists('user_id', 'subject_id');
+        return \DB::table('classes_subjects')
+                ->whereClassId($this->id)->lists('user_id', 'subject_id');
     }
 
     public function getTeacherBySubject($subject_id)

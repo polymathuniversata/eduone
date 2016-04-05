@@ -47,7 +47,6 @@ class Subject extends Model
                     ->withTimestamps();
     }
 
-
     public function getSessionsCountAttribute($value)
     {
         return isset($value) ? $value : 0;
