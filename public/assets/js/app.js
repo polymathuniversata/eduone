@@ -33,7 +33,7 @@ app.controller('MetaController', function($scope) {
 app.controller('MemberController', function($scope, $http)
 {
 	$scope.setRole = function(userId, roleId) {
-		$http.put('/classes', {
+		$http.put( APP_URL + 'classes', {
 			user_id: userId,
 			role_id: roleId 
 		}).success(function(data, status, headers, config) {
@@ -67,8 +67,14 @@ $(function()
 		$(this).parents('table').find('input[type=checkbox]').prop('checked', this.checked);
 	});
 
-	$('.cell-label').click(function () {
+	// When click to cell. Checkbox in that cell is also clicked.
+	$('.cell-label').click(function (e) {
 		$(this).find('input[type=checkbox]').trigger('click');
+	});
+
+	$('.cell-label input[type=checkbox]').click(function(e) {
+		// Stop bubble because of above effect.
+		e.stopPropagation();
 	});
 
 	$('[data-toggle="offcanvas"]').click(function () {

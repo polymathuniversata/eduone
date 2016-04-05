@@ -33,11 +33,12 @@
 					<td>1</td>
 					<td><a href="{{url('users/' . $id)}}">{{$student_name}}</a></td>
 					<td class="cell-label">
-						{!! Form::checkbox("students[{$id}][status]", 'present', ! empty($attendance_detail[$id]['status']) && $attendance_detail[$id]['status'] == 'present') !!}
+						{!! Form::checkbox("students[{$id}][status]", 'present', 
+						! empty($attendance_detail[$id]['status']) && $attendance_detail[$id]['status'] == 'present') 
+						!!}
 					</td>
 					<td><textarea name="students[{{$id}}][note]" class="form-control" rows="2">{{ ( ! empty($attendance_detail[$id]['note'])) ? $attendance_detail[$id]['note'] : '' }}</textarea></td>
 				</tr>
-				
 				@endforeach
 			</tbody>
 		</table>

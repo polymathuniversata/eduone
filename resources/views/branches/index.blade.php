@@ -8,7 +8,7 @@
 @section('content')
 
 <div class="table-responsive panel panel-default">
-	<table class="table table-striped table-hover">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Branch Name</th>
@@ -21,11 +21,11 @@
 			@if (count($branches) > 0)
 				@foreach ($branches as $branch)
 				<tr>
-					<td><a href="/branches/{{ $branch->id }}/edit">{{ $branch->name }}</a></td>
+					<td><a href="{{url('/')}}/branches/{{ $branch->id }}/edit">{{ $branch->name }}</a></td>
 					<td>{{ $branch->email }}</td>
-					<td><a href="/users/1">{{ $branch->admin->getFullName() }}</a></td>
+					<td><a href="{{url('/')}}/users/1">{{ $branch->admin->getFullName() }}</a></td>
 					<td>
-						<a href="/branches/{{ $branch->id }}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+						<a href="{{url('/')}}/branches/{{ $branch->id }}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
 						<button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 					</td>
 				</tr>

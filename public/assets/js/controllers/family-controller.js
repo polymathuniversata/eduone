@@ -29,7 +29,7 @@ app.controller('FamilyController', function($scope, $http)
 
 			$scope.isLoading = true;
 
-			$http.get('/users/search/', {
+			$http.get( APP_URL + 'users/search/', {
 				params: params
 			}).
 			success(function(data, status, headers, config) {

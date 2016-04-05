@@ -104,7 +104,7 @@ return [
 		'url'	=> 'settings',
 		'childs' => [
 			'settings' 			=> 'General',
-			'settings/academic' => 'Academic',
+			'settings/grades' 	=> 'Grades',
 			'settings/themes' 	=> 'Themes',
 		]
 	],

@@ -15,7 +15,7 @@
 @section('search_box')
  {!! Form::model($request, ['url' => '/classes', 'method' => 'GET']) !!}
     <div class="input-group pull-right col-md-7" id="advanced-search">
-        {!! Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
+        {!! Form::text('s', null, ['class' => 'form-control', 'placeholder' => 'Enter search terms']) !!}
         <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Show Advanced Search Options">
                 <span class="caret"></span>
@@ -77,10 +77,8 @@
             <option value="export">Export</option>
         </select>
     </div>
-
+    <button type="button" class="btn btn-default btn-sm">Go</button>
     <button type="button" class="btn btn-default btn-sm">{!! trans('app.import') !!}...</button>
-    <button type="button" class="btn btn-default btn-sm">{!! trans('app.export') !!}...</button>
-    <button type="button" class="btn btn-danger btn-sm">{{ trans('app.delete') }}</button>
 </div>
 
 <!-- Modal -->
@@ -141,8 +139,6 @@
                         ])!!}
                     </div>
                 </div>
-                
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{!! trans('app.cancel') !!}</button>
