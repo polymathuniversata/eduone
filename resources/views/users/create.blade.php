@@ -1,7 +1,6 @@
 @extends('master')
 
 @section('title', trans('app.create_new_user'))
-
 @section('main_title', trans('app.create_new_user'))
 
 @section('main_button')

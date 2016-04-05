@@ -55,12 +55,12 @@ app.controller('UserController', function($scope, $http)
 		angular.forEach($scope.queue, function(user) {
 			if (user.id === $scope.users[$index].id) {
 				isDuplicated = true;
-				return;
+				return false;
 			}
 		});
 
 		if (isDuplicated)
-			return;
+			return false;
 
 		$scope.queue.push($scope.users[$index]);
 

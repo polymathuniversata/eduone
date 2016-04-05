@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Schedule;
 use App\Room;
+use App\Group;
 use \Carbon\Carbon as Carbon;
 
 class ScheduleController extends Controller
@@ -51,7 +52,8 @@ class ScheduleController extends Controller
 
         $rooms = Room::lists('name', 'id')->toArray();
 
-        $available_schedules = Schedule::whereDate('started_at', '=', $viewing_day)->ofBranch(1)->get();
+        $available_schedules = Schedule::whereDate('started_at', '=', $viewing_day)
+                                        ->ofBranch(1)->get()->toArray();
 
         $schedules = [];
         foreach ($rooms as $room_id => $room_name) {
@@ -61,12 +63,12 @@ class ScheduleController extends Controller
         }
 
         foreach ($available_schedules as $schedule){
-            if (isset($schedule->room_id) && isset($schedule->slot_id)) {
-                $schedules[$schedule->room_id][$schedule->slot_id] = $schedule->toArray();
+            if (isset($schedule['room_id']) && isset($schedule['slot_id'])) {
+                $schedules[$schedule['room_id']][$schedule['slot_id']] = $schedule;
             }
         }
 
-        $classes = \App\Group::ofType('class')
+        $classes = Group::ofType('class')
                     ->whereDate('started_at', '<=', $viewing_day)
                     ->lists('name', 'id')
                     ->toArray();

@@ -1,4 +1,4 @@
-<div class="row" ng-controller="UserController">
+<div class="row">
 	<div class="col-md-6 basic">
 		<div class="form-group">
 			<label>{!! trans('app.user_name') !!}</label>
@@ -16,8 +16,9 @@
 			<label>{!! trans('app.role') !!}</label>
 			{!! Form::select('role_id', $roles, isset($request->role) ? $request->role : null, [
 				'class' => 'form-control', 
-				'placeholder' => 'Please select', 
-				] ) 
+				'placeholder' => 'Please select',
+				'ng-model' => 'role_id'
+				]) 
 			!!}
 		</div>
 		@endif
@@ -42,7 +43,7 @@
 			{!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-show="role_id != 1">
 			<label>{!! trans('app.branches') !!}</label>
 			<br>
 			<div class="checkbox">
