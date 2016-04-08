@@ -1,5 +1,6 @@
 <?php
 
+use Cmgmyr\Messenger\Models\Models;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -12,11 +13,10 @@ class AddSoftDeletesToParticipantsTable extends Migration
      */
     public function up()
     {
-        Schema::table('participants', function (Blueprint $table) {
+        Schema::table(Models::table('participants'), function (Blueprint $table) {
             $table->softDeletes();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -25,7 +25,7 @@ class AddSoftDeletesToParticipantsTable extends Migration
      */
     public function down()
     {
-        Schema::table('participants', function (Blueprint $table) {
+        Schema::table(Models::table('participants'), function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

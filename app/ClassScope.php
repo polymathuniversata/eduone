@@ -13,6 +13,4 @@ class ClassScope implements ScopeInterface
     {
         $builder->whereType('class');
     }
-    
-    public function remove(Builder $builder, Model $model) { }
 }

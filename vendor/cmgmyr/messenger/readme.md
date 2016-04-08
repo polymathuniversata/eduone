@@ -3,6 +3,7 @@
 [![Latest Version](https://img.shields.io/github/release/cmgmyr/laravel-messenger.svg?style=flat-square)](https://github.com/cmgmyr/laravel-messenger/releases)
 [![Total Downloads](https://img.shields.io/packagist/dt/cmgmyr/messenger.svg?style=flat-square)](https://packagist.org/packages/cmgmyr/messenger)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/cmgmyr)
 
 # Laravel Messenger
 This package will allow you to add a full user messaging system into your Laravel application.
@@ -45,13 +46,19 @@ Add the service provider to `config/app.php` under `providers`:
 
 Publish Assets
 
-	php artisan vendor:publish --provider="Cmgmyr\Messenger\MessengerServiceProvider"
+    php artisan vendor:publish --provider="Cmgmyr\Messenger\MessengerServiceProvider"
 	
 Update config file to reference your User Model:
 
-	config/messenger.php
+    config/messenger.php
 	
 Create a `users` table if you do not have one already. If you need one, simply use [this example](https://github.com/cmgmyr/laravel-messenger/blob/v2/src/Cmgmyr/Messenger/examples/create_users_table.php) as a starting point, then migrate.
+
+**(Optional)** Define names of database tables in package config file if you don't want to use default ones:
+
+    'messages_table' => 'messenger_messages',
+    'participants_table' => 'messenger_participants',
+    'threads_table' => 'messenger_threads',
 
 Migrate your database:
 
@@ -62,7 +69,7 @@ Add the trait to your user model:
     use Cmgmyr\Messenger\Traits\Messagable;
     
     class User extends Model {
-    	use Messagable;
+        use Messagable;
     }
 
 
@@ -79,9 +86,9 @@ __Note:__ These examples use the [laravelcollective/html](http://laravelcollecti
 
 
 ## Contributing? 
-Please format your code before creating a pull-request:
+Please format your code before creating a pull-request. This will format all files as specified in `.php_cs`:
 
-    vendor/bin/php-cs-fixer fix --level psr2 .
+    vendor/bin/php-cs-fixer fix .
 
 ## Security
 

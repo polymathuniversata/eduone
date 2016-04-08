@@ -12,9 +12,4 @@ class StudentScope implements ScopeInterface
     {
         $builder->whereRoleId(4);
     }
-
-    public function remove(Builder $builder, Model $model) 
-    { 
-    	// you don't need this 
-	}
 }

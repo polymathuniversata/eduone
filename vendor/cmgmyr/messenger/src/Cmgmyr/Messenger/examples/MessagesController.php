@@ -1,10 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\User;
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Thread;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -13,17 +15,7 @@ use Illuminate\Support\Facades\Session;
 class MessagesController extends Controller
 {
     /**
-     * Just for testing - the user should be logged in. In a real
-     * app, please use standard authentication practices
-     */
-    public function __construct()
-    {
-        $user = User::find(1);
-        Auth::login($user);
-    }
-
-    /**
-     * Show all of the message threads to the user
+     * Show all of the message threads to the user.
      *
      * @return mixed
      */
@@ -44,7 +36,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Shows a message thread
+     * Shows a message thread.
      *
      * @param $id
      * @return mixed
@@ -72,7 +64,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Creates a new message thread
+     * Creates a new message thread.
      *
      * @return mixed
      */
@@ -84,7 +76,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Stores a new message thread
+     * Stores a new message thread.
      *
      * @return mixed
      */
@@ -112,7 +104,7 @@ class MessagesController extends Controller
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::user()->id,
-                'last_read' => new Carbon
+                'last_read' => new Carbon,
             ]
         );
 
@@ -125,7 +117,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Adds a new message to a current thread
+     * Adds a new message to a current thread.
      *
      * @param $id
      * @return mixed
@@ -155,7 +147,7 @@ class MessagesController extends Controller
         $participant = Participant::firstOrCreate(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => Auth::user()->id
+                'user_id'   => Auth::user()->id,
             ]
         );
         $participant->last_read = new Carbon;

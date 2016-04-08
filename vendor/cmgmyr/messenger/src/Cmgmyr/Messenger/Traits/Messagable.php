@@ -1,32 +1,51 @@
-<?php namespace Cmgmyr\Messenger\Traits;
+<?php
 
-use Cmgmyr\Messenger\Models\Thread;
+namespace Cmgmyr\Messenger\Traits;
+
+use Cmgmyr\Messenger\Models\Message;
+use Cmgmyr\Messenger\Models\Models;
 use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
 
 trait Messagable
 {
     /**
-     * Message relationship
+     * Message relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages()
     {
-        return $this->hasMany('Cmgmyr\Messenger\Models\Message');
+        return $this->hasMany(Models::classname(Message::class));
     }
 
     /**
-     * Thread relationship
+     * Participants relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function participants()
+    {
+        return $this->hasMany(Models::classname(Participant::class));
+    }
+
+    /**
+     * Thread relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function threads()
     {
-        return $this->belongsToMany('Cmgmyr\Messenger\Models\Thread', 'participants');
+        return $this->belongsToMany(
+            Models::classname(Thread::class),
+            Models::table('participants'),
+            'user_id',
+            'thread_id'
+        );
     }
 
     /**
-     * Returns the new messages count for user
+     * Returns the new messages count for user.
      *
      * @return int
      */
@@ -36,14 +55,15 @@ trait Messagable
     }
 
     /**
-     * Returns all threads with new messages
+     * Returns all threads with new messages.
      *
      * @return array
      */
     public function threadsWithNewMessages()
     {
         $threadsWithNewMessages = [];
-        $participants = Participant::where('user_id', $this->id)->lists('last_read', 'thread_id');
+
+        $participants = Models::participant()->where('user_id', $this->id)->lists('last_read', 'thread_id');
 
         /**
          * @todo: see if we can fix this more in the future.
@@ -56,7 +76,7 @@ trait Messagable
         }
 
         if ($participants) {
-            $threads = Thread::whereIn('id', array_keys($participants))->get();
+            $threads = Models::thread()->whereIn('id', array_keys($participants))->get();
 
             foreach ($threads as $thread) {
                 if ($thread->updated_at > $participants[$thread->id]) {

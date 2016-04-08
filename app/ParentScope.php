@@ -13,9 +13,4 @@ class ParentScope implements ScopeInterface
     {
         $builder->whereRoleId(5);
     }
-
-    public function remove(Builder $builder, Model $model) 
-    { 
-    	// you don't need this 
-	}
 }

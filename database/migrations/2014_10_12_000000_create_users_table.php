@@ -41,7 +41,7 @@ class CreateUsersTable extends Migration
             $table->string('status', 60)->nullable();
             $table->integer('creator_id');
             $table->softDeletes();
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
         });

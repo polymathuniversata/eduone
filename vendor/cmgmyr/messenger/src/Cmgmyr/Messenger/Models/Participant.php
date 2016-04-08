@@ -1,6 +1,8 @@
-<?php namespace Cmgmyr\Messenger\Models;
+<?php
 
-use Illuminate\Support\Facades\Config;
+namespace Cmgmyr\Messenger\Models;
+
+use App\User;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,22 +32,32 @@ class Participant extends Eloquent
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'last_read'];
 
     /**
-     * Thread relationship
+     * {@inheritDoc}
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->table = Models::table('participants');
+
+        parent::__construct($attributes);
+    }
+
+    /**
+     * Thread relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function thread()
     {
-        return $this->belongsTo('Cmgmyr\Messenger\Models\Thread');
+        return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
     }
 
     /**
-     * User relationship
+     * User relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(Config::get('messenger.user_model'));
+        return $this->belongsTo(Models::classname(User::class), 'user_id');
     }
 }

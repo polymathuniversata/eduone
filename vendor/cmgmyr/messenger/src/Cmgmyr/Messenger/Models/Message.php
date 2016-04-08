@@ -1,6 +1,8 @@
-<?php namespace Cmgmyr\Messenger\Models;
+<?php
 
-use Illuminate\Support\Facades\Config;
+namespace Cmgmyr\Messenger\Models;
+
+use App\User;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Message extends Eloquent
@@ -36,37 +38,47 @@ class Message extends Eloquent
     ];
 
     /**
-     * Thread relationship
+     * {@inheritDoc}
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->table = Models::table('messages');
+
+        parent::__construct($attributes);
+    }
+
+    /**
+     * Thread relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function thread()
     {
-        return $this->belongsTo('Cmgmyr\Messenger\Models\Thread');
+        return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
     }
 
     /**
-     * User relationship
+     * User relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(Config::get('messenger.user_model'));
+        return $this->belongsTo(Models::classname(User::class), 'user_id');
     }
 
     /**
-     * Participants relationship
+     * Participants relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function participants()
     {
-        return $this->hasMany('Cmgmyr\Messenger\Models\Participant', 'thread_id', 'thread_id');
+        return $this->hasMany(Models::classname(Participant::class), 'thread_id', 'thread_id');
     }
 
     /**
-     * Recipients of this message
+     * Recipients of this message.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
