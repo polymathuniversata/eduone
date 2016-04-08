@@ -20,7 +20,7 @@ class ScheduleController extends Controller
 
     public function __construct()
     {
-        $this->teachers = \App\User::ofRole(3)->lists('display_name', 'id')->toArray();
+        $this->teachers = \App\User::ofRole(3)->pluck('display_name', 'id')->toArray();
         
         $this->subjects = \App\Subject::get(['id', 'name', 'sessions_count'])->getDictionary();
     }
@@ -50,7 +50,7 @@ class ScheduleController extends Controller
         
         $slots = config('settings.slots');
 
-        $rooms = Room::lists('name', 'id')->toArray();
+        $rooms = Room::pluck('name', 'id')->toArray();
 
         $available_schedules = Schedule::whereDate('started_at', '=', $viewing_day)
                                         ->ofBranch(1)->get()->toArray();
@@ -70,7 +70,7 @@ class ScheduleController extends Controller
 
         $classes = Group::ofType('class')
                     ->whereDate('started_at', '<=', $viewing_day)
-                    ->lists('name', 'id')
+                    ->pluck('name', 'id')
                     ->toArray();
 
         $pass_to_view = [

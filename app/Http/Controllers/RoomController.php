@@ -14,7 +14,7 @@ class RoomController extends Controller
 
     public function __construct()
     {
-        $this->branches =  Branch::lists('name', 'id')->toArray();
+        $this->branches =  Branch::pluck('name', 'id')->toArray();
     }
 
     /**

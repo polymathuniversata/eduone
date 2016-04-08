@@ -37,7 +37,7 @@ class Group extends Model
 
     public function getUserIds()
     {
-        return \DB::table('users_groups')->whereGroupId($this->id)->lists('user_id', 'id');
+        return \DB::table('users_groups')->whereGroupId($this->id)->pluck('user_id', 'id');
     }
 
     /**
@@ -190,7 +190,7 @@ class Group extends Model
     {
         $all_users = \DB::table('users_groups')
                         ->whereGroupId($this->id)
-                        ->lists('user_id');
+                        ->pluck('user_id');
         
         $users = User::whereIn('id', $all_users)->whereRoleId($role_id)->get();
 
@@ -210,7 +210,7 @@ class Group extends Model
     public function getSubjectsTeachers()
     {
         return \DB::table('classes_subjects')
-                ->whereClassId($this->id)->lists('user_id', 'subject_id');
+                ->whereClassId($this->id)->pluck('user_id', 'subject_id');
     }
 
     public function getTeacherBySubject($subject_id)

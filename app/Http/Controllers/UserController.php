@@ -35,11 +35,11 @@ class UserController extends Controller
 
     public function __construct(UserRepository $user)
     {
-        $this->roles       = Role::orderBy('id')->lists('name', 'id')->toArray();
+        $this->roles       = Role::orderBy('id')->pluck('name', 'id')->toArray();
+        dd($this->roles);
+        $this->branches    = Branch::pluck('name', 'id')->toArray();
 
-        $this->branches    = Branch::lists('name', 'id')->toArray();
-
-        $this->programs    = Program::lists('name', 'id')->toArray();
+        $this->programs    = Program::pluck('name', 'id')->toArray();
 
         $this->user        = $user;
     }
@@ -125,8 +125,8 @@ class UserController extends Controller
      */
     public function show(User $user, Request $request)
     {
-        $user_branches = $user->branches->lists('id')->toArray();
-        $user_programs = $user->programs->lists('id')->toArray();
+        $user_branches = $user->branches->pluck('id')->toArray();
+        $user_programs = $user->programs->pluck('id')->toArray();
 
         $permissions= config('settings.permissions');
         
@@ -149,14 +149,14 @@ class UserController extends Controller
         ];
 
         if ($user->isRole([3,4])) {
-            $subjects         = \App\Subject::lists('name', 'id')->toArray();
+            $subjects         = \App\Subject::pluck('name', 'id')->toArray();
 
             $pass_to_view['subjects'] = $subjects;
         }
 
         if ($user->isTeacher()) {
             
-            $teacher_subjects = $user->subjects->lists('id')->toArray(); 
+            $teacher_subjects = $user->subjects->pluck('id')->toArray(); 
 
         }
 

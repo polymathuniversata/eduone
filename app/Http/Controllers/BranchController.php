@@ -15,7 +15,7 @@ class BranchController extends Controller
 
     public function __construct()
     {
-        $this->administrators = User::ofRole(1)->lists('name', 'id')->toArray();
+        $this->administrators = User::ofRole(1)->pluck('name', 'id')->toArray();
     }
     /**
      * Display a listing of the resource.

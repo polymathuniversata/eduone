@@ -19,7 +19,7 @@ class StudentController extends Controller
 
     public function __construct()
     {
-        $this->branches = Branch::lists('name', 'id')->toArray();
+        $this->branches = Branch::pluck('name', 'id')->toArray();
     }
     /**
      * Display a listing of the resource.

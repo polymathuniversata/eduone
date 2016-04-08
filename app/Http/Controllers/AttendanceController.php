@@ -39,7 +39,7 @@ class AttendanceController extends Controller
 
         $class      = Group::find($schedule->class_id);
         
-        $students   = $class->getStudents()->lists('display_name', 'id')->toArray();
+        $students   = $class->getStudents()->pluck('display_name', 'id')->toArray();
 
         $subject = Subject::findOrFail($schedule->subject_id);
         

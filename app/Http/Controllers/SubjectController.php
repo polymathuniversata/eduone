@@ -22,7 +22,7 @@ class SubjectController extends Controller
      */
     public function __construct()
     {
-        $this->programs = Program::lists('name', 'id')->toArray();
+        $this->programs = Program::pluck('name', 'id')->toArray();
         array_unshift( $this->programs, 'Please select');
     }
 

@@ -28,11 +28,11 @@ class ClassController extends Controller
     {
         $this->classes = $classes;
 
-        $this->programs = Program::lists('name', 'id')->toArray();
+        $this->programs = Program::pluck('name', 'id')->toArray();
         
-        $this->branches = Branch::lists('name', 'id')->toArray();
+        $this->branches = Branch::pluck('name', 'id')->toArray();
  
-        $this->subjects = Subject::lists('name', 'id')->toArray();
+        $this->subjects = Subject::pluck('name', 'id')->toArray();
     }
 
     /**
@@ -126,7 +126,7 @@ class ClassController extends Controller
         
         if ( in_array($request->tab, ['subjects', 'schedules']) && $class->users_count > 0) 
         {
-            $teachers   = $class->getTeachers()->lists('display_name', 'id')->toArray();
+            $teachers   = $class->getTeachers()->pluck('display_name', 'id')->toArray();
         
             $program = $class->program;
 

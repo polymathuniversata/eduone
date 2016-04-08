@@ -18,9 +18,9 @@ class ProgramController extends Controller
     
     public function __construct()
     {
-        $this->branches = Branch::lists('name', 'id')->toArray();
+        $this->branches = Branch::pluck('name', 'id')->toArray();
         
-        $this->subjects = Subject::lists('name', 'id')->toArray();
+        $this->subjects = Subject::pluck('name', 'id')->toArray();
     }
 
     /**
@@ -209,7 +209,7 @@ class ProgramController extends Controller
         foreach ($all_periods as $id => $period) {
             if ( ! empty($period['subjects'])) {
                 $subjects = Subject::whereIn('id', $period['subjects'])
-                                ->lists('name', 'id')->toArray();
+                                ->pluck('name', 'id')->toArray();
                 $period['subjects'] = $subjects;
             }
             $periods[] = $period;
