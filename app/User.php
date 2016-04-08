@@ -245,7 +245,7 @@ class User extends Model implements AuthenticatableContract,
         if (isset($request['not_in_group'])) 
         {
             // Retrieve a list of user id in current group
-            $group_users = \App\Group::find($request['not_in_group'])->getUserIds()->toArray();
+            $group_users = \App\Group::find($request['not_in_group'])->getUserIds();
             
             $user = $user->whereNotIn('id', $group_users);
         }
