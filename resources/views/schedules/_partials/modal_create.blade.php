@@ -33,7 +33,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="deleteGroup()">Delete</button>
+        <button ng-show="schedule.id" type="button" class="btn btn-danger pull-left" ng-click="deleteGroup()">Delete</button>
 
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="addGroup()" ng-show="schedule.teacher_id && schedule.subject_id">

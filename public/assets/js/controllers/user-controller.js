@@ -79,5 +79,4 @@ app.controller('UserController', function($scope, $http)
 	{
 		$scope.queue.splice($index, 1);
 	};
-
 });

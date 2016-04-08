@@ -2,13 +2,13 @@ var app = app || {};
 
 app.controller('SubjectController', function($scope, $http, $sce) 
 {
-	
 	$scope.grades = [];
 	$scope.sessions = [];
 
 	$scope.init = function() {
 		if (typeof window.grades != 'undefined' && angular.isArray(window.grades))
 			$scope.grades 	= window.grades;
+
 		if (typeof window.sessions != 'undefined' && angular.isArray(window.sessions))
 			$scope.sessions = window.sessions;
 	};

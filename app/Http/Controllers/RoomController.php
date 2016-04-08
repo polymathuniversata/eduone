@@ -12,7 +12,6 @@ class RoomController extends Controller
 {
     protected $branches;
 
-
     public function __construct()
     {
         $this->branches =  Branch::lists('name', 'id')->toArray();
@@ -95,7 +94,7 @@ class RoomController extends Controller
 
         $room->update($data);
 
-        return redirect(url("/rooms/{$room->id}"))->withMessage('Room was updated successfully');
+        return back()->withMessage('Room was updated successfully');
     }
 
     /**

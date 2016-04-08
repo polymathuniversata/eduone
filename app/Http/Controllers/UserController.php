@@ -182,6 +182,13 @@ class UserController extends Controller
         return view('users.update', $pass_to_view);
     }
 
+    public function profile(Request $request)
+    {
+        $user = User::find(1);
+
+        return $this->show($user, $request);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

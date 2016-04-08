@@ -35,6 +35,11 @@ class Group extends Model
                     ->withTimestamps();
     }
 
+    public function getUserIds()
+    {
+        return \DB::table('users_groups')->whereGroupId($this->id)->lists('user_id', 'id');
+    }
+
     /**
      * Check if this Group contains user or not
      * 
@@ -43,9 +48,12 @@ class Group extends Model
      */
     public function hasUser($user_id)
     {
-        $group_users = \DB::table('users_groups')->whereGroupId($this->id)->lists('user_id', 'id');
+        $group_users = $this->getUserIds();
         
-        return in_array($user_id, $group_users);
+        if ( ! empty( $group_users ))
+            return in_array($user_id, $group_users);
+
+        return false;
     }
 
     /**
@@ -96,7 +104,8 @@ class Group extends Model
             return $this->addUser($input->id, [], false);
 
         // Otherwise, find user by name or email or roll no, then add by id
-        $user = User::whereName($input)->orWhere('email', $input)->orWhere('roll_no', $input)->firstOrFail();
+        $user = User::whereName($input)->orWhere('email', $input)
+                    ->orWhere('roll_no', $input)->firstOrFail();
 
         if ($user->id > 0)
             return $this->addUser($user->id, [], false);
