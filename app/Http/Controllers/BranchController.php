@@ -26,7 +26,10 @@ class BranchController extends Controller
     {
         $branches   = Branch::all();
 
-        return view('branches.index', compact('branches'));
+        return view('branches.index', [
+            'branches'          => $branches,
+            'administrators'    => $this->administrators
+        ]);
     }
 
     /**
@@ -67,7 +70,7 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        $this->edit($branch);
+        return $this->edit($branch);
     }
 
     /**
