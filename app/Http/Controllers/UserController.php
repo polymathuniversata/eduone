@@ -36,7 +36,7 @@ class UserController extends Controller
     public function __construct(UserRepository $user)
     {
         $this->roles       = Role::orderBy('id')->pluck('name', 'id')->toArray();
-        dd($this->roles);
+        
         $this->branches    = Branch::pluck('name', 'id')->toArray();
 
         $this->programs    = Program::pluck('name', 'id')->toArray();
@@ -184,8 +184,10 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
+        // Todo: Get current user id
         $user = User::find(1);
 
+        // Todo: Only show specified part
         return $this->show($user, $request);
     }
 
@@ -253,8 +255,7 @@ class UserController extends Controller
 
             // $user->subjects()->sync($subjects);
 
-            return redirect('users/' . $user->id )
-                ->with('message', 'User was updated successfully!');
+            return back()->with('message', 'User was updated successfully!');
 
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');

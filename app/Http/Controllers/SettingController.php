@@ -83,4 +83,9 @@ class SettingController extends Controller
     {
         //
     }
+
+    public function grades()
+    {
+        return view('settings/grades');
+    }
 }

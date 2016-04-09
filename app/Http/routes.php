@@ -33,7 +33,10 @@ Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::resource('branches', 'BranchController');
+
+Route::get('settings/grades', 'SettingController@grades');
 Route::resource('settings', 'SettingController');
+
 Route::resource('rooms', 'RoomController');
 Route::resource('roles', 'RoleController');
 Route::get('classes/{id}/subjects', 'ClassController@subjects');

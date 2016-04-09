@@ -284,7 +284,7 @@ return [
 		'vi'	=> 'Vietnamese'
 	],
 
-	'calculate_formula' => ['Weighted Arithmetic Mean', 'Percent'],
+	'calculation_method' => ['Coefficient', 'Percent'],
 	
 	'room_types' => [
 		'classroom' 		=> 'Classroom',
