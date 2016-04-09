@@ -27,7 +27,7 @@
 		<thead>
 			<tr>
 				<th>Grade Name</th>
-				<th>Range</th>
+				<th>Mark Range</th>
 				<th></th>
 			</tr>
 		</thead>

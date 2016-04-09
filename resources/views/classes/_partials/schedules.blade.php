@@ -16,8 +16,10 @@
 </div>
 
 <div class="schedules">
+@if ($schedules->count() > 0)
 	<div class="table-responsive panel">
 		<table class="table table-bordered table-striped">
+			
 			<thead class="panel-heading">
 				<tr>
 					<th>Date</th>
@@ -27,36 +29,41 @@
 				</tr>
 			</thead>
 			<tbody>
-				@for($i = 0; $i < 6; $i++)
-				<tr>
-					<td>
-						{{Setting::get('settings.weekdays')[$i]}} <br>
+					@for($i = 0; $i < 6; $i++)
+					<tr>
+						<td>
+							{{config('settings.weekdays')[$i]}} <br>
+							
+							{{ $dates['weekdays'][$i] }}
+						</td>
 						
-						{{ $dates['weekdays'][$i] }}
-					</td>
-					
-					@foreach (Setting::get('settings.slots') as $slot)
-					<td>
-						@foreach ($schedules as $schedule)
-							@if ($schedule->slot_id == $slot['id'] && str_contains($schedule->started_at, $dates['weekdays'][$i]))
-								<h4 class="schedule-subject">{{$all_subjects[$schedule->subject_id]}}</h4>
+						@foreach (config('settings.slots') as $slot)
+						<td>
+							@foreach ($schedules as $schedule)
+								@if ($schedule->slot_id == $slot['id'] && str_contains($schedule->started_at, $dates['weekdays'][$i]))
+									<h4 class="schedule-subject">{{$all_subjects[$schedule->subject_id]}}</h4>
 
-								<h5 class="schedule-teacher">{{$teachers[$schedule->teacher_id]}}</h5>
-								
-								@if (1==1)
-									@if (empty($schedule->attendance_detail))
-									<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
-									@else
-									<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-default btn-xs">View Attendance</a>
+									<h5 class="schedule-teacher">{{$teachers[$schedule->teacher_id]}}</h5>
+									
+									@if (1==1)
+										@if (empty($schedule->attendance_detail))
+										<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-info btn-xs">Take Attendance</a>
+										@else
+										<a href="{{url('attendances/create?schedule_id=' . $schedule->id )}}" class="btn btn-default btn-xs">View Attendance</a>
+										@endif
 									@endif
 								@endif
-							@endif
+							@endforeach
+						</td>
 						@endforeach
-					</td>
-					@endforeach
-				</tr>
-				@endfor
+					</tr>
+					@endfor
 			</tbody>
+			
+
 		</table>
-	</div>
+	</div><!--.table-responsive-->
+	@else
+	<h4>No schedule set for this time. Consider <a href="/schedules">create new one</a></h4>
+	@endif
 </div>

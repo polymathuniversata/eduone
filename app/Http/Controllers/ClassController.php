@@ -181,7 +181,7 @@ class ClassController extends Controller
                                 ->whereClassId($class->id)
                                 ->whereBetween('started_at', [$this_week['start'], $this_week['end']])
                                 ->get();
-
+                                                     
             $pass_to_view['schedules'] = $schedules;
 
             $pass_to_view['dates'] = compact('this_week', 'weekdays', 'previous_week', 'next_week', 'today');
