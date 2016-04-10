@@ -283,8 +283,6 @@ return [
 		'rus' 	=> 'Russian',
 		'vi'	=> 'Vietnamese'
 	],
-
-	'calculation_method' => ['Coefficient', 'Percent'],
 	
 	'room_types' => [
 		'classroom' 		=> 'Classroom',

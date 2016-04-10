@@ -75,9 +75,6 @@ if ( ! function_exists('ss'))
 
 function average_of($marks)
 {
-	// Todo: Get Calculation method from Setting::('calculation_method')
-	$calculation_method = 'arithmetic_mean';
-
 	$average = 0;
 
 	foreach ($marks as $mark) {

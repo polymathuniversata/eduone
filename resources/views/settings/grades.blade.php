@@ -4,23 +4,7 @@
 @section('content')
 
 <form action="">
-	<div class="form-group">
-		<label for="calculation_method">Grade Value</label>
-		{!! Form::select('calculation_method', config('settings.calculation_method'), null, [
-			'class' 		=> 'form-control'
-		]); !!}
-		<p class="help-block">
-			This shows how we calculate the grade average<br>
-			<dl>
-				<dt>Percent</dt>
-				<dd>Each grade is represent a percent of all grade. For example: Math <span class="badge">66%</span>, History <span class="badge">34%</span></dd>
-				<dt>Coefficient</dt>
-				<dd>Each grade is represent a level of all grade. For example: Math <span class="badge">2</span>, History <span class="badge">1</span></dd>
-			</dl>
-		</p>
-	</div>
-
-
+	
 	<h2>Grade Converter</h2>
 
 	<table class="table table-striped pane">

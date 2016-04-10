@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('total_grade_rate', trans('app.total_grade_rate')) !!}
+		{!! Form::label('total_grade_rate', trans('app.weight')) !!}
 		{!! Form::number('total_grade_rate', null, [
 			'class' => 'form-control', 
 			'placeholder' => trans('app.total_grade_rate')]) 
@@ -57,7 +57,7 @@
     		<thead>
 	    		<tr>
 	    			<th>Grade Name</th>
-	    			<th>Percent</th>
+	    			<th>Weight</th>
 	    			<th>Minimum</th>
 	    			<th></th>
 	    		</tr>
