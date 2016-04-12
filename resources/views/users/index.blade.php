@@ -34,16 +34,22 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        {!! Form::label('role') !!}
-                        {!! Form::select('role', $roles, null, ['class' => 'form-control', 'placeholder' => 'Select a Role']) !!}
+                        {!! Form::label('role_id', 'Role') !!}
+                        {!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'placeholder' => 'Select a Role']) !!}
                     </div>
                     <div class="form-group col-md-6">
-                        {!! Form::label('branch') !!}
-                        {!! Form::select('branch', $branches, null, ['class' => 'form-control', 'placeholder' => 'Select a Branch']) !!}
+                        {!! Form::label('branch_id', 'Branch') !!}
+                        {!! Form::select('branch_id', $branches, null, ['class' => 'form-control', 'placeholder' => 'Select a Branch']) !!}
                     </div>
                 </div>
-             
+                
+                <div class="row row-margin-md">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
             </div>
+            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
         </div>
     </div>
     {!! Form::close() !!}
@@ -69,25 +75,33 @@
     	</thead>
 
     	<tbody>
-    		@foreach ($users as $user)
-    		<tr>
-    			<td><input type="checkbox" disabled></td>
-    			<td class="table-title"> <img src="{!! $user->photo !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
-                    {{ $user->display_name }}</a>
-                </td>
-    			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-                @if ( ! isset($request->role) && isset($user->role->name))
-    			<td>{{ $user->role->name }}</td>
-    			@endif
-                <td>
-                    @if ( ! empty($user->status))
-                    {!! $user->status !!}
-                    @endif
-                </td>
-    			<td>{!! $user->created_at !!}</td>
-    			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
-    		</tr>
-    		@endforeach
+            @if ($users->count() > 0)
+        		@foreach ($users as $user)
+        		<tr>
+        			<td><input type="checkbox" disabled></td>
+        			<td class="table-title"> <img src="{!! $user->photo !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
+                        {{ $user->display_name }}</a>
+                    </td>
+        			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
+                    @if ( ! isset($request->role) && isset($user->role->name))
+        			<td>{{ $user->role->name }}</td>
+        			@endif
+                    <td>
+                        @if ( ! empty($user->status))
+                        {!! $user->status !!}
+                        @endif
+                    </td>
+        			<td>{!! $user->created_at !!}</td>
+        			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
+        		</tr>
+        		@endforeach
+            @else
+                <tr>
+                    <td colspan="7" class="">
+                        <h5 class="text-muted text-center row-padding-md">There are no user with the search result. Please try with different keywords...</h5>
+                    </td>
+                </tr>
+            @endif
     	</tbody>
     </table>
 </div>

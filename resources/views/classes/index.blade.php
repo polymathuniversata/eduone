@@ -33,7 +33,7 @@
                 </div>
              
             </div>
-            <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
+            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
         </div>
     </div>
     {!! Form::close() !!}
