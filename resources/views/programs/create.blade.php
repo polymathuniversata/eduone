@@ -3,10 +3,10 @@
 @section('header')
 <script type="text/javascript" src="{{ url('/assets/js/controllers/program-controller.js') }}"></script>
 @endsection
-@section('title', trans('app.new_program'))
+@section('title', trans('app.program_designer'))
 
 @section('main_title')
-{!! trans('app.new_program') !!}
+{!! trans('app.program_designer') !!}
 @endsection
 
 @section('content')

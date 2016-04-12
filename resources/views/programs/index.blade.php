@@ -34,7 +34,7 @@
 					</tr>
 					<tr>
 						<th>Creator</th>
-						<td>{{$program->creator->display_name}}</td>
+						<td>{{$program->creator->getFullName()}}</td>
 					</tr>
 				</table>
 	    	</div>
