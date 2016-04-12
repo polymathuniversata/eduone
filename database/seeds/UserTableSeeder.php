@@ -65,7 +65,8 @@ class UserTableSeeder extends Seeder
             'email'         => 'tan@fitwp.com',
             'phone'         => '0932292225',
             'id_card'       => '123456789',
-            'role_id'       => $superAdmin->id
+            'role_id'       => $superAdmin->id,
+            'password'      => Hash::make('123456')
         ]);
 
         $walter_white = App\User::create([

@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-	if ( ! Auth::user())
-		Auth::loginUsingId(1);
+	// if ( ! Auth::user())
+	// 	Auth::loginUsingId(1);
 
     return view('dashboard');
 });
@@ -56,3 +56,5 @@ Route::resource('transports', 'TransportController');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('fack', 'UserController@profile');
