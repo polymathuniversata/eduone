@@ -55,8 +55,7 @@ class BranchController extends Controller
         $data = $request->all();
         try {
             $branch = Branch::create($data);
-            return redirect('branches/' . $branch->id )
-                    ->with('message', 'Branch was created successfully!');
+            return back()->with('message', 'Branch was created successfully!');
         } catch ( Exception $e ) {
             return back()->withInput()->with('message', 'Fooo!');
         }
