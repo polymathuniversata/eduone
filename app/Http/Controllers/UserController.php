@@ -104,6 +104,9 @@ class UserController extends Controller
             }
         }
 
+        if (! empty($data['password']))
+            $data['password'] = bcrypt($data['password']);
+
         try {
             $user = User::create($data);
 
@@ -245,6 +248,9 @@ class UserController extends Controller
             else
                 $user->childrens()->attach($users);
         }
+
+        if (! empty($data['password']))
+            $data['password'] = bcrypt($data['password']);
 
         try {
             $user->update($data);
