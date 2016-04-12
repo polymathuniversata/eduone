@@ -3,7 +3,7 @@
 @section('main_title', 'Grade Settings')
 @section('content')
 
-<form action="">
+{!! Form::open() !!}
 	
 	<h2>Grade Converter</h2>
 
@@ -40,7 +40,7 @@
 		</tfoot>
 	</table>
 
-</form>
+{!! Form::close(); !!}
 
 
 @endsection

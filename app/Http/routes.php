@@ -52,3 +52,7 @@ Route::resource('schedules', 'ScheduleController');
 Route::resource('attendances', 'AttendanceController');
 Route::resource('grades', 'GradeController');
 Route::resource('transports', 'TransportController');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
