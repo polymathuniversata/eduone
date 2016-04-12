@@ -5,12 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
-{
-	// Branch can use meta data
-	use CanUseMeta;
-	
-    protected $fillable = ['name', 'address', 'country', 'state', 'postcode', 'phone',
-    	'email', 'language', 'currency', 'timezone', 'administrator_id'
+{	
+    protected $fillable = ['name', 'slug', 'address', 'phone',
+    	'email', 'administrator_id'
     ];
 
     /**

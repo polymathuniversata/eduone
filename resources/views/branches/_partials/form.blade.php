@@ -8,6 +8,15 @@
 </div>
 
 <div class="form-group">
+	{!! Form::label('slug', trans('app.slug')) !!}
+
+	{!! Form::text('slug', null, [
+		'class' => 'form-control', 
+		'placeholder' => trans('app.slug')]) 
+	!!}
+</div>
+
+<div class="form-group">
 	{!! Form::label('address', trans('app.address')) !!}
 	
 	{!! Form::textarea('address', null, [
@@ -32,46 +41,6 @@
 	{!! Form::email('email', null, [
 		'class' => 'form-control', 
 		'placeholder' => trans('app.email')]) 
-	!!}
-</div>
-
-<div class="form-group">
-	{!! Form::label('language', trans('app.language')) !!}
-	
-	{!! Form::select('language', config('settings.languages'), 'en_UK', 
-	['class' => 'form-control'] ) !!}
-</div>
-
-<div class="form-group">
-	{!! Form::label('currency', trans('app.currency')) !!}
-	
-		{!! Form::select('currency', config('settings.currencies'), 'en_UK', 
-		['class' => 'form-control'] ) !!}
-</div>
-
-<div class="form-group">
-	{!! Form::label('country', trans('app.country')) !!}
-	
-	{!! Form::select('country', config('settings.countries'), 'VN', ['class' => 'form-control'] ) !!}
-</div>
-
-<div class="form-group">
-	<label for="input-title" class="col-sm-2">State / Province</label>
-	
-	<select name="state" id="state" class="form-control">
-		<option value="hn">Hanoi</option>
-		<option value="hcmc">HCM City</option>
-		<option value="hp">Hai Phong</option>
-		<option value="dn">Danang</option>
-	</select>
-</div>
-
-<div class="form-group">
-	{!! Form::label('postcode', trans('app.postcode')) !!}
-	
-	{!! Form::number('postcode', null, [
-		'class' => 'form-control', 
-		'placeholder' => trans('app.postcode')]) 
 	!!}
 </div>
 

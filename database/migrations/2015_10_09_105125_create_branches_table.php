@@ -15,19 +15,13 @@ class CreateBranchesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('address')->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->integer('postcode')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('language')->nullable();
-            $table->string('currency')->nullable();
-            $table->string('timezone')->nullable();
             $table->integer('administrator_id')->nullable();
             $table->softDeletes();
-
-            $table->timestamps();
+            $table->nullableTimestamps();
             $table->engine = 'InnoDB';
         });
     }

@@ -52,7 +52,11 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = array_filter($request->all());
+
+        if (empty($data['slug']))
+            $data['slug'] = str_slug($data['slug']);
+
         try {
             $branch = Branch::create($data);
             return back()->with('message', 'Branch was created successfully!');
@@ -92,9 +96,20 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Branch $branch)
     {
-        //
+        $data = array_filter($request->all());
+
+
+        if (empty($data['slug']))
+            $data['slug'] = str_slug($data['slug']);
+        
+        try {
+            $branch = $branch->update($data);
+            return back()->with('message', 'Branch was created successfully!');
+        } catch ( Exception $e ) {
+            return back()->withInput()->with('message', 'Fooo!');
+        }
     }
 
     /**

@@ -1,9 +1,6 @@
 @extends('master')
 @section('title', 'Branches')
 @section('main_title', 'Branches')
-@section('main_button')
-<a href="/branches/create" class="btn btn-default">{!! trans('app.add_new') !!}</a>
-@endsection
 
 @section('content')
 
@@ -18,6 +15,17 @@
 					'class' 		=> 'form-control', 
 					'placeholder' 	=> trans('app.branch_name')]) 
 				!!}
+			</div>
+
+			<div class="form-group">
+				{!! Form::label('slug', trans('app.slug')) !!}
+
+				{!! Form::text('slug', null, [
+					'class' 		=> 'form-control', 
+					'placeholder' 	=> trans('app.slug')]) 
+				!!}
+
+				<span class="help-block">Lowercase, shouldn't contains any special characters</span>
 			</div>
 
 			<div class="form-group">
@@ -65,7 +73,7 @@
 						@foreach ($branches as $branch)
 						<tr>
 							<td><a href="{{url('/')}}/branches/{{ $branch->id }}/edit">{{ $branch->name }}</a></td>
-							<td>{{ $branch->email }}</td>
+							<td>{{ $branch->slug }}</td>
 							<td><a href="{{url('/')}}/users/1">{{ $branch->admin->getFullName() }}</a></td>
 							<td>
 								<a href="{{url('/')}}/branches/{{ $branch->id }}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
