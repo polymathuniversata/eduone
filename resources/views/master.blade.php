@@ -56,14 +56,14 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <img src="https://avatars2.githubusercontent.com/u/9004445?v=3&s=20" alt="Tan Nguyen"> <span class="caret"></span>
+                                    <img src="{!! Auth::user()->photo !!}" width="20" height="20" alt="{{ Auth::user()->display_name }}"> <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-header">Signed in as <strong>Tan Nguyen</strong></li>
+                                    <li class="dropdown-header">Signed in as <strong>{{ Auth::user()->display_name }}</strong></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{url('/profile')}}">My Profile</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{url('/sign-out')}}">Sign out</a></li>
+                                    <li><a href="{{url('/logout')}}">Sign out</a></li>
                                 </ul>
                             </li>
                         </ul>
