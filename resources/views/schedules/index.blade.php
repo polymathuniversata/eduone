@@ -26,8 +26,8 @@
 	  	</div>
 
 	  	<div class="btn-group" role="group">
-	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['previous_day'] )}}"><i class="fa fa-chevron-left"></i></a>
-	  		<a role="button" class="btn btn-default" href="{{url('schedules/?date=' . $dates['next_day'])}}"><i class="fa fa-chevron-right"></i></a>	  		
+	  		<a role="button" class="btn btn-default" title="Previous Day" href="{{url('schedules/?date=' . $dates['previous_day'] )}}"><i class="fa fa-chevron-left"></i></a>
+	  		<a role="button" class="btn btn-default" title="Next Day" href="{{url('schedules/?date=' . $dates['next_day'])}}"><i class="fa fa-chevron-right"></i></a>	  		
 	  	</div>
 	
 		<div class="col-md-2 form-horizontal">

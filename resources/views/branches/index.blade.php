@@ -25,7 +25,7 @@
 					'placeholder' 	=> trans('app.slug')]) 
 				!!}
 
-				<span class="help-block">Lowercase, shouldn't contains any special characters</span>
+				<span class="help-block">Unique, lowercase, do not contains special characters</span>
 			</div>
 
 			<div class="form-group">

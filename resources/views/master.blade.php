@@ -48,7 +48,7 @@
                       <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                          <a class="navbar-brand" href="#">@yield('main_title')</a>
+                            <span class="navbar-brand">@yield('main_title')</span>
                         </div>
 
                         <div id="main-button">@yield('main_button')</div>
