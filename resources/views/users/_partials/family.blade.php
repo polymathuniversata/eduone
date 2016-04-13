@@ -19,17 +19,20 @@ var searchParams = {};
 		<h4>Childrens</h4>
 		@endif
 		<ul class="list-unstyled" id="queue-users-list">
-
 			
-			@foreach ($user->familyMembers() as $member)
-			<li>
-				<img src="{!! $member->photo !!}"> {{ $member->display_name }}
+			@if ($user->familyMembers()->count() > 0)
+				@foreach ($user->familyMembers() as $member)
+				<li>
+					<img src="{!! $member->photo !!}"> {{ $member->display_name }}
 
-				<button class="btn btn-default btn-xs pull-right">
-					<i class="fa fa-times"></i> 
-				</button>
-			</li>
-			@endforeach
+					<a class="btn btn-default btn-xs pull-right" href="{{url('/')}}/users/{{$user->id}}/remove-family-member/{{$member->id}}">
+						<i class="fa fa-times"></i>
+					</a>
+				</li>
+				@endforeach
+			@else
+				<li class="not-found"><h4>Start adding family members by typing in the search box below</h4></li>
+			@endif
 
 
 			<li ng-repeat="user in queue track by $index">

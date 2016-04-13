@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('subjects', 'SubjectController');
 	Route::resource('programs', 'ProgramController');
 	Route::get('users/search', 'UserController@search');
+	Route::get('users/{id}/remove-family-member/{member_id}', 'UserController@removeMember');
 
 	Route::resource('users', 'UserController');
 	Route::resource('media', 'MediaController');

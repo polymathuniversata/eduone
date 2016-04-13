@@ -243,10 +243,14 @@ class UserController extends Controller
                 $users[$member['id']] = $member['id'];
             }
 
-            if ($user->isStudent())
-                $user->parents()->attach($users);
-            else
-                $user->childrens()->attach($users);
+            try {
+                if ($user->isStudent())
+                    $user->parents()->attach($users);
+                else
+                    $user->childrens()->attach($users);
+            } catch (Exception $e) {
+                return back()->withMessage('Family member has already added!');
+            }
         }
 
         if (! empty($data['password']))
@@ -264,10 +268,21 @@ class UserController extends Controller
             return back()->with('message', 'User was updated successfully!');
 
         } catch(Exception $e) {
-            return back()->withInput()->with('message', 'Fooo!');
+            return back()->withInput()->with('message', 'Error during updating user. Please try again later.');
         }
     }
 
+    public function removeMember($user, $family_member)
+    {
+        $user = User::findOrFail($user);
+
+        if ($user->isStudent())
+            $user->parents()->detach($family_member);
+        else
+            $user->childrens()->detach($family_member);
+
+        return back()->withMessage('Family member was removed successfully!');
+    }
     /**
      * Remove the specified resource from storage.
      *
