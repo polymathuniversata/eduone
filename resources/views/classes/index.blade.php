@@ -38,6 +38,7 @@
     </div>
     {!! Form::close() !!}
 @endsection
+
 @section('content')
 
 <div class="table-responsive panel panel-default">
@@ -54,17 +55,28 @@
     		</tr>
     	</thead>
     	<tbody>
-    		@foreach ($classes as $class)
-    		<tr>
-    			<td><input type="checkbox"></td>
-    			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
-    			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
-                <td><span class="badge">{{ $class->users_count }}</span></td>
-    			<td>{{ $class->status }}</td>
-    			<td>{{ $class->started_at }}</td>
-                <td>{{ $class->finished_at }}</td>
-    		</tr>
-    		@endforeach
+            @if ($classes->count() > 0)
+        		@foreach ($classes as $class)
+        		<tr>
+        			<td><input type="checkbox"></td>
+        			<td class="table-title"><a href="/classes/{{$class->id}}">{{ $class->name }}</a></td>
+        			<td><a href="/programs/{{$class->program->id}}">{{ $class->program->name }}</a></td>
+                    <td><span class="badge">{{ $class->users_count }}</span></td>
+        			<td>{{ $class->status }}</td>
+        			<td>{{ $class->started_at }}</td>
+                    <td>{{ $class->finished_at }}</td>
+        		</tr>
+        		@endforeach
+            @else
+                <tr>
+                    <td colspan="7">
+                        <h4 class="text-muted text-center row-padding-md">
+                            There are no class match with your request. <br><br>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">{!! trans('app.create_new_class') !!}</button>
+                        </h4>
+                    </td>
+                </tr>
+            @endif
     	</tbody>
     </table>
 </div>

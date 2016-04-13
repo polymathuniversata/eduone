@@ -1,8 +1,13 @@
 <script>
+
+var searchParams = {};
+
 @if ($user->isParent())
-	var role_id = 4;
+	searchParams.role_id = 4;
+	searchParams.not_in = {{$user->childrens->pluck('id')->toJson() }};
 @elseif ($user->isStudent())
-	var role_id = 5;
+	searchParams.role_id = 5;
+	searchParams.not_in = {{$user->parents->pluck('id')->toJson() }};
 @endif
 </script>
 <div class="form-group" ng-controller="UserController" ng-init="init()">
@@ -57,6 +62,7 @@
 		<h4>Add Childrens</h4>
 		@endif
 		</label>
+
 		<input id="search-family-member" type="text" class="form-control" ng-model="search" ng-model-options="{debounce: 500}" placeholder="Search for user and click to add...">
 
 		<ul class="list-unstyled" id="ajax-users-list">

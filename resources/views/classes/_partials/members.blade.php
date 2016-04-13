@@ -1,6 +1,8 @@
 <script>
-	var role_id 	= '3,4',
-		group_id 	= {{$class->id}};
+	var searchParams = {
+		role_id: '3,4',
+		not_in_group: {{$class->id}}
+	};
 </script>
 <script type="text/javascript" src="{{ url('/assets/js/controllers/user-controller.js') }}"></script>
 

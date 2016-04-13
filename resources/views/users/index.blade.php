@@ -98,7 +98,7 @@
             @else
                 <tr>
                     <td colspan="7" class="">
-                        <h5 class="text-muted text-center row-padding-md">There are no user with the search result. Please try with different keywords...</h5>
+                        <h4 class="text-muted text-center row-padding-md">There are no user with the search result. Please try with different keywords...</h4>
                     </td>
                 </tr>
             @endif

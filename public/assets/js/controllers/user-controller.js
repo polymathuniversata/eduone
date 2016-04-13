@@ -12,20 +12,20 @@ app.controller('UserController', function($scope, $http)
 
 	$scope.isLoading = false;
 
-	$scope.role_id = null;
-
-	$scope.group_id = null;
+	$scope.params = {
+		search: ''
+	};
 
 	$scope.init = function() 
 	{
-		if (typeof window.exists != 'undefined')
-			$scope.exists = window.exists;
+		if (typeof window.searchParams != 'undefined') {
+			angular.forEach(window.searchParams, function (value, param) {
+				if (value != null)
+					$scope.params[param] = value;
+			});
+		}
 
-		if (typeof window.role_id != 'undefined')
-			$scope.role_id = window.role_id;
-
-		if (typeof window.group_id != 'undefined')
-			$scope.group_id = window.group_id;
+		console.log($scope.params);
 	};
 
 	$scope.$watch('search', function()
@@ -33,17 +33,9 @@ app.controller('UserController', function($scope, $http)
 		if ( ! $scope.isLoading) {
 
 			$scope.isLoading = true;
-
-			var params = {
-				search: $scope.search,
-				role_id: $scope.role_id,
-			};
-
-			if ( typeof $scope.group_id != 'undefined')
-				params.not_in_group = $scope.group_id;
 			
 			$http.get(APP_URL + 'users/search/', {
-				params: params
+				params: $scope.params
 			}).
 			success(function(data, status, headers, config) {	
 		    	$scope.users = data;
