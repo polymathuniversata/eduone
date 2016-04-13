@@ -101,6 +101,14 @@ class User extends Model implements AuthenticatableContract,
                     ->withTimestamps();
     }
 
+    public function familyMembers()
+    {
+        if ( $this->isStudent() )
+            return $this->parents;
+
+        if ( $this->isParent() )
+            return $this->students;
+    }
     /**
      * Check if user belongs to Role. Role can be slug or id
      * 
@@ -287,4 +295,8 @@ class User extends Model implements AuthenticatableContract,
         return $query;
     }
 
+    public function own($object)
+    {
+        return $object->user_id === $this->id;
+    }
 }

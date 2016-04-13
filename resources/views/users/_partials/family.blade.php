@@ -19,29 +19,19 @@ var searchParams = {};
 		<h4>Childrens</h4>
 		@endif
 		<ul class="list-unstyled" id="queue-users-list">
-			@if ($user->isStudent())
-				@foreach ($user->parents as $parent)
-				<li>
-					<img src="{!! $parent->photo !!}"> {{ $parent->display_name }}
 
-					<button class="btn btn-default btn-xs pull-right">
-						<i class="fa fa-times"></i> 
-					</button>
-				</li>
-				@endforeach
-			@endif
+			
+			@foreach ($user->familyMembers() as $member)
+			<li>
+				<img src="{!! $member->photo !!}"> {{ $member->display_name }}
 
-			@if ($user->isParent())
-				@foreach ($user->childrens as $children)
-				<li>
-					<img src="{!! $children->photo !!}"> {{ $children->display_name }}
+				<button class="btn btn-default btn-xs pull-right">
+					<i class="fa fa-times"></i> 
+				</button>
+			</li>
+			@endforeach
 
-					<button class="btn btn-default btn-xs pull-right">
-						<i class="fa fa-times"></i> 
-					</button>
-				</li>
-				@endforeach
-			@endif
+
 			<li ng-repeat="user in queue track by $index">
 				<img ng-src="@{{user.photo}}"> @{{user.display_name}} 
 
