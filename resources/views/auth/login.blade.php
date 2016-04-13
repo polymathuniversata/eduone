@@ -6,7 +6,7 @@
         <div class="col-md-4 col-md-offset-4">
             <h1>EduOne</h1>
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body panel-body-md">
 
                     <form role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
