@@ -62,7 +62,7 @@ var searchParams = {};
 			<li ng-repeat="user in users track by $index" ng-click="addUser($index)">
 				<img ng-src="@{{user.photo}}"> @{{user.display_name}}
 			</li>
-			<li class="not-found" ng-show="users.length == 0">Sorry we cannot found any user.</li>
+			<li class="not-found" ng-show="users.length == 0 && search.length > 0">Sorry we cannot found any user.</li>
 		</ul>
 
 		<input type="hidden" name="family_members" value="@{{queue}}">
