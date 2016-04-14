@@ -6,10 +6,10 @@ app.controller('SubjectController', function($scope, $http, $sce)
 	$scope.sessions = [];
 
 	$scope.init = function() {
-		if (typeof window.grades != 'undefined' && angular.isArray(window.grades))
+		if (typeof window.grades != 'undefined')
 			$scope.grades 	= window.grades;
 
-		if (typeof window.sessions != 'undefined' && angular.isArray(window.sessions))
+		if (typeof window.sessions != 'undefined')
 			$scope.sessions = window.sessions;
 	};
 	
