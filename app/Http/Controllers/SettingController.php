@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Branch;
+use App\Setting;
 
 class SettingController extends Controller
 {
@@ -37,8 +39,16 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $data = array_filter($request->all());
+        
+        $branch_id = Branch::currentId();
 
-        dd($data);
+        foreach ($data as $key => $value)
+        {
+            if ($key != '_token')
+                Setting::set($key, $value, $branch_id);
+        }
+
+        return back()->withMessage('Setting was saved successfully!');
     }
 
     /**

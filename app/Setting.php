@@ -6,27 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-    public function set($name, $value, $branch_id = null)
+    public $fillable = ['id', 'name', 'val', 'branch_id'];
+
+    public static function set($name, $value, $branch_id = null)
     {
-    	$setting = new Setting;
+        $branch_id = $branch_id === null ? Branch::currentId() : $branch_id;
 
-    	$setting->name 	= $name;
-    	$setting->val 	= $value;
+    	$setting = Setting::firstOrNew([
+            'branch_id' => $branch_id,
+            'name'      => $name
+        ]);
 
-    	if (null != $branch_id)
-    		$setting->branch_id = $branch_id;
+        $setting->val = $value;
 
-    	$setting->update();
+        return $setting->save();
     }
 
-    public static function get($name, $default = '', $branch_id = null)
+    public static function get($name, $branch_id = null, $default = '')
     {
-        try {
-            $setting = Setting::ofBranch($branch_id)->whereName($name)->first();
+        $branch_id = $branch_id === null ? Branch::currentId() : $branch_id;
 
-            if ($setting)
-                return $setting->value('val');
+        try {
+            $setting = Setting::whereBranchId($branch_id)->whereName($name)->first();
             
+            if ($setting)
+                return $setting->val;
+
             if (empty($setting))
                 $setting = config($name, $default);
 
@@ -34,11 +39,6 @@ class Setting extends Model
         } catch (Exception $e) {
             return null;
         }
-    }
-
-    public static function has($name, $branch_id)
-    {
-        return Setting::ofBranch($branch_id)->whereName($name)->first()->exists;
     }
 
     public function scopeOfBranch($query, $value)

@@ -19,6 +19,8 @@ class CreateSettingsTable extends Migration
             $table->integer('branch_id')->nullable(); // This setting is applied to only 1 branch
             $table->timestamps();
             $table->engine = 'InnoDB';
+
+            $table->unique(['name', 'branch_id']);
         });
     }
 

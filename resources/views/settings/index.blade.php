@@ -23,7 +23,7 @@
 		<div class="form-group">
 			{!! Form::label('title', 'App Title', ['class' => 'col-sm-2'] ) !!}
 			<div class="col-sm-6">
-				{!! Form::text('title', Setting::get('title'), ['class' => 'form-control']) !!}
+				{!! Form::text('title', App\Setting::get('title', null), ['class' => 'form-control']) !!}
 			</div>
 		</div>
 
