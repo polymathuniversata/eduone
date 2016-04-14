@@ -11,12 +11,15 @@
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('/', function () {
+Route::group(['middleware' => 'auth'], function () 
+{
+	Route::get('/', function () 
+	{
 	    return view('dashboard');
 	});
 
-	Route::get('profile', function () {
+	Route::get('profile', function () 
+	{
 	    return view('users/profile');
 	});
 

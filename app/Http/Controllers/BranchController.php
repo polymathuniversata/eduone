@@ -114,21 +114,7 @@ class BranchController extends Controller
 
     public function switch($id, Request $request)
     {
-        if ($request->user()->isSuperAdmin()) {
-
-            try {
-                $branch = \App\Branch::findOrFail($id)->toArray();
-
-            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-                $branch = [
-                    'id'    => 0,
-                    'name'  => 'Master'
-                ];
-            }
-
-            $request->session()->set('branch', $branch);
-            $request->session()->set('branch_id', $branch['id']);
-        }
+        Branch::switch($id);
 
         return redirect('/');
     }

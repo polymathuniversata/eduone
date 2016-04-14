@@ -29,6 +29,40 @@ class Branch extends Model
         return $this->belongsToMany('App\User', 'users_branches');
     }
 
+    public static function switch($id = null)
+    {
+        $user = \Auth::user();
+        
+        try {   
+            // If current user isn't super admin. Do not allows access Master
+            if ( ! $user->isSuperAdmin() && $id == 0)
+                $id = null;
+
+            if ($user->isSuperAdmin() && $id === null)
+                $id = 0;
+            
+            // If not set the target. Switch to the first one.
+            if (null === $id) {
+                $branch = $user->branches->first()->toArray();
+            }
+            else {
+                $branch = self::findOrFail($id)->toArray();
+            }
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            if ($user->isSuperAdmin()) {
+                $branch = [
+                    'id'    => 0,
+                    'name'  => 'Master'
+                ];
+            }   
+        }
+
+        \Session::set('branch', $branch);
+        \Session::set('branch_id', $branch['id']);
+        
+    }
+
     public static function current()
     {
         return \Session::get('branch');

@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers\Auth;
+
 use App\User;
+use App\Branch;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 class AuthController extends Controller
 {
     /*
@@ -48,6 +52,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -61,5 +66,19 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Set branch for user before redirect
+     * 
+     * @param  Request $request Request
+     * @param  Guard  $guard   data
+     * @return Redirect
+     */
+    public function authenticated(Request $request, $guard)
+    {
+        Branch::switch();
+
+        return redirect()->intended($this->redirectPath());
     }
 }
