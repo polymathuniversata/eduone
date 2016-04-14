@@ -36,7 +36,9 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array_filter($request->all());
+
+        dd($data);
     }
 
     /**

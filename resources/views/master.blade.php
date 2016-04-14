@@ -54,6 +54,25 @@
                         <div id="main-button">@yield('main_button')</div>
 
                         <ul class="nav navbar-nav navbar-right">
+                            @if (Auth::user()->isSuperAdmin())
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="typcn typcn-flow-children"></i> <strong>{{App\Branch::current()['name']}}</strong> <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Switch to another branch</li>
+                                    @foreach(App\Branch::pluck('name', 'id') as $id => $name)
+                                        @if (0 != App\Branch::currentId())
+                                        <li><a class="text-small" href="{{url('/')}}/branches/switch/0">Master</a></li>
+                                        @endif
+                                        @if ($id != App\Branch::currentId())
+                                        <li><a class="text-small" href="{{url('/')}}/branches/switch/{{$id}}">{{$name}}</a></li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @endif
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <img src="{!! Auth::user()->photo !!}" width="20" height="20" alt="{{ Auth::user()->display_name }}"> <span class="caret"></span>

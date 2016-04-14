@@ -51,11 +51,11 @@
     	<thead class="panel-heading">
     		<tr>
     			<th><input type="checkbox"></th>
-    			<th>{!! trans('app.name') !!}</th>
-    			<th>{!! trans('app.program') !!}</th>
+    			<th>{{ trans('app.name') }}</th>
+    			<th>{{ trans('app.program') }}</th>
                 <th>{{ trans('app.users_count') }}</th>
-    			<th>{!! trans('app.status') !!}</th>
-    			<th>{!! trans('app.started') !!}</th>
+    			<th>{{ trans('app.status') }}</th>
+    			<th>{{ trans('app.started') }}</th>
                 <th>{{ trans('app.finished') }}</th>
     		</tr>
     	</thead>

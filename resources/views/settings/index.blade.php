@@ -5,16 +5,16 @@
 
 @section('content')
 
-{!! Form::open([ 'url' => 'settings', 'class' => 'form-horizontal']) !!}
+{!! Form::open(['url' => 'settings', 'class' => 'form-horizontal']) !!}
 
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Languages &amp; Regions</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Contact Info</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Privacy &amp; Policy</a></li>
-    <li role="presentation"><a href="#email" aria-controls="email" role="tab" data-toggle="tab">Email</a></li>
-  </ul>
+  	<!-- Nav tabs -->
+  	<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
+	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Languages &amp; Regions</a></li>
+	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Contact Info</a></li>
+	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Privacy &amp; Policy</a></li>
+	    <li role="presentation"><a href="#email" aria-controls="email" role="tab" data-toggle="tab">Email</a></li>
+  	</ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
@@ -23,21 +23,27 @@
 		<div class="form-group">
 			{!! Form::label('title', 'App Title', ['class' => 'col-sm-2'] ) !!}
 			<div class="col-sm-6">
-				{!! Form::text('title', null, ['class' => 'form-control']) !!}
+				{!! Form::text('title', Setting::get('title'), ['class' => 'form-control']) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="input-title" class="col-sm-2">SSL</label>
+			<label for="enable_ssl" class="col-sm-2">SSL</label>
 			<div class="col-sm-6">
-				<input type="checkbox"> Enable SSL
+				<label class="label-secondary">
+					{!! Form::checkbox('enable_ssl') !!}
+					 Enable SSL
+				</label>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="input-title" class="col-sm-2">Administrator Email</label>
+			<label for="email" class="col-sm-2">Administrator Email</label>
 			<div class="col-sm-6">
-				<input type="email" class="form-control" value="tan@binaty.org">
+				{!! Form::email('email', Setting::get('administrator_email'), [
+					'class' => 'form-control',
+					'id'	=> 'email'
+				]) !!}				
 			</div>
 		</div>
 

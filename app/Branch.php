@@ -28,4 +28,14 @@ class Branch extends Model
     {
         return $this->belongsToMany('App\User', 'users_branches');
     }
+
+    public static function current()
+    {
+        return \Session::get('branch');
+    }
+
+    public static function currentId()
+    {
+        return \Session::get('branch_id');
+    }
 }

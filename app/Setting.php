@@ -21,15 +21,27 @@ class Setting extends Model
 
     public static function get($name, $default = '', $branch_id = null)
     {
-        $setting = Setting::branch($branch_id)->whereName($name)->pluck('val');
+        try {
+            $setting = Setting::ofBranch($branch_id)->whereName($name)->first();
 
-        if (empty($setting))
-            $setting = config($name, $default);
+            if ($setting)
+                return $setting->value('val');
+            
+            if (empty($setting))
+                $setting = config($name, $default);
 
-        return $setting;
+            return $setting;
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
-    public function scopeBranch($query, $value)
+    public static function has($name, $branch_id)
+    {
+        return Setting::ofBranch($branch_id)->whereName($name)->first()->exists;
+    }
+
+    public function scopeOfBranch($query, $value)
     {
         if ( is_numeric($value))
             return $query->whereBranchId($value);
