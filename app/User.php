@@ -107,7 +107,7 @@ class User extends Model implements AuthenticatableContract,
             return $this->parents;
 
         if ( $this->isParent() )
-            return $this->students;
+            return $this->childrens;
     }
     /**
      * Check if user belongs to Role. Role can be slug or id

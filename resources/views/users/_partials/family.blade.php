@@ -20,7 +20,7 @@ var searchParams = {};
 		@endif
 		<ul class="list-unstyled" id="queue-users-list">
 			
-			@if ($user->familyMembers()->count() > 0)
+			@if ($user->familyMembers() && $user->familyMembers()->count() > 0)
 				@foreach ($user->familyMembers() as $member)
 				<li>
 					<img src="{!! $member->photo !!}"> {{ $member->display_name }}

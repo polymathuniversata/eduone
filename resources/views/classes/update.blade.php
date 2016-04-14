@@ -16,14 +16,16 @@
 
 @include('classes/_partials/tabs')
 
-<div class="row">
-	{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT', 'class' => 'col-md-7']) !!}
-		
-	  	@if(isset($request->tab) && in_array($request->tab, ['info', 'members', 'subjects', 'schedules']))
-				@include('classes/_partials/' . $request->tab)
-		@endif
-		
-		<input type="hidden" name="tab" value="{{$request->tab}}">
-	{!! Form::close() !!}
+<div class="tab-pane active">
+	<div class="row">
+		{!! Form::model($class, ['route' => ['classes.update', $class->id], 'method' => 'PUT', 'class' => 'col-md-7']) !!}
+			
+		  	@if(isset($request->tab) && in_array($request->tab, ['info', 'members', 'subjects', 'schedules']))
+					@include('classes/_partials/' . $request->tab)
+			@endif
+			
+			<input type="hidden" name="tab" value="{{$request->tab}}">
+		{!! Form::close() !!}
+	</div>
 </div>
 @endsection
