@@ -46,14 +46,16 @@
 		
 			@endif
 	  	</ul>
-
-	  	<!-- Tab panes -->
-	  	<div class="col-md-9">
-			@if(isset($request->tab) && in_array($request->tab, ['account', 'profile', 'family', 'contact', 'permissions', 'subjects', 'meta', 'attendances', 'grades']))
-				@include('users/_partials/' . $request->tab)
-			@endif
-	  	</div>
-
+		<div role="tabpanel" class="tab-pane active">
+		  	<!-- Tab panes -->
+		  	<div class="row">
+		  	<div class="col-md-9">
+				@if(isset($request->tab) && in_array($request->tab, ['account', 'profile', 'family', 'contact', 'permissions', 'subjects', 'meta', 'attendances', 'grades']))
+					@include('users/_partials/' . $request->tab)
+				@endif
+		  	</div>
+		  	</div>
+		</div>
 	</div>
 </div>
 
