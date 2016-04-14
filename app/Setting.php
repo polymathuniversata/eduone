@@ -22,16 +22,22 @@ class Setting extends Model
         return $setting->save();
     }
 
-    public static function get($name, $branch_id = null, $default = '')
+    public static function get($name, $branch_id = null, $fallback = true, $default = '')
     {
         $branch_id = $branch_id === null ? Branch::currentId() : $branch_id;
 
         try {
             $setting = Setting::whereBranchId($branch_id)->whereName($name)->first();
             
+            // If found setting. Return value
             if ($setting)
                 return $setting->val;
 
+            // If not found. Find in Master branch
+            if (empty($setting) && $fallback && $branch_id != 0)
+                $setting = self::get($name, 0, true, $default);
+
+            // If still not found. Find in config file
             if (empty($setting))
                 $setting = config($name, $default);
 
