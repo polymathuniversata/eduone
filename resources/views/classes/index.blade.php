@@ -31,7 +31,12 @@
                         {!! Form::select('branch', $branches, null, ['class' => 'form-control', 'placeholder' => 'Select a Branch']) !!}
                     </div>
                 </div>
-             
+                
+                <div class="row row-margin-md">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
         </div>
