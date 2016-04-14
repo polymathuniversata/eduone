@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="App">
     <head>
-        <title>EduOne @yield('title')</title>
+        <title>@yield('title') - {{Setting::get('title')}}</title>
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
         <link href="/assets/css/typicons.css" rel="stylesheet" type="text/css">
@@ -23,7 +23,7 @@
         };
         </script>
         <script type="text/javascript" src="/assets/js/pace.min.js"></script>
-
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         @yield('header')
     </head>
     <body>
@@ -32,7 +32,13 @@
             <div class="row row-offcanvas row-offcanvas-left">
                 <aside id="sidebar" class="sidebar-offcanvas">
                     <header id="header">
-                        <h1><a href="/">eduone</a></h1>
+                        <h1><a href="{{url('/')}}">
+                            @if (Setting::get('logo'))
+                                <img src="{{url('/')}}/images/{{Setting::get('logo')}}" alt="Logo">
+                            @else
+                                {{Setting::get('title')}}
+                            @endif
+                        </a></h1>
                     </header>
                     
                     <nav id="main-menu">

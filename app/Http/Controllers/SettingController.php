@@ -38,9 +38,34 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        $data = array_filter($request->all());
+        $data = $request->all();
         
         $branch_id = Branch::currentId();
+
+        if ( ! empty($request->file('logo'))) {
+            $logo      = $request->file('logo');
+
+            $logo_path = $logo->getRealPath();
+            $logo_name = $logo->getClientOriginalName();
+
+            $logo->move(
+                base_path() . '/public/images/', $logo_name
+            );
+
+            $data['logo'] = $logo_name;
+        }
+
+        if ( ! empty($request->file('favicon')))
+        {
+            $favicon      = $request->file('favicon');
+            $favicon_path = $favicon->getRealPath();
+            $favicon_name = 'favicon.ico';
+
+            $favicon->move(
+                base_path() . '/public/', $photo_name
+            );
+        }
+
 
         foreach ($data as $key => $value)
         {
@@ -48,6 +73,11 @@ class SettingController extends Controller
                 Setting::set($key, $value, $branch_id);
         }
 
+        // Checkboxes
+        if ( ! isset($data['enable_ssl']))
+            Setting::set('enable_ssl', 0);
+
+        
         return back()->withMessage('Setting was saved successfully!');
     }
 

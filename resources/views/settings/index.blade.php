@@ -5,7 +5,7 @@
 
 @section('content')
 
-{!! Form::open(['url' => 'settings', 'class' => 'form-horizontal']) !!}
+{!! Form::open(['url' => 'settings', 'class' => 'form-horizontal', 'files' => true]) !!}
 
   	<!-- Nav tabs -->
   	<ul class="nav nav-tabs" role="tablist">
@@ -23,7 +23,7 @@
 		<div class="form-group">
 			{!! Form::label('title', 'App Title', ['class' => 'col-sm-2'] ) !!}
 			<div class="col-sm-6">
-				{!! Form::text('title', App\Setting::get('title', null), ['class' => 'form-control']) !!}
+				{!! Form::text('title', Setting::get('title'), ['class' => 'form-control']) !!}
 			</div>
 		</div>
 
@@ -31,7 +31,7 @@
 			<label for="enable_ssl" class="col-sm-2">SSL</label>
 			<div class="col-sm-6">
 				<label class="label-secondary">
-					{!! Form::checkbox('enable_ssl') !!}
+					{!! Form::checkbox('enable_ssl', 1, Setting::get('enable_ssl')) !!}
 					 Enable SSL
 				</label>
 			</div>
@@ -40,7 +40,7 @@
 		<div class="form-group">
 			<label for="email" class="col-sm-2">Administrator Email</label>
 			<div class="col-sm-6">
-				{!! Form::email('email', Setting::get('administrator_email'), [
+				{!! Form::email('administrator_email', Setting::get('administrator_email'), [
 					'class' => 'form-control',
 					'id'	=> 'email'
 				]) !!}				
@@ -50,14 +50,17 @@
 		<div class="form-group">
 			<label for="input-title" class="col-sm-2">Logo</label>
 			<div class="col-sm-6">
-				<input type="file" class="form-control">
+				@if (Setting::get('logo'))
+				<img src="/images/{{Setting::get('logo')}}" alt="Logo">
+				@endif
+				{!! Form::file('logo', ['class' => 'form-control', 'placeholder' => 'Start Upload...']) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="input-title" class="col-sm-2">Fav Icon</label>
 			<div class="col-sm-6">
-				<input type="file" class="form-control">
+				{!! Form::file('favicon', ['class' => 'form-control', 'placeholder' => 'Start Upload...']) !!}
 			</div>
 		</div>
 
