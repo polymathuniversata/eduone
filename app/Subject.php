@@ -57,6 +57,11 @@ class Subject extends Model
         return isset($value) ? $value : 0;
     }
 
+    public function getGradesPlanAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public function scopeSearch($query, $value)
     {
         if ( ! empty($value)) {

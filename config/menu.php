@@ -16,6 +16,11 @@ return [
 		]
 	],
 	[
+		'icon' => 'typcn typcn-tree',
+		'title' => 'Grades',
+		'url'	=> 'grades'
+	],
+	[
 		'icon' => 'typcn typcn-mortar-board',
 		'title' => 'Students',
 		'url'	=> 'users?role_id=4',

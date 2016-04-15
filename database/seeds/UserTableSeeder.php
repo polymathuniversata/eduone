@@ -126,7 +126,7 @@ class UserTableSeeder extends Seeder
             'total_grade_rate' => 1,
             'minimum_student_present_session' => 1,
             'minimum_student_grade' => 40,
-            'sessions_plan' => json_encode([
+            'sessions_plan' => [
                 [
                     'name' => 'Buoi 1',
                     'type' => '',
@@ -137,19 +137,19 @@ class UserTableSeeder extends Seeder
                     'type' => '',
                     'description' => ''
                 ]
-            ]),
-            'grades_plan' => json_encode([
+            ],
+            'grades_plan' => [
                 [
                     'name' => 'Ly Thuyet',
-                    'percent' => 1,
+                    'weight' => 1,
                     'minimum' => 30
                 ],
                 [
                     'name' => 'Thuc Hanh',
-                    'percent' => 2,
+                    'weight' => 2,
                     'minimum' => 30
                 ]
-            ])
+            ]
         ]);
 
         $history = App\Subject::create([
@@ -160,7 +160,7 @@ class UserTableSeeder extends Seeder
             'total_grade_rate' => 1,
             'minimum_student_present_session' => 1,
             'minimum_student_grade' => 40,
-            'sessions_plan' => json_encode([
+            'sessions_plan' => [
                 [
                     'name' => 'Buoi 1',
                     'type' => '',
@@ -171,19 +171,19 @@ class UserTableSeeder extends Seeder
                     'type' => '',
                     'description' => ''
                 ]
-            ]),
-            'grades_plan' => json_encode([
+            ],
+            'grades_plan' => [
                 [
                     'name' => 'Ly Thuyet',
-                    'percent' => 1,
+                    'weight' => 1,
                     'minimum' => 30
                 ],
                 [
                     'name' => 'Thuc Hanh',
-                    'percent' => 2,
+                    'weight' => 2,
                     'minimum' => 30
                 ]
-            ])
+            ]
         ]);
 
         $program = App\Program::create([

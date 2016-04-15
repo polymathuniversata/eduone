@@ -100,7 +100,8 @@ class UserRepository
 			];
 		}
 		
-		return average_of($marks);
+		dd($marks);
+		//return average_of($marks);
 	}
 
 	public function getPeriodAverageGrade($period_id)
