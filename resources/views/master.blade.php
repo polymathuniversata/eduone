@@ -67,11 +67,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Switch to another branch</li>
-                                    @foreach(App\Branch::pluck('name', 'id') as $id => $name)
-                                        @if (0 != App\Branch::currentId())
+                                    @if (App\Branch::currentId() != 0)
                                         <li><a class="text-small" href="{{url('/')}}/branches/switch/0">Master</a></li>
-                                        @endif
-                                        @if ($id != App\Branch::currentId())
+                                    @endif
+                                    
+                                    @foreach(App\Branch::pluck('name', 'id') as $id => $name)
+                                        @if (App\Branch::currentId() != $id)
                                         <li><a class="text-small" href="{{url('/')}}/branches/switch/{{$id}}">{{$name}}</a></li>
                                         @endif
                                     @endforeach

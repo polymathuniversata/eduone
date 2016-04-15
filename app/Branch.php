@@ -45,7 +45,7 @@ class Branch extends Model
 
             if ($user->isSuperAdmin() && $id === null)
                 $id = 0;
-            
+   
             // If not set the target. Switch to the first one.
             if (null === $id) {
                 $branch = $user->branches->first()->toArray();
@@ -55,9 +55,11 @@ class Branch extends Model
                 $branch = self::findOrFail($id)->toArray();
             }
 
-            if ($id === 0) {
+            if ($id == 0) {
                 $branch = $master;
             }
+
+
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             if ($user->isSuperAdmin()) {
