@@ -327,5 +327,8 @@ return [
 		]
 	],
 
-	'weekdays' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+	'weekdays' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+
+	// Because Carbon beginOfWeek != dayOfWeek so we have an ugly hack. Have to do a better way in the next release.
+	'weekdays_begin_with_monday' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 ];

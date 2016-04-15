@@ -42,7 +42,7 @@
 	</div>
 	{!! Form::close() !!}
 	
-	 <span class="text-muted">{{$dates['weekday']}}</span>
+	<span class="text-muted">{{$dates['weekday']}}</span>
 	<div class="table-responsive">
 		<table class="table table-bordered" id="table-schedule">
 			<thead>

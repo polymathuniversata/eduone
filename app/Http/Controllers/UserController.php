@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function __construct(UserRepository $user)
     {
-        $this->roles       = Role::orderBy('id')->pluck('name', 'id')->toArray();
+        $this->roles       = Role::orderBy('id', 'desc')->pluck('name', 'id')->toArray();
         
         $this->branches    = Branch::pluck('name', 'id')->toArray();
 

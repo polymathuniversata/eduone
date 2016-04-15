@@ -29,10 +29,10 @@
 				</tr>
 			</thead>
 			<tbody>
-					@for($i = 0; $i < 6; $i++)
+					@for($i = 0; $i <= 6; $i++)
 					<tr>
 						<td>
-							{{config('settings.weekdays')[$i]}} <br>
+							{{config('settings.weekdays_begin_with_monday')[$i]}} <br>
 							
 							{{ $dates['weekdays'][$i] }}
 						</td>

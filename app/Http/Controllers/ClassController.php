@@ -171,7 +171,8 @@ class ClassController extends Controller
             ];
 
             $weekdays = [];
-            for ($i = 0; $i < 6; $i++) {
+            for ($i = 0; $i <= 6; $i++) {
+                // Because startOfWeek != dayOfWeek. So we have to hack!~
                 $weekdays[$i] = \Carbon\Carbon::createFromFormat('Y-m-d', $this_week['start'])
                                     ->addDay($i)
                                     ->format('Y-m-d');
