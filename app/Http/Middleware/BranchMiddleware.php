@@ -15,8 +15,10 @@ class BranchMiddleware
      */
     public function handle($request, Closure $next)
     { 
-        if ( \Auth::check() && null === session('branch')) {
+        if (\Auth::check() && null === session('branch')) {
             \App\Branch::switch();
+
+            return redirect('/');
         }
 
         return $next($request);

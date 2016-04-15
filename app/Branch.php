@@ -58,18 +58,18 @@ class Branch extends Model
             }   
         }
 
-        \Session::set('branch', $branch);
-        \Session::set('branch_id', $branch['id']);
+        session(['branch' => $branch]);
+        session(['branch_id' => $branch['id']]);
         
     }
 
     public static function current()
     {
-        return \Session::get('branch');
+        return session('branch');
     }
 
     public static function currentId()
     {
-        return \Session::get('branch_id');
+        return session('branch_id');
     }
 }
