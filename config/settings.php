@@ -1,6 +1,8 @@
 <?php
 
 return [
+	'title' => 'EduOne',
+	
 	'languages' => [
 		'en_US' => 'English (US)',
 		'en_UK' => 'English (UK)',

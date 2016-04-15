@@ -17,6 +17,7 @@ class CreateProgramsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique()->nullable();
             $table->integer('creator_id');
+            $table->integer('branch_id'); // 0 - Apply for all
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

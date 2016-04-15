@@ -8,7 +8,7 @@ class Program extends Model
 {
 	use CanUseCreator, CanUseMeta;
 	
-    protected $fillable = ['name', 'slug', 'periods_count', 'creator_id'];
+    protected $fillable = ['name', 'slug', 'periods_count', 'creator_id', 'branch_id'];
     
     protected $casts = [
     	'periods_count'  => 'integer',

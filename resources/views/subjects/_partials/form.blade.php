@@ -25,10 +25,10 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('minimum_student_grade', trans('app.minimum_student_grade')) !!}
-		{!! Form::number('minimum_student_grade', null, [
+		{!! Form::label('minimum_student_mark', trans('app.minimum_student_mark')) !!}
+		{!! Form::number('minimum_student_mark', null, [
 			'class' => 'form-control', 
-			'placeholder' => trans('app.minimum_student_grade')]) 
+			'placeholder' => trans('app.minimum_student_mark')]) 
 		!!}
 	</div>
 	

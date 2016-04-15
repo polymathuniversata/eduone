@@ -19,7 +19,14 @@
 		</div>
 	</div>
 	
-	<h1>{{ $user->display_name }}</h1>
+	<div class="user-short-info row-margin-md">
+		<span class="h1">{{ $user->display_name }}</span>
+		<span class="label label-success">{{ $user->role->name }}</span>
+
+		@foreach ($user->branches as $branch)
+		<span class="label label-warning">{{$branch->name}}</span>
+		@endforeach
+	</div>
 </header>
 
 {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'PUT', 'files' => true]) !!}

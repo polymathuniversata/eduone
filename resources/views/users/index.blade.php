@@ -70,7 +70,6 @@
                 @endif
     			<th>{{ trans('app.status') }}</th>
     			<th>{{ trans('app.created_at') }}</th>
-    			<th>{{ trans('app.login_as') }}</th>
     		</tr>
     	</thead>
 
@@ -83,16 +82,18 @@
                         {{ $user->display_name }}</a>
                     </td>
         			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>
-                    @if ( ! isset($request->role) && isset($user->role->name))
-        			<td>{{ $user->role->name }}</td>
-        			@endif
+                    
+        			<td>@if ( ! isset($request->role) && isset($user->role->name))
+                            {{ $user->role->name }}
+                        @endif
+                    </td>
+        			
                     <td>
                         @if ( ! empty($user->status))
                         {!! $user->status !!}
                         @endif
                     </td>
         			<td>{!! $user->created_at !!}</td>
-        			<td><a href="/login-as/{{$user->id}}">{!! trans('app.login_as') !!}</a></td>
         		</tr>
         		@endforeach
             @else

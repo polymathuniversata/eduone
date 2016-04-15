@@ -36,7 +36,7 @@ class Setting extends Model
             // If not found. Find in Master branch
             if (empty($setting) && $fallback && $branch_id != 0)
                 $setting = self::get($name, 0, true, $default);
-
+            
             // If still not found. Find in config file
             if (empty($setting))
                 $setting = config($name, $default);

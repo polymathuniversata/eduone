@@ -72,7 +72,7 @@ return [
 	'create_new_subject' => 'Create New Subject',
 	'weight' => 'Weight',
 	'minimum_student_present_session' => 'Minimum Present Session',
-	'minimum_student_grade' => 'Minimum Student Grade',
+	'minimum_student_mark' => 'Minimum Student Grade',
 	'create_new_program' => 'Create New Program',
  	'create_new_class' => 'Create New Class',
  	'update_subject' => 'Update Subject',

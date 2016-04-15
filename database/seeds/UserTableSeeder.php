@@ -28,7 +28,5 @@ class UserTableSeeder extends Seeder
         $programs = factory(App\Program::class, 3)->create();
 
         $subjects = factory(App\Subject::class, 10)->create();
-
-       
     }
 }

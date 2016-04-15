@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $users = User::search($request->all())
                     ->orderBy('created_at')
-                    ->paginate(50); 
+                    ->paginate(20); 
 
         return view('users.index', [
             'users'     => $users,

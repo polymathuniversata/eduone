@@ -21,7 +21,8 @@ $factory->defineAs(App\User::class, 'super_admin', function (Faker\Generator $fa
         'phone'	=> $faker->phoneNumber,
         'identity_number' => $faker->randomNumber(9),
         'password' => bcrypt('123456'),
-        'remember_token' => str_random(10)
+        'remember_token' => str_random(10),
+        'role_id'   => 1
 	];
 });
 
@@ -50,7 +51,9 @@ $factory->define(App\Branch::class, function(Faker\Generator $faker) {
         'address'			=> $faker->address,
         'phone'				=> $faker->phoneNumber,
         'email'				=> $faker->email,
-        'administrator_id'  => 1
+        'administrator_id'  => function () {
+            return App\User::ofRole(1)->get()->random(1)->id;
+        }
 	];
 });
 
@@ -59,7 +62,9 @@ $factory->define(App\Room::class, function(Faker\Generator $faker) {
         'name'              => $faker->numerify('Room ###'),
         'capacity'			=> $faker->numberBetween(20, 80),
         'type'				=> 'Lab',
-        'branch_id'			=> 1
+        'branch_id'			=> function () {
+            return App\Branch::all()->random(1)->id;
+        }
 	];
 });
 
@@ -68,7 +73,9 @@ $factory->define(App\Program::class, function(Faker\Generator $faker) {
 	return [
 		'name' => $faker->name,
         'slug' => str_slug($faker->name),
-        'creator_id' => 1
+        'creator_id' => function () {
+            return App\User::ofRole([1,2])->get()->random(1)->id;
+        }
 	];
 });
 
