@@ -9,8 +9,8 @@
 </div>
 
 <div class="form-group">
-	<label>{!! trans('app.id_code_or_passport') !!}</label>
-	{!! Form::text('id_code', null, ['class' => 'form-control', 'placeholder' => trans('app.id_code_or_passport') ]) !!}
+	<label>{!! trans('app.identity_number') !!}</label>
+	{!! Form::text('identity_number', null, ['class' => 'form-control', 'placeholder' => trans('app.identity_number') ]) !!}
 </div>
 
 @if ($user->isStudent())

@@ -23,7 +23,7 @@ var searchParams = {};
 			@if ($user->familyMembers() && $user->familyMembers()->count() > 0)
 				@foreach ($user->familyMembers() as $member)
 				<li>
-					<img src="{!! $member->photo !!}"> {{ $member->display_name }}
+					<img src="{!! $member->profile_picture !!}"> {{ $member->display_name }}
 
 					<a class="btn btn-default btn-xs pull-right" href="{{url('/')}}/users/{{$user->id}}/remove-family-member/{{$member->id}}">
 						<i class="fa fa-times"></i>
@@ -36,7 +36,7 @@ var searchParams = {};
 
 
 			<li ng-repeat="user in queue track by $index">
-				<img ng-src="@{{user.photo}}"> @{{user.display_name}} 
+				<img ng-src="@{{user.profile_picture}}"> @{{user.display_name}} 
 
 				<button class="btn btn-default btn-xs pull-right" ng-click="removeQueueUser($index)">
 					<i class="fa fa-times"></i> 
@@ -60,7 +60,7 @@ var searchParams = {};
 
 		<ul class="list-unstyled" id="ajax-users-list">
 			<li ng-repeat="user in users track by $index" ng-click="addUser($index)">
-				<img ng-src="@{{user.photo}}"> @{{user.display_name}}
+				<img ng-src="@{{user.profile_picture}}"> @{{user.display_name}}
 			</li>
 			<li class="not-found" ng-show="users.length == 0 && search.length > 0">Sorry we cannot found any user.</li>
 		</ul>

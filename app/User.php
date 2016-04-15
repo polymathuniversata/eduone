@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = ['name', 'first_name', 'last_name', 'display_name', 'email', 'password', 'phone',
-        'date_of_birth', 'id_card', 'job', 'gender', 'roll_no', 'photo', 'postcode', 'address', 'state',
+        'date_of_birth', 'identity_number', 'job', 'gender', 'roll_no', 'profile_picture', 'postcode', 'address', 'state',
         'country', 'media', 'department_id', 'categories', 'expired_date', 'role_id', 'permissions',
         'remember_token', 'status', 'creator_id','created_at', 'updated_at', 'deleted_at'
     ];
@@ -175,7 +175,7 @@ class User extends Model implements AuthenticatableContract,
      * 
      * @return String Photo Image URL
      */
-    public function getPhotoAttribute($value)
+    public function getProfilePictureAttribute($value)
     {
         $use_gravatar = true;
         $default_photo = '';
@@ -234,7 +234,7 @@ class User extends Model implements AuthenticatableContract,
                     ->orWhere('last_name', 'like', $keyword)
                     ->orWhere('email', 'like', $keyword)
                     ->orWhere('phone', 'lile', $keyword)
-                    ->orWhere('id_card', 'like', $keyword);
+                    ->orWhere('identity_number', 'like', $keyword);
             });
         }
 

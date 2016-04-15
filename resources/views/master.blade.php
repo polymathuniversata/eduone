@@ -81,7 +81,7 @@
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <img src="{!! Auth::user()->photo !!}" width="20" height="20" alt="{{ Auth::user()->display_name }}"> <span class="caret"></span>
+                                    <img src="{!! Auth::user()->profile_picture !!}" width="20" height="20" alt="{{ Auth::user()->display_name }}"> <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Signed in as <strong>{{ Auth::user()->display_name }}</strong></li>

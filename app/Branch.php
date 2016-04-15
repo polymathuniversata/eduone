@@ -33,6 +33,11 @@ class Branch extends Model
     {
         $user = \Auth::user();
         
+        $master = [
+            'id'    => 0,
+            'name'  => 'Master'
+        ];
+
         try {   
             // If current user isn't super admin. Do not allows access Master
             if ( ! $user->isSuperAdmin() && $id == 0)
@@ -45,16 +50,18 @@ class Branch extends Model
             if (null === $id) {
                 $branch = $user->branches->first()->toArray();
             }
-            else {
+            
+            if ($id > 0) {
                 $branch = self::findOrFail($id)->toArray();
+            }
+
+            if ($id === 0) {
+                $branch = $master;
             }
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             if ($user->isSuperAdmin()) {
-                $branch = [
-                    'id'    => 0,
-                    'name'  => 'Master'
-                ];
+                $branch = $master;
             }   
         }
 

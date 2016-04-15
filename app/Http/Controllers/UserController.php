@@ -67,7 +67,7 @@ class UserController extends Controller
     {
         return User::search($request->all())
                     ->orderBy('created_at', 'DESC')
-                    ->get(['id', 'display_name', 'photo'])
+                    ->get(['id', 'display_name', 'profile_picture'])
                     ->take(20);
     }
 
@@ -221,8 +221,8 @@ class UserController extends Controller
         
         // $subjects = isset($data['subjects']) ? $data['subjects'] : [];
 
-        if ( ! empty($data['photo'])) {
-            $photo      = $request->file('photo');
+        if ( ! empty($data['profile_picture'])) {
+            $photo      = $request->file('profile_picture');
             $photo_path = $photo->getRealPath();
             $photo_name = $photo->getClientOriginalName();
 
@@ -230,7 +230,7 @@ class UserController extends Controller
                 base_path() . '/public/photos/', $photo_name
             );
 
-            $data['photo'] = $photo_name;
+            $data['profile_picture'] = $photo_name;
         }
 
         if ( ! empty($data['family_members']) )

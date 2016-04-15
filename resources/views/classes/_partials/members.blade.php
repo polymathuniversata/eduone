@@ -17,7 +17,7 @@
 		<div class="media member">
 		  <div class="media-left">
 		    <a href="{{url('users/' . $user->id)}}">
-		      <img class="media-object" width="100" height="100" src="{!! $user->photo !!}" alt="{{$user->getFullName()}}">
+		      <img class="media-object" width="100" height="100" src="{!! $user->profile_picture !!}" alt="{{$user->getFullName()}}">
 		    </a>
 		  </div>
 		  <div class="media-body">
@@ -80,7 +80,7 @@
 	        		
 	        		<ul class="list-unstyled" id="ajax-users-list">
 	        			<li ng-repeat="user in users track by $index" ng-click="addUser($index)">
-	        				<img ng-src="@{{user.photo}}"> @{{user.display_name}}
+	        				<img ng-src="@{{user.profile_picture}}"> @{{user.display_name}}
 	        			</li>
 	        			<li class="not-found" ng-show="users.length == 0 && search.length > 0">Sorry we cannot found any user.</li>
 	        		</ul>
@@ -90,7 +90,7 @@
 	        		<h4>People in queue <span class="badge">@{{queue.length}}</span></h4>
 	        		<ul class="list-unstyled" id="queue-users-list">
 	        			<li ng-repeat="user in queue track by $index">
-	        				<img ng-src="@{{user.photo}}"> @{{user.display_name}} 
+	        				<img ng-src="@{{user.profile_picture}}"> @{{user.display_name}} 
 
 	        				<button class="btn btn-default btn-xs pull-right" ng-click="removeQueueUser($index)">
 	        					<i class="fa fa-times"></i> 

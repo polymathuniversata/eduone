@@ -9,10 +9,10 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('total_grade_rate', trans('app.weight')) !!}
-		{!! Form::number('total_grade_rate', null, [
+		{!! Form::label('weight', trans('app.weight')) !!}
+		{!! Form::number('weight', null, [
 			'class' => 'form-control', 
-			'placeholder' => trans('app.total_grade_rate')]) 
+			'placeholder' => trans('app.weight')]) 
 		!!}
 	</div>
 
@@ -65,7 +65,7 @@
     		<tbody>
     			<tr ng-repeat="grade in grades">
     				<td><input type="text" ng-model="grade.name" class="form-control input-sm"></td>
-    				<td><input type="number" ng-model="grade.percent" min="0" max="100" step="1" class="form-control input-sm"></td>
+    				<td><input type="number" ng-model="grade.weight" min="0" max="100" step="1" class="form-control input-sm"></td>
     				<td><input type="number" ng-model="grade.minimum" min="0" max="100" step="1" class="form-control input-sm"></td>
     				<td><button type="button" class="btn btn-default btn-sm" ng-click="removeGrade($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
     			</tr>

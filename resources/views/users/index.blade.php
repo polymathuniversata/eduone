@@ -79,7 +79,7 @@
         		@foreach ($users as $user)
         		<tr>
         			<td><input type="checkbox" disabled></td>
-        			<td class="table-title"> <img src="{!! $user->photo !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
+        			<td class="table-title"> <img src="{!! $user->profile_picture !!}" width="32" height="32" alt="Profile Picture"> <a href="/users/{{$user->id}}">
                         {{ $user->display_name }}</a>
                     </td>
         			<td><a href="/users/{{$user->id}}">{{ $user->email }}</a></td>

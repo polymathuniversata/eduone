@@ -89,7 +89,7 @@ class UserRepository
 		$grades = collect($grades)->keyBy('grade_id')->toArray();
 
 		$grades_plan = $subject->grades_plan;
-		
+
 		$marks = [];
 
 		foreach ($grades_plan as $index => $plan)
@@ -117,7 +117,7 @@ class UserRepository
 
 		foreach ($subjects as $subject) {
 			$marks[$subject->id] = [
-				'percent' => $subject->total_grade_rate,
+				'percent' => $subject->weight,
 				'value'	  => $this->getSubjectAverageGrade($subject->id)
 			];
 		}

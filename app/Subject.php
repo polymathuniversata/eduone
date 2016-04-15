@@ -10,8 +10,8 @@ class Subject extends Model
     use CanUseCreator, CanUseMeta;
 
     protected $fillable = [
-    	'name', 'slug', 'grades_count', 'sessions_count', 'total_grade_rate', 
-    	'minimum_student_present_session', 'minimum_student_grade', 
+    	'name', 'slug', 'grades_count', 'sessions_count', 'weight', 
+    	'minimum_student_present_session', 'minimum_student_mark', 
     	'sessions_plan', 'grades_plan', 
     	'creator_id', 'is_required', 'created_at', 'updated_at'
     ];
@@ -19,8 +19,8 @@ class Subject extends Model
     protected $casts = [
     	'grades_count' 			=> 'integer',
     	'sessions_count' 		=> 'integer',
-    	'total_grade_rate' 		=> 'integer',
-    	'minimum_student_grade' => 'integer',
+    	'weight' 		=> 'integer',
+    	'minimum_student_mark' => 'integer',
     	'minimum_student_present_session' => 'integer',
     	'creator_id' 			=> 'integer',
         'is_required'           => 'boolean',
