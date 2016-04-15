@@ -13,7 +13,7 @@ class CreateUsersGradesTable extends Migration
             $table->integer('subject_id');
             $table->integer('class_id')->nullable();
             $table->integer('grade_id');
-            $table->integer('total');
+            $table->decimal('total', 4, 1);
             $table->integer('creator_id');
             $table->string('status')->nullable(); // Passed or not
             $table->string('notes')->nullable();

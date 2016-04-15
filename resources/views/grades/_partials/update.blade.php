@@ -28,7 +28,7 @@
 				<td>{{$index+1}}</td>
 				<td>{{$student->display_name}}</td>
 				<td>
-					{!! Form::number('students[' . $student->id .'][mark]', isset($grades[$student->id]) ? $grades[$student->id]->total : 0, ['class' => 'form-control', 'min' => 0, 'max' => 100]) !!}
+					{!! Form::number('students[' . $student->id .'][mark]', isset($grades[$student->id]) ? $grades[$student->id]->total : 0, ['class' => 'form-control', 'min' => 0, 'max' => 100, 'step' => '0.1']) !!}
 				</td>
 				<td>
 					{!! Form::textarea('students[' . $student->id .'][notes]', isset($grades[$student->id]) ? $grades[$student->id]->notes : '', ['class' => 'form-control', 'rows' => 2]) !!}

@@ -194,7 +194,7 @@ class ProgramController extends Controller
             }
 
             return redirect('programs/' . $program->id )
-                ->with('message', 'Period was updated successfully!');
+                ->with('message', 'Program was updated successfully!');
         } catch(Exception $e) {
             return back()->withInput()->with('message', 'Fooo!');
         }

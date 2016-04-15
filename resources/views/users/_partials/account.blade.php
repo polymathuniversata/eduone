@@ -34,6 +34,7 @@
 	{!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('app.password_confirmation')]) !!}
 </div>
 
+@if ($request->role_id > 1)
 <div class="form-group">
 	<label>{!! trans('app.branches') !!}</label>
 	<br>
@@ -45,6 +46,7 @@
 	@endforeach
 	</div>
 </div>
+@endif
 
 @if ($user->isStudent())
 <div class="form-group">

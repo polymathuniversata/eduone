@@ -34,7 +34,7 @@
 							@if ( ! empty($subjects[$request->subject_id]))
 							
 							<ul class="list-unstyled">
-								@foreach (json_decode($subjects[$request->subject_id]->grades_plan) as $index => $grade)
+								@foreach ($subjects[$request->subject_id]->grades_plan as $index => $grade)
 								<li>
 									<a href="{{url('grades?class_id=' . $class->id . '&amp;subject_id=' . $request->subject_id . '&amp;grade_id=' . $index)}}">
 										{{$grade->name}}
