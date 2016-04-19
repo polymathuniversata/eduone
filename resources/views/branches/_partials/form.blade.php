@@ -50,4 +50,6 @@
 	{!! Form::select('administrator_id', $administrators, null, ['class' => 'form-control', 'placeholder' => 'Pick an Administrator'] ) !!}
 </div>
 
-<button class="btn btn-primary">Save Changes</button>
+<div class="form-group">
+	<button class="btn btn-primary">Save Changes</button>
+</div>

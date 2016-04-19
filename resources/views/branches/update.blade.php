@@ -1,11 +1,13 @@
 @extends('master')
 
+@section('title', trans('app.update_branch'))
+@section('main_title', trans('app.update_branch'))
+
 @section('content')
 
-<header>
-	<h1>Update Branch</h1>
-</header>
 {!! Form::model($branch, ['route' => ['branches.update', $branch->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
-	@include('branches/_partials/form');
+	<div class="col-md-6">
+		@include('branches/_partials/form')
+	</div>
 {!! Form::close() !!}
 @endsection
