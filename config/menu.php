@@ -12,7 +12,6 @@ return [
 		'url'	=> 'classes',
 		'childs' => [
 			'classes' 			=> 'All Classes',
-			'classes/create' 	=> 'Add New Class'
 		]
 	],
 	[
