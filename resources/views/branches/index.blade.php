@@ -58,6 +58,7 @@
 	</div>
 
 	<div class="col-md-8">
+		<h4>Branches</h4>
 		<div class="table-responsive panel panel-default">
 			<table class="table table-hover">
 				<thead>
