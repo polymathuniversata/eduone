@@ -35,4 +35,3 @@
 		{!! Form::select('branch_id', $branches, null, ['class' => 'form-control'] ) !!}
 	</div>
 </div>
-

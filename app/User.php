@@ -182,7 +182,7 @@ class User extends Model implements AuthenticatableContract,
         $default_photo = '';
 
         if ($use_gravatar)
-            $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=80';
+            $default_photo = 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=120';
 
         if ( ! empty($value) && file_exists(base_path() . '/public/photos/' . $value))
             return url('/photos/' . $value);
